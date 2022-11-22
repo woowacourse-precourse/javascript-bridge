@@ -1,8 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+
 class BridgeGame {
   #bridge;
   constructor() {
@@ -18,48 +16,28 @@ class BridgeGame {
     this.moveLogs.push(upOrDown);
   }
 
-  moveTracking() {
-    const bridge = this.userMoveMap(this.moveLogs, this.#bridge);
-    return this.bridgeToString(bridge);
+  walkable() {
+    return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
   }
 
-  userMoveMap(moveLogs, bridge) {
-    const upside = [];
-    const downside = [];
-    moveLogs.forEach((move, index) => {
-      if (move === bridge[index]) {
-        if (move === 'U') {
-          upside.push(' O ');
-          downside.push('   ');
-        }
-        if (move === 'D') {
-          upside.push('   ');
-          downside.push(' O ');
-        }
-      }
-      if (move !== bridge[index]) {
-        if (move === 'U') {
-          upside.push(' X ');
-          downside.push('   ');
-        }
-        if (move === 'D') {
-          upside.push('   ');
-          downside.push(' X ');
-        }
-      }
-    });
-    return [upside, downside];
+  makeUserMoveMap(movelogs, bridge) {
+    const checkedUserMap = movelogs.map((log, index) =>
+      log === bridge[index] ? [log, 'O'] : [log, 'X']
+    );
+    return this.checkingUserMoveLogs(checkedUserMap);
+  }
+
+  checkingUserMoveLogs(moveMap) {
+    const upperBridge = moveMap.map((move) => (move[0] === 'U' ? move[1] : ' '));
+    const lowerBridge = moveMap.map((move) => (move[0] === 'D' ? move[1] : ' '));
+    return [upperBridge, lowerBridge];
   }
 
   bridgeToString(bridge) {
-    const convertedBridge = bridge.map(upOrDown => {
+    const convertedBridge = bridge.map((upOrDown) => {
       return '[' + upOrDown.join('|') + ']';
     });
     return convertedBridge;
-  }
-
-  walkable() {
-    return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
   }
 
   isWin() {
