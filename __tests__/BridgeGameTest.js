@@ -37,7 +37,7 @@ describe('BridgeGame 클래스 테스트 4', () => {
   });
 });
 
-describe('BridgeGame 클래스 테스트 4', () => {
+describe('BridgeGame 클래스 테스트 5', () => {
   test('retry 메소드', () => {
     const testModel = new Model();
     BridgeGame.move('D', ' X ', testModel);
