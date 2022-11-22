@@ -49,6 +49,11 @@ class BridgeGame {
     }
   }
 
+  checkInputSpace(input){
+    if(input.includes(" ")){
+      Console.print("[ERROR] 입력에 공백이 없어야합니다."); 
+    }
+  }
 }
 
 module.exports = BridgeGame;
