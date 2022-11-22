@@ -14,7 +14,9 @@ class BridgeGame {
     this.#trial = 1;
   }
 
-  move(char) {}
+  move(char) {
+    this.#history.push(char);
+  }
 
   retry(command) {}
 
