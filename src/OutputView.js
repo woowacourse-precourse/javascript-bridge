@@ -8,103 +8,69 @@ const OutputView = {
     if (count === 0) {
       this.upBridge = BRIDGE.INITAIL_UP;
       this.downBridge = BRIDGE.INITAIL_DOWN;
+      return this.printFirstMap(boolean, letter);
     }
-    return this.printMap(boolean, letter);
+    if (count !== 0) return this.printAfterMap(boolean, letter);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(boolean, letter) {
-    if (boolean && letter === 'U') return this.answerisTrueWithU();
-    if (boolean && letter === 'D') return this.answerisTrueWithD();
-    if (!boolean && letter === 'U') return this.answerisFalseWithU();
-    if (!boolean && letter === 'D') return this.answerisFalseWithD();
+  printFirstMap(boolean, letter) {
+    if (boolean && letter === 'U') this.firstTrueUpBridge();
+    if (boolean && letter === 'D') this.firstTrueDownBridge();
+    if (!boolean && letter === 'U') this.firstFalseUpBridge();
+    if (!boolean && letter === 'D') this.firstFalseDownBridge();
+    return Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  answerisTrueWithU() {
-    if (this.upBridge === '[') {
-      return this.firstTrueUpBridge();
-    }
-    if (this.upBridge !== '[') {
-      return this.afterTrueUpBridge();
-    }
+  printAfterMap(boolean, letter) {
+    if (boolean && letter === 'U') this.afterTrueUpBridge();
+    if (boolean && letter === 'D') this.afterTrueDownBridge();
+    if (!boolean && letter === 'U') this.afterFalseUpBridge();
+    if (!boolean && letter === 'D') this.afterFalseDownBridge();
+    return Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   firstTrueUpBridge() {
     this.upBridge = this.upBridge.concat(' O ]');
     this.downBridge = this.downBridge.concat('   ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   afterTrueUpBridge() {
     this.upBridge = this.upBridge.slice(0, -1).concat('| O ]');
     this.downBridge = this.downBridge.slice(0, -1).concat('|   ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
-  },
-
-  answerisTrueWithD() {
-    if (this.upBridge === '[') {
-      return this.firstTrueDownBridge();
-    }
-    if (this.upBridge !== '[') {
-      return this.afterTrueDownBridge();
-    }
   },
 
   firstTrueDownBridge() {
     this.upBridge = this.upBridge.concat('   ]');
     this.downBridge = this.downBridge.concat(' O ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   afterTrueDownBridge() {
     this.upBridge = this.upBridge.slice(0, -1).concat('|   ]');
     this.downBridge = this.downBridge.slice(0, -1).concat('| O ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
-  },
-
-  answerisFalseWithU() {
-    if (this.upBridge === '[') {
-      return this.firstFalseUpBridge();
-    }
-    if (this.upBridge !== '[') {
-      return this.afterFalseUpBridge();
-    }
   },
 
   firstFalseUpBridge() {
     this.upBridge = this.upBridge.concat(' X ]');
     this.downBridge = this.downBridge.concat('   ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   afterFalseUpBridge() {
     this.upBridge = this.upBridge.slice(0, -1).concat('| X ]');
     this.downBridge = this.downBridge.slice(0, -1).concat('|   ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
-  },
-
-  answerisFalseWithD() {
-    if (this.upBridge === '[') {
-      return this.firstFalseDownBridge();
-    }
-    if (this.upBridge !== '[') {
-      return this.afterFalseDownBridge();
-    }
   },
 
   firstFalseDownBridge() {
     this.upBridge = this.upBridge.concat('   ]');
     this.downBridge = this.downBridge.concat(' X ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   afterFalseDownBridge() {
     this.upBridge = this.upBridge.slice(0, -1).concat('|   ]');
     this.downBridge = this.downBridge.slice(0, -1).concat('| X ]');
-    Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
   resetOutputBridge() {
