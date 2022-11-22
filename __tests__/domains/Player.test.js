@@ -1,6 +1,7 @@
 const { Tile } = require('../../src/constants');
 const Bridge = require('../../src/domains/Bridge');
 const Player = require('../../src/domains/Player');
+const BridgeError = require('../../src/errors/BridgeError');
 
 describe('Player 클래스 테스트', () => {
   test('기본 동작 테스트', () => {
@@ -44,5 +45,15 @@ describe('Player 클래스 테스트', () => {
       [Tile.DOWN, true],
       [Tile.DOWN, false],
     ]);
+  });
+
+  test('이미 도착한 후에도 움직였을 때 예외가 발생하는지', () => {
+    const bridge = new Bridge([Tile.UP, Tile.DOWN]);
+    const player = new Player(bridge);
+
+    player.move(Tile.UP);
+    player.move(Tile.DOWN);
+
+    expect(() => player.move(Tile.UP)).toThrow(BridgeError);
   });
 });
