@@ -1,11 +1,11 @@
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
-const { error } = require("../src/Constant/Constant");
+const { ERROR } = require("../src/Constant/Constant");
 
 describe("에러 테스트 ", () => {
   test("BridgeSize 입력 테스트", () => {
     const errorInputs = ["2", "0", "21", "-5", "6.3"];
-    const errorMessage = error.notRange;
+    const errorMessage = ERROR.NOTr;
     const boundarys = ["3", "20"];
 
     errorInputs.forEach((input) => {
@@ -23,7 +23,7 @@ describe("에러 테스트 ", () => {
 
   test("U/D 입력 테스트", () => {
     const errorInputs = ["u", "UU", "유", "UD"];
-    const errorMessage = error.notUD;
+    const errorMessage = ERROR.NOT_UD;
     const correctInputs = ["U", "D"];
     const bridgeGame = new BridgeGame(["U", "U", "U"]);
 
@@ -42,7 +42,7 @@ describe("에러 테스트 ", () => {
 
   test("R/Q 입력 테스트", () => {
     const errorInputs = ["RR", "QQ", "RQ"];
-    const errorMessage = error.notRQ;
+    const errorMessage = ERROR.NOT_RQ;
     const correctInputs = ["R", "Q"];
     const bridgeGame = new BridgeGame(["U", "U", "U"]);
 
