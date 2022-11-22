@@ -4,8 +4,8 @@ class App {
   play() {
     const play = new Player();
     const answer = play.createBridgeAnswer();
-    const obj = play.setBridgeGame(answer);
-    play.repeatMove(answer, obj);
+    const game = play.setBridgeGame(answer);
+    play.playGame(answer, game);
   }
 }
 

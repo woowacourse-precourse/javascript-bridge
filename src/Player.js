@@ -24,7 +24,6 @@ class Player {
     repeatMove(bridgeAnswer, bridgeGame) {
         let currentBridge;
         let isSuccessed = true;
-        let tryCount = bridgeGame.getTryCount();
 
         for(let i = 0; i < bridgeAnswer.length; i++) {
             OutputView.printInputMove();
@@ -36,12 +35,21 @@ class Player {
                 break;
             }
         }
-        if (!isSuccessed) {
+        return [isSuccessed, currentBridge];
+    }
+
+    playGame(bridgeAnswer, bridgeGame) {
+        const tryCount = bridgeGame.getTryCount();
+        const moveResult = this.repeatMove(bridgeAnswer, bridgeGame);
+        const isSuccessed = moveResult[0];
+        const currentBridge = moveResult[1];
+
+        if (isSuccessed === false) {
             const gameCommandInput = InputView.readGameCommand();
             const isRetried = bridgeGame.retry(gameCommandInput);
             if (isRetried) {
                 this.setNewGame(bridgeGame);
-                this.repeatMove(bridgeAnswer, bridgeGame);
+                this.playGame(bridgeAnswer, bridgeGame);
                 return;
             }
         }
