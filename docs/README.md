@@ -24,12 +24,10 @@ bridgeGame.start();
   - D를 입력받은 경우 : <code> userMoveArray.push(0); </code>
 
 - 랜덤으로 생성된 다리의 값과 유저가 입력한 이동 칸을 비교하여 조건에 따라 분기하여 출력
-  1. 맞춘 경우 : <code> if (bridge[i] === this.userMoveArray[i]) </code>
-  2. 맞춘 경우가 length 끝까지 이어진 경우 다 맞췄다는 판단을 함
-  3. 그 외의 경우 틀림
+  - 맞춘 경우 : <code> if (bridge[i] === this.userMoveArray[i]) </code>
+  - 맞춘 경우가 length 끝까지 이어진 경우 다 맞췄다는 판단을 함
+  - 그 외의 경우 틀림
 - UPSIDE, DOWNSIDE를 각각 분리하여 조건에 따라 추가하면서 출력
-
----
 
 ### 유저로부터 재시작/종료 여부를 입력받는 기능
 
@@ -37,6 +35,7 @@ bridgeGame.start();
 - 입력 받은 값이 Q 혹은 R이 아닌 경우 예외처리 -> <code> if (check === COMMAND_VALUE.RETRY || check === COMMAND_VALUE.QUIT) </code>
   - Q를 입력받은 경우 종료, R을 입력받은 경우 재시작 된다.
 - 재시작이 되면 시도 회수 카운트가 1 증가한다.
+- 재시작이 되면 기존 생성했던 다리를 재사용한다.
 
 ### 게임 결과를 출력하는 기능
 

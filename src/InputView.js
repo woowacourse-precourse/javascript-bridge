@@ -45,7 +45,7 @@ const InputView = {
         OutputView.printResult(keepGaming, count, result);
       }
       if (keepGaming === GAME_RESOURCE.WRONG) {
-        this.readGameCommand(bridgeGame, bridge, userMoveArray, result);
+        this.readGameCommand(bridgeGame, bridge, result);
       }
     });
     return;
@@ -54,11 +54,10 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame, bridge, userMoveArray, result) {
+  readGameCommand(bridgeGame, bridge, result) {
     Console.readLine(MESSAGE.SELECT_RETRY, (userInput) => {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
       let count = bridgeGame.plusCount();
-
       const command = bridgeGame.retry(retryOrCloseKey);
       if (command === 1) {
         const userMoveArray = [];
