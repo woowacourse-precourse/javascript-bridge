@@ -29,6 +29,15 @@ class Exception{
         }
         
     }
+
+    checkRestart(restart){
+        try{
+            if (space !== "R" || space !== "Q") throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
+        }catch(error){
+            Console.print(error.message);
+            return true;
+        }
+    }
 }
 
 module.exports = Exception;

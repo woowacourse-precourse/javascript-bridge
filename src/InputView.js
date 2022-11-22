@@ -44,6 +44,7 @@ const InputView = {
    */
   readGameCommand(bridge, bridgeGame) {
     Console.readLine(COMMAND.RESTART, (restart) => {
+      if(exception.checkRestart(restart)) return this.readGameCommand(bridge,bridgeGame);
       if (restart === "R") {
         bridgeGame.retry(bridge);
         return this.readMoving(bridge, bridgeGame);
