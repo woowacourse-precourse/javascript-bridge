@@ -82,7 +82,55 @@ describe('다리 건너기 테스트', () => {
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('예외 테스트', () => {
+  test('기능 테스트2 (3번째 성공)', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'D', 'D', 'R', 'D', 'R', 'U', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[ O |   | O ]',
+      '[   | O |   ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 3',
+    ]);
+    expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
+  });
+
+  test('기능 테스트3 (2번 도전 후 포기)', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1', '0']);
+    mockQuestions(['4', 'U', 'U', 'R', 'U', 'D', 'U', 'U', 'Q']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[ O |   | O | X ]',
+      '[   | O |   |   ]',
+      '게임 성공 여부: 실패',
+      '총 시도한 횟수: 2',
+    ]);
+
+    expectBridgeOrder(log, '[ O |   | O | X ]', '[   | O |   |   ]');
+  });
+
+  test('예외 테스트1: 다리 생성기는 3이상 20이하 숫자만 가능', () => {
     runException(['a']);
+  });
+
+  test('예외 테스트2: 다리 이동은 U, D 중에 가능', () => {
+    runException(['3', '4']);
+  });
+
+  test('예외 테스트3: 게임 재시작 여부는 Q, R 중에 가능', () => {
+    mockRandoms(['1', '1', '1']);
+    runException(['3', 'U', 'D', 'D']);
   });
 });
