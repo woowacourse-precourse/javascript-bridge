@@ -1,5 +1,6 @@
 const InputView = require('./UI/InputView')
 const OutputView = require('./UI/OutputView')
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   #generatedBridge;
@@ -77,6 +78,7 @@ class App {
   // 게임 종료 및 결과출력
   endGame() {
     OutputView.printResult(this.#gameStatus);
+    Console.close();
   }
 }
 
