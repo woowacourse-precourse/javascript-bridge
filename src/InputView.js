@@ -14,18 +14,19 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeLength) => {
       if (isNaN(bridgeLength)) {
-        Console.print("[ERROR] 다리의 길이는 숫자입니다");
+        Console.print("[ERROR] 다리의 길이는 숫자입니다.");
         InputView.readBridgeSize();
         return;
       }
 
       if (bridgeLength < 3 || bridgeLength > 20) {
-        Console.print("[ERROR] 다리의 길이는 3이상, 20이하입니다");
+        Console.print("[ERROR] 다리의 길이는 3이상, 20이하입니다.");
         InputView.readBridgeSize();
         return;
       }
 
-      eventEmitter.emit("readBridgeSize", bridgeLength);
+      Console.print("");
+      eventEmitter.emit("readBridgeSize", +bridgeLength);
     });
   },
 
@@ -36,7 +37,15 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위:U, 아래:D)\n",
       (direction) => {
-        eventEmitter.emit("readMoving", direction);
+        const upperCaseDirection = direction.toUpperCase();
+
+        if (!(upperCaseDirection === "U" || upperCaseDirection === "D")) {
+          Console.print("[ERROR] U와 D 중에 하나를 입력하세요.");
+          InputView.readMoving();
+          return;
+        }
+
+        eventEmitter.emit("readMoving", upperCaseDirection);
       }
     );
   },
@@ -44,7 +53,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (answer) => {
+        const upperCaseAnswer = answer.toUpperCase();
+
+        if (!(upperCaseAnswer === "R" || upperCaseAnswer === "Q")) {
+          Console.print("[ERROR] R과 Q 중에 하나를 입력해주세요.");
+          InputView.readMoving();
+          return;
+        }
+
+        eventEmitter.emit("retryOrExit", upperCaseAnswer);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
