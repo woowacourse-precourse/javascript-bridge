@@ -13,6 +13,7 @@ const OutputView = {
   printMap(bridgeStatus, jumpHistory) {
     this.printMapLine("U", bridgeStatus, jumpHistory);
     this.printMapLine("D", bridgeStatus, jumpHistory);
+    MissionUtils.Console.print("\n");
   },
 
   printMapLine(direction, bridgeStatus, jumpHistory) {
