@@ -28,18 +28,18 @@
 
 ## 🦿 프로그래밍 요구 사항
 
-- [ ] 자바스크립트 코드 컨벤션 지키기
-- [ ] indent depth 2 이하로 작성하기
-- [ ] Jest로 구현한 기능이 정상 동작하는지 확인하기
-- [ ] else 사용하지 않고 코드 작성하기 ( HINT : RETURN )
+- [x] 자바스크립트 코드 컨벤션 지키기
+- [x] indent depth 2 이하로 작성하기
+- [x] Jest로 구현한 기능이 정상 동작하는지 확인하기
+- [x] else 사용하지 않고 코드 작성하기 ( HINT : RETURN )
 - [ ] 도메인 로직에 단위 테스트를 구현하기
 
 ### 🤏 추가된 사항!
 
 - [ ] 함수의 길이가 10라인을 넘어가지 않기
-- [ ] 메서드의 파라미터 개수는 최대 3개까지만 사용하기.
-- [ ] `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한기.
-  - [ ] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않기.
+- [x] 메서드의 파라미터 개수는 최대 3개까지만 사용하기.
+- [x] `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한기.
+  - [x] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않기.
 
 |                  | InputView | OutputView | BridgeGame | BridgeMaker | BridgeRandomNumberGenerator |
 | :--------------- | --------- | ---------- | ---------- | ----------- | --------------------------- |
