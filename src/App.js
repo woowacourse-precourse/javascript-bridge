@@ -18,9 +18,16 @@ class App {
   }
   startGame() {
     this.bridgeGame.addCount();
+    this.buildBridge();
+  }
+  buildBridge() {
     InputView.readBridgeSize((bridgeSize) => {
       this.bridgeGame.buildBridge(bridgeSize);
+      this.moveOnBridge();
     });
+  }
+  moveOnBridge() {
+    InputView.readMoving();
   }
 }
 

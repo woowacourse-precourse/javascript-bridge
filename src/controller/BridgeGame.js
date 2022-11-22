@@ -27,7 +27,6 @@ class BridgeGame {
    */
   buildBridge(bridgeSize) {
     this.bridge.setBridge(bridgeSize);
-    console.log(this.bridge);
   }
 
   /**
