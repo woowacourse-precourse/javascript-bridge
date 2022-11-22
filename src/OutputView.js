@@ -1,20 +1,86 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils')
+const { STRING, OUTPUT } = require('./common/Contents')
 const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+  topMap: [],
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
-};
+  buttomMap: [],
 
-module.exports = OutputView;
+  initMap() {
+    this.topMap = []
+    this.buttomMap = []
+  },
+
+  printStart() {
+    Console.print(OUTPUT.START)
+  },
+
+  selectMap(userInput, status, count) {
+
+    switch(status) {
+    case 'success':
+      this.makeSuccessMap(userInput)
+      break
+    case 'fail':
+      this.makeFailMap(userInput)
+      break
+    case 'finish':
+      this.printResult(status, count, userInput)
+    }
+  },
+
+  makeSuccessMap(userInput) {
+    if (userInput === STRING.TOP_BRIDGE) {
+      this.topMap.push(STRING.SUCCESS)
+      this.buttomMap.push(STRING.BLANK)
+    }
+    if (userInput === STRING.BOTTOM_BRIDGE) {
+      this.topMap.push(STRING.BLANK)
+      this.buttomMap.push(STRING.SUCCESS)
+    }
+    this.printMap()
+  },
+
+  makeFailMap(userInput) {
+    if (userInput === STRING.TOP_BRIDGE) {
+      this.topMap.push(STRING.FAIL)
+      this.buttomMap.push(STRING.BLANK)
+    }
+    if (userInput === STRING.BOTTOM_BRIDGE) {
+      this.topMap.push(STRING.BLANK)
+      this.buttomMap.push(STRING.FAIL)
+    }
+    this.printMap()
+  },
+
+  makeFinishMap(userInput) {
+    this.makeSuccessMap(userInput)
+    Console.print(OUTPUT.GAME_RESULT)
+    this.printMap()
+    Console.print(OUTPUT.SUCCESS)
+  },
+
+  makeStopMap() {
+    Console.print(OUTPUT.GAME_RESULT)
+    this.printMap()
+    Console.print(OUTPUT.FAIL)
+  },
+
+  printMap() {
+    Console.print(`[ ${this.topMap.join(' | ')} ]`)
+    Console.print(`[ ${this.buttomMap.join(' | ')} ]`)
+  },
+
+  printResult(status, count, userInput) {
+    if (status === 'finish') {
+      this.makeFinishMap(userInput)
+    }
+    if (status === STRING.QUIT) {
+      this.makeStopMap()
+    }
+    
+    Console.print(`${OUTPUT.FULL_COUNT} ${count}`)
+    Console.close()
+  },
+}
+
+module.exports = OutputView

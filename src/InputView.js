@@ -1,21 +1,32 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils')
+const { STRING, INPUT, ERROR } = require('./common/Contents')
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  bridge: [],
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readBridgeSize() {
+    return new Promise((resolve) => {
+      Console.readLine(INPUT.BRIDGE_SIZE, (answer) => resolve(answer))
+    })
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
-};
+  readMoving() {
+    return new Promise((resolve) => {
+      Console.readLine(INPUT.MOVE_CELL, (answer) => resolve(answer)
+    )})
+  },
 
-module.exports = InputView;
+  readGameCommand() {
+    return new Promise((resolve) => 
+      Console.readLine(INPUT.RETRY, (answer) => resolve(answer)
+    ))
+  },
+
+  exceptionHandler(answer) {
+    if (answer !== STRING.RESTART && answer !== STRING.QUIT) {
+      throw new Error(ERROR.ONLY_R_AND_Q)
+    }
+  }
+}
+
+module.exports = InputView
