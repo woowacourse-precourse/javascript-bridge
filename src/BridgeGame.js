@@ -11,6 +11,11 @@ class BridgeGame {
   #trial;
 
   constructor() {
+    this.move = this.move.bind(this);
+    this.result = this.result.bind(this);
+    this.clear = this.clear.bind(this);
+    this.over = this.over.bind(this);
+    this.generateMap = this.generateMap.bind(this);
     this.#history = [];
     this.#trial = 1;
   }
