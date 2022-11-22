@@ -8,14 +8,18 @@ const BridgeRecorder = require('./BridgeRecorder');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #turn = 0;
-  #try = 1;
-  #isPlay = true;
-  #isEnd = false;
+  #turn;
+  #try;
+  #isPlay;
+  #isEnd;
   #bridge;
   #bridgeRecord;
 
   constructor() {
+    this.#turn = 0;
+    this.#try = 1;
+    this.#isPlay = true;
+    this.#isEnd = false;
     this.#bridgeRecord = new BridgeRecorder([], []);
   }
 
