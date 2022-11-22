@@ -13,7 +13,8 @@ const BridgeMaker = {
     if (Validator.validatorBridgeLength(size)) {
       return Array.from({ length: size }, () => {
         const number = generateRandomNumber();
-        return number ? GAME_CONSTANTS.upStair
+        return number
+          ? GAME_CONSTANTS.upStair
           : GAME_CONSTANTS.downStair;
       });
     }

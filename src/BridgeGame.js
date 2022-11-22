@@ -17,7 +17,6 @@ class BridgeGame {
 
   setPattern (pattern) {
     this.#pattern = pattern;
-    console.log(this.#pattern);
   }
 
   static makePattern (size) {
