@@ -14,7 +14,6 @@ const InputView = {
   readBridgeSize(controller) {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
       try {
-        Console.print('');
         controller.createBridge(input);
       } catch (error) {
         Console.print(error);

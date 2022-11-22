@@ -13,9 +13,7 @@ const BridgeMaker = {
     const bridgeArray = [];
     for (let length = 1; length <= size; length += 1) {
       const number = generateRandomNumber();
-      number === BRIDGE_ELEMENT.UP
-        ? bridgeArray.push(INPUT_MESSAGE.UP)
-        : bridgeArray.push(INPUT_MESSAGE.DOWN);
+      number === 1 ? bridgeArray.push("U") : bridgeArray.push("D");
     }
     return bridgeArray;
   },

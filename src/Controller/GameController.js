@@ -5,7 +5,6 @@ const Bridge = require('../Model/Bridge');
 const { RETRY_MESSAGE } = require('../Utils/Constant');
 const BridgeValidator = require('../Utils/Validator/BridgeValidator');
 const GameValidator = require('../Utils/Validator/GameValidator');
-const { isRightRetryString } = require('../Utils/Validator/GameValidator');
 const SelectedValidator = require('../Utils/Validator/SelectedValidator');
 const InputView = require('../Viewer/InputView');
 const OutputView = require('../Viewer/OutputView');
@@ -35,6 +34,7 @@ class GameController {
    * @param {number} input
    */
   createBridge(input) {
+    Console.print('');
     BridgeValidator.validator(input);
     this.#game.createBridge(new Bridge(input, generate));
     return InputView.readMoving(this);
@@ -50,10 +50,7 @@ class GameController {
     this.#game.move(input);
     OutputView.printMap(this.#game.result);
     if (this.#game.isReMoving()) return InputView.readMoving(this);
-    if (this.#game.isEnd()) {
-      OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
-      return Console.close();
-    }
+    if (this.#game.isEnd()) return OutputView.printResult(this.#game);
     return InputView.readGameCommand(this);
   }
 
@@ -68,7 +65,7 @@ class GameController {
       this.#game.retry();
       return InputView.readMoving(this);
     }
-    OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
+    OutputView.printResult(this.#game);
     return Console.close();
   }
 }

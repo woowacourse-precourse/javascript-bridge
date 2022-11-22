@@ -67,11 +67,12 @@ const OutputView = {
    * @param {boolean} isWin
    * @param {number} tryCnt
    */
-  printResult(result, isWin, tryCnt) {
+  printResult(game) {
     Console.print(OUTPUT_MESSAGE.GAME_RESULT);
-    this.printMap(result);
-    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(isWin));
-    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(tryCnt));
+    this.printMap(game.result);
+    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.isWin()));
+    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryNumber));
+    Console.close();
   },
 };
 
