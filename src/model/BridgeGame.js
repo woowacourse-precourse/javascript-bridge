@@ -25,34 +25,41 @@ class BridgeGame {
     return JSON.stringify(this.#userBridge) === JSON.stringify(bridgePiece);
   }
 
-  makeUpDownBridge() {
+  makeBridgeFormat() {
+    const { front, middle, back } = BRIDGE;
+    const { up, down } = this.#makeUpDownBridge();
+    const upBridge = front.concat(up.join(middle), back);
+    const downBridge = front.concat(down.join(middle), back);
+    return { upBridge, downBridge };
+  }
+
+  #makeUpDownBridge() {
     return this.#userBridge.reduce(
-      (acc, cur, index) => {
-        const space = this.#bridge[index] === cur ? 'O' : 'X';
-        return cur === 'U' ? this.makeUpBridge(acc, space) : this.makeDownBridge(acc, space);
+      (bridgeAccumulator, currentCommand, index) => {
+        const space = this.#bridge[index] === currentCommand ? BRIDGE.correct : BRIDGE.wrong;
+        return BridgeGame.#bridgeMaker(bridgeAccumulator, currentCommand, space);
       },
       { up: [], down: [] }
     );
   }
 
-  makeUpBridge(bridge, space) {
+  static #bridgeMaker(bridge, command, space) {
+    if (command === 'U') {
+      return BridgeGame.#makeUpBridge(bridge, space);
+    }
+    return BridgeGame.#makeDownBridge(bridge, space);
+  }
+
+  static #makeUpBridge(bridge, space) {
     bridge.up.push(space);
     bridge.down.push(BRIDGE.blank);
     return bridge;
   }
 
-  makeDownBridge(bridge, space) {
+  static #makeDownBridge(bridge, space) {
     bridge.up.push(BRIDGE.blank);
     bridge.down.push(space);
     return bridge;
-  }
-
-  makeBridgeFormat() {
-    const { up, down } = this.makeUpDownBridge();
-    const { front, middle, back } = BRIDGE;
-    const upBridge = front.concat(up.join(middle), back);
-    const downBridge = front.concat(down.join(middle), back);
-    return { upBridge, downBridge };
   }
 
   isEnd() {

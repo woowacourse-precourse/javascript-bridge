@@ -1,6 +1,6 @@
 const BridgeGame = require('../model/BridgeGame');
-const { readBridgeSize, readGameCommand, readMoving } = require('../view/InputView');
 const { checkValidBridgeSize, checkValidRetry, checkValidSpace } = require('../InputValidation');
+const { readBridgeSize, readGameCommand, readMoving } = require('../view/InputView');
 const {
   printNewLine,
   printStart,
@@ -10,7 +10,7 @@ const {
 } = require('../view/OutputView');
 
 class BridgeGamePresenter {
-  #BridgeGame;
+  #bridgeGame;
 
   constructor() {
     printStart();
@@ -30,7 +30,7 @@ class BridgeGamePresenter {
 
   #createBridge(size) {
     checkValidBridgeSize(size);
-    this.#BridgeGame = new BridgeGame(size);
+    this.#bridgeGame = new BridgeGame(size);
     printNewLine();
     this.#checkMoving();
   }
@@ -48,10 +48,10 @@ class BridgeGamePresenter {
 
   #startMoving(space) {
     checkValidSpace(space);
-    const spaceExistence = this.#BridgeGame.move(space).isCorrectSpace();
-    printMap(this.#BridgeGame.makeBridgeFormat());
+    const spaceExistence = this.#bridgeGame.move(space).isCorrectSpace();
+    printMap(this.#bridgeGame.makeBridgeFormat());
 
-    if (this.#BridgeGame.isEnd()) {
+    if (this.#bridgeGame.isEnd()) {
       return this.#result();
     }
     return spaceExistence ? this.#checkMoving() : this.#checkRetry();
@@ -70,11 +70,11 @@ class BridgeGamePresenter {
 
   #retry(input) {
     checkValidRetry(input);
-    return this.#BridgeGame.retry(input) ? this.#checkMoving() : this.#result();
+    return this.#bridgeGame.retry(input) ? this.#checkMoving() : this.#result();
   }
 
   #result() {
-    printResult(this.#BridgeGame.getResult());
+    printResult(this.#bridgeGame.getResult());
   }
 }
 
