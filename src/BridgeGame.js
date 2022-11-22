@@ -5,11 +5,15 @@ class BridgeGame {
   #bridge;
   #moveRoute;
   #index;
+  #checkFail;
+  #tryTime;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#moveRoute = [[], []];
     this.#index = 0;
+    this.#checkFail = false;
+    this.#tryTime = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -58,6 +62,16 @@ class BridgeGame {
     return upRoute.includes("X") || downRoute.includes("X");
   }
 
+  getResult() {
+    if (this.#checkFail == true) {
+      return "실패";
+    }
+    return "성공";
+  }
+
+  getTryTime() {
+    return this.#tryTime;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

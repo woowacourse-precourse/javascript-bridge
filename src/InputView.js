@@ -45,6 +45,9 @@ const InputView = {
           return this.readGameCommand(bridge, bridgeGame, moveRoute);
         }
 
+        if (bridge.length === moveRoute[0].length)
+          return OutputView.printResult(bridgeGame, moveRoute);
+
         return this.readMoving(bridge, bridgeGame);
       }
     );
@@ -65,7 +68,7 @@ const InputView = {
           return this.readMoving(bridge, bridgeGame);
         }
         if (answer === "Q") {
-          return;
+          return OutputView.printResult(bridgeGame, moveRoute);
         }
       }
     );
