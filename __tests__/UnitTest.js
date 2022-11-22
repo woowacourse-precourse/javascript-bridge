@@ -1,5 +1,7 @@
 const BridgeGame = require('../src/BridgeGame');
 const BridgeStore = require('../src/BridgeStore');
+const BridgeValidator = require('../src/BridgeValidator');
+const { VALID_INPUT } = require('../src/constants');
 const MapMaker = require('../src/MapMaker');
 
 describe('MapMaker 테스트', () => {
@@ -147,5 +149,75 @@ describe('BridgeStore 테스트', () => {
 
     store.retry();
     expect(store.getUserInputResultLength()).toEqual(0);
+  });
+});
+
+describe('입력 검증 테스트', () => {
+  let validator;
+
+  beforeEach(() => {
+    validator = new BridgeValidator({ bridgeSize: { min: 3, max: 20 } }, VALID_INPUT);
+  });
+
+  describe('유효한 다리 길이 입력 여부', () => {
+    test.each(['7', '3', '10', '4'])('유효한 다리 길이 입력 테스트', (input) => {
+      expect(validator.isValidBridgeSize(input)).toBe(true);
+    });
+
+    test.each(['1', '2', '100'])('유효하지 않은 다리 길이 입력 테스트', (input) => {
+      expect(() => validator.isValidBridgeSize(input)).toThrow('[ERROR]');
+    });
+  });
+
+  describe('유효한 명령어 입력 여부', () => {
+    describe('이동 명령어 테스트', () => {
+      const target = 'move';
+
+      test.each(['U', 'D'])('올바른 이동 명령어 입력', (command) => {
+        expect(validator.isValidCommand(target, command)).toBe(true);
+      });
+
+      test.each(['z', ' '])('올바르지 않은 이동 명령어 입력', (command) => {
+        expect(() => validator.isValidCommand(target, command)).toThrow('[ERROR]');
+      });
+    });
+
+    describe('재시작 명령어 테스트', () => {
+      const target = 'retry';
+
+      test.each(['R', 'Q'])('올바른 재시작 명령어 입력', (command) => {
+        expect(validator.isValidCommand(target, command)).toBe(true);
+      });
+
+      test.each(['z', ' '])('올바르지 않은 재시작 명령어 입력', (command) => {
+        expect(() => validator.isValidCommand(target, command)).toThrow('[ERROR]');
+      });
+    });
+  });
+
+  describe('정수 입력 테스트', () => {
+    test.each(['1', '3', '1000'])('올바른 입력 테스트', (input) => {
+      expect(validator.isValidNumber(input)).toBe(true);
+    });
+
+    test.each(['test', '   '])('일반 글자 입력 테스트', (input) => {
+      expect(() => validator.isValidNumber(input)).toThrow('[ERROR]');
+    });
+
+    test.each(['test', '   '])('일반 글자 입력 테스트', (input) => {
+      expect(() => validator.isValidNumber(input)).toThrow('[ERROR]');
+    });
+
+    test.each(['0.3', '-3.8'])('정수가 아닌 숫자 입력 테스트', (input) => {
+      expect(() => validator.isValidNumber(input)).toThrow('[ERROR]');
+    });
+  });
+
+  test('아무 입력도 없는 경우 에러 발생', () => {
+    expect(() => validator.isValidInput('')).toThrow('[ERROR]');
+  });
+
+  test.each([' ', ' 3 ', '\n가나다'])('공백을 포함하여 입력하는 경우 에러 발생', () => {
+    expect((input) => validator.isValidInput(input).toThrow('[ERROR]'));
   });
 });
