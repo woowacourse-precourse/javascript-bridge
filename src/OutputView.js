@@ -38,6 +38,10 @@ const OutputView = {
     arr2=arr2+MESSAGE.bridge.bridgeAgain+downMessage;
     Console.print(arr1+MESSAGE.bridge.bridgeEnd+`\n`+arr2+MESSAGE.bridge.bridgeEnd);
   },
+  resetBridge(){
+    arr1="";
+    arr2="";
+  },
 
   printResult(score){ 
     Console.print('최종 게임 결과');
@@ -50,6 +54,10 @@ const OutputView = {
       Console.print(`게임 성공 여부: ${MESSAGE.gameScore.fail}`)
     }
     Console.print(`총 시도한 횟수: ${OutputView.checkRestartCount()}`)//카운트 세기
+  },
+
+  checkRestartCount(){
+    return restartcount+=1;
   },
 
 
