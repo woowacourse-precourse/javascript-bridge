@@ -1,11 +1,9 @@
-const { INPUT_MESSAGE } = require('./constants');
+const { INPUT_MESSAGE } = require('./constants/message');
 const { Console } = require('@woowacourse/mission-utils');
-const Validation = require('./Validation');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const OutputView = require('./OutputView');
 const { MOVING, GAME_COMMANDS, GAME_RESULT } = require('./constants/index');
+const BridgeGame = require('./BridgeGame');
+const Validation = require('./Validation');
+const OutputView = require('./OutputView');
 
 const InputView = {
   readBridgeSize() {
@@ -13,16 +11,12 @@ const InputView = {
       const checkedSize = Validation.validateBridgeSize(bridgeSize);
       if (checkedSize) {
         this.readBridgeSize();
-      } else {
-        const bridge = BridgeMaker.makeBridge(
-          parseInt(bridgeSize, 10),
-          BridgeRandomNumberGenerator.generate
-        );
-        Console.print('');
-        let movingRoute = [[], []];
-        let UserTryCount = 1;
-        this.readMoving(bridge, movingRoute, UserTryCount);
       }
+      const bridgeGame = new BridgeGame();
+      const bridge = bridgeGame.prepare(bridgeSize);
+      let movingRoute = [[], []];
+      let UserTryCount = 1;
+      this.readMoving(bridge, movingRoute, UserTryCount);
     });
   },
 
