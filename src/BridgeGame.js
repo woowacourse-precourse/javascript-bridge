@@ -21,7 +21,7 @@ class BridgeGame {
    * @param userRestartInput {string} [유저 재시작 여부]
    * @param userMoving {string[]} [유저 이동기록]
    */
-  processUserRestartInput(userRestartInput, userMoving) {
+  processRestart(userRestartInput, userMoving) {
     if (userRestartInput === "R") this.retry();
     if (userRestartInput === "Q") this.finishGame(userMoving, false);
   }
