@@ -14,7 +14,6 @@ class App {
 	play() {
 		OutputView.printStart();
 		InputView.readBridgeSize(this);
-		console.log(this);
 	}
 }
 

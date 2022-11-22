@@ -18,7 +18,7 @@ const OutputView = {
 		const down = [];
 
 		inputList.forEach(value => {
-			if (value === '1') {
+			if (value === 1) {
 				up.push(1);
 				down.push(0);
 			} else {
@@ -26,15 +26,15 @@ const OutputView = {
 				down.push(1);
 			}
 		});
-		return [up, down];
+		return [up.slice(), down.slice()];
 	},
 
 	printMap(info) {
 		const list = this.convertGameInfo(info.inputList);
-
-		list.forEach(el => {
-			console.log('[ ' + el.map((num, idx) => (num === 0 ? ' ' : num === info.bridgeInfo[idx] ? 'O' : 'X')).join(' | ') + ' ]');
+		list.forEach((el, dir) => {
+			Console.print('[ ' + el.map((num, idx) => (num === 0 ? ' ' : info.bridgeInfo[idx] === dir ? 'X' : 'O')).join(' | ') + ' ]');
 		});
+		Console.print();
 	},
 
 	/**
@@ -46,7 +46,7 @@ const OutputView = {
 		Console.print('최종 게임 결과');
 		this.printMap(info);
 		Console.print('게임 성공 여부 : ' + info.currentPosition === info.bridgeLength ? '성공' : '실패');
-		Consolo.print('총 시도한 횟수 : ' + info.gameCount);
+		Console.print('총 시도한 횟수 : ' + info.gameCount);
 	},
 };
 
