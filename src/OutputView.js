@@ -20,10 +20,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(input) {
+  printMap(input, answer) {
     let upperBridge = '[ ';
     let lowerBridge = '[ ';
-    repeatVerifyInputAndAnswer(input);
+    repeatVerifyInputAndAnswer(input, answer);
     upperBridge += ']';
     lowerBridge += ']';
 
@@ -49,12 +49,12 @@ const OutputView = {
   },
 
   //사용자 입력 개수만큼 검증과정 반복하기
-  repeatVerifyInputAndAnswer(input){
+  repeatVerifyInputAndAnswer(input, answer){
     for(let i = 0; i < input.length; i++){
       if(i != 0){
         this.printSpaceDivision();
       }
-      this.verifyInputAndAnswer();   
+      this.verifyInputAndAnswer(input, answer);   
     }
   },
 
