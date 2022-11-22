@@ -1,9 +1,9 @@
-const Bridge = require("./Bridge");
-const View = require("./View");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { GAME_RESULT } = require("./Constant");
-const gameUtils = require("./GameUtils");
+const Bridge = require("./model/Bridge");
+const View = require("../view/View");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../utils/BridgeRandomNumberGenerator");
+const { GAME_RESULT } = require("../Constant");
+const gameUtils = require("../utils/GameUtils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
