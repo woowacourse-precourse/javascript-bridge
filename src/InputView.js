@@ -38,7 +38,7 @@ const InputView = {
   readMoving(bridgeGame) {
     readLine(GAME_MESSAGE.move, (userInput) => {
       try {
-        this.getMoving(userInput, bridgeGame);
+        this.moveBridge(userInput, bridgeGame);
       } catch (error) {
         Console.print(error.message);
         this.readMoving(bridgeGame);
@@ -46,21 +46,21 @@ const InputView = {
     });
   },
 
-  getMoving(userInput, bridgeGame) {
+  moveBridge(userInput, bridgeGame) {
     moveValidation(userInput);
     bridgeGame.move(userInput);
     const bridgeResult = bridgeGame.getMap();
     printMap(bridgeResult);
-    this.getMoveNext(bridgeGame);
+    this.checkFinish(bridgeGame);
   },
 
-  getMoveNext(bridgeGame) {
+  checkFinish(bridgeGame) {
     const isFinish = bridgeGame.isFinish();
     if (isFinish) {
       this.getGameFinish(bridgeGame);
       return;
     }
-    this.getGameNext(bridgeGame);
+    this.checkMoveResult(bridgeGame);
   },
   getGameFinish(bridgeGame) {
     const bridgeResult = bridgeGame.getMap();
@@ -68,7 +68,7 @@ const InputView = {
     printResult(bridgeResult, GAME_BOOLEAN.success, numberAttempts);
     Console.close();
   },
-  getGameNext(bridgeGame) {
+  checkMoveResult(bridgeGame) {
     const isAnswer = bridgeGame.isAnswer();
     if (isAnswer) {
       return this.readMoving(bridgeGame);
@@ -82,14 +82,14 @@ const InputView = {
   readGameCommand(bridgeGame) {
     readLine(GAME_MESSAGE.retry, (userInput) => {
       try {
-        this.getRetry(userInput, bridgeGame);
+        this.checkRetry(userInput, bridgeGame);
       } catch (error) {
         Console.print(error.message);
         this.readGameCommand(bridgeGame);
       }
     });
   },
-  getRetry(userInput, bridgeGame) {
+  checkRetry(userInput, bridgeGame) {
     retryValidation(userInput);
     if (userInput === SHORT_CUT.retry) {
       this.showReStart(bridgeGame);
