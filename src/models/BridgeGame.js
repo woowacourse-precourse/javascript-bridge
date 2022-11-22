@@ -5,7 +5,7 @@ const Bridge = require('./Bridge');
  */
 class BridgeGame {
   #bridge;
-  #map = new Map();
+  #map = [];
 
   makeBridge(bridgeSize) {
     this.#bridge = new Bridge(bridgeSize);
@@ -21,7 +21,7 @@ class BridgeGame {
 
     const map = this.#map;
     const movingState = this.#bridge.isMovable(round, direction);
-    map.set(round, movingState);
+    map.push([direction, movingState]);
 
     return { map, movingState };
   }

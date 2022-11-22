@@ -30,8 +30,8 @@ class BridgeGameView {
     this.#output.printStart();
   }
 
-  printMap() {
-    this.#output.printMap();
+  printMap(map) {
+    this.#output.printMap(map);
   }
 
   printResult() {

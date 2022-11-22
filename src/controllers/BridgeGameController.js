@@ -43,7 +43,7 @@ class BridgeGameController {
         ? this.#requestMoveDirection.bind(this, round + 1)
         : this.retry.bind(this);
 
-      this.#view.printMap(map, movingState);
+      this.#view.printMap(map);
       progress();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
