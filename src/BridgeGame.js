@@ -16,7 +16,8 @@ class BridgeGame {
   }
 
   decideMoveOrStop(direction) {
-    if (direction !== this.#answerBridgeArray[this.#bridgeIndex - 1]) return this.stop(direction);
+    if (direction !== this.#answerBridgeArray[this.#bridgeIndex - 1]) 
+      return this.stop(direction);
     if (this.#bridgeIndex === this.#answerBridgeArray.length) {
       this.mapMaker.makeFinalSuccess(direction, this.#attemptNumber);
       return GAME_OUTCOME.FINAL_SUCCESS;
