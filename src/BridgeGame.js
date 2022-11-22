@@ -9,6 +9,14 @@ class BridgeGame {
     this.downBridgeList = [];
     this.count = 0;
   }
+
+  setCount(){
+    this.count += 1;
+  }
+
+  getCount(){
+    return this.count;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -16,13 +24,16 @@ class BridgeGame {
    */
   move(space) {
     const bridgeList = Bridge.getBridge();
+    let count = getCount();
 
-    if(space === "U") this.upMove(bridgeList);
-    if(space === "D") this.downMove(bridgeList);
+    if(space === "U") this.upMove(bridgeList,count);
+    if(space === "D") this.downMove(bridgeList,count);
+
+    this.setCount();
   }
 
-  upMove(bridgeList){
-    if(bridgeList[this.count] === "U"){
+  upMove(bridgeList,count){
+    if(bridgeList[count] === "U"){
       return (
         this.upBridgeList[count].push('O'),
         this.downBridgeList[count].push(' ')
@@ -32,8 +43,8 @@ class BridgeGame {
     this.downBridgeList[count].push(' ');
   }
 
-  downMove(bridgeList){
-    if(bridgeList[this.count] === "D"){
+  downMove(bridgeList,count){
+    if(bridgeList[count] === "D"){
       return (
         this.upBridgeList[count].push(' '),
         this.downBridgeList[count].push('O')
@@ -41,7 +52,6 @@ class BridgeGame {
     }
     this.upBridgeList[count].push(' ');
     this.downBridgeList[count].push('X');
-
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
