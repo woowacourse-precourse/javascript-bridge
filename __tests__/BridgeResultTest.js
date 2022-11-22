@@ -23,7 +23,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 }
 
-describe('게임 결과 출력 테스트', () => {
+describe('최종 결과에 대한 단위테스트', () => {
   test('게임을 한번에 성공한 경우', () => {
     const logSpy = getLogSpy();
 

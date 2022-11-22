@@ -26,7 +26,7 @@ const mockRandoms = (numbers) => {
 }
 
 describe('다리 현황 출력 테스트', () => {
-  test('모든 경로가 정답일 경우의 다리를 그려낸다', () => {
+  test('플레이어가 이동하는 기능(다리 현황 그려내기)에 대한 단위 테스트를 진행한다', () => {
     const logSpy = getLogSpy();
 
     let gameStatus = {
