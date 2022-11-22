@@ -18,10 +18,12 @@ describe('readBridgeSize 메서드 테스트', () => {
 
 describe('readMoving 메서드 테스트', () => {
   test('문구 출력 테스트', () => {
-    InputView.readMoving((direction) => {});
+    InputView.readMoving('', (direction) => {});
+
+    console.log([...readLineSpy.mock.calls].join(''));
 
     expect([...readLineSpy.mock.calls].join('')).toEqual(
-      expect.stringContaining('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n')
+      expect.stringContaining('이동할 칸을 선택해주세요. (위: U, 아래: D)\n')
     );
   });
 });
