@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_STATUS, NEW_LINE } = require('./constants/BridgeGameSetting');
 const MESSAGE = require('./constants/BridgeGameMessage');
 const Validator = require('./utils/Validator');
 /**
@@ -10,11 +9,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.print(MESSAGE.PROCESS.GAME_START);
-    Console.readLine(MESSAGE.PROCESS.ENTER_BRIDGE_LENGTH, (length) => {
-      Validator.isCorrectLength(length);
-      Console.print(NEW_LINE);
-      this.readMoving();
+    Console.readLine(MESSAGE.PROCESS.ENTER_BRIDGE_LENGTH, (size) => {
+      Validator.isCorrectLength(size);
+      return size;
     });
   },
 
@@ -24,7 +21,7 @@ const InputView = {
   readMoving() {
     Console.readLine(MESSAGE.PROCESS.SELECT_UP_DOWN, (select) => {
       Validator.isUpOrDown(select);
-      Console.print(NEW_LINE);
+      return select;
     });
   },
 
@@ -34,16 +31,9 @@ const InputView = {
   readGameCommand() {
     Console.readLine(MESSAGE.PROCESS.SELECT_RESTART_OR_QUIT, (select) => {
       Validator.isRestartOrQuit(select);
-      if (select === GAME_STATUS.GAME_RESTART) {
-        this.readMoving();
-      }
-      if (select === GAME_STATUS.GAME_QUIT) {
-        Console.print(MESSAGE.PROCESS.GAME_RESULT);
-      }
+      return select;
     });
   },
 };
-
-Console.print(InputView.readGameCommand());
 
 module.exports = InputView;

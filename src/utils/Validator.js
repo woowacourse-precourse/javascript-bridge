@@ -1,10 +1,11 @@
+const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE_INFO, GAME_STATUS } = require('../constants/BridgeGameSetting');
 const MESSAGE = require('../constants/BridgeGameMessage');
 
 class Validator {
   static throwErr(result, msg) {
     if (!result) {
-      throw new Error(msg);
+      Console.print(msg);
     }
   }
 

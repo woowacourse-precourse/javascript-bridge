@@ -1,6 +1,5 @@
-const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE_INFO } = require('./constants/BridgeGameSetting');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { generate } = require('./BridgeRandomNumberGenerator');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -13,20 +12,16 @@ const BridgeMaker = {
   makeBridge(size) {
     const result = [];
     for (let i = 0; i < size; i += 1) {
-      result.push(BridgeRandomNumberGenerator.generate());
-    }
-    result.forEach((number, idx) => {
+      const number = generate();
       if (number === BRIDGE_INFO.RANDOM_UP) {
-        result[idx] = BRIDGE_INFO.SELECT_UP;
+        result.push(BRIDGE_INFO.SELECT_UP);
       }
       if (number === BRIDGE_INFO.RANDOM_DOWN) {
-        result[idx] = BRIDGE_INFO.SELECT_DOWN;
+        result.push(BRIDGE_INFO.SELECT_DOWN);
       }
-      return result;
-    });
+    }
+    return result;
   },
 };
-
-Console.print(BridgeMaker.makeBridge(5));
 
 module.exports = BridgeMaker;
