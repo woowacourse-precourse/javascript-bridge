@@ -10,7 +10,9 @@ const InputView = {
   console: MissionUtils.Console,
 
   validate(userInput) {
-    if (!userInput) {
+    const EMPTY_USER_INPUT = !userInput;
+
+    if (EMPTY_USER_INPUT) {
       throw new Error(this.INPUT_ERROR_TEXT);
     }
   },
