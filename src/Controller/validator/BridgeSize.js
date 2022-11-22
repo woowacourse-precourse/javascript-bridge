@@ -13,10 +13,9 @@ class BridgeSize {
   checkInput() {
     try {
       if (this.isAllowNumber() || this.isAllowRange())
-        throw new Error(`${ERROR.BRIDGE_SIZE}`);
+        throw OutputView.printErrorMessage(ERROR.BRIDGE_SIZE);
       return ISALLOW.TRUE;
-    } catch (errorMessage) {
-      OutputView.printErrorMessage(errorMessage);
+    } catch {
       return ISALLOW.FALSE;
     }
   }

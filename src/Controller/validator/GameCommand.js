@@ -12,10 +12,10 @@ class GameCommand {
 
   checkInput() {
     try {
-      if (!this.isAllowOrder()) throw new Error(`${ERROR.GAMECOMMAND}`);
+      if (!this.isAllowOrder())
+        throw OutputView.printErrorMessage(ERROR.GAMECOMMAND);
       return ISALLOW.TRUE;
-    } catch (errorMessage) {
-      OutputView.printErrorMessage(errorMessage);
+    } catch {
       return ISALLOW.FALSE;
     }
   }
