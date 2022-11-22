@@ -58,7 +58,7 @@ D
 
 이후, 다리 건너기는 종료됩니다.
 
-### 3. 재시도 혹은 종료
+## 3. 재시도 혹은 종료
 
 건널 수 없는 칸으로 이동했다면 다리 건너기가 종료되며 재시도를 할지, 게임을 종료할지 물어봅니다.
 
@@ -84,7 +84,7 @@ Q
 최종 게임 결과
 ```
 
-### 4. 최종 게임 결과 출력
+## 4. 최종 게임 결과 출력
 
 다리를 건너는데 성공했거나, 중간에 종료 명령어를 통해 종료했다면 최종 게임 결과를 출력합니다.
 
@@ -237,11 +237,11 @@ Q
 
 # 🔧 도메인 클래스별 필드, 생성자, 메소드 설명
 
-### 🌉 Bridge Class
+## 🌉 Bridge Class
 
 다리의 경로를 다루는 다리 클래스
 
-#### Class Field
+### Class Field
 
 `#bridge`
 
@@ -249,7 +249,7 @@ Q
 - 다리의 경로 방향은 위(U) 아래(D) 형태로만 저장한다.
 - type: `Array<string>`
 
-#### Class Constructor & Method
+### Class Constructor & Method
 
 `constructor(bridge)`
 
@@ -270,11 +270,11 @@ Q
 - parameter type: `Player`
 - return type: `string`
 
-### 🙍‍♂️ Player Class
+## 🙍‍♂️ Player Class
 
 플레이어의 이동 경로와 탈락 상태를 다루는 클래스
 
-#### Class Field
+### Class Field
 
 `#bridgePath`
 
@@ -283,7 +283,7 @@ Q
 - 경로 방향은 위(U) 아래(D) 형태로만 저장한다.
 - type: `Object<upperBridge: Array<string>, lowerBridge: Array<string>>`
 
-#### Class Constructor & Method
+### Class Constructor & Method
 
 `constructor()`
 
@@ -327,11 +327,11 @@ Q
 - 다리 경로의 윗칸을 문자열로 변환해 upperBridgeMap에 저장하고, 아랫칸을 문자열로 변환해 lowerBridgeMap에 저장한 객체를 반환한다.
 - return type: `Object<upperBridgeMap: string, lowerBridgeMap: string>`
 
-### 🕹 BridgeGame Class
+## 🕹 BridgeGame Class
 
 다리 건너기 게임을 진행하는 클래스
 
-#### Class Field
+### Class Field
 
 `#bridge`
 
@@ -348,7 +348,7 @@ Q
 - 게임의 시도횟수를 저장하는 필드
 - type: `number`
 
-#### Class Constructor & Method
+### Class Constructor & Method
 
 `constructor(bridge)`
 
