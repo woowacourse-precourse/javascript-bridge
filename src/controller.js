@@ -46,7 +46,6 @@ class Controller{
     gameFail(value){
         if(value == COMMAND.QUIT){
           OutputView.printFailResult(userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_DOWN], userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_UP], bridgeGame.attemptCount);
-          Console.close();
         }
     }
 
