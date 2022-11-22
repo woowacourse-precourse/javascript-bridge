@@ -7,14 +7,25 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+   move(answer, moves) {
+    for(var i = 0; i < moves.length; i++) {
+      if(answer[i] !== moves[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  
+   retry(command) {
+    if(command === 'R') return true;
+    if(command === 'Q') return false;
+  }
 }
 
 module.exports = BridgeGame;
