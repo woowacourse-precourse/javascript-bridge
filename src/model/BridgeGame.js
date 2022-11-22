@@ -73,8 +73,8 @@ class BridgeGame {
    */
   retry() {
     this.#retryingCount += ONE_TIME;
-    this.#upperBridge.pop();
-    this.#lowerBridge.pop();
+    this.#upperBridge.splice(0, this.#upperBridge.length);
+    this.#lowerBridge.splice(0, this.#lowerBridge.length);
   }
 }
 
