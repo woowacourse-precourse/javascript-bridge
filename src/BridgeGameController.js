@@ -5,6 +5,7 @@ const OutputView = require("./OutputView");
 const InputValidator = require("./InputValidator");
 
 class BridgeGameController {
+  RESTART_COMMAND = "R";
   #BridgeGame;
 
   getBridgeSize() {
@@ -66,7 +67,7 @@ class BridgeGameController {
   }
 
   isRestart(command) {
-    return command === "R";
+    return command === this.RESTART_COMMAND;
   }
 
   restartGame() {

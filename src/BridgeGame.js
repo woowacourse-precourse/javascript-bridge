@@ -13,6 +13,7 @@ class BridgeGame {
   ABLE_TO_MOVE_MARKER = "O";
   UNABLE_TO_MOVE_MARKER = "X";
   UP_DIRECTION = "U";
+  NO_MOVE_MARKER = " ";
 
   #attemptCount = 1;
   #upBridge = [];
@@ -42,10 +43,10 @@ class BridgeGame {
   mark(nextDirection, marker) {
     if (nextDirection === this.UP_DIRECTION) {
       this.#upBridge.push(marker);
-      this.#downBridge.push(" ");
+      this.#downBridge.push(this.NO_MOVE_MARKER);
     } else {
       this.#downBridge.push(marker);
-      this.#upBridge.push(" ");
+      this.#upBridge.push(this.NO_MOVE_MARKER);
     }
   }
 
