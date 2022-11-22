@@ -80,7 +80,10 @@ class BridgeGame {
   }
 
   setBridge(bridgeSize) {
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    return (this.#bridge = BridgeMaker.makeBridge(
+      bridgeSize,
+      BridgeRandomNumberGenerator.generate,
+    ));
   }
 }
 module.exports = BridgeGame;
