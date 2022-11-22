@@ -7,11 +7,13 @@ class BridgeGame {
   #bridge
   #steps
   #map
+  #result
 
   constructor(size){
     this.#steps=[]
     this.#map = {up: [], down: []}
-    
+    this.result = {count: 1, success: false}
+
     this.buildBridge(size)
     console.log(this.#bridge)
   }
@@ -30,6 +32,8 @@ class BridgeGame {
     const isDirectionRight = this.#bridge[this.#steps.length-1] === direction
     
     this.fillMap(direction, isDirectionRight)
+    
+    if(this.#steps.length === this.#bridge.length && isDirectionRight)this.#result.success = true
     
     return isDirectionRight
   }
@@ -57,7 +61,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#steps = []
+    this.#result.count ++
+  }
 }
 
 module.exports = BridgeGame;
