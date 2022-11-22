@@ -1,3 +1,5 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,8 +19,8 @@ class BridgeGame {
   #downBridge = [];
   #bridge;
 
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor(bridgeSize) {
+    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 
   isBridgeCrossed() {
