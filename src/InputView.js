@@ -25,8 +25,9 @@ const InputView = {
 
   readBridgeSize() {
     this.wrappingInput(CONSOLE_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
-      const bridgeGame = new BridgeGame(size);
-      Validator.validateBridgeSize(size);
+      const sizeNumber = Number(size);
+      const bridgeGame = new BridgeGame(sizeNumber);
+      Validator.validateBridgeSize(sizeNumber);
       this.readMoving(bridgeGame);
     });
   },
