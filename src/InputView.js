@@ -22,7 +22,6 @@ const InputView = {
       if(checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
 
       bridge.setBridge(Number(bridgeSize));
-      Console.print(bridge.getBridge());
       this.readMoving(bridge, bridgeGame);
     });
   },
