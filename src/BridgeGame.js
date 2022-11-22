@@ -2,31 +2,23 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #userMoves = [];
-  #bridge;
+  #userDirections = [];
+  #bridgeDirections = [];
 
   /**
    * @constructor
-   * @param {('U'|'D')[]} bridge - 다리('U' 와 'D'로 이루어진 배열)
+   * @param {('U'|'D')[]} bridgeDirections - 다리를 건너기 위한 방향 배열('U' 와 'D'로 이루어진 배열)
    */
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor(bridgeDirections) {
+    this.#bridgeDirections = bridgeDirections;
   }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * @param {('U'|'D')} direction - 이동 방향
+   * @param {('U'|'D')} nextDirection - 이동 방향
    */
-  move(direction) {
-    this.#userMoves.push(direction);
-  }
-
-  getBridge() {
-    return [...this.#bridge];
-  }
-
-  getUserMoves() {
-    return [...this.#userMoves];
+  move(nextDirection) {
+    this.#userDirections.push(nextDirection);
   }
 
   /**
@@ -38,24 +30,32 @@ class BridgeGame {
   }
 
   #isStartWith() {
-    const [bridge, userMoves] = [this.#bridge, this.#userMoves];
+    const [bridgeDirections, userDirections] = [this.#bridgeDirections, this.#userDirections];
 
     return (
-      userMoves.filter((userDirection, index) => userDirection === bridge[index]).length ===
-      userMoves.length
+      userDirections.filter((userDirection, index) => userDirection === bridgeDirections[index])
+        .length === userDirections.length
     );
   }
 
   #hasLessLength() {
-    return this.#userMoves.length < this.#bridge.length;
+    return this.#userDirections.length < this.#bridgeDirections.length;
   }
 
   isSuccess() {
-    const [bridge, userMoves] = [this.#bridge, this.#userMoves];
+    const [bridgeDirections, userDirections] = [this.#bridgeDirections, this.#userDirections];
 
-    return bridge
-      .map((direction, index) => direction === userMoves[index])
+    return bridgeDirections
+      .map((direction, index) => direction === userDirections[index])
       .every((isSame) => isSame);
+  }
+
+  getBridgeDirections() {
+    return [...this.#bridgeDirections];
+  }
+
+  getUserDirections() {
+    return [...this.#userDirections];
   }
 
   /**
