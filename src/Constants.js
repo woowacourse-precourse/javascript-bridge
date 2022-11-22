@@ -17,7 +17,8 @@ const STATE_CONSTANT = Object.freeze({
   retry: "R",
   end: "Q",
   canMovePlace: "O",
-  cantMovePlace: " ",
+  emptyPlace: " ",
+  cantMovePlace: "X",
 
   BridgeMinLength: 3,
   BridgeMaxLength: 20,
@@ -36,7 +37,7 @@ const ERROR_MESSAGE = Object.freeze({
   error: "[ERROR]",
 
   onlyNumber: `${this.error} 숫자만 입력할 수 있습니다.`,
-  betweenRange: `${this.error} 3부터 20 사이의 숫자만 입력할 수 있습니다.`,
+  betweenRange: `${this.error} 다리 길이는 3부터 20 사이의 숫자여야 합니다.`,
 });
 
 module.exports = {

@@ -64,12 +64,20 @@ class BridgeGame {
     ) {
       if (newState === STATE_CONSTANT.up) {
         this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.canMovePlace);
-        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.cantMovePlace);
+        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.emptyPlace);
       } else {
-        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.cantMovePlace);
+        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.emptyPlace);
         this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.canMovePlace);
       }
       userCanGo = true;
+    } else {
+      if (newState === STATE_CONSTANT.up) {
+        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.cantMovePlace);
+        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.emptyPlace);
+      } else {
+        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.emptyPlace);
+        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.cantMovePlace);
+      }
     }
     OutputView.makeMap({
       bridgeTop: this.#bridgeViewTop,
