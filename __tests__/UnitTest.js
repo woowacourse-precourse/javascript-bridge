@@ -31,3 +31,14 @@ describe('BridgeGame테스트', () => {
   beforeEach(() => {
     bridgeGame = new BridgeGame();
   });
+  test('숫자 입력에 알맞은 다리 생성 테스트', () => {
+    const userInputs = ['3', '5', '10'];
+    const result = [];
+
+    userInputs.forEach((input) => {
+      bridgeGame.createBridge(input);
+      result.push(bridgeGame.bridgeStore.isSameWithBridgeLength(Number(input)));
+    });
+    expect(result.every((el) => el)).toBeTruthy();
+  });
+});
