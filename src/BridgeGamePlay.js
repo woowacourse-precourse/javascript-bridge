@@ -44,9 +44,6 @@ class BridgeGamePlay {
     this.#myMoves.push(currentMove);
     const result = this.bridgeGame.getMoveResult(this.#myMoves, this.#bridge);
     OutputView.printMap(result);
-    if (this.bridgeGame.checkIfCanMove(this.#myMoves, this.#bridge)) {
-      this.move();
-    }
     this.checkIfWinOrMove(result);
   }
 
@@ -54,22 +51,23 @@ class BridgeGamePlay {
    * 이겼는지 또는 이동이 불가능한지 확인
    */
   checkIfWinOrMove(result) {
+    if (this.bridgeGame.checkIfCanMove(this.#myMoves, this.#bridge)) {
+      this.move();
+    }
     if (this.bridgeGame.validateWin(this.#myMoves, this.#bridge)) {
       OutputView.printResult(result, RESULT.WIN, this.bridgeGame.getTryCount());
     }
-    if (!this.bridgeGame.validateMove(this.#myMoves, this.#bridge)) {
-      this.checkRetry(result, InputView.getGameCommand());
-    }
+    this.checkRetry(result, InputView.getGameCommand());
   }
 
   /**
    * 이동이 불가능할 때 다시 할지 확인
    */
   checkRetry(result, gameCommand) {
-    if (!this.bridgeGame.retry(gameCommand)) {
+    if (!this.bridgeGame.retry(this.#myMoves, this.#bridge, gameCommand)) {
       OutputView.printResult(result, RESULT.FAIL, this.bridgeGame.getTryCount());
     }
-    if (this.bridgeGame.retry(gameCommand)) {
+    if (this.bridgeGame.retry(this.#myMoves, this.#bridge, gameCommand)) {
       this.playGame();
     }
   }
