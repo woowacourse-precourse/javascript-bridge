@@ -15,7 +15,12 @@ class App {
 
   setBridge = () => {
     InputView.readBridgeSize((size) => {
-      this.bridgeGame.setBridge(size);
+      const bridge = BridgeMaker.makeBridge(
+        size,
+        BridgeRandomNumberGenerator.generate
+      );
+      this.bridgeGame.setBridge(bridge);
+      console.log(this.bridgeGame.bridge);
     });
   };
 }
