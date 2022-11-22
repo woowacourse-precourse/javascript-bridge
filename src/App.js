@@ -1,5 +1,9 @@
+const Process = require("./Process");
+
 class App {
-  play() {}
+  play() {
+    new Process().play();
+  }
 }
 
 module.exports = App;
