@@ -2,11 +2,11 @@ const BridgeState = require('./BridgeState');
 
 class BridgeGame {
   constructor() {
+    BridgeState.addTryCount();
     BridgeState.initializeUserBridge();
   }
 
   move(moving) {
-    BridgeState.addTryCount();
     BridgeState.addUserBridgeMoving(moving);
   }
 

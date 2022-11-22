@@ -62,9 +62,9 @@ const OUTPUT_CONSTANTS = {
   },
 
   GAME_RESULT: {
-    INTRO_MESSAGE: '최종게임 결과',
+    INTRO_MESSAGE: '최종 게임 결과',
     SUCCESS_OR_NOT_MESSAGE: '게임 성공 여부: ',
-    TRY_COUNT_MESSAGE: '총 시도할 횟수: ',
+    TRY_COUNT_MESSAGE: '총 시도한 횟수: ',
     SUCCESS: '성공',
     FAIL: '실패',
   },

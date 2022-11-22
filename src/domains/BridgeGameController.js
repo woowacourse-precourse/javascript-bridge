@@ -3,7 +3,7 @@ const { READ_TYPE, GAME_COMMAND } = require('../constants');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
-const BridgeMaker = require('../utils/BridgeMaker');
+const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
 
 const BridgeState = require('./BridgeState');
@@ -17,36 +17,36 @@ const Utils = require('../utils/Utils');
 let bridgeGame = null;
 
 const BridgeGameController = {
-  async start() {
+  start() {
     OutputView.printStartMessage();
 
-    await this.initializeBridgeGame();
-    this.loopGame();
+    this.initializeBridgeGame();
   },
 
-  async initializeBridgeGame() {
-    let bridgeSize = await InputView.read(READ_TYPE.BRIDGE_SIZE);
-    bridgeSize = Utils.convertToNumber(bridgeSize);
-    BridgeState.setBridgeSize(bridgeSize);
+  initializeBridgeGame() {
+    InputView.read(READ_TYPE.BRIDGE_SIZE, (bridgeSize) => {
+      BridgeState.setBridgeSize(Utils.convertToNumber(bridgeSize));
 
-    const answerBridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    BridgeState.setAnswerBridge(answerBridge);
+      const answerBridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+      BridgeState.setAnswerBridge(answerBridge);
 
-    bridgeGame = new BridgeGame();
-
-    OutputView.addNewLine();
+      bridgeGame = new BridgeGame();
+      OutputView.addNewLine();
+      this.loopGame();
+    });
   },
 
-  async loopGame() {
-    const moving = await InputView.read(READ_TYPE.MOVING);
-    bridgeGame.move(moving);
-    OutputView.printMap();
-    OutputView.addNewLine();
+  loopGame() {
+    InputView.read(READ_TYPE.MOVING, (moving) => {
+      bridgeGame.move(moving);
+      OutputView.printMap();
+      OutputView.addNewLine();
 
-    const retryOrAllDone = this.checkRetryOrAllDone();
-    if (retryOrAllDone) return;
+      const retryOrAllDone = this.checkRetryOrAllDone();
+      if (retryOrAllDone) return;
 
-    this.loopGame();
+      this.loopGame();
+    });
   },
 
   checkRetryOrAllDone() {
@@ -81,14 +81,14 @@ const BridgeGameController = {
     return false;
   },
 
-  async DoQuitOrNew() {
-    const gameCommand = await InputView.read(READ_TYPE.GAME_COMMAND);
+  DoQuitOrNew() {
+    InputView.read(READ_TYPE.GAME_COMMAND, (gameCommand) => {
+      const isRetry = this.checkCommandRetry(gameCommand);
+      if (isRetry) return;
 
-    const isRetry = this.checkCommandRetry(gameCommand);
-    if (isRetry) return;
-
-    const isQuit = this.checkCommandQuit(gameCommand);
-    if (isQuit) return;
+      const isQuit = this.checkCommandQuit(gameCommand);
+      if (isQuit) return;
+    });
   },
 
   checkCommandRetry(gameCommand) {

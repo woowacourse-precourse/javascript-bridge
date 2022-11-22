@@ -3,31 +3,25 @@ const { Console } = require('@woowacourse/mission-utils');
 const ExceptionHandler = require('../utils/ExceptionHandler');
 
 const InputView = {
-  readBridgeSize() {
-    return new Promise((resolve, _) => {
-      Console.readLine(QUESTION_MESSAGE.BRIDGE_SIZE, resolve);
-    });
+  readBridgeSize(callback) {
+    Console.readLine(QUESTION_MESSAGE.BRIDGE_SIZE, callback);
   },
 
-  readMoving() {
-    return new Promise((resolve, _) => {
-      Console.readLine(QUESTION_MESSAGE.MOVING, resolve);
-    });
+  readMoving(callback) {
+    Console.readLine(QUESTION_MESSAGE.MOVING, callback);
   },
 
-  readGameCommand() {
-    return new Promise((resolve, _) => {
-      Console.readLine(QUESTION_MESSAGE.GAME_COMMAND, resolve);
-    });
+  readGameCommand(callback) {
+    Console.readLine(QUESTION_MESSAGE.GAME_COMMAND, callback);
   },
 
-  async read(readType) {
-    let inputedValue = await InputView[`read${readType}`]();
-    const isValidation = ExceptionHandler.tryValidate(inputedValue, readType);
+  read(readType, nextCallback) {
+    InputView[`read${readType}`]((inputedValue) => {
+      const isValidation = ExceptionHandler.tryValidate(inputedValue, readType);
+      if (!isValidation) return this.read(readType, nextCallback);
 
-    if (!isValidation) return await this.read(readType);
-
-    return inputedValue;
+      nextCallback(inputedValue);
+    });
   },
 };
 
