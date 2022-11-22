@@ -1,8 +1,7 @@
-const { readLine } = require('./utils/util');
+const { readLine, print } = require('./utils/util');
 const { BRIDGE_SIZE, MOVE, PLAY } = require('./constant/constant');
 const MESSAGE = require('./constant/message');
 const Validate = require('./utils/validate');
-const { print } = require('./utils/util');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

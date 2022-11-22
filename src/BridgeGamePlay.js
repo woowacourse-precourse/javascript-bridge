@@ -11,7 +11,6 @@ const BridgeGame = require('./BridgeGame');
 class BridgeGamePlay {
   constructor() {
     this.bridgeGame = new BridgeGame();
-    this.bridgeSize = 0;
     this.bridge = [];
     this.tryCount = 0;
     this.myMoves = [];
@@ -22,16 +21,16 @@ class BridgeGamePlay {
    */
   start() {
     OutputView.printStart();
-    this.bridgeSize = InputView.getBridgeSize();
-    this.makeBridge();
+    const bridgeSize = InputView.getBridgeSize();
+    this.makeBridge(bridgeSize);
     this.playGame();
   }
 
   /**
    * 다리 생성
    */
-  makeBridge() {
-    this.bridge = BridgeMaker.makeBridge(this.bridgeSize, makeRandomNumber);
+  makeBridge(bridgeSize) {
+    this.bridge = BridgeMaker.makeBridge(bridgeSize, makeRandomNumber);
   }
 
   /**
@@ -50,7 +49,7 @@ class BridgeGamePlay {
     const currentIndex = this.myMoves.length - 1;
     if (
       this.myMoves[currentIndex] === this.bridge[currentIndex] &&
-      currentIndex + 1 === this.bridgeSize
+      currentIndex + 1 === this.bridge.length
     ) {
       return true;
     }

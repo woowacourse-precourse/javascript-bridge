@@ -1,4 +1,3 @@
-// InputView, OutputView 를 사용하지 않는다
 const { MOVE, MOVE_PICK, PLAY } = require('./constant/constant');
 
 /**

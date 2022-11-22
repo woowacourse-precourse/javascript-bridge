@@ -16,7 +16,7 @@ class Utils {
   }
 
   static printAllInList(list) {
-    return list.reduce((allMoves, move) => allMoves + `, ${move}`, '').slice(2);
+    return list.reduce((allMoves, move) => `${allMoves}, ${move}`, '').slice(2);
   }
 }
 

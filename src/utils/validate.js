@@ -1,5 +1,4 @@
 const ERROR = require('../constant/error');
-const { print } = require('./util');
 
 class Validate {
   static notNumber(input) {
