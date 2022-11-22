@@ -1,6 +1,4 @@
-const CORRECT_MOVING = ' O ';
-const INCORRECT_MOVING = ' X ';
-const NONE_MOVING = '   ';
+const { UP_OR_DOWN, PRINT_MAP } = require('./Constant.js');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -25,13 +23,13 @@ class BridgeGame {
    */
   move(movingInfo) {
     const compareIndex = this.roundCount;
-    const other = movingInfo === 'U' ? 'D' : 'U';
+    const other = movingInfo === 'U' ? UP_OR_DOWN.DOWN : UP_OR_DOWN.UP;
 
-    const pushString = this.bridge[compareIndex] === movingInfo ? CORRECT_MOVING : INCORRECT_MOVING;
+    const pushString = this.bridge[compareIndex] === movingInfo ? PRINT_MAP.CORRECT_MOVING : PRINT_MAP.INCORRECT_MOVING;
     const returnTF = this.bridge[compareIndex] === movingInfo ? true : false;
 
     this.nowMap[movingInfo].push(pushString);
-    this.nowMap[other].push(NONE_MOVING);
+    this.nowMap[other].push(PRINT_MAP.NONE_MOVING);
 
     this.roundCount++;
     return returnTF;

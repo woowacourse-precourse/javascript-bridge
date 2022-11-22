@@ -1,25 +1,27 @@
+const { RESTART_OR_END, UP_OR_DOWN, ERROR_MESSAGE } = require('./Constant.js');
+
 const ValidityCheck = {
   
   checkBridgeSize(bridgeSize) {
     const regex = /^[0-9]+$/;
     
     if (!regex.test(bridgeSize)) {
-      throw '[ERROR] 다리 길이는 숫자여야 합니다.\n';
+      throw ERROR_MESSAGE.BRIDGE_SIZE_NUMBER;
     }
     if (3 > bridgeSize || bridgeSize > 20) {
-      throw '[ERROR] 다리 길이는 3에서 20 사이입니다.\n';
+      throw ERROR_MESSAGE.BRIDGE_SIZE_RANGE;
     }
   },
 
   checkMovingInfo(movingInfo) {
-    if (!['U', 'D'].includes(movingInfo)) {
-      throw '[ERROR] 이동 칸은 U와 D만 입력할 수 있습니다.\n';
+    if (![UP_OR_DOWN.UP, UP_OR_DOWN.DOWN].includes(movingInfo)) {
+      throw ERROR_MESSAGE.MOVING_INFO_LIMIT;
     }
   },
 
   checkRestartOrFail(answer) {
-    if (answer !== 'R' && answer !== 'Q') {
-      throw '[ERROR] 재시작 여부는 R과 Q만 입력할 수 있습니다.\n';
+    if (![RESTART_OR_END.RESTART, RESTART_OR_END.END].includes(answer)) {
+      throw ERROR_MESSAGE.ANSWER_LIMIT;
     }
   }
 };
