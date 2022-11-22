@@ -4,6 +4,7 @@ const { downward, upward } = BRIDGE_MSG;
 
 describe('판단자 테스트', () => {
   const bridge = [upward, downward, downward];
+
   test.each([
     [[downward, false]],
     [

@@ -1,9 +1,8 @@
 const { checkSpaceCanMove, checkGameOver } = require('../src/utils/Checker');
 const { BRIDGE_MSG } = require('../src/common/Constant');
+const { upward, downward } = BRIDGE_MSG;
 
 describe('가능 검토자 테스트', () => {
-  const { upward, downward } = BRIDGE_MSG;
-
   test.each([
     [upward, downward],
     [downward, upward],

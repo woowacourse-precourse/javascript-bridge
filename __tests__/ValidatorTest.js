@@ -43,8 +43,6 @@ describe('유효성 검사 테스트', () => {
   test.each([/[^UD]/, 'UU', 'UD', 'UaagD'])(
     '라운드마다 U와 D 이외의 값이 입력될 경우 예외가 발생한다.',
     (str) => {
-      const validInput1 = 'U';
-      const validInput2 = 'D';
       expect(() => {
         validateMove(str);
       }).toThrow(prefix + isNotUpOrDown);
