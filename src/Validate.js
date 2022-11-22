@@ -8,7 +8,7 @@ const Validate = {
       throw new Error(ERROR_MESSAGE.BRIDGE_LENGTH_NOT_PIXED_NUMBER); 
     };
     if (isNaN(size)) {
-      throw new Error(ERROR_MESSAGE.BRIDGE_LENGTH_NOT_PIXED_NUMBER);
+      throw (ERROR_MESSAGE.BRIDGE_LENGTH_NOT_NUMBER);
     };
     return size;
   },
