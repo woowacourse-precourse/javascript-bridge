@@ -34,6 +34,7 @@ class Controller {
 
   movingDirectionInput(square) {
     try {
+      this.validator.isUpAndDown(square);
       Console.print(square);
     } catch (error) {
       Console.print(error);
