@@ -43,8 +43,17 @@ class BridgeGame {
    */
   move(moving) {
     const currentPath = this.#path.push(moving);
-    const moveStatus = this.#bridge.compare(currentPath);
-    const isCorrect = this.#bridge.isCorrect(currentPath);
+    return this.comparePath(currentPath, this.#bridge);
+  }
+
+  /**
+   * @param {string[]} currentPath
+   * @param {Bridge} bridge
+   * @returns {{moveStatus: number, pathMap: string[][]}}
+   */
+  comparePath(currentPath, bridge) {
+    const moveStatus = bridge.compare(currentPath);
+    const isCorrect = bridge.isCorrect(currentPath);
     const pathMap = this.#path.markOX(isCorrect);
 
     return { moveStatus, pathMap };
