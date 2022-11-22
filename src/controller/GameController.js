@@ -32,7 +32,7 @@ class GameController {
     }
   }
 
-  printProgress(direction, index) {
+  printProcess(direction, index) {
     const { movable, isSuccess } = this.#game.move(direction, index);
     OutputView.printMap(this.#game.moveProcess(index, direction));
 
@@ -46,7 +46,7 @@ class GameController {
     InputView.readMoving((direction) => {
       Validator.handleException(
         () => Validator.validateBridgeDirection(direction),
-        () => this.printProgress(direction, index),
+        () => this.printProcess(direction, index),
         () => this.moveInput(index),
       );
     });
@@ -72,8 +72,8 @@ class GameController {
   }
 
   quit() {
-    const { progress, isSuccess, tryCount } = this.#game.quit();
-    OutputView.printResult(tryCount, isSuccess, progress);
+    const { process, isSuccess, tryCount } = this.#game.quit();
+    OutputView.printResult(tryCount, isSuccess, process);
     IO.close();
   }
 }

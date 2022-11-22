@@ -8,14 +8,14 @@ const { DIRECTION, MOVABLE } = require('../data/constants');
 class BridgeGame {
   #bridge;
 
-  #bridgesProgress;
+  #bridgesProcess;
 
   #tryCount;
 
   #success;
 
   constructor() {
-    this.#bridgesProgress = [[], []];
+    this.#bridgesProcess = [[], []];
     this.#success = false;
     this.#tryCount = 1;
   }
@@ -35,9 +35,9 @@ class BridgeGame {
     const movable = this.#bridge.checkCorrectDirection(direction, index);
     const movablePosition = BridgeGame.getIndexFromDirection(direction);
 
-    this.#bridgesProgress.map((arr, arrayIndex) => (
+    this.#bridgesProcess.map((arr, arrayIndex) => (
       arrayIndex === movablePosition ? arr.push(movable) : arr.push(' ')));
-    return this.#bridgesProgress;
+    return this.#bridgesProcess;
   }
 
   /**
@@ -58,7 +58,7 @@ class BridgeGame {
 
   quit() {
     return {
-      progress: this.#bridgesProgress,
+      process: this.#bridgesProcess,
       isSuccess: this.#success,
       tryCount: this.#tryCount,
     };
@@ -71,7 +71,7 @@ class BridgeGame {
    */
   retry() {
     this.#tryCount += 1;
-    this.#bridgesProgress = [[], []];
+    this.#bridgesProcess = [[], []];
   }
 }
 
