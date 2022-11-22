@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("../src/BridgeGame");
-const GameController = require("../src/GameController");
+const App = require("../src/App");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -11,16 +10,26 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
-const gameController = new GameController({
-  game: new BridgeGame(),
-});
+const runException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
 
 describe("유저 입력 테스트", () => {
-  test("다리 길이 테스트", () => {
-    mockQuestions(["1"]);
-
+  test("다리 길이가 숫자가 아니라면 예외가 발생한다", () => {
     expect(() => {
-      gameController.setUpBridge();
-    }).toThrow("[ERROR]");
+      runException(["a"]);
+    });
+  });
+
+  test("다리 길이가 3부터 20까지의 숫자가 아니라면 예외가 발생한다", () => {
+    expect(() => {
+      runException(["1"]);
+    });
   });
 });
