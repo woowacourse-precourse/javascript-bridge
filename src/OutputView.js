@@ -15,6 +15,7 @@ const OutputView = {
     this.printUp(bridge, location);
     this.printDown(bridge, location);
   },
+
   printUp(bridge, location) {
     let upBridge = [];
     for (let index = 0; index <= location; index++) {
@@ -25,6 +26,7 @@ const OutputView = {
     upBridge = "[" + upBridge.join("|") + "]";
     MissionUtils.Console.print(`${upBridge}\n`);
   },
+
   printDown(bridge, location) {
     let downBridge = [];
     for (let index = 0; index <= location; index++) {

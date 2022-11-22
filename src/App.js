@@ -26,6 +26,10 @@ class App {
   playingBridge() {
     this.bridgeGame.move(this.makeMoving());
     OutputView.printMap(this.bridgeGame.bridge, this.bridgeGame.location);
+    return this.checkGameEnd();
+  }
+
+  checkGameEnd() {
     if (this.bridgeGame.checkFail()) {
       if (InputView.readGameCommand() == "Q") return false;
       else {
