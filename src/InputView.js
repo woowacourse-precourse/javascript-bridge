@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGameController = require('./BridgeGameController');
-const Validator = require('./Validator');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,12 +9,19 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (inputValue) => {
+      this.BridgeSizeTryCatch(inputValue);
+    });
+  },
+  bridgeSizeTryCatch(inputValue) {
+    try {
       BridgeGameController.getSize(inputValue);
       this.bridgeSize = Number(inputValue);
       this.movingController();
-    });
+    } catch (error) {
+      BridgeGameController.errorMessage(error.message);
+      this.readBridgeSize();
+    }
   },
-
   movingController() {
     this.index = 0;
     this.tryCount = 1;
@@ -52,7 +58,6 @@ const InputView = {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (inputValue) => {
-        Validator.retryOrQuit(inputValue);
         this.checkRetry(inputValue);
       }
     );

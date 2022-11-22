@@ -37,6 +37,9 @@ const BridgeGameController = {
     this.upper = [];
     this.lower = [];
   },
+  errorMessage(message) {
+    OutputView.printError(message);
+  },
   passData() {
     if (this.isPass && this.chooseBlock === 'U') {
       this.upper.push('O');
