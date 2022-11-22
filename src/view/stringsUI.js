@@ -53,6 +53,7 @@ const trimString = (string) => {
   string.trim();
   let regex = / /gi;
   trimedString = string.replace(regex, "");
+  return trimedString;
 };
 
 module.exports = {

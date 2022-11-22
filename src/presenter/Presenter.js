@@ -9,6 +9,7 @@ const {
   PLAYER_STATE,
 } = require("./constantsPresenter");
 const BridgeGame = require("../model/BridgeGame");
+const { trimString } = require("../view/stringsUI");
 
 class Presenter {
   bridgeGameModel;
@@ -51,9 +52,10 @@ class Presenter {
 
   // Control InputView
   handleInput(input, inputType) {
+    let trimedInput = trimString(input);
     try {
-      Validation[inputType](input);
-      INPUT_TRY_FN[inputType](this, input);
+      const valInput = Validation[inputType](trimedInput);
+      INPUT_TRY_FN[inputType](this, valInput);
     } catch (errorMsg) {
       OutputView.printError(errorMsg);
       INPUT_CATCH_FN[inputType](this);

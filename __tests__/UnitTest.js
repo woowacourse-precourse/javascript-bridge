@@ -15,6 +15,7 @@ describe("Player State 테스트", () => {
 describe("Input Validation 클래스 테스트", () => {
   test("Bridge size validation 테스트", () => {
     expect(() => Validation.size("D")).toThrow(INPUT_VAL.SIZE_ERROR);
+    expect(Validation.size("4")).toBe(4);
     expect(() => Validation.size(1)).toThrow(INPUT_VAL.SIZE_ERROR);
     expect(() => Validation.size(1, 3)).toThrow(INPUT_VAL.SIZE_ERROR);
   });
