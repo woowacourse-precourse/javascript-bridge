@@ -1,5 +1,9 @@
+const BridgeGameController = require('./domains/BridgeGameController');
+
 class App {
-  play() {}
+  play() {
+    BridgeGameController.start();
+  }
 }
 
 module.exports = App;
