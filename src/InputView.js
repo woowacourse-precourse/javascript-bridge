@@ -1,4 +1,4 @@
-const { readLine } = require('./Utils');
+const { readLine, close } = require('./Utils');
 const BridgeGame = require('./BridgeGame');
 const { validateBridgeLength, validateMovingValue, validateEndValue } = require('./Validation');
 const OutputView = require('./OutputView');
@@ -18,7 +18,7 @@ const InputView = {
   onInputBridge(input) {
     const size = Number(input);
     validateBridgeLength(input);
-    bg.initGame();
+    bg.initGame(size);
     readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
   },
 
@@ -27,22 +27,25 @@ const InputView = {
    */
   readMoving(input) {
     validateMovingValue(input);
+    const correct = bg.isCorrect(input);
 
-    if (bg.move(input)) {
-      OutputView.printMap(bg);
-      return readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
+    bg.move(input, correct);
+    OutputView.printMap(bg);
+
+    if (!correct) {
+      return readLine(
+        '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+        this.readGameCommand.bind(this)
+      );
     }
     // OutputView.printMap(bg);
 
     if (bg.isFinish()) {
-      OutputView.printMap(bg);
       OutputView.printResult(bg);
-      return;
+      close();
+    } else {
+      readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
     }
-    readLine(
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      this.readGameCommand.bind(this)
-    );
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -51,8 +54,9 @@ const InputView = {
     validateEndValue(input);
 
     if (bg.retry(input))
-      readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
-    else OutputView.printResult();
+      return readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
+
+    close();
   }
 };
 

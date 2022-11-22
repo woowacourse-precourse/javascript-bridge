@@ -21,17 +21,17 @@ class BridgeGame {
     this.#gameStatus = false;
     this.topText = '';
     this.bottomText = '';
-    console.log(this.#bridge);
+    // console.log(this.#bridge);
   }
 
   showResult() {
     return `[${this.topText}]\n[${this.bottomText}]\n`;
   }
 
-  buildResult(flag) {
+  buildResult(correct) {
     const len = this.#userInputArray.length;
     const value = this.#userInputArray[len - 1];
-    const ox = flag ? ' O ' : ' X ';
+    const ox = correct ? ' O ' : ' X ';
 
     if (value == 'U') {
       this.topText =
@@ -58,7 +58,7 @@ class BridgeGame {
     return (totalText += text);
   }
 
-  isMove(input) {
+  isCorrect(input) {
     const currentIndex = this.#userInputArray.length;
     return this.#bridge[currentIndex] == input;
   }
@@ -68,15 +68,9 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input) {
-    const flag = this.isMove(input);
+  move(input, correct) {
     this.#userInputArray.push(input);
-    this.buildResult(flag);
-    if (flag) {
-      return !(this.#userInputArray.length == this.#size);
-    }
-
-    return false;
+    this.buildResult(correct);
   }
 
   /**
@@ -88,6 +82,8 @@ class BridgeGame {
     if (input == 'R') {
       this.#tryCount += 1;
       this.#userInputArray = [];
+      this.topText = '';
+      this.bottomText = '';
       return true;
     }
 
@@ -95,8 +91,7 @@ class BridgeGame {
   }
 
   isFinish() {
-    if (this.#userInputArray.length == this.#size) this.#gameStatus = true;
-    return this.#gameStatus;
+    return (this.#gameStatus = this.#userInputArray.length == this.#size);
   }
 
   finishGame() {
