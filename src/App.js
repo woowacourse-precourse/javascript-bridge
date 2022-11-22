@@ -34,9 +34,9 @@ class App {
   continueGame() {
     InputView.readMoving((moving) => {
       try {
-        const { status, pathMap } = this.#bridgeGame.move(moving);
+        const { moveStatus, pathMap } = this.#bridgeGame.move(moving);
         OutputView.printMap(pathMap);
-        this.#commands[status].call(this);
+        this.#commands[moveStatus].call(this);
       } catch (error) {
         MissionUtils.Console.print(error.message);
         this.continueGame();
