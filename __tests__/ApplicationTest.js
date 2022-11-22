@@ -118,6 +118,10 @@ describe("다리 건너기 테스트", () => {
     ]);
     expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
   });
+
+  test("예외 테스트", () => {
+    runException(["a"]);
+  });
 });
 
 describe("예외 발생 테스트", () => {
