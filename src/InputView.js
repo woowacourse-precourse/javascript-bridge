@@ -10,14 +10,21 @@ const OutputView = require("./OutputView");
  */
 const game = new BridgeGame();
 const InputView = {
+  bridgeLenError(bridgeLen){
+    if(!(3<=bridgeLen && bridgeLen<=20)) throw "[ERROR] 다리 길이는 3~20 사이의 숫자만 입력 가능합니다.";
+    if(isNaN(bridgeLen)) throw "[ERROR] 숫자만 입력하세요.";
+  },
+  readMovingError(input){
+    if(input!=="U" && input!=="D") throw "[ERROR] U와 D중 하나만 입력 가능합니다.";
+  },
+
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     try{
       Console.readLine('다리의 길이를 입력해주세요.', (bridgeLen) => {
-        if(!(3<=bridgeLen && bridgeLen<=20)) throw "[ERROR] 다리 길이는 3~20 사이의 숫자만 입력 가능합니다.";
-        if(isNaN(bridgeLen)) throw "[ERROR] 숫자만 입력하세요.";
+        this.bridgeLenError(bridgeLen);
         const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
         currentBridge = this.readMoving([[],[]], bridge, 1);
       })
@@ -33,16 +40,14 @@ const InputView = {
   readMoving(currentBridge, bridge, count) {
     try{
       Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
-        if(input!=="U" && input!=="D") throw "[ERROR] U와 D중 하나만 입력 가능합니다.";
-        currentBridge=game.move(currentBridge, bridge, input); // class
+        this.readMovingError(input);
+        currentBridge=game.move(currentBridge, bridge, input);
         this.stillMoving(currentBridge, bridge, count);
       })
-      return currentBridge;
     } catch(e){
       Console.print(e);
       this.readMoving(currentBridge, bridge, count);
     }
-
   },
 
   /**
@@ -66,10 +71,7 @@ const InputView = {
   readGameCommand(currentBridge, bridge, count) {
     try{
       Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
-        if(input==='R') {
-          count += 1;
-          this.readMoving(game.retry(currentBridge), bridge, count);
-        }
+        if(input==='R') this.readMoving(game.retry(currentBridge), bridge, ++count);
         else if(input==='Q') OutputView.printResult(currentBridge, count, 0);
         else throw "[ERROR] R와 Q중 하나만 입력 가능합니다.";
       })
@@ -77,7 +79,6 @@ const InputView = {
       Console.print(e);
       this.readGameCommand(currentBridge, bridge, count);
     }
-
   },
 };
 
