@@ -11,6 +11,17 @@ class App {
 
   }
 
+  failPlace(inputMove) {
+    if(inputMove == 'U'){
+      printFail(MESSAGE.bridge.bridgeNone, MESSAGE.bridge.bridgeNo);
+      this.checkRestart();
+    }
+    else if(inputMove == 'D') {
+      printFail(MESSAGE.bridge.bridgeNo, MESSAGE.bridge.bridgeNone);
+      this.checkRestart();
+    }
+  }
+
 
   makeBridgeBase() {
     bridgeSize=readBridgeSize()
