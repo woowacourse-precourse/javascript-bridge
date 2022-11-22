@@ -1,4 +1,5 @@
 const Constants = require('./Constants');
+const Validate = require('./Validate');
 
 class BridgeGame {
   #bridge = [];
@@ -12,6 +13,8 @@ class BridgeGame {
   };
 
   constructor(bridge) {
+    Validate.bridgeSize(bridge.length);
+
     this.#bridge = bridge;
   }
 

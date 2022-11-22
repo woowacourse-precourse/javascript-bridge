@@ -16,7 +16,7 @@ const InputView = {
     });
   },
   getBridgeSize(size) {
-    Validate.bridge(size);
+    Validate.isNumber(size);
 
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     game = new BridgeGame(bridge);
