@@ -30,6 +30,15 @@ class App {
     readMoving(bridgeGame, step, this);
   }
 
+  evaluate(bridgeGame, step, isMovable) {
+    const bridgeSize = bridgeGame.getBridgeSize();
+    if (!isMovable) this.readGameCommand(bridgeGame, step);
+    else {
+      if (step < bridgeSize - 1) this.step(bridgeGame, step + 1);
+      else this.printResult(bridgeGame, step, isMovable);
+    }
+  }
+
   printResult(bridgeGame, step, isMovable) {
     Console.print(`\n${MESSAGE.RESULT.FINAL_GAME_RESULT}`);
     printMap(bridgeGame, step, isMovable);

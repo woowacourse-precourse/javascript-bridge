@@ -29,12 +29,7 @@ const InputView = {
       const moving = validateMoving(inputStr);
       const isMovable = bridgeGame.move(step, moving);
       printMap(bridgeGame, step, isMovable);
-      const bridgeSize = bridgeGame.getBridgeSize();
-      if (!isMovable) app.readGameCommand(bridgeGame, step);
-      else {
-        if (step < bridgeSize - 1) app.step(bridgeGame, step + 1);
-        else app.printResult(bridgeGame, step, isMovable);
-      }
+      app.evaluate(bridgeGame, step, isMovable);
     });
   },
 
