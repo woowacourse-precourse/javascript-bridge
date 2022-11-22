@@ -25,15 +25,12 @@ class BridgeGame {
 
   move(moving) {
     if(this.#bridgeInfo[this.#moveCnt] !== moving) {
-      this.#moveInfo.push({'moving': moving, 'success': false});
-      return 'fail';
+      this.#moveInfo.push({'moving': moving, 'success': false}); return 'fail';
     } else if(this.#moveCnt + 1 === this.#bridgeInfo.length) {
-      this.#moveInfo.push({'moving': moving, 'success': true});
-      return 'success';
+      this.#moveInfo.push({'moving': moving, 'success': true}); return 'success';
     } else if(this.#bridgeInfo[this.#moveCnt] === moving) {
       this.#moveInfo.push({'moving': moving, 'success': true});
-      this.#moveCnt += 1;
-      return 'next';
+      this.#moveCnt += 1; return 'next';
     }
   }
 
