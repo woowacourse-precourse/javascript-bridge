@@ -1,5 +1,6 @@
+/* eslint-disable object-curly-newline */
 const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT_START_LINE, OUTPUT_END_LINE, OUTPUT_IS_WIN_LINE, OUTPUT_TRY_COUNT_LINE } = require('../Constant');
+const { OUTPUT_START_LINE, OUTPUT_END_LINE, OUTPUT_IS_WIN_LINE, OUTPUT_TRY_COUNT_LINE, MOVE_COMMAND_UP, MOVE_COMMAND_DOWN } = require('../Constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -24,11 +25,13 @@ const OutputView = {
   },
 
   getUpMap(map, currentPosition) {
-    return this.getMapUntilcurrentPosition(map, currentPosition).map((stage) => (stage.getMovingCommand() === 'U' ? stage.getStage().U : ' '));
+    const isCommandUp = (stage) => stage.getMovingCommand() === MOVE_COMMAND_UP;
+    return this.getMapUntilcurrentPosition(map, currentPosition).map((stage) => (isCommandUp(stage) ? stage.getStage()[MOVE_COMMAND_UP] : ' '));
   },
 
   getDownMap(map, currentPosition) {
-    return this.getMapUntilcurrentPosition(map, currentPosition).map((stage) => (stage.getMovingCommand() === 'D' ? stage.getStage().D : ' '));
+    const isCommandDown = (stage) => stage.getMovingCommand() === MOVE_COMMAND_DOWN;
+    return this.getMapUntilcurrentPosition(map, currentPosition).map((stage) => (isCommandDown(stage) ? stage.getStage()[MOVE_COMMAND_DOWN] : ' '));
   },
 
   printMap(map, currentPosition) {
