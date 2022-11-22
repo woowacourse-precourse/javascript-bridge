@@ -19,9 +19,9 @@ class BridgeController{
         InputView.readMoving(bridgeGame);
     }
     
-    printError(error, bridgeGame){
+    printError(error, inputFunction, bridgeGame){
         OutputView.printError(error)
-        InputView.readBridgeSize(bridgeGame);
+        inputFunction(bridgeGame);
     }
 
     moveFinalRound(attempt, clearedbridge){
