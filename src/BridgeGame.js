@@ -16,7 +16,7 @@ class BridgeGame {
   }
 
   getMap() {
-    return this.#map;
+    return this.#map.map((side) => BRIDGE.START + side.join(BRIDGE.SPLIT) + BRIDGE.END);
   }
 
   getMovingNum() {
