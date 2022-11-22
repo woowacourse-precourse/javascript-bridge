@@ -8,7 +8,7 @@ describe('OutputView 기능 테스트', () => {
     const logSpy = getLogSpy();
     const testWinStatus = false;
     const testTrialCount = 56;
-    OutputView.printGameSuccessFail(testWinStatus, testTrialCount);
+    OutputView.printGameResultSuccessFail(testWinStatus, testTrialCount);
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
@@ -16,7 +16,7 @@ describe('OutputView 기능 테스트', () => {
 
   test('printGameResult 메서드 integration 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'U', 'Q']);
 
     const app = new App();

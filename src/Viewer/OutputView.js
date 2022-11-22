@@ -36,10 +36,10 @@ const OutputView = {
     const getLower = game.getBridgeLower();
     MissionUtils.Console.print(MESSAGE.GAME_RESULT_PRINT);
     this.printMap(getUpper, getLower);
-    this.printGameSuccessFail(getWin, getTrialCount);
+    this.printGameResultSuccessFail(getWin, getTrialCount);
   },
 
-  printGameSuccessFail(getWin, getTrialCount) {
+  printGameResultSuccessFail(getWin, getTrialCount) {
     if (getWin === true) {
       this.printGameResultSuccess(getTrialCount);
       return;
