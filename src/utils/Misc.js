@@ -1,4 +1,4 @@
-const { print } = require("./IOtemp.js");
+const { print } = require("./IO.js");
 
 const Misc = class {
   static continueAfterCatchError(input, callback, method) {

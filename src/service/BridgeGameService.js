@@ -1,7 +1,7 @@
 const { generate } = require("../BridgeRandomNumberGenerator.js");
 const { makeBridge } = require("../BridgeMaker.js");
 const { pipe } = require("../utils/Misc.js");
-const { close } = require("../utils/IOtemp.js");
+const { close } = require("../utils/IO.js");
 
 const BridgeGameService = class {
   #inputView;

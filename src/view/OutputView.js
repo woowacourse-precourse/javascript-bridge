@@ -1,4 +1,4 @@
-const { print } = require("../utils/IOtemp.js");
+const { print } = require("../utils/IO.js");
 const {
   OUTPUT: { START_BRIDGE, END_MESSAGE, END_ATTEMPT, END_SUCCESS },
   KEYWORD: { SUCCESS_BRIDGE, FAIL_BRIDGE },
