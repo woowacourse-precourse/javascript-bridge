@@ -6,7 +6,7 @@ const OutputView = require('./views/OutputView');
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
 
-class Bridge {
+class Controller {
   #bridgeGame;
 
   constructor () {
@@ -103,7 +103,7 @@ class Bridge {
   }
 
   #runRetry (chooseRetry) {
-    if (Bridge.isQuitGame(chooseRetry)) {
+    if (Controller.isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
     this.#bridgeGame.retry();
@@ -119,4 +119,4 @@ class Bridge {
   }
 }
 
-module.exports = Bridge;
+module.exports = Controller;
