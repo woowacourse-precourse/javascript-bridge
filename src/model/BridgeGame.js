@@ -1,4 +1,4 @@
-const { GAME_RULE, COMMAND } = require('./utils/Constant');
+const { GAME_RULE, COMMAND } = require('../utils/Constant');
 
 class BridgeGame {
   #bridge;
