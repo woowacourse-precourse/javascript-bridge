@@ -66,7 +66,42 @@
     MissionUtils.Console.print(`${downString.join('')}`);
     return bigBridgeArr;
   }
-  ```   
+  ```    
+
+
+<br>
+
+
+- 마지막 최종 결과 출력을 위한 메서드   
+
+  ```js
+  printResult(bridgeArr, bool, cnt) {
+    const [upString, downString] = this.printScript(bridgeArr);
+    MissionUtils.Console.print(`${Script.RESULT}`);
+    MissionUtils.Console.print(`${upString.join('')}`);
+    MissionUtils.Console.print(`${downString.join('')}\n`);
+    MissionUtils.Console.print(`${Script.BOOL}${BOOLEAN[bool]}`);
+    MissionUtils.Console.print(`${Script.CNT}${cnt}`);
+    MissionUtils.Console.close();
+  },
+  ```
+  *최종 결과(실패, 성공)을 담고있는 bool과 시행횟수를 담고있는 cnt를 이용*   
+  
+
+<br>
+
+- 최대한 `if문`을 줄이기 위한 객체   
+
+  ```js
+  const UPANDDOWN = {
+  D: 1,
+  U: 0
+  }
+  const BOOLEAN = {
+    true: "성공",
+    false: "실패"
+  }
+  ```
 
 
 
