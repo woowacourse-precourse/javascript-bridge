@@ -3,8 +3,6 @@ const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { OUTPUT_MESSAGE, GAME_RULE, COMMAND } = require('./utils/Constant');
-const Exception = require('./utils/Exception');
-const Validator = require('./utils/Validator');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
@@ -18,17 +16,7 @@ class App {
 
   play() {
     OutputView.printStartGame();
-    this.readValidLength();
-  }
-
-  readValidLength() {
-    InputView.readBridgeSize((length) => {
-      if (Exception.isThrow(Validator.bridgeSize, length)) {
-        this.makeBridge(length);
-        return;
-      }
-      this.readValidLength();
-    });
+    this.makeBridge();
   }
 
   makeGame(length) {
@@ -36,30 +24,23 @@ class App {
     this.#bridgeGame = new BridgeGame(bridge, 0);
   }
 
-  makeBridge(length) {
-    this.makeGame(length);
-    this.readValidDirection();
-  }
-
-  readValidDirection() {
-    InputView.readMoving((direction) => {
-      if (Exception.isThrow(Validator.direction, direction)) {
-        this.startMove(direction);
-        return;
-      }
-      this.readValidDirection();
+  makeBridge() {
+    InputView.readBridgeSize((length) => {
+      this.makeGame(length);
+      this.startMove();
     });
   }
 
-  startMove(direction) {
-    if (this.#bridgeGame.isMove(direction)) {
-      this.#bridgeGame.move();
-      this.renderBridge(GAME_RULE.SUCCESS_MESSAGE);
-      this.checkCompletion();
-      return;
-    }
-    this.renderBridge(GAME_RULE.FAIL_MESSAGE);
-    this.readValidFinalCommand();
+  startMove() {
+    InputView.readMoving((direction) => {
+      if (this.#bridgeGame.isMove(direction)) {
+        this.#bridgeGame.move();
+        this.renderBridge(GAME_RULE.SUCCESS_MESSAGE);
+        this.checkCompletion();
+        return;
+      }
+      this.failGame();
+    });
   }
 
   renderBridge(result) {
@@ -75,25 +56,18 @@ class App {
       this.resultGame(GAME_RULE.SUCCESS_MESSAGE);
       return;
     }
-    this.readValidDirection();
+    this.startMove();
   }
 
-  readValidFinalCommand() {
+  failGame() {
+    this.renderBridge(GAME_RULE.FAIL_MESSAGE);
     InputView.readGameCommand((command) => {
-      if (Exception.isThrow(Validator.finalGame, command)) {
-        this.failGame(command);
+      if (command === COMMAND.RETRY) {
+        this.replay();
         return;
       }
-      this.readValidFinalCommand();
+      this.resultGame(GAME_RULE.FAIL_MESSAGE);
     });
-  }
-
-  failGame(command) {
-    if (command === COMMAND.RETRY) {
-      this.replay();
-      return;
-    }
-    this.resultGame(GAME_RULE.FAIL_MESSAGE);
   }
 
   resultGame(result) {
@@ -110,7 +84,7 @@ class App {
   replay() {
     this.#attempts += 1;
     this.#bridgeGame.retry();
-    this.readValidDirection();
+    this.startMove();
   }
 }
 
