@@ -12,7 +12,7 @@ class App {
   }
 
   play() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    OutputView.printStart();
     this.inputBridgeSize();
   }
 
@@ -20,7 +20,7 @@ class App {
     InputView.readBridgeSize((size) => {
       const { error } = Validation.validateBridgeSize(size);
       if (error) {
-        Console.print(error);
+        OutputView.printError(error);
         return this.inputBridgeSize();
       }
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
@@ -33,7 +33,7 @@ class App {
     InputView.readMoving((upsideDown) => {
       const { error } = Validation.validateUpsideDown(upsideDown);
       if (error) {
-        Console.log(error);
+        OutputView.printError(error);
         return this.inputUpsideDown();
       }
       this.bridgeGame.move(upsideDown);
@@ -49,7 +49,7 @@ class App {
     InputView.readGameCommand((retryQuit) => {
       const { error } = Validation.validateRetryQuit(retryQuit);
       if (error) {
-        Console.print(error);
+        OutputView.printError(error);
         return this.inputRetryQuit();
       }
       if (retryQuit === "R") return this.retryGame();
@@ -63,8 +63,7 @@ class App {
   }
 
   quitGame() {
-    const isFail = this.bridgeGame.isFail();
-    Console.print(`${!isFail ? "\n" : ""}최종 게임 결과`);
+    OutputView.printEnd(this.bridgeGame.isFail());
     OutputView.printMap(this.bridgeGame.getBridgeResult());
     OutputView.printResult(this.bridgeGame.getResult());
     Console.close();
