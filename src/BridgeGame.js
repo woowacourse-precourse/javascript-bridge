@@ -12,7 +12,6 @@ class BridgeGame {
 
   makeBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size, randomNumber);
-    console.log(this.#bridge)
   }
 
   moveCompare(move) {
