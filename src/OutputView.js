@@ -59,7 +59,9 @@ const OutputView = {
   checkRestartCount(){
     return restartcount+=1;
   },
-
+  resetCount(){
+    return restartcount=0;
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
