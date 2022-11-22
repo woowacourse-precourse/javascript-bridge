@@ -10,17 +10,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-
     for (let index = 0; index < size; index++) {
       const number = generateRandomNumber();
-      if (number.toString() === MOVING.RANDOM_LOWER) {
-        bridge.push(MOVING.LOWER);
-      }
-      if (number.toString() === MOVING.RANDOM_UPPER) {
-        bridge.push(MOVING.UPPER);
-      }
+      if (number.toString() === MOVING.RANDOM_LOWER) bridge.push(MOVING.LOWER);
+      if (number.toString() === MOVING.RANDOM_UPPER) bridge.push(MOVING.UPPER);
     }
-
     return bridge;
   },
 };
