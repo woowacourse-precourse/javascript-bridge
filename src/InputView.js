@@ -1,7 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { setBridge } = require("./BridgeGame");
+const { printResult } = require("./OutputView");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
