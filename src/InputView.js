@@ -14,9 +14,15 @@ const InputView = {
 
   readMoving() {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
-      callback(input);
+      this.validateMoving(input);
     });
   },
+
+  validateMoving(upDown) {
+    if (upDown !== "U" && upDown !== "D")
+      throw new Error('[ERROR] 이동할 칸("U" 또는 "D")을 입력해주세요.');
+  },
+
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (input) => {
       callback(input);
