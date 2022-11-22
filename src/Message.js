@@ -35,3 +35,9 @@ const BRIDGE = {
   MAX_SIZE: 20,
 };
 
+const MOVING = {
+  UP: 'U',
+  DOWN: 'D',
+};
+
+module.exports = { MESSAGE, RESULT, COMMAND, ERROR, BRIDGE, MOVING };
