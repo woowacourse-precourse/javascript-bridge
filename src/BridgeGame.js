@@ -1,20 +1,61 @@
+const { COMMAND, RESULT, } = require("./BridgeConstant");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge;
+  #moving = [];
+  #count = 1;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  setBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
+  move(moving) {
+    this.#moving.push(moving);
+  }
+
+  isFail() {
+    const stage = this.#moving.length - 1;
+    if (this.#moving[stage] !== this.#bridge[stage]) {
+      return true;
+    }
+    return false;
+  };
+
+  isSuccess() {
+    if(!this.isFail() && this.#bridge.length === this.#moving.length) {
+      return true;
+    }
+    return false;
+  }
+
+  getMoveResult() {
+    const upBridge = Array.from({length: this.#moving.length}, () => RESULT.BLANK);
+    const downBridge = Array.from({length: this.#moving.length}, () => RESULT.BLANK);
+    this.#moving.forEach((answer, idx) => {
+      if (answer === COMMAND.UP && answer === this.#bridge[idx]) upBridge[idx] = RESULT.SUCCESS;
+      if (answer === COMMAND.UP && answer !== this.#bridge[idx]) upBridge[idx] = RESULT.FAIL;
+      if (answer === COMMAND.DOWN && answer === this.#bridge[idx]) downBridge[idx] = RESULT.SUCCESS;
+      if (answer === COMMAND.DOWN && answer !== this.#bridge[idx]) downBridge[idx] = RESULT.FAIL;
+    })
+    return { upBridge, downBridge };
+  }
+
+  getGameResult() {
+    return {
+      upBridge: this.getMoveResult().upBridge,
+      downBridge: this.getMoveResult().downBridge,
+      isSuccess: this.isSuccess(),
+      count: this.#count
+    }
+  }
+
+  retry() {
+    this.#moving = [];
+    this.#count += 1;
+  }
 }
 
 module.exports = BridgeGame;
