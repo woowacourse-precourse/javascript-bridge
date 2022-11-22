@@ -47,8 +47,8 @@ class App {
   restartGame() {
     InputView.readGameCommand((gameCommand) => {
       try {
-        const status = this.#bridgeGame.retry(gameCommand);
-        this.#commands[status].call(this);
+        const command = this.#bridgeGame.convertStringToCommand(gameCommand);
+        this.#commands[command].call(this);
       } catch (error) {
         MissionUtils.Console.print(error.message);
         this.restartGame();

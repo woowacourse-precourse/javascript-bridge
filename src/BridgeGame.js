@@ -43,9 +43,8 @@ class BridgeGame {
    */
   move(moving) {
     const currentPath = this.#path.push(moving);
-    const isCorrect = this.#bridge.isCorrect(currentPath);
-
     const moveStatus = this.#bridge.compare(currentPath);
+    const isCorrect = this.#bridge.isCorrect(currentPath);
     const pathMap = this.#path.markOX(isCorrect);
 
     return { moveStatus, pathMap };
@@ -53,19 +52,20 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @param {string} gameCommand
    * @return {number}
    */
-  retry(gameCommand) {
+  retry() {
+    this.#path = new Path();
+    this.#count += 1;
+    return STATUS.CONTINUE;
+  }
+
+  /**
+   * @param {string} gameCommand
+   */
+  convertStringToCommand(gameCommand) {
     Validator.validateEqual(gameCommand, COMMAND_TYPE);
-
-    if (gameCommand === COMMAND.RETRY) {
-      this.#path = new Path();
-      this.#count += 1;
-      return STATUS.CONTINUE;
-    }
-
-    return STATUS.SUCCESS;
+    return gameCommand === COMMAND.RETRY ? this.retry() : STATUS.SUCCESS;
   }
 
   /**
