@@ -11,7 +11,7 @@ const OutputView = {
     Console.print(`[ ${downBridge.join(" | ")} ]`);
   },
 
-  printResult(attemptCount, isBridgeCrossed, bridgeMap) {
+  printResult(isBridgeCrossed, attemptCount, bridgeMap) {
     Console.print("최종 게임 결과");
     this.printMap(bridgeMap);
     Console.print(`게임 성공 여부: ${isBridgeCrossed ? "성공" : "실패"}`);

@@ -55,7 +55,7 @@ class BridgeGameController {
   }
 
   endGame() {
-    OutputView.printResult(this.#BridgeGame.checkBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
+    OutputView.printResult(this.#BridgeGame.isBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
     Console.close();
   }
 
@@ -75,7 +75,7 @@ class BridgeGameController {
   }
 
   quitGame() {
-    OutputView.printResult(this.#BridgeGame.checkBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
+    OutputView.printResult(this.#BridgeGame.isBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
     Console.close();
   }
 }
