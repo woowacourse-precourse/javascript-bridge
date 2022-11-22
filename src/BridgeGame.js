@@ -31,12 +31,13 @@ class BridgeGame {
 
   start() {
     this.gameManager.inputBridgeSize(this.getBridge.bind(this));
-    this.#count = 0;
+    this.#count = 1;
   }
 
-  getBridge(bridge) {
-    this.#bridges = bridge;
-    this.#originBridges = bridge;
+  getBridge(bridges) {
+    this.#bridges = bridges;
+    this.#originBridges = bridges;
+    console.log(bridges);
     this.openBridgeRow();
     this.inputSpace();
   }
@@ -90,16 +91,13 @@ class BridgeGame {
   }
 
   inputRetry() {
-    this.gameManager.inputRetry(this.retry.bind(this));
+    this.gameManager.inputRetry(this.checkRetry.bind(this));
   }
 
-  retry(command) {
-    this.#count += 1;
-
+  checkRetry(command) {
     if (command === GAME_COMMAND.retry) {
-      this.#bridges = this.#originBridges;
-      this.openBridgeRow();
-      this.inputSpace();
+      this.#count += 1;
+      this.retry();
       return;
     }
 
@@ -107,8 +105,13 @@ class BridgeGame {
     this.printFinalResult();
   }
 
+  retry() {
+    this.#bridges = this.#originBridges;
+    this.openBridgeRow();
+    this.inputSpace();
+  }
+
   finish() {
-    this.#count += 1;
     this.#result = GAME_RESULT.success;
     this.printFinalResult();
   }
