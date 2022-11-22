@@ -1,31 +1,37 @@
+const { WORD } = require("./Constants");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {
-    this.bridges = [];
-    this.position = 0;
-    this.movement = "";
-    this.movements = [];
+  #bridges;
+  #movements;
+
+  constructor(bridges) {
+    this.#bridges = bridges;
+    this.#movements = [];
   }
 
-  getBridges(bridges) {
-    this.bridges = bridges;
+  getBridges() {
+    return this.#bridges;
   }
+
+  getMovements() {
+    return this.#movements;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    this.position += 1;
-    if (this.bridges[this.position - 1] === moving) {
-      this.movement = "0";
-      this.movements.push(this.movement);
-    } else {
-      this.movement = "X";
-      this.movements.push(this.movement);
+    if (this.#bridges[this.#movements.length] === moving) {
+      this.#movements.push(WORD.SUCCESS);
+      return true;
     }
+    this.#movements.push(WORD.FAILURE);
+    return false;
   }
 
   /**

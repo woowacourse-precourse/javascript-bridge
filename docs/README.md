@@ -55,19 +55,23 @@ View(InputView.js, OutputView.js)
 App
 
 - +startBridgeGame()
-- +getBridgeSize()
-- +getBridge()
-- +getMoving()
-- +getGameCommand()
+- +controlBridgeSize()
+- +controlBridges()
+- +controlMoving()
+- +controlresult()
+- +controlGameCommand()
 
 ## 비지니스 로직(Model)
 
 BridgeGame // 사용자가 칸을 이동할 때 사용하는 메서드
 
-- constructor(){
-  this.bridges = [];
+- constructor(bridges){
+  this.bridges = bridges;
+  this.movements = [];
   }
 - +getBridges()
+- +getMovements()
+- +isEnd()
 - move() // 사용자가 칸을 이동할 때 사용하는 메서드
 - retry() // 사용자가 게임을 다시 시도할 때 사용하는 메서드
 

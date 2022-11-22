@@ -6,7 +6,7 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 
 class App {
   constructor() {
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame;
   }
   play() {
     this.startBridgeGame();
@@ -27,15 +27,16 @@ class App {
 
   controlBridges(bridgeSize) {
     const bridges = BridgeMaker.makeBridge(bridgeSize, generate);
-    this.bridgeGame.getBridges(bridges);
-    console.log("(확인용) bridges: ", this.bridgeGame.bridges);
+    this.bridgeGame = new BridgeGame(bridges);
+    console.log("(확인용) bridges: ", this.bridgeGame.getBridges());
+    this.controlMoving;
   }
 
   controlMoving() {
     InputView.readMoving((moving) => {
       console.log("(callback 확인용) moving: ", moving);
-      this.bridgeGame.move(moving);
-      console.log("(확인용) movements: ", this.bridgeGame.movements);
+      let isMoving = this.bridgeGame.move(moving);
+      console.log("(확인용) isMoving: ", isMoving);
     });
   }
 }

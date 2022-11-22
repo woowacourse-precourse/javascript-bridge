@@ -6,6 +6,8 @@ const WORD = {
   DOWN_NUMBER: 0,
   UP: "U",
   DOWN: "D",
+  SUCCESS: "O",
+  FAILURE: "X",
 };
 
 const MESSAGE = {
