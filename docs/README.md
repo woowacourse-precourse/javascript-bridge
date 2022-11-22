@@ -7,11 +7,10 @@
 ```mermaid
 graph TD
     A[game start]-->B[input size]-->C[make bridge]-->D[input moving]-->E[print map]
-    D-->F{can move?}
-    F-->|can move? : yes|H{is complete?}
-    F-->|can move? : no|I[input command]
-    H-->|is complete? : yes|K
-    H-->|is complete? : no|D
+    D-->F{move status}
+    F-->|move complete|K
+    F-->|can not move|I[input command]
+		F-->|can move|D
     I-->J{quit or restart}
     J-->|quit|K[print result]
     J-->|restart|D
