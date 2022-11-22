@@ -1,7 +1,7 @@
 const { DEFAULTS, ERRORLINE } = require('./Constants');
 const MissionUtils = require('@woowacourse/mission-utils');
 const bridgeGame = require('../model/BridgeGame');
-const { getLastValue } = require('./Utils');
+const { isLastValueFail, isLastValueSuccess } = require('./Utils');
 const onlyNmbr = /^[0-9]+$/;
 
 class Validation {
@@ -48,11 +48,7 @@ class Validation {
   }
 
   isfailAtLastMove(cnt_move, answer, gameLog) {
-    if (
-      this.isMovedDone(cnt_move, answer) &&
-      getLastValue(gameLog, 0) !== DEFAULTS.CAN_MOVE &&
-      getLastValue(gameLog, 1) !== DEFAULTS.CAN_MOVE
-    ) {
+    if (this.isMovedDone(cnt_move, answer) && isLastValueFail(gameLog)) {
       bridgeGame.retry();
       return true;
     }
@@ -60,10 +56,7 @@ class Validation {
   }
 
   isfailAtOngame(gameLog) {
-    if (
-      getLastValue(gameLog, 0) === DEFAULTS.CANT_MOVE ||
-      getLastValue(gameLog, 1) === DEFAULTS.CANT_MOVE
-    ) {
+    if (!isLastValueSuccess(gameLog)) {
       bridgeGame.retry();
       return true;
     }
@@ -71,11 +64,7 @@ class Validation {
   }
 
   isSuccess(cnt_move, gameLog, answer) {
-    if (
-      this.isMovedDone(cnt_move, answer) &&
-      getLastValue(gameLog, 0) !== DEFAULTS.CANT_MOVE &&
-      getLastValue(gameLog, 1) !== DEFAULTS.CANT_MOVE
-    ) {
+    if (this.isMovedDone(cnt_move, answer) && isLastValueSuccess(gameLog)) {
       return true;
     }
     return false;

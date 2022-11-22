@@ -42,10 +42,14 @@ const InputView = {
       } catch (err) {
         return this.readMoving(answer, move_cnt);
       }
-      const gameLog = OutputView.printMap(answer, upOrdown);
-      move_cnt += 1;
-      this.checkNeedtoStop(move_cnt, gameLog);
+      this.printAndValidCheck(answer, upOrdown, move_cnt);
     });
+  },
+
+  printAndValidCheck(answer, upOrdown, move_cnt) {
+    const gameLog = OutputView.printMap(answer, upOrdown);
+    move_cnt += 1;
+    this.checkNeedtoStop(move_cnt, gameLog);
   },
 
   checkNeedtoStop(move_cnt, gameLog) {
@@ -69,10 +73,14 @@ const InputView = {
       } catch (err) {
         return this.readGameCommand();
       }
-      restart === DEFAULTS.RESTART
-        ? this.readMoving(answer, 0)
-        : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
+      this.restartOrkeepGoing(restart, gameLog);
     });
+  },
+
+  restartOrkeepGoing(restart, gameLog) {
+    restart === DEFAULTS.RESTART
+      ? this.readMoving(answer, 0)
+      : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
   },
 };
 
