@@ -12,12 +12,27 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    var moving;
+    MissionUtils.Console.readLine(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)",
+      (move) => {
+        this.isMoveChar(move);
+        moving = move;
+      }
+    );
+    return moving;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
+  isMoveChar(upDown) {
+    if (upDown !== "U" && upDown !== "D") {
+      throw new Error("[ERROR] U와 D 중 하나의 문자를 입력하세요.");
+    }
+  },
 };
 
 module.exports = InputView;
