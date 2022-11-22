@@ -35,10 +35,8 @@ class BridgeGame {
    */
   move(direction) {
     const canCross = this.isSameDirection(direction);
-    const successOrFail = canCross ? GAME_OPTION.SUCCESS : GAME_OPTION.FAIL;
-
-    this.result.set(RESULT.IS_SUCCESS, successOrFail);
-    this.makePlayerBridgeState(direction, canCross);
+    this.calculateSuccessOrFail(canCross);
+    this.makePlayerMoveState(direction, canCross);
 
     return [canCross, this.playerUpperBridgeState, this.playerLowerBridgeState];
   }
@@ -49,20 +47,30 @@ class BridgeGame {
     return this.computerBridge[currPosition] === direction;
   }
 
-  makePlayerBridgeState(direction, canCross) {
-    if (direction === BRIDGE.UPPER) {
-      canCross
-        ? this.playerUpperBridgeState.push(BRIDGE.POSSIBLE_MARK)
-        : this.playerUpperBridgeState.push(BRIDGE.IMPOSSIBLE_MARK);
-      this.playerLowerBridgeState.push(OUTPUT_MARK.BLANK);
-    }
+  calculateSuccessOrFail(canCross) {
+    const successOrFail = canCross ? GAME_OPTION.SUCCESS : GAME_OPTION.FAIL;
+    this.result.set(RESULT.IS_SUCCESS, successOrFail);
+  }
 
-    if (direction === BRIDGE.LOWER) {
-      canCross
-        ? this.playerLowerBridgeState.push(BRIDGE.POSSIBLE_MARK)
-        : this.playerLowerBridgeState.push(BRIDGE.IMPOSSIBLE_MARK);
-      this.playerUpperBridgeState.push(OUTPUT_MARK.BLANK);
-    }
+  makePlayerMoveState(direction, canCross) {
+    direction === "U"
+      ? this.makeMark(
+          canCross,
+          this.playerUpperBridgeState,
+          this.playerLowerBridgeState
+        )
+      : this.makeMark(
+          canCross,
+          this.playerLowerBridgeState,
+          this.playerUpperBridgeState
+        );
+  }
+
+  makeMark(canCross, crossBridge, oppsiteBridge) {
+    canCross
+      ? crossBridge.push(BRIDGE.POSSIBLE_MARK)
+      : crossBridge.push(BRIDGE.IMPOSSIBLE_MARK);
+    oppsiteBridge.push(OUTPUT_MARK.BLANK);
   }
 
   /**
@@ -74,7 +82,6 @@ class BridgeGame {
     this.init();
 
     const attemptsCount = this.result.get(RESULT.TOTAL_ATTEMPTS_COUNT) + 1;
-
     this.result.set(RESULT.TOTAL_ATTEMPTS_COUNT, attemptsCount);
   }
 
