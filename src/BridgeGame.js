@@ -6,17 +6,19 @@ const MapMaker = require('./MapMaker');
 class BridgeGame {
   #answerBridgeArray;
   #bridgeIndex;
+  #attemptNumber;
 
   constructor(answerBridgeArray) {
     this.mapMaker = new MapMaker();
     this.#answerBridgeArray = answerBridgeArray;
     this.#bridgeIndex = 1;
+    this.#attemptNumber = 1;
   }
 
   decideMoveOrStop(direction) {
     if (direction !== this.#answerBridgeArray[this.#bridgeIndex - 1]) return this.stop(direction);
     if (this.#bridgeIndex === this.#answerBridgeArray.length) {
-      this.mapMaker.makeFinalSuccess(direction);
+      this.mapMaker.makeFinalSuccess(direction, this.#attemptNumber);
       return GAME_OUTCOME.FINAL_SUCCESS;
     }
     return this.move(direction);
@@ -43,8 +45,13 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(command) {
-    if (command === GAME_COMMAND.RESTART) return GAME_OUTCOME.RESTART;
-    if (command === GAME_COMMAND.QUIT) return GAME_OUTCOME.QUIT;
+    if (command === GAME_COMMAND.RESTART) {
+      this.#bridgeIndex = 1;
+      this.#attemptNumber += 1;
+      this.mapMaker.initGame();
+      return GAME_OUTCOME.RESTART;
+    }
+    return GAME_OUTCOME.QUIT;
   }
 }
 

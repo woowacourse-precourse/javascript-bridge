@@ -9,6 +9,11 @@ class MapMaker {
     this.#upperMapArray = [];
     this.#lowerMapArray = [];
   }
+  
+  initGame() {
+    this.#upperMapArray = [];
+    this.#lowerMapArray = [];
+  }
 
   selectRightBridge(direction) {
     if (direction === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.RIGHT);
@@ -32,9 +37,9 @@ class MapMaker {
     this.#lowerMapArray.push(sign);
   }
 
-  makeFinalSuccess(direction) {
+  makeFinalSuccess(direction, attemptNumber) {
     this.selectRightBridge(direction);
-    OutputView.printResult(this.#upperMapArray, this.#lowerMapArray);
+    OutputView.printResult(this.#upperMapArray, this.#lowerMapArray, attemptNumber);
   }
 }
 

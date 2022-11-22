@@ -21,11 +21,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(upperMapArray, lowerMapArray) {
+  printResult(upperMapArray, lowerMapArray, attemptNumber) {
     Console.print(OUTPUT.FINAL_GAME_RESULT);
     this.printMap(upperMapArray, lowerMapArray);
-    Console.print(OUTPUT.GAME_SUCCESS_OR_NOT('성공'));
-    Console.print(OUTPUT.TOTAL_ATTEMPT_NUMBER('1'));
+    Console.print(OUTPUT.GAME_SUCCESS_OR_NOT());
+    Console.print(OUTPUT.TOTAL_ATTEMPT_NUMBER(attemptNumber));
   }
 };
 
