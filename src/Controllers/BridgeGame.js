@@ -15,34 +15,6 @@ class BridgeGame {
 
   start() {
     this.getBridgeSize();
-    if (this.model.bridge) {
-      this.gameStart();
-    }
-  }
-
-  gameStart() {
-    this.move();
-    this.isUserSucess();
-    this.isUserAlive();
-    this.isUserDead();
-  }
-
-  isUserAlive() {
-    if (this.#userLife && this.#turn !== this.model.bridge.length) {
-      this.gameStart();
-    }
-  }
-
-  isUserDead() {
-    if (!this.#userLife) {
-      this.retry();
-    }
-  }
-
-  isUserSucess() {
-    if (this.#userLife && this.#turn === this.model.bridge.length) {
-      this.end();
-    }
   }
 
   getBridgeSize() {
@@ -50,6 +22,7 @@ class BridgeGame {
       try {
         Validation.isBridgeSizeValid(bridgeSize);
         this.model.genBridge(bridgeSize);
+        this.move();
       } catch (error) {
         this.catchError(this.getBridgeSize, error);
       }
@@ -69,11 +42,18 @@ class BridgeGame {
   move() {
     this.view.readMoving(MESSAGE.UPORDOWN, (userMove) => {
       try {
-        this.tryMove(userMove);
+        if (this.tryMove(userMove)) return;
+        this.#userLife ? this.move() : this.retry();
       } catch (error) {
         this.catchError(this.move, error);
       }
     });
+  }
+
+  isUserSucess() {
+    if (this.#userLife && this.#turn === this.model.bridge.length) {
+      return this.end();
+    }
   }
 
   tryMove(userMove) {
@@ -81,6 +61,7 @@ class BridgeGame {
     this.#userLife = this.model.aliveOrDeath(userMove, this.#turn);
     this.#turn += 1;
     this.view.printMap(this.model.upsideBridge, this.model.downSideBridge);
+    if (this.isUserSucess()) return true;
   }
 
   /**
@@ -90,7 +71,6 @@ class BridgeGame {
    */
   retry() {
     this.#turn = 0;
-    this.#attemptNumber = 1;
     this.askUserRetry();
   }
 
@@ -110,7 +90,7 @@ class BridgeGame {
       this.model.reset();
       this.#attemptNumber += 1;
       this.#userLife = true;
-      this.gameStart();
+      this.move();
     } else {
       this.end();
     }
@@ -122,6 +102,7 @@ class BridgeGame {
       this.model.downSideBridge,
     );
     this.view.printResult(this.#userLife, this.#attemptNumber);
+    return true;
   }
 }
 
