@@ -12,9 +12,9 @@ const OutputView = {
     Console.print("");
   },
 
-  printResult(upLineOfBridge, downLineOfBridge, totalResult, totalTry) {
+  printResult(lineOfBridge, totalResult, totalTry) {
     Console.print("최종 게임 결과");
-    this.printMap(upLineOfBridge, downLineOfBridge);
+    this.printMap(lineOfBridge[0], lineOfBridge[1]);
     Console.print(`게임 성공 여부: ${totalResult}`);
     Console.print(`총 시도한 횟수: ${totalTry}`);
     Console.close();
