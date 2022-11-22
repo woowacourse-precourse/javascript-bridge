@@ -31,6 +31,10 @@ class App {
   inputUpsideDown() {
     InputView.readMoving((upsideDown) => {
       const { error } = Validation.validateUpsideDown(upsideDown);
+      if (error) {
+        Console.log(error);
+        return this.inputUpsideDown();
+      }
     });
   }
 }
