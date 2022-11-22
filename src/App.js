@@ -9,12 +9,12 @@ const {
   printGameStart,
   printMap,
   printResult,
-} = require("./OutputView");
+} = require("./view/OutputView");
 const {
   validateBridgeNumber,
   validateMoveInput,
   validateCommandInput,
-} = require("./Validation");
+} = require("./utils/Validation");
 const { LETTER, MESSAGE } = require("./utils/Constant");
 const { Console } = require("@woowacourse/mission-utils");
 
@@ -40,7 +40,7 @@ class App {
       this.#bridgeGame.setBridge(Number(input));
       this.askMoveInput();
     } catch (e) {
-      this.askAgain(e, this.askBridgeSize);
+      this.askAgain(e, this.askBridgeSize.bind(this));
     }
   }
 
@@ -57,7 +57,7 @@ class App {
       printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
-      this.askAgain(e, this.askMoveInput);
+      this.askAgain(e, this.askMoveInput.bind(this));
     }
   }
 
@@ -84,7 +84,7 @@ class App {
       validateCommandInput(letter);
       this.actWithCommand(letter);
     } catch (e) {
-      this.askAgain(e, this.askCommandInput);
+      this.askAgain(e, this.askCommandInput.bind(this));
     }
   }
 
