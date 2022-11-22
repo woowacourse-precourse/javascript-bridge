@@ -54,7 +54,7 @@ const InputView = {
 
   moveValidate(move) {
     if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
-      throw ERROR.MOVE;
+      throw new Error(ERROR.MOVE);
     }
   },
 
