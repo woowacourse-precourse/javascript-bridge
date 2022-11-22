@@ -1,20 +1,88 @@
+const Bridge = require('./Bridge');
+const Path = require('./Path');
+const Validator = require('./utils/Validator');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { STATUS, BRIDGE, COMMAND, COMMAND_NUMBER } = require('./utils/const');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge;
+  #path;
+  #count;
 
   /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string} size
    */
-  retry() {}
+  constructor(size) {
+    this.validateBridgeSize(size);
+    const generateRandomNumber = BridgeRandomNumberGenerator.generate;
+    const bridge = BridgeMaker.makeBridge(Number(size), generateRandomNumber);
+
+    this.#bridge = new Bridge(bridge);
+    this.#path = new Path();
+    this.#count = 1;
+  }
+
+  /**
+   * @param {string} bridgeSize
+   */
+  validateBridgeSize(bridgeSize) {
+    Validator.validateNaN(bridgeSize);
+    Validator.validateNumberBound(Number(bridgeSize), BRIDGE.MIN, BRIDGE.MAX);
+  }
+
+  /**
+   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * @param {string} moving U 혹은 D
+   * @return {{status: number, pathMap: string[][]}}
+   */
+  move(moving) {
+    const currentPath = this.#path.push(moving);
+    const { status, isCorrect } = this.comparePath(currentPath, this.#bridge);
+    const pathMap = this.#path.markOX(isCorrect);
+
+    return { status, pathMap };
+  }
+
+  /**
+   * @param {string[]} currentPath
+   * @param {Bridge} bridge
+   * @returns {{status: number, isCorrect: boolean}}
+   */
+  comparePath(currentPath, bridge) {
+    const status = bridge.compare(currentPath);
+    const isCorrect = bridge.isCorrect(currentPath);
+
+    return { status, isCorrect };
+  }
+
+  retry() {
+    this.#path = new Path();
+    this.#count += 1;
+    return COMMAND_NUMBER.RETRY;
+  }
+
+  /**
+   * @param {string} gameCommand
+   * @return {number}
+   */
+  convertStringToCommand(gameCommand) {
+    Validator.validateEqual(gameCommand, [COMMAND.RETRY, COMMAND.QUIT]);
+    return gameCommand === COMMAND.RETRY ? this.retry() : COMMAND_NUMBER.QUIT;
+  }
+
+  getResultInfo() {
+    const currentPath = this.#path.getPath();
+
+    const count = this.#count;
+    const pathMap = this.#path.getPathMap();
+    const isSuccess = this.#bridge.compare(currentPath) === STATUS.SUCCESS;
+
+    return { count, pathMap, isSuccess };
+  }
 }
 
 module.exports = BridgeGame;
