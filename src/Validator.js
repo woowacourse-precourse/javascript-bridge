@@ -6,6 +6,10 @@ class Validator {
 		if (!(3 <= number && number <= 25))
 			throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
 	}
+	static isValidMove(move) {
+		if (!(move === 'U' || move === 'D'))
+			throw new Error('[ERROR] 이동할 칸은 U/D 중 하나여야 합니다.');
+	}
 }
 
 module.exports = Validator;

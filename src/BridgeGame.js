@@ -60,9 +60,22 @@ class BridgeGame {
 	}
 
 	handleMove(move) {
+		const isValid = this.validateMove(move);
+		if (!isValid) return;
 		this.trace += move;
 		this.recentMove = move;
 		this.evaluateMove();
+	}
+
+	validateMove(move) {
+		try {
+			Validator.isValidMove(move);
+			return true;
+		} catch (e) {
+			ViewManager.error(e);
+			this.move();
+			return false;
+		}
 	}
 
 	evaluateMove() {
