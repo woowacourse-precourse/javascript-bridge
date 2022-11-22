@@ -45,13 +45,7 @@ class Bridge {
    * @return {string} 출력할 map의 윗부분
    */
   #makeAbovePart(inputs) {
-    const abovePart = inputs.map((input, idx) => {
-      if (input !== BRIDGE.ABOVE) return BRIDGE.BLANK;
-      if (this.compare(input, idx)) return BRIDGE.MOVE_SUCCESS;
-      return BRIDGE.MOVE_FAIL;
-    });
-
-    return abovePart.join(BRIDGE.JOIN);
+    return this.#makePart(BRIDGE.ABOVE, inputs);
   }
 
   /**
@@ -59,13 +53,22 @@ class Bridge {
    * @return {string} 출력할 map의 아랫부분
    */
   #makeBelowPart(inputs) {
-    const belowPart = inputs.map((input, idx) => {
-      if (input !== BRIDGE.BELOW) return BRIDGE.BLANK;
+    return this.#makePart(BRIDGE.BELOW, inputs);
+  }
+
+  /**
+   * @param {string} whichPart
+   * @param {string[]} inputs
+   * @return {string}
+   */
+  #makePart(whichPart, inputs) {
+    const part = inputs.map((input, idx) => {
+      if (input !== whichPart) return BRIDGE.BLANK;
       if (this.compare(input, idx)) return BRIDGE.MOVE_SUCCESS;
       return BRIDGE.MOVE_FAIL;
     });
 
-    return belowPart.join(BRIDGE.JOIN);
+    return part.join(BRIDGE.JOIN);
   }
 }
 
