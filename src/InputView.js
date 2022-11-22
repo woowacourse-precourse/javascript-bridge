@@ -33,8 +33,11 @@ const InputView = {
       Validation.validateUserChoice(userInput);
       console.log(bridgeGame.BridgeStatus, userInput);
       const data = bridgeGame.move(userInput);
-      if(data === "win") OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.CompareResult, bridgeGame.count);
-      if(data === "end") this.readGameCommand();
+      if(data === "종료") {
+        OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.gameResult, bridgeGame.count);
+        Io.close();
+      } 
+      if(data === "재시작") this.readGameCommand();
       this.readMoving();
     });
   },
@@ -44,6 +47,7 @@ const InputView = {
    */
   readGameCommand() {
     Io.input('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
+      Validation.validateUserRetryChoice(userInput);
       if(userInput === 'R'){
         bridgeGame.retry();
         this.readMoving();

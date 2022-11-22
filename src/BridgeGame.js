@@ -8,6 +8,7 @@ class BridgeGame {
   constructor(SIZE, BridgeStatus){
     this.SIZE = SIZE;
     this.BridgeStatus = BridgeStatus; 
+    this.gameResult = false;
     this.BridgeIndex = 0;
     this.BridgeResultArray = [[], []];
     this.count = 1;
@@ -24,9 +25,12 @@ class BridgeGame {
     this.BridgeResultArray = BridgeCompare.makeBridgeResultArray(userInput, CompareResult, this.BridgeResultArray);
     OutputView.printMap(this.BridgeResultArray);
     this.BridgeIndex += 1; 
-    if(BridgeCompare.isCompleteBridge(this.SIZE, this.BridgeIndex)) return "win";  
-    if(!CompareResult) return "end";
-    return "req";
+    if(BridgeCompare.isCompleteBridge(this.SIZE, this.BridgeIndex)){
+      this.gameResult = true;
+      return "종료";
+    }  
+    if(!CompareResult) return "재시작";
+    return "재귀";
   }
 
   /**

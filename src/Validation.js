@@ -17,6 +17,11 @@ const Validaton = {
         if(!(userInput === 'U' || userInput === 'D')){
             throw new Error(`[ERROR] 이동할 칸은 U 또는 D만 선택 가능합니다.`);
         }
+    },
+    validateUserRetryChoice(userInput){
+        if(!(userInput === 'U' || userInput === 'D')){
+            throw new Error(`[ERROR] 재선택은 U 또는 D만 선택 가능합니다.`);
+        }
     }
 };
 
