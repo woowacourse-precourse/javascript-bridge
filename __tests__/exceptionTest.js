@@ -75,3 +75,10 @@ describe("사용자 이동 입력값 유효성 테스트", () => {
     });
 });
 
+describe("재시작 입력값 유효성 테스트", () => {
+    test("입력값이 R 또는 Q가 아니면 예외발생", () => {
+        const logSpy = getLogSpy();
+        checkRestart("E");
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR] R 또는 Q를 입력해주세요."));
+    });
+});
