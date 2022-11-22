@@ -13,6 +13,17 @@ class App {
     this.movePlay(game);
     OutputView.printResult(game.up,game.down,game);
   };
+  movePlay(game){
+    while((game.cnt!=game.size) && !isNaN(game.size)){
+      InputView.readMoving(game);
+      this.exceptionHandlingMove(game);
+      if(!game.check){
+        InputView.readGameCommand(game);
+        this.exceptionHandlingCommand(game);
+      }
+      game.cnt +=1;
+    }
+  };
 }
 
 module.exports = App;
