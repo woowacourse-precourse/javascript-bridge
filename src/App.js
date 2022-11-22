@@ -30,6 +30,15 @@ class App {
         this.selectRetry();
     });
   }
+
+  selectRetry(){
+    InputView.readGameCommand((retry)=>{
+      if(retry === 'R'){
+        this.#bridgeGame.retry();
+        this.selectMove();
+      }
+    });
+  }
 }
 
 const app = new App();
