@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
+const BridgeGame = require('../src/model/BridgeGame');
 const Controller = require('../src/controller/Controller');
 const BridgeMaker = require('../src/BridgeMaker');
 
@@ -151,12 +152,80 @@ describe('다리 건너기 테스트', () => {
     ]);
   });
 
+  test('validateSize 메서드 기능 테스트 : 다리의 길이에 대해 잘못된 입력값 받은 경우 에러 메시지 출력하고 inputBridgeSize 메서드가 호출된다', () => {
+    const logSpy = getLogSpy();
+    const controller = new Controller();
+    controller.inputBridgeSize = jest.fn();
+
+    const inputBridgeSize = controller.inputBridgeSize;
+    controller.validateSize(21);
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ERROR] 다리의 길이는 3 이상 20 이하만 가능합니다.',
+    ]);
+
+    expect(inputBridgeSize).toBeCalledTimes(1);
+  });
+
+  test('validateDirection 메서드 기능 테스트 : 이동할 칸에 대해 잘못된 입력값 받은 경우 에러 메시지 출력하고 inputMoving 메서드가 호출된다', () => {
+    const logSpy = getLogSpy();
+    const controller = new Controller();
+    controller.inputMoving = jest.fn();
+
+    const inputMoving = controller.inputMoving;
+    controller.validateDirection('');
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ERROR] 공백을 입력할 수 없습니다. 값을 입력해주세요.',
+    ]);
+
+    expect(inputMoving).toBeCalledTimes(1);
+  });
+
+  test('checkSuccess 메서드 기능 테스트 : 이동할 수 있는 칸을 선택하였고 아직 다리를 다 건너지 못했다면 inputMoving 메서드가 호출된다', () => {
+    const controller = new Controller();
+    controller.inputMoving = jest.fn();
+
+    const inputMoving = controller.inputMoving;
+    controller.checkSuccess(true, false);
+
+    expect(inputMoving).toBeCalledTimes(1);
+  });
+
+  test('checkSuccess 메서드 기능 테스트 : 이동할 수 있는 칸을 선택함과 동시에 다리를 최종적으로 건넜다면 printResult 메서드가 호출된다', () => {
+    const controller = new Controller();
+    controller.printResult = jest.fn();
+
+    const printResult = controller.printResult;
+    controller.checkSuccess(true, true);
+
+    expect(printResult).toBeCalledTimes(1);
+  });
+
   test('checkSuccess 메서드 기능 테스트 : 이동할 수 없는 칸을 선택한 경우 inputGameCommand 메서드가 호출된다', () => {
     const controller = new Controller();
     controller.inputGameCommand = jest.fn();
 
     const inputGameCommand = controller.inputGameCommand;
     controller.checkSuccess(false);
+
+    expect(inputGameCommand).toBeCalledTimes(1);
+  });
+
+  test('validateCommand 메서드 기능 테스트 : 게임 재시도 여부에 대해 잘못된 입력값 받은 경우 에러 메시지 출력하고 inputGameCommand 메서드가 호출된다', () => {
+    const logSpy = getLogSpy();
+    const controller = new Controller();
+    controller.inputGameCommand = jest.fn();
+
+    const inputGameCommand = controller.inputGameCommand;
+    controller.validateCommand('quit');
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ERROR] R (재시도) 와 Q (종료) 중에서만 입력해주세요.',
+    ]);
 
     expect(inputGameCommand).toBeCalledTimes(1);
   });
