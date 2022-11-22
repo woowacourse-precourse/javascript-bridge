@@ -1,4 +1,6 @@
 const InputError = require("../src/InputError");
+const { error } = require("./Constant/Constant");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,6 +12,7 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    console.log(this.#bridge);
     this.#currentIdx = 0;
     this.#bridgeMap = [[], []]; // 0 ≒ D , 1 ≒ U
     this.#retryCount = 1;
@@ -21,11 +24,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   canMove(input) {
-    if (!["U", "D"].includes(input))
-      throw new InputError(
-        "U/D",
-        "[ERROR] 유효한 값(U or D)을 입력해주세요.\n"
-      );
+    if (!["U", "D"].includes(input)) throw new InputError("U/D", error.notUD);
     if (input === this.#bridge[this.#currentIdx]) return true;
     return false;
   }
@@ -55,11 +54,7 @@ class BridgeGame {
   }
 
   isRetry(input) {
-    if (!["R", "Q"].includes(input))
-      throw new InputError(
-        "R/Q",
-        "[ERROR] 유효한 값(R or Q)을 입력해주세요.\n"
-      );
+    if (!["R", "Q"].includes(input)) throw new InputError("R/Q", error.notRQ);
     if (input == "R") return this.retry();
     return false;
   }

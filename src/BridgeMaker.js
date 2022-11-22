@@ -1,5 +1,6 @@
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const InputError = require("../src/InputError");
+const { error } = require("../src/Constant/Constant");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -13,11 +14,7 @@ const BridgeMaker = {
 
   canMakeBridge(size) {
     const isValidInput = size < 3 || size > 20 || size % 1 != 0;
-    if (isValidInput)
-      throw new InputError(
-        "3-20",
-        "[ERROR] 3과 20사이의 자연수를 입력해주세요.\n"
-      );
+    if (isValidInput) throw new InputError("3-20", error.notRange);
     return BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   },
 
