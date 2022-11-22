@@ -8,21 +8,28 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
   #upMap = [];
   #downMap = [];
   #success
+
   constructor(bridgeMap){
     this.#cumulativeCount = 1;
     this.#bridgeMap = bridgeMap;
     this.#upMap = "";
     this.#downMap = "";
   }
+
   /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {number} moveCount 현재 몇 번째 이동인지
+   * @return {boolean} 플레이어가 이동한 칸이 이동가능한지 여부 가능하면 true, 불가능하면 false
    */
   move(moveCount) {
     const moving = RecallUntilCorrect.recallReadMoving();
     return this.comparePlayerAndMap(moving, moveCount);
   }
+
+  /**"
+   * @param {String} moving 플레이어가 입력한 이동("U" or "D")
+   * @param {number} moveCount 현재 몇 번째 이동인지
+   * @return {boolean} 플레이어가 이동한 칸이 이동가능한지 여부 가능하면 true, 불가능하면 false
+   */  
   comparePlayerAndMap(moving, moveCount){
     if(moving===this.#bridgeMap[moveCount]){
       const MAP = this.isUpOrDown(moving, true);
@@ -36,9 +43,19 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
       return false;
     }
   }
+
+  /**"
+   * @param {String[]} map 다리 맵의 윗부분과 아랫부분이 담긴 배열 [0]에는 윗부분 / [1]에는 아랫부분이 담겨있다.
+   */    
   addUpDownMap(map){
     this.#upMap += map[0], this.#downMap += map[1];
   }
+
+  /**"
+   * @param {String} moving 플레이어가 입력한 이동("U" or "D")
+   * @param {booelan} canMove 플레이어가 이동한 칸이 이동가능한지 여부 가능하면 true, 불가능하면 false;
+   * @return {String[]} [0]에는 다리 윗부분, [1]에는 아랫부분이 return된다.
+   */    
   isUpOrDown(moving, canMove){
     if(moving === "U" && canMove) 
       return [" O"+" |", "  "+" |"]; 
@@ -49,6 +66,10 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
     if(moving === "D" && !canMove) 
       return["  "+" |", " X"+" |"]; 
   }
+
+  /**"
+   * @return {String} 입력 커맨드를 Return ("R","Q")
+   */      
   isRetryOrQuit(){
     const gameCommand = RecallUntilCorrect.recallreadGameCommand();
     if(gameCommand==="R"){
@@ -58,11 +79,10 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
       return "Q";
     }
   }
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
+  /**"
+   * @return {String} 입력 커맨드를 Return ("R")
+   */  
   retry() {
     this.#cumulativeCount+=1;
     this.#upMap = "";
