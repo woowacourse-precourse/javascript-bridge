@@ -24,7 +24,11 @@ class App {
     this.bridges = makeBridge(this.size, generate);
     this.startGame();
   }
-  startGame(){ }
+  startGame(){ 
+    let i = 0;
+    const bridgeGame = new BridgeGame(this.bridges);
+
+  }
 }
 
 module.exports = App;
