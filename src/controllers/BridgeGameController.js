@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 class BridgeGameController {
   #model;
   #view;
@@ -77,6 +79,8 @@ class BridgeGameController {
     const gameResult = this.#model.getGameResult();
 
     this.#view.printResult(gameResult);
+
+    Console.close();
   }
 }
 
