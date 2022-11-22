@@ -41,7 +41,7 @@ class GameController {
   createBridge(input) {
     BridgeValidator.validator(input);
     this.#game.createBridge(new Bridge(input, generate));
-    InputView.readMoving(this);
+    return InputView.readMoving(this);
   }
 
   /**
@@ -54,8 +54,10 @@ class GameController {
     this.#game.move(input);
     OutputView.printMap(this.#game.result);
     if (this.#game.isReMoving()) return InputView.readMoving(this);
-    OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
-    if (this.#game.isEnd()) return Console.close();
+    if (this.#game.isEnd()) {
+      OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
+      return Console.close();
+    }
     return InputView.readGameCommand(this);
   }
 

@@ -14,9 +14,10 @@ const InputView = {
   readBridgeSize(controller) {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
       try {
+        Console.print('');
         controller.createBridge(input);
       } catch (error) {
-        Console.print(`${error}`);
+        Console.print(error);
         this.readBridgeSize(controller);
       }
     });
@@ -32,7 +33,7 @@ const InputView = {
       try {
         controller.setNextTurn(input);
       } catch (error) {
-        Console.print(`${error}`);
+        Console.print(error);
         this.readMoving(controller);
       }
     });
@@ -48,7 +49,7 @@ const InputView = {
       try {
         controller.setRetryOrQuit(input);
       } catch (error) {
-        Console.print(`${error}`);
+        Console.print(error);
         this.readGameCommand(controller);
       }
     });

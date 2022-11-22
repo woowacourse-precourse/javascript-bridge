@@ -15,6 +15,7 @@ const OutputView = {
   printMap(result) {
     Console.print(this.getPrintLine(0, result));
     Console.print(this.getPrintLine(1, result));
+    Console.print('');
   },
 
   /**
