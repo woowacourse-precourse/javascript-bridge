@@ -17,7 +17,7 @@ const DomainValidator = {
   },
 
   validateMoveCount(moveCount) {
-    if (!Validator.isNumber(moveCount)) throw new Error();
+    if (!Validator.isNumber(moveCount)) throw new Error(ERROR.MOVE_COUNT);
   },
 
   validateMoveCountOverBridgeSize(moveCount, bridgeSize) {
