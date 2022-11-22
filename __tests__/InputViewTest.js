@@ -23,4 +23,9 @@ describe("InputView 테스트", () => {
       InputView.validateSize(21);
     }).toThrow("[ERROR]");
   });
+  test("U, D 이외의 것들이 moving으로 들어가면 예외가 발생한다", () => {
+    expect(() => {
+      InputView.validateMoving("P");
+    }).toThrow("[ERROR]");
+  });
 });
