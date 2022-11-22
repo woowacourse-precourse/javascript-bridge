@@ -1,4 +1,4 @@
-const { OX, INPUT_VALUE } = require('../Util/Constant');
+const { OX, INPUT_VALUE } = require('../util/Constant');
 
 const MapMaker = {
   upFloor: [],

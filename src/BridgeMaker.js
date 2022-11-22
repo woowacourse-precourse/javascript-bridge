@@ -1,4 +1,4 @@
-const { INPUT_VALUE } = require('./Util/Constant');
+const { INPUT_VALUE } = require('./util/Constant');
 
 const BridgeMaker = {
   /**
@@ -8,7 +8,9 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    const generatedNumbers = Array.from({ length: size }, () => generateRandomNumber().toString());
+    const generatedNumbers = Array.from({ length: size }, () =>
+      generateRandomNumber().toString()
+    );
     const Bridge = [];
     Array.from(generatedNumbers).forEach(value => {
       if (value === '0') Bridge.push(INPUT_VALUE.DOWN);

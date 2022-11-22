@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('../Util/Constant');
+const { MESSAGE } = require('../util/Constant');
 
 const InputView = {
   readBridgeSize(callback) {

@@ -1,4 +1,4 @@
-const { ERROR } = require('../Util/Constant');
+const { ERROR } = require('../util/Constant');
 const OutputView = require('../View/OutputView');
 
 class CheckBridgeSize {

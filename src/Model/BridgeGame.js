@@ -1,4 +1,4 @@
-const { INPUT_VALUE } = require('../Util/Constant');
+const { INPUT_VALUE } = require('../util/Constant');
 
 class BridgeGame {
   #randomBridge;

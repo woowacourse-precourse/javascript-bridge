@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const MapMaker = require('../Model/MapMaker');
-const { MESSAGE, OX } = require('../Util/Constant');
+const { MESSAGE, OX } = require('../util/Constant');
 
 const OutputView = {
   printError(error) {
