@@ -10,8 +10,8 @@ const BridgeMaker = {
   changeBridgeElements(bridgeByNumber) {
     let bridgeByDirection = [];
     for (let i = 0; i < bridgeByNumber.length; i++) {
-      if (bridgeByNumber[i] === 1) bridgeByDirection.push("D");
-      if (bridgeByNumber[i] === 0) bridgeByDirection.push("U");
+      if (bridgeByNumber[i] === 1) bridgeByDirection.push("U");
+      if (bridgeByNumber[i] === 0) bridgeByDirection.push("D");
     }
     return bridgeByDirection;
   },
