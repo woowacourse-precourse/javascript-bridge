@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 const PlayerMove = require('../src/PlayerMove');
+const BridgeGame = require('../src/BridgeGame');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -74,6 +75,20 @@ describe('다리 건너기 테스트', () => {
     const bridge = BridgeMaker.makeBridge(5, mockGenerator);
     const { upBridgeRoute, downBridgeRoute } = PlayerMove.getCurrentRoute(3, bridge, false);
 
+    expect(upBridgeRoute).toEqual(['O', 'O', ' ', 'X']);
+    expect(downBridgeRoute).toEqual([' ', ' ', 'O', ' ']);
+  });
+
+  test('플레이어가 이동하는 기능', () => {
+    const randomNumbers = ['1', '1', '0', '0', '1'];
+    const mockGenerator = randomNumbers.reduce((acc, number) => acc.mockReturnValueOnce(number), jest.fn());
+    const bridge = BridgeMaker.makeBridge(5, mockGenerator);
+    const bridgeGame = new BridgeGame(5, bridge);
+    bridgeGame.move('U');
+    bridgeGame.move('U');
+    bridgeGame.move('D');
+    bridgeGame.move('U');
+    const { upBridgeRoute, downBridgeRoute } = bridgeGame.currentRoute;
     expect(upBridgeRoute).toEqual(['O', 'O', ' ', 'X']);
     expect(downBridgeRoute).toEqual([' ', ' ', 'O', ' ']);
   });

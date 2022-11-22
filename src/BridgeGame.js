@@ -16,9 +16,9 @@ class BridgeGame {
 
   #tryCount;
 
-  constructor(bridgeSize) {
+  constructor(bridgeSize, bridge) {
     this.#bridgeSize = bridgeSize;
-    this.#bridge = makeBridge(bridgeSize, generate);
+    this.#bridge = bridge || makeBridge(bridgeSize, generate);
     this.#playerPosition = -1;
     this.#state = STATE.PROGRESS;
     this.#tryCount = 1;
