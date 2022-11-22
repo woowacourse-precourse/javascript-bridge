@@ -3,7 +3,7 @@ class CalcForDrawingBridgeStatus{
     constructor(input,generatedBridge,gameStatus) {
         this.input=input,
         this.generatedBridge=generatedBridge
-        this.gameStatus=gameStatus   
+        this.gameStatus=gameStatus 
     }
 
     
@@ -25,7 +25,7 @@ class CalcForDrawingBridgeStatus{
         }
     }
     
-    ifWrong(answerOfCurrentlocation,wrongFlag){
+    ifWrong(answerOfCurrentlocation){
         if(this.input==='U' && answerOfCurrentlocation==='D'){
            this.gameStatus.bridgeStatus.up.push('X')
            this.gameStatus.bridgeStatus.down.push(' ')
@@ -41,12 +41,3 @@ class CalcForDrawingBridgeStatus{
 }
 
 module.exports=CalcForDrawingBridgeStatus
-
-// gameStatus={
-//     playerLocation:0,
-//     bridgeStatus:{
-//       up:[],
-//       down:[]
-//     },
-//     wrongFlag:false
-//   }

@@ -55,7 +55,6 @@ class App {
   //오답시
   chooseWrong(){
     InputView.readGameCommand(this.#gameStatus)
-    console.log(this.#gameStatus)
     if(this.#gameStatus.wrongFlag){
       this.endGame()
     }
