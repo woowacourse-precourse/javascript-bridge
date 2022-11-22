@@ -8,24 +8,24 @@ const { SINGLE_MAP, WORD } = require("../Constants/Token");
  */
 
 class BridgeGame {
-  #state = {
-    bridge: null,
-    trial: 1,
-    isAlive: true,
-    currentIndex: 0,
-    currentMap: {
-      up: [],
-      down: [],
-    },
-  };
+  // #state = {
+  //   bridge: null,
+  //   trial: 1,
+  //   isAlive: true,
+  //   currentIndex: 0,
+  //   currentMap: {
+  //     up: [],
+  //     down: [],
+  //   },
+  // };
 
-  get state() {
-    return this.#state;
-  }
+  // get state() {
+  //   return this.#state;
+  // }
 
-  setState(nextState) {
-    this.#state = { ...this.#state, ...nextState };
-  }
+  // setState(nextState) {
+  //   this.#state = { ...this.#state, ...nextState };
+  // }
 
   move(step) {
     const { bridge, currentIndex } = this.state;
@@ -34,27 +34,27 @@ class BridgeGame {
     this.makeBridgeMap(passed, step);
   }
 
-  proceed(passed) {
-    const nextIndex = (this.state.currentIndex += 1);
-    const nextStatus = passed ? true : false;
+  // proceed(passed) {
+  //   const nextIndex = (this.state.currentIndex += 1);
+  //   const nextStatus = passed ? true : false;
 
-    this.setState({
-      currentIndex: nextIndex,
-      isAlive: nextStatus,
-    });
-  }
+  //   this.setState({
+  //     currentIndex: nextIndex,
+  //     isAlive: nextStatus,
+  //   });
+  // }
 
-  makeBridgeMap(passed, step) {
-    const answer = passed ? WORD.O_PRINT : WORD.X_PRINT;
-    const [newUp, newDown] = SINGLE_MAP[answer][step];
+  // makeBridgeMap(passed, step) {
+  //   const answer = passed ? WORD.O_PRINT : WORD.X_PRINT;
+  //   const [newUp, newDown] = SINGLE_MAP[answer][step];
 
-    this.setState({
-      currentMap: {
-        up: [...this.state.currentMap.up, newUp],
-        down: [...this.state.currentMap.down, newDown],
-      },
-    });
-  }
+  //   this.setState({
+  //     currentMap: {
+  //       up: [...this.state.currentMap.up, newUp],
+  //       down: [...this.state.currentMap.down, newDown],
+  //     },
+  //   });
+  // }
 
   retry() {
     this.setState({

@@ -14,81 +14,81 @@ const { KEY } = require("../Constants/Token");
 const { SAYS } = require("../Constants/Message");
 
 class GameController {
-  constructor() {
-    this.model = new BridgeGame();
-    this.view = {
-      input: InputView,
-      output: OutputView,
-    };
-  }
+  // constructor() {
+  //   this.model = new BridgeGame();
+  //   this.view = {
+  //     input: InputView,
+  //     output: OutputView,
+  //   };
+  // }
 
   startGame() {
     this.view.output.printMessage(SAYS.START);
     this.createBridge();
   }
 
-  createBridge() {
-    this.view.input.readBridgeSize((sizeInput) => {
-      Check(sizeInput, checkBridgeLength, this.createBridge.bind(this));
+  // createBridge() {
+  //   this.view.input.readBridgeSize((sizeInput) => {
+  //     Check(sizeInput, checkBridgeLength, this.createBridge.bind(this));
 
-      const bridge = BridgeMaker.makeBridge(
-        sizeInput,
-        BridgeRandomNumberGenerator.generate
-      );
+  //     const bridge = BridgeMaker.makeBridge(
+  //       sizeInput,
+  //       BridgeRandomNumberGenerator.generate
+  //     );
 
-      this.model.setState({ bridge });
-      this.playRound();
-    });
-  }
+  //     this.model.setState({ bridge });
+  //     this.playRound();
+  //   });
+  // }
 
-  playRound() {
-    this.view.input.readMoving((moveInput) => {
-      const step = Check(moveInput, checkMoveFormat, this.playRound.bind(this));
+  // playRound() {
+  //   this.view.input.readMoving((moveInput) => {
+  //     const step = Check(moveInput, checkMoveFormat, this.playRound.bind(this));
 
-      if (step === undefined) {
-        return;
-      }
+  //     if (step === undefined) {
+  //       return;
+  //     }
 
-      this.model.move(step);
-      const { isAlive, currentIndex, bridge, currentMap } = this.model.state;
-      const isEnd = currentIndex === bridge.length;
+  //     this.model.move(step);
+  //     const { isAlive, currentIndex, bridge, currentMap } = this.model.state;
+  //     const isEnd = currentIndex === bridge.length;
 
-      this.view.output.printMap(currentMap);
-      this.proceedNextStep(isAlive, isEnd);
-    });
-  }
+  //     this.view.output.printMap(currentMap);
+  //     this.proceedNextStep(isAlive, isEnd);
+  //   });
+  // }
 
-  proceedNextStep(isAlive, isEnd) {
-    if (!isAlive) {
-      this.retryOrFinish();
-    } else if (isEnd) {
-      this.finishGame();
-    } else {
-      this.playRound();
-    }
-  }
+  // proceedNextStep(isAlive, isEnd) {
+  //   if (!isAlive) {
+  //     this.retryOrFinish();
+  //   } else if (isEnd) {
+  //     this.finishGame();
+  //   } else {
+  //     this.playRound();
+  //   }
+  // }
 
-  retryOrFinish() {
-    this.view.input.readGameCommand((commandInput) => {
-      const command = Check(
-        commandInput,
-        checkCommandFormat,
-        this.retryOrFinish.bind(this)
-      );
+  // retryOrFinish() {
+  //   this.view.input.readGameCommand((commandInput) => {
+  //     const command = Check(
+  //       commandInput,
+  //       checkCommandFormat,
+  //       this.retryOrFinish.bind(this)
+  //     );
 
-      if (command === KEY.COMMAND_RESTART) {
-        this.model.retry();
-        this.playRound();
-      } else if (command === KEY.COMMAND_QUIT) {
-        this.finishGame();
-      }
-    });
-  }
+  //     if (command === KEY.COMMAND_RESTART) {
+  //       this.model.retry();
+  //       this.playRound();
+  //     } else if (command === KEY.COMMAND_QUIT) {
+  //       this.finishGame();
+  //     }
+  //   });
+  // }
 
-  finishGame() {
-    this.view.output.printResult(this.model.state);
-    Console.close();
-  }
+  // finishGame() {
+  //   this.view.output.printResult(this.model.state);
+  //   Console.close();
+  // }
 }
 
 module.exports = GameController;
