@@ -21,7 +21,6 @@ const OutputView = {
     Console.print(`[ ${UpperBlock} ]`);
     Console.print(`[ ${LowerBlock} ]`);
     Console.print('');
-    Console.close();
   },
 
   /**

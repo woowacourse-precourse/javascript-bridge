@@ -9,8 +9,8 @@ const OutputView = require('./OutputView');
 const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
-      const inputValueError = Validation.validateBridgeSize(bridgeSize);
-      if (inputValueError) {
+      const checkedSize = Validation.validateBridgeSize(bridgeSize);
+      if (checkedSize) {
         this.readBridgeSize();
       } else {
         const bridge = BridgeMaker.makeBridge(
@@ -30,7 +30,11 @@ const InputView = {
    */
   readMoving(bridge, movingRoute, UserTryCount) {
     Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {
-      Validation.validateMovingCommand(movingCommand);
+      const checkedMoving = Validation.validateMovingCommand(movingCommand);
+
+      if (checkedMoving) {
+        return this.readMoving(bridge, movingRoute, UserTryCount);
+      }
 
       const bridgeGame = new BridgeGame();
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
@@ -54,7 +58,7 @@ const InputView = {
       const RESTART_COMMAND = 'R';
       const END_COMMAND = 'Q';
 
-      Validation.validateInputCommand(gameCommand);
+      Validation.validateGameCommand(gameCommand);
 
       if (gameCommand === RESTART_COMMAND) {
         UserTryCount += 1;

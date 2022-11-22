@@ -36,19 +36,20 @@ const Validation = {
   },
 
   validateMovingCommand(movingCommand) {
-    this.validateInputMoving(movingCommand);
-  },
-
-  validateInputMoving(movingCommand) {
     const UPPER_MOVING = 'U';
     const LOWER_MOVING = 'D';
-
-    if (movingCommand !== UPPER_MOVING && movingCommand !== LOWER_MOVING) {
-      throw new Error('[ERROR] 이동할 다리 칸은 U 또는 D만 입력 가능합니다.');
+    try {
+      if (movingCommand !== UPPER_MOVING && movingCommand !== LOWER_MOVING) {
+        throw new Error('[ERROR] 이동할 다리 칸은 U 또는 D만 입력 가능합니다.');
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
+    return false;
   },
 
-  validateInputCommand(gameCommand) {
+  validateGameCommand(gameCommand) {
     const RESTART_COMMAND = 'R';
     const END_COMMAND = 'Q';
     if (gameCommand !== RESTART_COMMAND && gameCommand !== END_COMMAND) {
