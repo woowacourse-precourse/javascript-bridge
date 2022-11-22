@@ -1,12 +1,6 @@
 //다리 건너기 게임을 관리하는 클래스
-const MissionUtils = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const InputView = require('./InputView');
-
-const PLAYING = 'playing...';
-const SUCCESS = 'success';
-const GAME_END = 'game end';
-const FAILURE = 'failure';
+const ConstValues = require('./ConstValues');
 
 class BridgeGame {
   #bridge = [];
@@ -34,10 +28,10 @@ class BridgeGame {
   nextAction(ifCorrect, ifAllFinish) {
     if (ifCorrect && !ifAllFinish) {
       this.#repeatReadMovingCount++;
-      return PLAYING;
+      return ConstValues.PLAYING;
     }
     if (!ifCorrect) {
-      return FAILURE;
+      return ConstValues.FAILURE;
     }
     if (ifAllFinish) {
       return this.success();
@@ -46,11 +40,11 @@ class BridgeGame {
 
   success() {
     OutputView.printResult(
-      SUCCESS,
+      ConstValues.SUCCESS,
       this.#bridgePrintString,
       this.#resetGameCount
     );
-    return GAME_END;
+    return ConstValues.GAME_END;
   }
 
   afterReadMoving(movingUpDown = '') {
@@ -103,7 +97,7 @@ class BridgeGame {
 
   quit() {
     OutputView.printResult(
-      FAILURE,
+      ConstValues.FAILURE,
       this.#bridgePrintString,
       this.#resetGameCount
     );

@@ -3,12 +3,11 @@ const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
-const FIRST_GAME = 1;
+const ConstValues = require('./ConstValues');
 
 class App {
   play() {
-    OutputView.printStart();
+    OutputView.printStart()
     InputView.readBridgeSize(this.afterReadBridgeSize);
   }
 
@@ -17,12 +16,12 @@ class App {
       bridgeLength,
       BridgeRandomNumberGenerator.generate
     );
-
-    InputView.readMoving(new BridgeGame(bridge, FIRST_GAME));
+    
+    InputView.readMoving(new BridgeGame(bridge, ConstValues.FIRST_GAME));
   }
 }
 
-const app = new App();
-app.play();
+const app = new App()
+app.play()
 
 module.exports = App;

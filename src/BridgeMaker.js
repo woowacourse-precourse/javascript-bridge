@@ -13,7 +13,7 @@ const BridgeMaker = {
       bridge.push(this.convertNumberToUpDown(generateRandomNumber()));
     }
 
-    console.log(bridge);
+    //console.log(bridge);
     return bridge;
   },
 
