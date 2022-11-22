@@ -15,6 +15,17 @@ class App {
     this.makeBridgeBase();
   }
 
+  checkRestart() {
+    if(readGameCommand()=='R') {
+      resetBridge();
+      this.bridgeTransfer();
+    } 
+    else {
+      printResult('fail');
+      this.gameEnd();
+    }
+  }
+
   failPlace(inputMove) {
     if(inputMove == 'U'){
       printFail(MESSAGE.bridge.bridgeNone, MESSAGE.bridge.bridgeNo);
