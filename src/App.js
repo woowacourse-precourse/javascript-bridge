@@ -18,7 +18,9 @@ class App {
 
   startGame() {
     Console.print("다리 건너기 게임을 시작합니다.");
-    this.bridge = InputView.readBridgeSize();
+    InputView.readBridgeSize((bridge) => {
+      this.bridge = bridge;
+    });
     this.#bridgeGame = new BridgeGame(this.bridge);
     this.moveBridge();
   }

@@ -10,18 +10,17 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    let bridge;
+  readBridgeSize(callback) {
     Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
       try {
         checkBridgeLength(Number(answer));
-        bridge = BridgeMaker.makeBridge(Number(answer), BridgeRandomNumberGenerator.generate);
+        let bridge = BridgeMaker.makeBridge(Number(answer), BridgeRandomNumberGenerator.generate);
+        callback(bridge);
       } catch (e) {
         Console.print(e);
-        this.readBridgeSize();
+        this.readBridgeSize(callback);
       }
     });
-    return bridge;
   },
 
   /**
