@@ -3,8 +3,7 @@ const MESSAGE = require('../constants/message');
 
 const isNumber = (number) => CONSTANT.REGEX.NUMBER.test(number);
 
-const isInRange = (size) =>
-  size < CONSTANT.GAME.MIN_SIZE || size > CONSTANT.GAME.MAX_SIZE;
+const isInRange = (size) => size < CONSTANT.GAME.MIN_SIZE || size > CONSTANT.GAME.MAX_SIZE;
 
 const checkValidSize = (size) => {
   if (!isNumber(size) || isInRange(size)) {

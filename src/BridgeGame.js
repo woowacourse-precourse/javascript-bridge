@@ -1,8 +1,9 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
-const { checkValidDirection } = require('./utils/validator');
+const { checkValidDirection, checkValidCommand } = require('./utils/validator');
 const { Console } = require('@woowacourse/mission-utils');
+const MESSAGE = require('./constants/message');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -25,12 +26,14 @@ class BridgeGame {
   }
 
   set(size) {
-    this.#bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate
-    );
-    console.log(this.#bridge);
-    InputView.readMoving(this);
+    try {
+      this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+      console.log(this.#bridge);
+      InputView.readMoving(this);
+    } catch (e) {
+      Console.print(MESSAGE.ERROR.SIZE);
+      this.start();
+    }
   }
 
   /**
@@ -39,8 +42,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    checkValidDirection(direction);
-    this.checkBridge(direction);
+    try {
+      checkValidDirection(direction);
+      this.checkBridge(direction);
+    } catch (e) {
+      Console.print(MESSAGE.ERROR.MOVE);
+      InputView.readMoving(this);
+    }
   }
 
   checkBridge(direction) {
@@ -67,10 +75,22 @@ class BridgeGame {
     if (!isTerminate) InputView.readMoving(this);
   }
 
+  readCommand(command) {
+    try {
+      checkValidCommand(command);
+      if (command === 'Q') this.close();
+      if (command === 'R') this.retry();
+    } catch (e) {
+      Console.print(MESSAGE.ERROR.RETRY);
+      InputView.readGameCommand(this);
+    }
+  }
+
   close() {
     Console.print('게임 성공 여부: 성공');
     Console.close();
   }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

@@ -1,9 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const {
-  checkValidSize,
-  checkValidDirection,
-  checkValidCommand,
-} = require('./utils/validator');
 const MESSAGE = require('./constants/message');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,7 +9,6 @@ const InputView = {
    */
   readBridgeSize(bridge) {
     Console.readLine(MESSAGE.GAME.INPUT, (size) => {
-      checkValidSize(size);
       bridge.set(size);
       this.readMoving();
     });
@@ -25,7 +19,6 @@ const InputView = {
    */
   readMoving(bridge) {
     Console.readLine(MESSAGE.GAME.MOVE, (direction) => {
-      checkValidDirection(direction);
       bridge.move(direction);
     });
   },
@@ -35,9 +28,7 @@ const InputView = {
    */
   readGameCommand(bridge) {
     Console.readLine(MESSAGE.GAME.RETRY, (command) => {
-      checkValidCommand(command);
-      if (command === 'Q') bridge.close();
-      if (command === 'R') bridge.retry();
+      bridge.readCommand(command);
     });
   },
 };
