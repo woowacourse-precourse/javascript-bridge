@@ -46,9 +46,11 @@ class Player {
                 return;
             }
         }
-        OutputView.printResult(currentBridge);
-        OutputView.printGameSuccess(isSuccessed);
-        OutputView.printTryCount(tryCount);
+        if(currentBridge) {
+            OutputView.printResult(currentBridge);
+            OutputView.printGameSuccess(isSuccessed);
+            OutputView.printTryCount(tryCount);
+        }
     }
 
     setBridgeGame(bridgeAnswer) {
