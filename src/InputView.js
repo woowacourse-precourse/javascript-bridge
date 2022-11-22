@@ -54,6 +54,7 @@ const InputView = {
    * 게임 진행이 가능한지, 게임이 종료되었는지, 게임을 진행할 수 없는지 확인
    */
   stillMoving(currentBridge, bridge, count) {
+    OutputView.printMap(currentBridge);
     if(currentBridge[0].length === bridge.length) OutputView.printResult(currentBridge, count, 1);
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
       OutputView.printMap(currentBridge);
