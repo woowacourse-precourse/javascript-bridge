@@ -11,4 +11,6 @@ const BridgeRandomNumberGenerator = {
   },
 };
 
+BridgeRandomNumberGenerator.generate();
+
 module.exports = BridgeRandomNumberGenerator;
