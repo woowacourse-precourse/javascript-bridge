@@ -7,24 +7,24 @@ const { Console } = MissionUtils;
 
 const InputView = {
   readBridgeSize(callback) {
-    InputView.read(MESSAGE.ASK_BRIDGE_SIZE, callback, Validator.bridgeSizeValidate);
+    InputView.readUntilValid(MESSAGE.ASK_BRIDGE_SIZE, callback, Validator.bridgeSizeValidate);
   },
 
   readMoving(callback) {
-    InputView.read(MESSAGE.ASK_MOVING, callback, Validator.movingValidate);
+    InputView.readUntilValid(MESSAGE.ASK_MOVING, callback, Validator.movingValidate);
   },
 
   readGameCommand(callback) {
-    InputView.read(MESSAGE.ASK_GAME_COMMAND, callback, Validator.commandValidate);
+    InputView.readUntilValid(MESSAGE.ASK_GAME_COMMAND, callback, Validator.commandValidate);
   },
 
-  read(msg, callback, validator) {
+  readUntilValid(msg, callback, validator) {
     Console.readLine(msg, (input) => {
       try {
         validator(input);
         callback(input);
       } catch (error) {
-        InputView.inputErrorHandler(error.message, InputView.read.bind(null, callback));
+        InputView.inputErrorHandler(error.message, InputView.readUntilValid.bind(null, callback));
       }
     });
   },
