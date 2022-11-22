@@ -78,6 +78,20 @@ class MainController {
     }
   }
 
+  /**
+   * 유저 재시작 여부를 입력받은 후 입력에 따라 다음 프로세스를 진행한다.
+   * @param userRestartInput {string} [유저 재시작 여부 입력]
+   * @param mainController {object} [컨트롤러]
+   * @param userMoving {string[]} [유저 이동기록]
+   */
+  onUserRestartInput(userRestartInput, mainController, userMoving) {
+    mainController.validateUserRestart(userRestartInput);
+    mainController.bridgeGame.processUserRestartInput(
+      userRestartInput,
+      userMoving
+    );
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
