@@ -64,13 +64,16 @@ class BridgeGameHandler {
     directionValidator.isDirectionValid(direction);
     const movable = this.#bridgeGame.move(direction);
     printMap(this.#bridgeGame.getPath());
-    movable ? this.isSuccess() : this.requestGameCommand();
+    movable ? this.checkGameClear() : this.requestGameCommand();
   }
 
-  isSuccess() {
-    this.#bridgeGame.isGameClear()
-      ? this.exitGame(MESSAGE_OUTPUT.SUCCESS)
-      : this.requestMoveDirection();
+  checkGameClear() {
+    if (this.#bridgeGame.isGameClear()) {
+      this.exitGame(MESSAGE_OUTPUT.SUCCESS);
+      return;
+    }
+
+    this.requestMoveDirection();
   }
 
   requestGameCommand() {
@@ -89,12 +92,14 @@ class BridgeGameHandler {
 
   tryGameCommand(command) {
     commandValidator.isCommandValid(command);
+
     if (this.#bridgeGame.isRetry(command)) {
       this.#bridgeGame.retry();
       this.requestMoveDirection();
-    } else {
-      this.exitGame(MESSAGE_OUTPUT.FAIL);
+      return;
     }
+
+    this.exitGame(MESSAGE_OUTPUT.FAIL);
   }
 
   exitGame(gameResult) {

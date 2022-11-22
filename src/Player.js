@@ -20,16 +20,16 @@ class Player {
   updatePath(direction, markOX) {
     if (direction === CONDITION.UP) {
       this.#addPath(markOX, MARK.BLANK);
-    } else {
-      this.#addPath(MARK.BLANK, markOX);
+      return;
     }
 
-    this.#currentLocation += 1;
+    this.#addPath(MARK.BLANK, markOX);
   }
 
   #addPath(upsideMark, downsideMark) {
     this.#path.upside.push(upsideMark);
     this.#path.downside.push(downsideMark);
+    this.#currentLocation += 1;
   }
 
   resetPath() {
