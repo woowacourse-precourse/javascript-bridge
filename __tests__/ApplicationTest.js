@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
@@ -65,6 +66,7 @@ describe("다리 건너기 테스트", () => {
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
+
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
@@ -81,7 +83,49 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
+  test("두번째 기능 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 0]);
+    mockQuestions(["3", "U", "D", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | X ]");
+  });
+
+  test("세번째 기능 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 0]);
+    mockQuestions(["4", "U", "D", "U", "U", "R", "U", "D", "U", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O |   ]",
+      "[   | O |   | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O |   ]", "[   | O |   | O ]");
+  });
+
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("예외 테스트", () => {
+    runException(["3", "u"]);
   });
 });
