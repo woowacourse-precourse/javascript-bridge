@@ -158,15 +158,23 @@ class BridgeGame {
     inputView.readGameCommand(this.handleAskRetry.bind(this));
   }
 
+  inputRetry (string) {
+    if (string === 'R') {
+      this.setList();
+      this.move(this);
+      this.incrementTryCount();
+    }
+  }
+
+  inputQuit (string) {
+    if (string === 'Q') outputView.printResult(false, this);
+  }
+
   handleAskRetry (string) {
     try {
       InputValidator.isRestartQuit(string);
-      if (string === 'R') {
-        this.setList();
-        this.move(this);
-        this.incrementTryCount();
-      }
-      if (string === 'Q') outputView.printResult(false, this);
+      this.inputRetry(string);
+      this.inputQuit(string);
     } catch (error) {
       outputView.printError(error);
       this.retry();
