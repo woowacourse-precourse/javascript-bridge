@@ -6,9 +6,9 @@ const BridgeGame = require("../Model/BridgeGame");
 const Bridge = require("../Model/Bridge");
 const { STATE, GAME_END } = require("../constants/GameCondition.js");
 class BridgeGameController {
-  #attempt = 1;
+  #attempt = 1; // 시도 횟수
   #BridgeGame = new BridgeGame();
-  #currentMap;
+  #currentMap; // 현재 마킹된 맵
   start() {
     OutputView.printStartMessage(); // 시작 문구 출력
     InputView.readBridgeSize(this.generateBridge.bind(this));
@@ -29,25 +29,24 @@ class BridgeGameController {
   }
 
   inputGameCommand() {
-    // TODO: change
     InputView.readGameCommand(this.restartOrEnd.bind(this));
   }
 
-  restartOrEnd(cmd) {
-    if (cmd === GAME_END.RESTART) {
+  restartOrEnd(gameCmd) {
+    if (gameCmd === GAME_END.RESTART) {
       this.#BridgeGame.retry();
       this.#attempt += 1;
       this.inputMoveDirection();
     }
-    if (cmd === GAME_END.QUIT)
+    if (gameCmd === GAME_END.QUIT)
       OutputView.printResult(this.#currentMap, STATE.FAIL, this.#attempt);
   }
   /**
    *
-   * @param {char} cmd 'U', 'D' 둘 중 하나로 들어옴.
+   * @param {char} moveCmd 'U', 'D' 둘 중 하나로 들어옴.
    */
-  move(cmd) {
-    const isSuccess = this.#BridgeGame.move(cmd);
+  move(moveCmd) {
+    const isSuccess = this.#BridgeGame.move(moveCmd);
     this.#currentMap = this.#BridgeGame.getCurrentMap();
     OutputView.printMap(this.#currentMap[0], this.#currentMap[1]);
     if (!isSuccess) {
