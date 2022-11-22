@@ -18,6 +18,13 @@ class App {
     InputView.readBridgeSize((size) => {
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
       this.bridgeGame = new BridgeGame(bridge);
+      this.requestDirection();
+    });
+  }
+  requestDirection() {
+    InputView.readMoving((direction) => {
+      this.bridgeGame.move(direction);
+      OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     })
   }
 }
