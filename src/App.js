@@ -8,13 +8,13 @@ class App {
   #game;
 
   constructor() {
+    OutputView.printBeginAnnouncement();
     this.#bridgeLength = InputView.readBridgeSize();
     this.#game = new Game(this.#bridgeLength);
     this.play();
   }
 
   play() {
-    OutputView.printBeginAnnouncement();
     this.processingGame();
   }
 
@@ -43,5 +43,8 @@ class App {
     return true;
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
