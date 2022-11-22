@@ -11,6 +11,7 @@ const {
   commandValidator,
 } = require('./Validator');
 const BridgeGame = require('./BridgeGame');
+const { MESSAGE_OUTPUT } = require('./utils/constant');
 
 class BridgeGameHandler {
   #bridgeGame;
@@ -68,7 +69,7 @@ class BridgeGameHandler {
 
   isSuccess() {
     this.#bridgeGame.isGameClear()
-      ? this.exitGame('성공')
+      ? this.exitGame(MESSAGE_OUTPUT.SUCCESS)
       : this.requestMoveDirection();
   }
 
@@ -92,7 +93,7 @@ class BridgeGameHandler {
       this.#bridgeGame.retry();
       this.requestMoveDirection();
     } else {
-      this.exitGame('실패');
+      this.exitGame(MESSAGE_OUTPUT.FAIL);
     }
   }
 

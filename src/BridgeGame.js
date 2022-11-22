@@ -1,7 +1,7 @@
-const BridgeGameHandler = require('./BridgeGameHandler');
 const Player = require('./Player');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { MARK, CONDITION } = require('./utils/constant');
 
 class BridgeGame {
   #bridge;
@@ -20,7 +20,7 @@ class BridgeGame {
 
   move(direction) {
     const movable = this.isMovable(direction);
-    const mark = movable ? ' O ' : ' X ';
+    const mark = movable ? MARK.CIRCLE : MARK.CROSS;
     this.#player.updatePath(direction, mark);
 
     return movable;
@@ -31,7 +31,7 @@ class BridgeGame {
   }
 
   isRetry(command) {
-    return command === 'R';
+    return command === CONDITION.REGAME;
   }
 
   retry() {

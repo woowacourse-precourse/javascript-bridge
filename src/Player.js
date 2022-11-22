@@ -1,3 +1,5 @@
+const { CONDITION, MARK } = require('./utils/constant');
+
 class Player {
   #path;
   #currentLocation;
@@ -16,11 +18,11 @@ class Player {
   }
 
   updatePath(direction, mark) {
-    if (direction === 'U') {
+    if (direction === CONDITION.UP) {
       this.#path.upside.push(mark);
-      this.#path.downside.push('   ');
+      this.#path.downside.push(MARK.BLANK);
     } else {
-      this.#path.upside.push('   ');
+      this.#path.upside.push(MARK.BLANK);
       this.#path.downside.push(mark);
     }
 
