@@ -12,8 +12,12 @@ class App {
   }
 
   init() {
-    OutputView.printStart();
+    OutputView.printStartMessage();
     InputView.readBridgeSize(this.#makeBridge.bind(this));
+  }
+
+  play() {
+    InputView.readMoving(this.#movePlayer.bind(this));
   }
 
   #makeBridge(size) {
@@ -22,49 +26,45 @@ class App {
     this.bridgeGame.saveBridge(bridge);
   }
 
-  play() {
-    InputView.readMoving(this.movePlayer.bind(this));
-  }
-
-  movePlayer(moving) {
+  #movePlayer(moving) {
     const crossResult = this.bridgeGame.move(moving);
-    this.printMap();
+    this.#printMap();
 
     if (crossResult === BRIDGE.CROSS) {
-      this.crossBridge();
+      this.#success();
       return;
     }
 
-    this.uncrossBridge();
+    this.#fail();
   }
 
-  crossBridge() {
+  #printMap() {
+    const map = this.bridgeGame.getMap();
+    OutputView.printMap(map);
+  }
+
+  #success() {
     if (this.bridgeGame.isArrived()) {
       this.quit(RESULT.SUCCESS);
-      return;
     }
 
     this.play();
   }
 
-  uncrossBridge() {
-    InputView.readGameCommand(this.retryOrQuit.bind(this));
+  #fail() {
+    InputView.readGameCommand(this.#retryOrQuit.bind(this));
   }
 
-  retryOrQuit(command) {
+  #retryOrQuit(command) {
     if (command === COMMAND.RETRY) {
-      this.bridgeGame.retry(this.play.bind(this));
+      this.bridgeGame.retry();
+      this.play();
       return;
     }
 
     if (command === COMMAND.QUIT) {
       this.quit(RESULT.FAIL);
     }
-  }
-
-  printMap() {
-    const map = this.bridgeGame.getMap();
-    OutputView.printMap(map);
   }
 
   quit(gameResult) {

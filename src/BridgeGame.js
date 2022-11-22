@@ -7,21 +7,16 @@ class BridgeGame {
 
   #attemptsNum = 1;
 
-  init() {
+  #initMap() {
     this.#map = [[], []];
-  }
-
-  getAttemptsNum() {
-    return this.#attemptsNum;
   }
 
   getMap() {
     return this.#map.map((side) => BRIDGE.START + side.join(BRIDGE.SPLIT) + BRIDGE.END);
   }
 
-  getMovingNum() {
-    const [upSide] = this.#map;
-    return upSide.length;
+  getAttemptsNum() {
+    return this.#attemptsNum;
   }
 
   saveBridge(bridge) {
@@ -29,8 +24,8 @@ class BridgeGame {
   }
 
   move(moving) {
-    const crossResult = this.judgeCross(moving);
-    const [crossSide, unCrossSide] = this.defineCrossSide(moving);
+    const [crossSide, unCrossSide] = this.#defineCrossSide(moving);
+    const crossResult = this.#judgeCross(moving);
 
     crossSide.push(crossResult);
     unCrossSide.push(BRIDGE.ROOM);
@@ -38,7 +33,7 @@ class BridgeGame {
     return crossResult;
   }
 
-  defineCrossSide(moving) {
+  #defineCrossSide(moving) {
     const [upSide, downSide] = this.#map;
 
     if (moving === MAP.UP_SIDE_STR) {
@@ -48,8 +43,8 @@ class BridgeGame {
     return [downSide, upSide];
   }
 
-  judgeCross(moving) {
-    const movingNum = this.getMovingNum();
+  #judgeCross(moving) {
+    const movingNum = this.#calcMovingNum();
 
     if (this.#bridge[movingNum] === moving) {
       return BRIDGE.CROSS;
@@ -59,17 +54,21 @@ class BridgeGame {
   }
 
   isArrived() {
-    const movingNum = this.getMovingNum();
+    const movingNum = this.#calcMovingNum();
     return this.#bridge.length === movingNum;
   }
 
-  retry(play) {
-    this.init();
-    this.updateAttemptsNum();
-    play();
+  #calcMovingNum() {
+    const [upSide] = this.#map;
+    return upSide.length;
   }
 
-  updateAttemptsNum() {
+  retry() {
+    this.#initMap();
+    this.#updateAttemptsNum();
+  }
+
+  #updateAttemptsNum() {
     this.#attemptsNum += 1;
   }
 }

@@ -4,7 +4,7 @@ const { MESSAGE } = require('./constants');
 const OutputView = {
   map: '',
 
-  printStart() {
+  printStartMessage() {
     Console.print(MESSAGE.GAME_START);
   },
 
