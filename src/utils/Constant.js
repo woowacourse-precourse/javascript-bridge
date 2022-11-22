@@ -25,10 +25,6 @@ const Constant = {
     ONLY_INPUT_ONE: "[ERROR] 한개만 입력하세요.",
     ONLY_R_OR_Q: "R과 D만 입력하세요.",
   },
-  REGEX: {
-    ONLY_U_OR_D: /[UD]/g,
-    ONLY_R_OR_Q: /[RQ]/g,
-  },
   PRINT: {
     FINAL_RESULT: "최종 게임 결과",
     SUCCESS: `게임 성공 여부: 성공`,

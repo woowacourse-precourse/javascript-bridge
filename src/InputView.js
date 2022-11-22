@@ -36,31 +36,30 @@ const InputView = {
   readMoving() {
     Console.readLine(Constant.INPUT.NEXT_STEP, (inputUpOrDown) => {
       try {
-        if (Validate.validateUserInputMove(inputUpOrDown)) {
-          this.bridgeGame = new BridgeGame();
-          const bridgeLength = this.bridge.length;
-          //게임 끝났을 때
-          let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
-          if (BridgeGame._userInputCount === this.bridge.length) {
-            if (!result) {
-              OutputView.printMap(result, inputUpOrDown, bridgeLength);
-              this.readGameCommand();
-              return;
-            }
+        Validate.validateUserInputMove(inputUpOrDown);
+        this.bridgeGame = new BridgeGame();
+        const bridgeLength = this.bridge.length;
+        //게임 끝났을 때
+        let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
+        if (BridgeGame._userInputCount === this.bridge.length) {
+          if (!result) {
             OutputView.printMap(result, inputUpOrDown, bridgeLength);
-            OutputView.printResult(result, BridgeGame._gameCount);
+            this.readGameCommand();
             return;
           }
-          //맞췄을 때
-          if (result) {
-            OutputView.printMap(result, inputUpOrDown, bridgeLength);
-            this.readMoving();
-            return;
-          }
-          //틀렸을 때
           OutputView.printMap(result, inputUpOrDown, bridgeLength);
-          this.readGameCommand();
+          OutputView.printResult(result, BridgeGame._gameCount);
+          return;
         }
+        //맞췄을 때
+        if (result) {
+          OutputView.printMap(result, inputUpOrDown, bridgeLength);
+          this.readMoving();
+          return;
+        }
+        //틀렸을 때
+        OutputView.printMap(result, inputUpOrDown, bridgeLength);
+        this.readGameCommand();
       } catch (e) {
         Console.print(e);
         this.readMoving();
@@ -74,18 +73,19 @@ const InputView = {
   readGameCommand() {
     Console.readLine(Constant.INPUT.GAME_RETRY, (userInputRetry) => {
       try {
-        if (Validate.validateUserInputRetry(userInputRetry)) {
-          if (userInputRetry === Constant.RETRY) {
-            this.bridgeGame.retry();
-            InputView.readMoving();
-            return;
-          }
-          if (userInputRetry === Constant.QUIT) {
-            OutputView.printResult("", BridgeGame._gameCount);
-            Console.close();
-          }
-          OutputView.printResult("", BridgeGame._gameCount);
+        Validate.validateUserInputRetry(userInputRetry);
+        //다시 시작
+        if (userInputRetry === Constant.RETRY) {
+          this.bridgeGame.retry();
+          InputView.readMoving();
+          return;
         }
+        //그만두기
+        if (userInputRetry === Constant.QUIT) {
+          OutputView.printResult("", BridgeGame._gameCount);
+          Console.close();
+        }
+        // OutputView.printResult("", BridgeGame._gameCount);
       } catch (e) {
         Console.print(e);
         this.readGameCommand();

@@ -14,12 +14,12 @@ class Validate {
     if (String(bridgeSize).length > 2) {
       throw new Error(Constant.ERROR.ONLY_ONE_NUMBER);
     }
-    return true;
   }
 
   //사용자 움직일 칸에 대한 입력 유효성 검사
   static validateUserInputMove(userInput) {
-    if (!Constant.REGEX.ONLY_U_OR_D.test(userInput)) {
+    let regexOnlyUorD = /[UD]/g;
+    if (!regexOnlyUorD.test(userInput)) {
       throw new Error(Constant.ERROR.ONLY_U_OR_D);
     }
     if (
@@ -31,12 +31,12 @@ class Validate {
     if (userInput.length >= 2) {
       throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
     }
-    return true;
   }
 
   //게임 다시 시작할 지 입력할 때 검증
   static validateUserInputRetry(inputRetry) {
-    if (!Constant.REGEX.ONLY_R_OR_Q.test(inputRetry)) {
+    let regexOnlyRorD = /[RQ]/g;
+    if (!regexOnlyRorD.test(inputRetry)) {
       throw new Error(Constant.ERROR.ONLY_R_OR_Q);
     }
     if (
@@ -48,7 +48,6 @@ class Validate {
     if (inputRetry.length >= 2) {
       throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
     }
-    return true;
   }
 }
 

@@ -16,7 +16,7 @@ const BridgeMaker = {
       if (generateRandomNumber() === 0) {
         bridge.push(Constant.DOWN);
       } else {
-        bridge.push(Constant.DOWN);
+        bridge.push(Constant.UP);
       }
       count++;
     }
