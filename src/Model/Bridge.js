@@ -1,10 +1,17 @@
+const { BRIDGE_DIRECTION } = require("../constants/GameCondition.js");
 class Bridge {
   upBridge = [];
   downBridge = [];
 
-  constructor() {
-    this.upBridge = [];
-    this.downBridge = [];
+  currentBridgeMap(cmd, currentBridge) {
+    if (currentBridge === BRIDGE_DIRECTION.DOWN) {
+      this.upBridge.push(currentBridge === cmd ? "O" : "X");
+      this.downBridge.push(" ");
+    }
+    if (currentBridge === BRIDGE_DIRECTION.UP) {
+      this.downBridge.push(currentBridge === cmd ? "O" : "X");
+      this.upBridge.push(" ");
+    }
   }
 
   getTotalBridge() {

@@ -22,6 +22,12 @@ class BridgeGame {
   getCurrentMap() {
     return this.#bridge_map.getTotalBridge();
   }
+
+  isEnd() {
+    const step = this.#step;
+    if (step === this.#bridge.length - 1) return true;
+    if (step !== this.#bridge.length - 1) return false;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -30,17 +36,9 @@ class BridgeGame {
    */
   move(cmd) {
     const step = this.#step;
-    const currentBridge = this.#bridge[step];
-    if (currentBridge === BRIDGE_DIRECTION.DOWN) {
-      this.#bridge_map.upBridge.push(currentBridge === cmd ? "O" : "X");
-      this.#bridge_map.downBridge.push(" ");
-    }
-    if (currentBridge === BRIDGE_DIRECTION.UP) {
-      this.#bridge_map.downBridge.push(currentBridge === cmd ? "O" : "X");
-      this.#bridge_map.upBridge.push(" ");
-    }
-    this.increaseStep();
-    return this.checkSuccess(cmd, currentBridge);
+    // const currentBridge = this.getBridge();
+    this.#bridge_map.currentBridgeMap(cmd, this.#bridge[step]);
+    return this.checkSuccess(cmd, this.#bridge[step]);
   }
 
   checkSuccess(cmd, currentBridge) {
