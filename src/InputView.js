@@ -34,7 +34,9 @@ const InputView = {
       OutputView.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
 
       if(bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand();
+      if(bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult();
       
+      return this.readMoving(bridge,bridgeGame);
     });
   },
 
