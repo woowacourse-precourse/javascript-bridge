@@ -17,10 +17,10 @@ const OutputView = {
   printMap(overBridge, underBridge) {
     MissionUtils.Console.print(
       OUTPUT_MESSAGE.STARTING_POINT + overBridge.join("") + OUTPUT_MESSAGE.END_POINT
-    )
+    );
     MissionUtils.Console.print(
       OUTPUT_MESSAGE.STARTING_POINT + underBridge.join("") + OUTPUT_MESSAGE.END_POINT
-    )
+    );
   },
 
   /**
@@ -37,7 +37,7 @@ const OutputView = {
   printResultInfo(result, tryCount) {
     MissionUtils.Console.print(OUTPUT_MESSAGE.WHETHER_GAME_SUCCESS + result);
     MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_TRY_COUNT + tryCount);
-  }
+  },
 };
 
 module.exports = OutputView;
