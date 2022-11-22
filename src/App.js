@@ -16,16 +16,19 @@ class App {
       OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
       MissionUtils.Console.print(bridgeGame.location);
     } while (this.checkGame(bridgeGame.bridge, bridgeGame.location, size));
-    OutputView.printResult();
+    OutputView.printResult(
+      bridgeGame.bridge,
+      bridgeGame.location,
+      this.gameCnt
+    );
   }
 
-  // checkGame(bridge, location) {
-  //   if (bridge[location] == 2 || bridge[location] == 3) {
-  //     let command = InputView.readGameCommand();
-  //     if (command == "Q") return 0;
-  //   }
-  //   return true;
-  // }
+  checkFail(bridge, location) {
+    if (bridge[location] == 2 || bridge[location] == 3) {
+      return true;
+    }
+    return false;
+  }
 
   makeSize() {
     let size = InputView.readBridgeSize();
