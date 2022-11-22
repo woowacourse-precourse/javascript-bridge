@@ -4,10 +4,6 @@ class Bridge {
   make(size) {
     return BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
-  paint() {
-
-  }
- 
 }
 
 module.exports = Bridge;

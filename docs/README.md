@@ -122,8 +122,10 @@
 13. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 14. test(Validator) : 예외처리를 판별하는 Validator 클래스 및 메서드 테스트 코드 작성
 15. feat(Validator) : 테스트를 통과, 예외처리 기능을 올바르게 구현한 경우 커밋
-
-
+16. test(Bridge) : Bridge 클래스 및 메서드 테스트 코드 작성
+17. feat(Bridge) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+18. test(roundProcess) : 라운드의 진행을 판별하는 roundProcess 클래스 테스트 코드 작성
+19. feat(roundProcess) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 ## 프로그래밍 요구사항
 
 - [ ] package.json을 변경하지 않는다. 
