@@ -1,6 +1,7 @@
 const Validation = require('../Utilities/Validation');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { INPUT, BRIDGE } = require('../Constants');
 
 const { generate } = BridgeRandomNumberGenerator;
 
@@ -10,14 +11,12 @@ class Model {
   #downSideBridge = '';
 
   genBridge(bridgeSize) {
-    Validation.isBridgeSizeValid(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(+bridgeSize, generate);
-    console.log(this.#bridge);
+    console.log('bridge: ', this.#bridge);
   }
 
   aliveOrDeath(userMove, turn) {
     let life = true;
-    Validation.isUserMoveValid(userMove);
     if (userMove === this.#bridge[turn]) {
       this.alive(userMove);
     }
@@ -29,24 +28,24 @@ class Model {
   }
 
   alive(userMove) {
-    if (userMove === 'U') {
-      this.#upsideBridge += ' O |';
-      this.#downSideBridge += '   |';
+    if (userMove === INPUT.UP) {
+      this.#upsideBridge += BRIDGE.SUCESS;
+      this.#downSideBridge += BRIDGE.NOTHING;
     }
-    if (userMove === 'D') {
-      this.#upsideBridge += '   |';
-      this.#downSideBridge += ' O |';
+    if (userMove === INPUT.DOWN) {
+      this.#upsideBridge += BRIDGE.NOTHING;
+      this.#downSideBridge += BRIDGE.SUCESS;
     }
   }
 
   death(userMove) {
-    if (userMove === 'U') {
-      this.#upsideBridge += ' X |';
-      this.#downSideBridge += '   |';
+    if (userMove === INPUT.UP) {
+      this.#upsideBridge += BRIDGE.FAIL;
+      this.#downSideBridge += BRIDGE.NOTHING;
     }
-    if (userMove === 'D') {
-      this.#upsideBridge += '   |';
-      this.#downSideBridge += ' X |';
+    if (userMove === INPUT.DOWN) {
+      this.#upsideBridge += BRIDGE.NOTHING;
+      this.#downSideBridge += BRIDGE.FAIL;
     }
   }
 

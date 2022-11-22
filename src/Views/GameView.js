@@ -1,3 +1,6 @@
+const { RESULT } = require('../Constants');
+const editBridge = require('../Utilities/EditBridge');
+
 class GameView {
   constructor(inputView, outputView) {
     this.inputView = inputView;
@@ -21,22 +24,19 @@ class GameView {
   }
 
   printMap(upsideBridge, downsideBridge) {
-    this.outputView.print(
-      `[${upsideBridge.slice(0, upsideBridge.length - 1)}]`,
-    );
-    this.outputView.print(
-      `[${downsideBridge.slice(0, downsideBridge.length - 1)}]`,
-    );
+    this.outputView.print(editBridge(upsideBridge));
+    this.outputView.print(editBridge(downsideBridge));
   }
 
   printResultBridge(upsideBridge, downSideBridge) {
-    this.outputView.print('최종 게임 결과 \n');
+    this.outputView.print(RESULT.TITLE);
     this.printMap(upsideBridge, downSideBridge);
   }
 
   printResult(userLife, attemptNumber) {
-    this.outputView.print(`\n 게임 성공 여부: ${userLife ? '성공' : '실패'}`);
-    this.outputView.print(`총 시도한 횟수: ${attemptNumber}`);
+    this.outputView.print(RESULT.CHART.SUCESS_OR_FAIL(userLife));
+    this.outputView.print(RESULT.CHART.ATTEMPT(attemptNumber));
+    this.close();
   }
 
   printError(message) {
