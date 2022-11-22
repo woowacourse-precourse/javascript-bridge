@@ -1,3 +1,4 @@
+const { validate } = require('../validators');
 const Bridge = require('./Bridge');
 
 /**
@@ -10,7 +11,7 @@ class BridgeGame {
    * @param {Bridge} bridge
    */
   constructor(bridge) {
-    this.#bridge = bridge;
+    this.#bridge = validate(bridge).shouldInstanceOf(Bridge).get();
   }
 
   /**

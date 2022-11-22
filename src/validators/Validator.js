@@ -24,6 +24,20 @@ class Validator {
     return this;
   }
 
+  /**
+   * 주어진 클래스를 상속하는 값인지 검증합니다.
+   *
+   * @param {typeof Object} GivenClass
+   * @param {function()} errorExpression
+   * @returns
+   */
+  shouldInstanceOf(GivenClass, errorExpression = undefined) {
+    return this.should(
+      this.#value instanceof GivenClass,
+      errorExpression ?? `${GivenClass.constructor.name} 을 상속한 값이어야 합니다.`,
+    );
+  }
+
   as(ValidatorClass) {
     return new ValidatorClass(this.#value);
   }
