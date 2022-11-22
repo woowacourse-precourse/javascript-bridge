@@ -97,7 +97,7 @@
 <b>다리를 모두 건넜을 경우에 진행한다</b>
 
 - [x] 게임 성공 여부를 출력한다   -   OutputView.printResult()
-- [x] 총 시도 횟수를 출력한다   -   OutputView.printResult
+- [x] 총 시도 횟수를 출력한다   -   OutputView.printResult()
 
 - [x] 최종 결과에 대한 단위테스트를 진행한다    -   __test__/BridgeResultTest
 
