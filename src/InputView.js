@@ -1,7 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
 const OutputView = require("./OutputView");
-const { INPUT } = require("./constant/constantValue");
+const { INPUT, RESULT } = require("./constant/constantValue");
+const BridgeGame = require("./BridgeGame");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -27,12 +28,12 @@ const InputView = {
     Console.readLine(`\n${INPUT.MOVING}\n`, (moving) => {
       const isMovingValueCorrect = Validation.checkMovingValue(moving);
       if (isMovingValueCorrect) return this.readMoving(bridgeGame, length);
-      const movingDirection = bridgeGame.move(moving, length);
-      const outputBridge = OutputView.printMap(movingDirection);
-      if (!movingDirection[2])
-        this.readGameCommand(bridgeGame, outputBridge, length);
-      if (movingDirection[3] < length) this.readMoving(bridgeGame, length);
-      else bridgeGame.success(outputBridge);
+      const direction = bridgeGame.move(moving, length);
+      const outputBridge = OutputView.printMap(direction);
+      if (!direction[2]) this.readGameCommand(bridgeGame, outputBridge, length);
+      if (direction[3] < length) this.readMoving(bridgeGame, length);
+      else
+        OutputView.printResult(bridgeGame.turn(), RESULT.SUCCESS, outputBridge);
     });
   },
 
@@ -44,8 +45,10 @@ const InputView = {
       const isSelectValueCorrect = Validation.checkingSelectValue(select);
       if (isSelectValueCorrect) return this.readGameCommand(bridgeGame);
 
-      const selectResult = bridgeGame.retry(select, outputBridge);
-      if (selectResult) this.readMoving(bridgeGame, length);
+      const selectResult = bridgeGame.retry(select);
+      if (!selectResult)
+        OutputView.printResult(bridgeGame.turn(), RESULT.FAILURE, outputBridge);
+      this.readMoving(bridgeGame, length);
     });
   },
 };
