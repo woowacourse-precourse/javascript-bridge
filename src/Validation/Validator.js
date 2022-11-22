@@ -13,6 +13,16 @@ const Validator = {
       return true;
     }
   },
+
+  checkUpOrDown(selectedBlock) {
+    try {
+      if (selectedBlock !== "U" && selectedBlock !== "D")
+        throw new Error("[Error] 이동할 칸은 'U' 또는 'D'만 입력 가능합니다.");
+    } catch (err) {
+      Console.print(err);
+      return true;
+    }
+  },
 };
 
 module.exports = Validator;
