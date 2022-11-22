@@ -64,6 +64,20 @@ class BridgeGame {
       downBridge.push(Constant.CORRECT_STRING);
     }
   }
+
+  isFinish() {
+    if (this.#currentPosition === this.#bridge.length) {
+      return true;
+    }
+    return false;
+  }
+
+  shallWeQuit(command) {
+    if (command === "Q") {
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = BridgeGame;
