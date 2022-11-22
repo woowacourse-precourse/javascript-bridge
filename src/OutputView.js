@@ -33,6 +33,12 @@ const OutputView = {
     }
   },
 
+  printFail(upMessage,downMessage){
+    arr1=arr1+MESSAGE.bridge.bridgeAgain+upMessage;
+    arr2=arr2+MESSAGE.bridge.bridgeAgain+downMessage;
+    Console.print(arr1+MESSAGE.bridge.bridgeEnd+`\n`+arr2+MESSAGE.bridge.bridgeEnd);
+  },
+
   printResult(score){ 
     Console.print('최종 게임 결과');
     Console.print(arr1+MESSAGE.bridge.bridgeEnd);
