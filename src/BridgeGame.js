@@ -1,5 +1,5 @@
 const Bridge = require('./Bridge');
-const BridgeResult = require('./dBridgeResult');
+const BridgeResult = require('./BridgeResult');
 const BridgeMaker = require('./BridgeMaker');
 const {generate} = require('./BridgeRandomNumberGenerator');
 

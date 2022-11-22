@@ -1,8 +1,8 @@
-const BridgeGame = require('../BridgeGame');
-const InputView = require('../InputView');
-const OutputView = require('../OutputView');
-const InputValidator = require('../InputValidator');
-const {BRIDGE, GAME} = require('../constants');
+const BridgeGame = require('./BridgeGame');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const InputValidator = require('./InputValidator');
+const {BRIDGE, GAME} = require('./Constant');
 
 class BridgeGameController {
   #bridgeGame = new BridgeGame();

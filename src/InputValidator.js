@@ -1,5 +1,5 @@
 const Validator = require('./Validator');
-const {INPUT_ERROR, BRIDGE, GAME} = require('./constants');
+const {INPUT_ERROR, BRIDGE, GAME} = require('./Constant');
 
 class InputValidator extends Validator {
   static isValidBridgeSize(size) {

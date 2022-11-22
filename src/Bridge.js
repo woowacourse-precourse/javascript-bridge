@@ -1,4 +1,4 @@
-const {BRIDGE} = require('../constants');
+const {BRIDGE} = require('./Constant');
 
 class Bridge {
   #pattern;
