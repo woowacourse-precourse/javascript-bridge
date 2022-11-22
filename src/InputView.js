@@ -6,6 +6,7 @@ const BridgeGame = require("./BridgeGame");
 const { BridgeInfo } = require("./BridgeInfo");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 
 const InputView = {
   /**
@@ -66,9 +67,13 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (handleRestart) => {
         if (handleRestart === "R") {
+          BridgeInfo.try++;
           const bridgeGame = new BridgeGame();
-          bridgeGame.retry(handleRestart);
+          bridgeGame.retry();
           return this.readMoving();
+        }
+        if (handleRestart === "Q") {
+          OutputView.printResult();
         }
       }
     );
