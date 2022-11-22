@@ -12,12 +12,12 @@ const { BRIDGE, GAME_STATUS } = require('../utils/constants');
  */
 class BridgeGame {
   #bridge;
-  #currentPosition;
+  #position;
   #gameStatus;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#currentPosition = BRIDGE.START_POSITION;
+    this.#position = BRIDGE.START_POSITION;
     this.#gameStatus = GAME_STATUS.PLAYING;
   }
 
@@ -33,8 +33,8 @@ class BridgeGame {
     const canMove = this.#canMove(moving);
 
     if (canMove) {
-      this.#currentPosition += BRIDGE.POSITION_UNIT;
-      this.#gameStatus = this.#bridge.isEndOfBridge(this.#currentPosition) ? GAME_STATUS.WIN : GAME_STATUS.PLAYING;
+      this.#position += BRIDGE.POSITION_UNIT;
+      this.#gameStatus = this.#bridge.isEndOfBridge(this.#position) ? GAME_STATUS.WIN : GAME_STATUS.PLAYING;
     } else {
       this.#gameStatus = GAME_STATUS.FAIL;
     }
@@ -43,7 +43,7 @@ class BridgeGame {
   }
 
   #canMove(moving) {
-    return this.#bridge.isAccessiblePosition(this.#currentPosition, moving);
+    return this.#bridge.isAccessiblePosition(this.#position, moving);
   }
 
   /**
@@ -52,7 +52,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#currentPosition = BRIDGE.START_POSITION;
+    this.#position = BRIDGE.START_POSITION;
     this.#gameStatus = GAME_STATUS.PLAYING;
   }
 }
