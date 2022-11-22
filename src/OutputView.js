@@ -11,17 +11,41 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(choices) {
-    let result = "";
-    for (let i = 0; i < choices.length; i++) {
-      if (choices[i] === "U") {
-        result += "[ O ]\n[   ]";
-      }
-      if (choices[i] === "D") {
-        result += "[   ]\n[ O ]";
+  printMap(choices, bridge) {
+    let resultUp = ["[ ", " ]"];
+    let resultDown = ["[ ", " ]"];
+
+    if (choices[0] === "U" && bridge[0] === choices[0]) {
+      resultUp.splice(1, 0, "O");
+      resultDown.splice(1, 0, " ");
+    } else if (choices[0] === "D" && bridge[0] === choices[0]) {
+      resultUp.splice(1, 0, " ");
+      resultDown.splice(1, 0, "O");
+    } else if (choices[0] === "U" && bridge[0] !== choices[0]) {
+      resultUp.splice(1, 0, "X");
+      resultDown.splice(1, 0, " ");
+    } else if (choices[0] === "D" && bridge[0] !== choices[0]) {
+      resultUp.splice(1, 0, " ");
+      resultDown.splice(1, 0, "X");
+    }
+
+    for (let i = 1; i < choices.length; i++) {
+      if (choices[i] === "U" && bridge[i] === choices[i]) {
+        resultUp.splice(1 + i, 0, " | O");
+        resultDown.splice(1 + i, 0, " |  ");
+      } else if (choices[i] === "D" && bridge[i] === choices[i]) {
+        resultUp.splice(1 + i, 0, " |  ");
+        resultDown.splice(1 + i, 0, " | O");
+      } else if (choices[i] === "U" && bridge[i] !== choices[i]) {
+        resultUp.splice(1 + i, 0, " | X");
+        resultDown.splice(1 + i, 0, " |  ");
+      } else if (choices[i] === "D" && bridge[i] !== choices[i]) {
+        resultUp.splice(1 + i, 0, " |  ");
+        resultDown.splice(1 + i, 0, " | X");
       }
     }
-    MissionUtils.Console.print(result);
+    MissionUtils.Console.print(resultUp.join(""));
+    MissionUtils.Console.print(resultDown.join(""));
   },
 
   /**
@@ -29,7 +53,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(choices, bridge, retry) {
+    MissionUtils.Console.print("최종게임결과\n");
+    this.printMap(choices, bridge);
+  },
 };
 
 module.exports = OutputView;
