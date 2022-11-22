@@ -4,10 +4,8 @@ const { COMMAND, ISALLOW } = require("../../utils/constants");
 const { ERROR } = require("../../utils/gameMessage");
 
 class GameCommand {
-  #input;
-
   constructor(input) {
-    this.#input = input;
+    this.input = input;
   }
 
   checkInput() {
@@ -21,7 +19,7 @@ class GameCommand {
   }
 
   isAllowOrder() {
-    return this.#input === COMMAND.RETRY || this.#input === COMMAND.QUIT;
+    return this.input === COMMAND.RETRY || this.input === COMMAND.QUIT;
   }
 }
 
