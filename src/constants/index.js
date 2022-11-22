@@ -16,6 +16,12 @@ const MAP = {
   DOWN_SIDE_NUM: 0,
 };
 
+
+const RESULT = {
+  SUCCESS: '성공',
+  FAIL: '실패',
+};
+
 const MESSAGE = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
   INPUT_SIZE: '다리의 길이를 입력해주세요.',
@@ -35,6 +41,7 @@ const ERROR_MESSAGE = {
 module.exports = {
   BRIDGE,
   MAP,
+  RESULT,
   MESSAGE,
   ERROR_PREFIX,
   ERROR_MESSAGE,
