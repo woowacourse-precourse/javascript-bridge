@@ -33,6 +33,39 @@ class App {
     }
   }
 
+  #readBridgeSizeCallback = (size) => {
+    try {
+      if (!this.#validateBridgeSize(size))
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+
+      this.#startToMove(size);
+    } catch (err) {
+      this.#reset(err);
+    }
+  };
+
+  #readMovingCallback = (moving) => {
+    try {
+      if (!this.#validateMoving(moving))
+        throw new Error("[ERROR] U 또는 D를 입력해 주세요.");
+
+      this.#moveToMove(moving);
+    } catch (err) {
+      this.#reset(err);
+    }
+  };
+
+  #readGameCommandCallback = (gameCommand) => {
+    try {
+      if (!this.#validateGameCommand(gameCommand))
+        throw new Error("[ERROR] R 또는 Q를 입력해 주세요.");
+
+      this.#moveToRetry();
+    } catch (err) {
+      this.#reset(err);
+    }
+  };
+
   #startToMove(size) {
     this.#bridgeGame.makeBridge(size);
     this.#bridgeGame.setStatus("move");
@@ -50,41 +83,10 @@ class App {
     this.#controller();
   }
 
-  #readBridgeSizeCallback = (size) => {
-    try {
-      if (!this.#validateBridgeSize(size))
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-
-      this.#startToMove(size);
-    } catch (err) {
-      MissionUtils.Console.print(err.message);
-      this.#controller();
-    }
-  };
-
-  #readMovingCallback = (moving) => {
-    try {
-      if (!this.#validateMoving(moving))
-        throw new Error("[ERROR] U 또는 D를 입력해 주세요.");
-
-      this.#moveToMove(moving);
-    } catch (err) {
-      MissionUtils.Console.print(err.message);
-      this.#controller();
-    }
-  };
-
-  #readGameCommandCallback = (gameCommand) => {
-    try {
-      if (!this.#validateGameCommand(gameCommand))
-        throw new Error("[ERROR] R 또는 Q를 입력해 주세요.");
-
-      this.#moveToRetry();
-    } catch (err) {
-      MissionUtils.Console.print(err.message);
-      this.#controller();
-    }
-  };
+  #reset(err) {
+    MissionUtils.Console.print(err.message);
+    this.#controller();
+  }
 
   #validateBridgeSize(size) {
     return size.toString().match(REGEX.SIZE_RANGE);
