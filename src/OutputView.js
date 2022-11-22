@@ -1,30 +1,30 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { OUTPUT, RESULT, MAP } = require("./constants/MessageConstants");
 
 const OutputView = {
-
   printSpace() {
-    MissionUtils.Console.print(' ');
+    MissionUtils.Console.print(OUTPUT.SPACE);
   },
 
   printStart() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
+    MissionUtils.Console.print(OUTPUT.START);
   },
     
   printMap(map) {
     map.forEach((map) => {
-      MissionUtils.Console.print(`[ ${map.join(" | ")} ]`);
+      MissionUtils.Console.print(MAP.PRINT_MAP(map));
     })
     this.printSpace();
   },
 
   printResult(gameResult, map) {
     [gameOver, tryCount] = gameResult;
-    gameOver === false ? checkForSuccess = '성공' : checkForSuccess = '실패'
+    gameOver === false ? checkForSuccess = OUTPUT.SUCCESS : checkForSuccess = OUTPUT.FAIL;
 
-    MissionUtils.Console.print('최종 게임 결과');
+    MissionUtils.Console.print(OUTPUT.RESULT_TEXT);
     this.printMap(map);
-    MissionUtils.Console.print(`게임 성공 여부: ${checkForSuccess}`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);    
+    MissionUtils.Console.print(RESULT.SUCCESS_OR_FAIL(checkForSuccess));
+    MissionUtils.Console.print(RESULT.TRY_COUNT(tryCount));    
     MissionUtils.Console.close();
   },
 };

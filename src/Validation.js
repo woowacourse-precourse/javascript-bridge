@@ -1,29 +1,30 @@
 const { MOVE, COMMAND } = require("./constants/Constants")
+const { ERROR } = require("./constants/MessageConstants")
 
 const Validation = {
   checkBridgeSize(input) {
     if (isNaN(input) === true) {
-      throw new Error('[ERROR] 다리 길이는 숫자여야 합니다.');
+      throw new Error(ERROR.NOT_NUMBER);
     }
 
     if (Number.isInteger(Number(input)) === false) {
-      throw new Error('[ERROR] 다리 길이는 실수가 아닌 정수여야 합니다.');
+      throw new Error(ERROR.NOT_INTEGER);
     }
     
     if (input < 3 || 20 < input) {
-      throw new Error('[ERROR] 다리 길이는 3 이상 20 이하의 숫자여야 합니다.');
+      throw new Error(ERROR.RANGE_IS_WRONG);
     }
   },
 
   checkMoving(input) {
     if (!(input === MOVE.UP || input === MOVE.DOWN)) {
-      throw new Error('[ERROR] 이동할 칸을 선택하기 위해선 \'U\' 또는 \'D\'를 입력해야 합니다.');
+      throw new Error(ERROR.PLEASE_INPUT_U_OR_D);
     }
   },
 
   checkInputRetryOrEnd(input) {
     if (!(input === COMMAND.RETRY || input === COMMAND.QUIT)) {
-      throw new Error('[ERROR] 재시도하려면 \'R\'를, 종료하려면 \'Q\'를 입력해야 합니다.');
+      throw new Error(ERROR.PLEASE_INPUT_R_OR_Q);
     }
   }
 };
