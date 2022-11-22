@@ -8,7 +8,7 @@ class BridgeGame {
   #bridge;
   #userPath = [];
   #currentBridge = { upPath: [], downPath: [] };
-  #totalCount = 0;
+  #totalCount = 1;
 
   constructor(size) {
     this.#bridge = BrideMaker.makeBridge(
