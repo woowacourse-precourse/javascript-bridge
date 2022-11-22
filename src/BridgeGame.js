@@ -4,20 +4,20 @@ const { printMap, printResult } = require("./OutputView");
 
 class BridgeGame {
     #bridgeArray;
-    #bridgeCount;
+    #moveCount;
     #gameCount;
     #bridgeHistory;
 
     constructor(bridgeArray) {
         this.#bridgeArray = bridgeArray;
-        this.#bridgeCount = 0;
+        this.#moveCount = 0;
         this.#gameCount = 1;
         this.#bridgeHistory = [];
     }
 
     move(move) {
-        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        this.#bridgeCount++;
+        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.UP;
+        this.#moveCount++;
         this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
         printMap(this);
     }
@@ -32,8 +32,8 @@ class BridgeGame {
     }
 
     isBadMove(move) {
-        const isKeyBadUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
-        const isKeyBadDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        const isKeyBadUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.DOWN;
+        const isKeyBadDown = move === KEY.DOWN && this.#bridgeArray[this.#moveCount] === KEY.UP;
         if (isKeyBadUp || isKeyBadDown) {
             this.pushBridgeHistory(isKeyBadUp, STRUCTURE.BAD);
             printMap(this);
@@ -42,8 +42,8 @@ class BridgeGame {
     }
 
     isSuccess(move) {
-        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        if (this.#bridgeCount === this.#bridgeArray.length - 1) {
+        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.UP;
+        if (this.#moveCount === this.#bridgeArray.length - 1) {
             this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
             return true;
         }
@@ -57,7 +57,7 @@ class BridgeGame {
     }
 
     resetBridgeSetting() {
-        this.#bridgeCount = 0;
+        this.#moveCount = 0;
         this.#bridgeHistory = [];
         this.#gameCount++;
     }
