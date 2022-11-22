@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const OutputView = require('./OutputView');
+const OutputView = require('./view/OutputView');
 
 class BridgeUnit {
     resultConsole() {
