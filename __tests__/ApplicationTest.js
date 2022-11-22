@@ -90,6 +90,16 @@ describe("다리 건너기 테스트", () => {
     ]);
   });
 
+  [["5", "S", "T", "1"], ["3", "0", "1"], ["10", "dfa"]].map((testList) => {
+    test("사용자 입력 예외 테스트", () => {
+      mockQuestions(testList);
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow("[ERROR]");
+    });
+  })
+
   // test("기능 테스트", () => {
   //   const logSpy = getLogSpy();
   //   mockRandoms(["1", "0", "1"]);

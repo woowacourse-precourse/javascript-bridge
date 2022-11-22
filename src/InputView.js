@@ -43,6 +43,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
+      this.validateInput(moving);
       this.MOVING.push(moving);
       this.CUR_IDX++;
       this.changeToMap();
@@ -61,6 +62,11 @@ const InputView = {
     });
 
     OutputView.printMap(UP, DOWN);
+  },
+
+  validateInput(moving) {
+    if (moving !== 'U' && moving !== 'D')
+      throw Error('[ERROR] 이동할 칸은 U 또는 D만 입력 가능 합니다.');
   },
 
   /**
