@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+const { MOVE_COMMAND_UP, MOVE_COMMAND_DOWN } = require('./Constant');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array(size)
       .fill()
-      .map(() => (generateRandomNumber() ? 'U' : 'D'));
+      .map(() => (generateRandomNumber() ? MOVE_COMMAND_UP : MOVE_COMMAND_DOWN));
   },
 };
 
