@@ -22,7 +22,7 @@ class BridgeGame {
    */
   move(direction) {
     Validation.validateCommand(['U','D'], ERROR.notGameCommand, direction)
-    if (this.#bridgeBoard.moveTo(direction, this.#round)) {
+    if (this.#bridgeBoard.moveTo(direction)) {
       this.clearRound();
     }else{
       this.faildRound();
