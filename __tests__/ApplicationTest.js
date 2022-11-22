@@ -1,7 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
-
+const Validation = require("../src/Validation");
+const GamePlaying = require("../src/GamePlaying");
+const BridgeGame = require("../src/BridgeGame");
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -83,5 +85,57 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+});
+
+describe("사용자 입력 테스트", () => {
+  test("입력받은 다리의 길이가 숫자가 아닌 경우", () => {
+    expect(() => {
+      Validation.validBridgeSize("q");
+    }).toThrow("숫자 입력이 아님");
+  });
+
+  test("입력받은 다리의 길이가 3이상 20미만이 아닌 경우", () => {
+    expect(() => {
+      Validation.validBridgeSize("2");
+    }).toThrow("3~20 사이의 숫자가 아님");
+  });
+
+  test("칸 이동시 U, D 입력이 아닌 경우", () => {
+    expect(() => {
+      Validation.validMovePoint("Z");
+    }).toThrow("U 또는 D가 아님");
+  });
+
+  test("재시작 여부 R, Q 입력이 아닌 경우", () => {
+    expect(() => {
+      Validation.validreadGameCommand("s");
+    }).toThrow("R 또는 Q가 아님");
+  });
+});
+
+describe("로직 테스트", () => {
+  test("장애물 충돌 테스트", () => {
+    const bridgeGame = new BridgeGame();
+    const bool = bridgeGame.move("D");
+    expect(bool).toBe(false);
+  });
+
+  test("다리 기록 테스트", () => {
+    const bridgeGame = new BridgeGame();
+    const gameMap = bridgeGame.bridgeDrawing("D", true);
+    expect(gameMap).toEqual(["[ O ]", "[   ]"]);
+  });
+
+  test("게임 종료 테스트", () => {
+    mockQuestions(["Q"]);
+    const result = GamePlaying.requestGame();
+    expect(result).toBe(false);
+  });
+
+  test("재시작 테스트", () => {
+    mockQuestions(["R"]);
+    const result = GamePlaying.requestGame();
+    expect(result).toBe(true);
   });
 });
