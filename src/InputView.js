@@ -1,21 +1,57 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const OutputView = require("./OutputView");
+const { checkBridgeSize, checkMovement, checkRestart } = require("./validate");
+const { TEXT } = require("./constant");
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize(bridge, bridgeGame) {
+    MissionUtils.Console.readLine(TEXT.BRIDGE_SIZE, (size) => {
+      if (checkBridgeSize(size)) return this.readBridgeSize(bridge, bridgeGame);
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+      bridge.setBridge(size);
+      this.readMoving(bridge, bridgeGame);
+      this.readGameCommand();
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  isCrossing(bridge, bridgeGame) {
+    if (bridgeGame.getCross()) {
+      if (bridgeGame.getSuccess()) OutputView.printResult(bridgeGame);
+      else this.readMoving(bridge, bridgeGame);
+    }
+
+    if (!bridgeGame.getCross()) this.readGameCommand(bridge, bridgeGame);
+  },
+
+  readMoving(bridge, bridgeGame) {
+    MissionUtils.Console.readLine(TEXT.MOVEMENT, (movement) => {
+      if (checkMovement(movement)) return this.readMoving(bridge, bridgeGame);
+
+      bridgeGame.move(movement, bridge);
+      OutputView.printMap(bridgeGame.getUpResult(), bridgeGame.getDownResult());
+
+      this.isCrossing(bridge, bridgeGame);
+    });
+  },
+
+  doRestart(restart, bridge, bridgeGame) {
+    bridgeGame.retry(restart);
+    this.readMoving(bridge, bridgeGame);
+  },
+
+  doQuit(bridgeGame) {
+    OutputView.printResult(bridgeGame);
+  },
+
+  readGameCommand(bridge, bridgeGame) {
+    MissionUtils.Console.readLine(TEXT.RETRY, (restart) => {
+      if (checkRestart(restart)) this.readGameCommand(bridge, bridgeGame);
+
+      if (restart === "R") this.doRestart(restart, bridge, bridgeGame);
+      if (restart === "Q") this.doQuit(bridgeGame);
+    });
+  },
 };
 
 module.exports = InputView;
