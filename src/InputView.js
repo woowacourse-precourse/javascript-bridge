@@ -14,7 +14,7 @@ const InputView = {
         throw new Error("[ERROR] 다리의 길이는 3 이상 20 이하입니다.");
       }
       game.setBridge(reply);
-      this.readMoving();
+      this.readMoving(game, []);
     });
   },
 
@@ -28,24 +28,32 @@ const InputView = {
       }
       const newInput = reply === "U" ? 0 : 1;
       input.push(newInput);
-      const flag = game.move(input);
       const answer = game.getBridge();
       OutputView.printMap(answer, input);
-      flag ? this.readMoving(game, input) : this.readGameCommand(game);
+      const flag = game.move(input);
+      flag ? this.readMoving(game, input) : this.readGameCommand(game, input);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(game, input) {
     Console.readLine(OutputView.printRequestReplay, (reply) => {
       if (reply !== "R" && reply !== "Q") {
         throw new Error(
           "[ERROR] 'R'와 'Q'를 입력하여 게임 재실행 응답을 할 수 있습니다."
         );
       }
-      console.log(reply);
+      if (reply === "Q") {
+        const answer = game.getBridge;
+        OutputView.printGameResult(false);
+        input.pop();
+        OutputView.printResult(answer, input);
+        OutputView.printTryGame(0);
+        return;
+      }
+      this.readMoving(game, []);
     });
   },
 };
