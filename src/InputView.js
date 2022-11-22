@@ -1,10 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constant/message.js");
+const { MESSAGE, STRUCTURE } = require("./constant/message.js");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker.js");
 const BridgeGame = require("./BridgeGame");
 const Validation = require("./Validation.js");
-const { printResult } = require("./OutputView.js");
+const { printResult, printMap } = require("./OutputView.js");
 
 const InputView = {
     readBridgeSize() {
@@ -34,13 +34,30 @@ const InputView = {
     },
 
     playMoving(bridgeGame, move) {
-        if (bridgeGame.isBadMove(move)) {
-            return this.readGameCommand(bridgeGame);
+        const isKeyUp = bridgeGame.move(move);
+        if (bridgeGame.isBadMove(isKeyUp)) {
+            return this.fail(bridgeGame, isKeyUp);
         }
-        if (bridgeGame.isSuccess(move)) {
-            return printResult(bridgeGame, MESSAGE.SUCCESS);
+        if (bridgeGame.isClear()) {
+            return this.clear(bridgeGame, isKeyUp);
         }
-        bridgeGame.move(move);
+        this.goodMove(bridgeGame, isKeyUp);
+    },
+
+    fail(bridgeGame, isKeyUp) {
+        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.BAD);
+        printMap(bridgeGame);
+        this.readGameCommand(bridgeGame);
+    },
+
+    clear(bridgeGame, isKeyUp) {
+        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
+        printResult(bridgeGame, MESSAGE.SUCCESS);
+    },
+
+    goodMove(bridgeGame, isKeyUp) {
+        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
+        printMap(bridgeGame);
         this.readMoving(bridgeGame);
     },
 

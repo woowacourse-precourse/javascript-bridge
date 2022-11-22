@@ -16,37 +16,27 @@ class BridgeGame {
     }
 
     move(move) {
-        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.UP;
         this.#moveCount++;
-        this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
-        printMap(this);
+        return move === KEY.UP;
     }
 
     pushBridgeHistory(isKeyUp, structureStatus) {
         if (isKeyUp) {
-            this.#bridgeHistory.push([structureStatus, STRUCTURE.BLANK]);
+            return this.#bridgeHistory.push([structureStatus, STRUCTURE.BLANK]);
         }
         if (!isKeyUp) {
-            this.#bridgeHistory.push([STRUCTURE.BLANK, structureStatus]);
+            return this.#bridgeHistory.push([STRUCTURE.BLANK, structureStatus]);
         }
     }
 
-    isBadMove(move) {
-        const isKeyBadUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.DOWN;
-        const isKeyBadDown = move === KEY.DOWN && this.#bridgeArray[this.#moveCount] === KEY.UP;
-        if (isKeyBadUp || isKeyBadDown) {
-            this.pushBridgeHistory(isKeyBadUp, STRUCTURE.BAD);
-            printMap(this);
-            return true;
-        }
+    isBadMove(isKeyUp) {
+        const isKeyBadUp = isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.DOWN;
+        const isKeyBadDown = !isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.UP;
+        return isKeyBadUp || isKeyBadDown;
     }
 
-    isSuccess(move) {
-        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#moveCount] === KEY.UP;
-        if (this.#moveCount === this.#bridgeArray.length - 1) {
-            this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
-            return true;
-        }
+    isClear() {
+        return this.#moveCount === this.#bridgeArray.length;
     }
 
     questionRetry(answer) {
@@ -54,12 +44,17 @@ class BridgeGame {
             this.resetBridgeSetting();
             return true;
         }
+        return false;
     }
 
     resetBridgeSetting() {
         this.#moveCount = 0;
         this.#bridgeHistory = [];
         this.#gameCount++;
+    }
+
+    getBridgeArray() {
+        return this.#bridgeArray;
     }
 
     getBridgeHistory() {
