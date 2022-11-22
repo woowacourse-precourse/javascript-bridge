@@ -15,16 +15,22 @@ const RandomGenerator = require("../Utils/BridgeRandomNumberGenerator");
 const InputView = {
   start() {
     let values = { stepArray: [], index: -1 };
-    let result = { upper: "", lower: "", array: [[], []], count: 1 };
+    let result = { upper: "", lower: "", array: [[], []], text: "", trial: 1 };
     return this.readBridgeSize(values, result);
   },
 
-  readBridgeSize(values, result) {
-    Console.readLine(ASKS.BRIDGE_SIZE, (size) => {
-      const resolved = Number(size);
-      Check.bridgeLength(resolved);
+  // readBridgeSize(values, result) {
+  //   Console.readLine(ASKS.BRIDGE_SIZE, (size) => {
+  //     const resolved = Number(size);
+  //     Check.bridgeLength(resolved);
 
-      this.readBridge(resolved, values, result);
+  //     this.readBridge(resolved, values, result);
+  //   });
+  // },
+
+  readBridgeSize(createBridgeController) {
+    Console.readLine(ASKS.BRIDGE_SIZE, (sizeInput) => {
+      createBridgeController(sizeInput);
     });
   },
 
@@ -49,7 +55,7 @@ const InputView = {
       Console.print(result.upper);
       Console.print(result.lower);
       Console.print("\n게임 성공 여부: 성공");
-      Console.print(`총 시도한 횟수: ${result.count}`);
+      Console.print(`총 시도한 횟수: ${result.trial}`);
       Console.close();
     }
   },
@@ -105,7 +111,7 @@ const InputView = {
     Console.readLine("\nRQ선택\n", (select) => {
       Check.selectFormat(select);
       if (select === "R") {
-        result.count++;
+        result.trial++;
         values.stepArray = [];
         result.array = [[], []];
         values.index = -1;
@@ -114,14 +120,14 @@ const InputView = {
 
       if (select === "Q") {
         // console.log(
-        //   `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 실패\n총 시도한 횟수: ${result.count}`
+        //   `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 실패\n총 시도한 횟수: ${result.trial}`
         // );
 
         Console.print(`\n최종 게임 결과`);
         Console.print(result.upper);
         Console.print(result.lower);
         Console.print("\n게임 성공 여부: 실패");
-        Console.print(`총 시도한 횟수: ${result.count}`);
+        Console.print(`총 시도한 횟수: ${result.trial}`);
         Console.close();
       }
     });

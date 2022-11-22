@@ -13,6 +13,19 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
+  #state = {
+    bridge: null,
+  };
+
+  get state() {
+    return this.#state;
+  }
+
+  setState(nextState) {
+    this.#state = { ...this.#state, ...nextState };
+  }
+
   move(bridge, values, step, result) {
     Check.moveFormat(step);
     values.stepArray.push(step);

@@ -13,12 +13,12 @@ class App {
   }
 
   play() {
-    this.controller.start();
+    this.controller.startGame();
   }
 }
 
 module.exports = App;
 
-//구현 후 삭제
+//TODO: 구현 후 삭제
 const app = new App();
 app.play();

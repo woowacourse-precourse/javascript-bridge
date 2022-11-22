@@ -3,6 +3,8 @@
  * 변경불가 : 파일경로, 프로퍼티, 메서드의 시그니처(인자, 이름), 반환 타입
  */
 
+const { CONFIG, KEY } = require("./Constants/Token");
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -11,8 +13,9 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
+    size = Number(size);
     return Array.from({ length: size }, () => generateRandomNumber()).map(
-      (value) => (value === 1 ? "U" : "D")
+      (value) => (value === CONFIG.SET_UP ? KEY.BRIDGE_UP : KEY.BRIDGE_DOWN)
     );
   },
 };

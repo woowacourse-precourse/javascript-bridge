@@ -1,6 +1,8 @@
 const CONFIG = Object.freeze({
   BRIDGE_START: 3,
   BRIDGE_END: 20,
+  SET_DOWN: 0,
+  SET_UP: 1,
 });
 
 const ENTITY = Object.freeze({
