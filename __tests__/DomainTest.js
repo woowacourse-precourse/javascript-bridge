@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/Controllers/BridgeGame');
-const Model = require('../src/Models/Model');
+const Model = require('../src/Models/BridgeModel');
 const InputView = require('../src/Views/InputView');
 const BridgeMaker = require('../src/BridgeMaker');
 const GameView = require('../src/Views/GameView');
@@ -46,16 +46,6 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
 
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ['[ERROR]']);
-};
-
 describe('1. 다리 생성하기', () => {
   test.each([[['15c']], [['길게']], [['five']], [['다섯']]])(
     '사용자가 3과 20사이 숫자로 다리 길이를 입력했는지 확인했다.',
@@ -96,7 +86,7 @@ describe('3. 플레이어가 이동할 칸 선택하기', () => {
       expectLogContains(getOutput(logSpy), ['[ERROR]']);
     },
   );
-  test.skip('다리 출력 테스트', () => {
+  test('다리 출력 테스트', () => {
     const logSpy = getLogSpy();
     const model = new Model();
     const gameView = new GameView(new InputView(), new OutputView());
@@ -104,7 +94,6 @@ describe('3. 플레이어가 이동할 칸 선택하기', () => {
     mockQuestions(['3', 'U', 'D', 'D']);
     mockRandoms(['1', '0', '0']);
 
-    bridgeGame.getBridgeSize();
     bridgeGame.start();
     const log = getOutput(logSpy);
     expectLogContains(log, ['[ O |   |   ]', '[   | O | O ]']);
@@ -121,11 +110,11 @@ describe('4. 잘못된 칸을 밟았을 때', () => {
       const gameView = new GameView(new InputView(), new OutputView());
       const bridgeGame = new BridgeGame(model, gameView);
       mockQuestions(input);
-      bridgeGame.askUserRetry();
+      bridgeGame.retry();
       expectLogContains(getOutput(logSpy), ['[ERROR]']);
     },
   );
-  test.skip('R을 눌러 재시작하고 다리 무사히 건넌 경우', () => {
+  test('R을 눌러 재시작하고 다리 무사히 건넌 경우', () => {
     const logSpy = getLogSpy();
     const model = new Model();
     const gameView = new GameView(new InputView(), new OutputView());
