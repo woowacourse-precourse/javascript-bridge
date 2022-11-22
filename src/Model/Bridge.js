@@ -4,11 +4,11 @@ class Bridge {
   downBridge = [];
 
   currentBridgeMap(cmd, currentBridge) {
-    if (currentBridge === BRIDGE_DIRECTION.UP) {
+    if (cmd === BRIDGE_DIRECTION.UP) {
       this.upBridge.push(currentBridge === cmd ? "O" : "X");
       this.downBridge.push(" ");
     }
-    if (currentBridge === BRIDGE_DIRECTION.DOWN) {
+    if (cmd === BRIDGE_DIRECTION.DOWN) {
       this.downBridge.push(currentBridge === cmd ? "O" : "X");
       this.upBridge.push(" ");
     }
