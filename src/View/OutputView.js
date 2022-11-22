@@ -16,6 +16,7 @@ const OutputView = {
     nowMap.forEach((bridge) => {
       Console.print(`[ ${bridge.join(" | ")} ]`);
     });
+    this.printBlank();
   },
 
   printResult(nowMap, attemptCnt, isSuccess) {
