@@ -64,6 +64,8 @@ input view 기준으로 기능 구현 작성
 
 ## Bridge Maker 객체
 
+### makeBridge
+
 - [x] 0 일경우 아래(D) 1일 경우 위칸(U) 을 받은 size 만큼 생성하는 기능
 
 ## Bridge Map 클래스
