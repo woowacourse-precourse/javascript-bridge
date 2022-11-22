@@ -18,6 +18,18 @@ const InputView = {
       InputView.question('다리의 길이를 입력해주세요.\n',callback, InputView.correctSize);
   },
   
+  correctSize(input) {
+    if (!parseInt(input)) {
+      Io.close();
+      throw new Error('[ERROR] 숫자가 아닙니다.');
+    }
+    
+    if (parseInt(input) < 3 || parseInt(input) > 20) {
+      Io.close();
+      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    }
+  },
+  
 
 };
 
