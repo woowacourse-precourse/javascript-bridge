@@ -28,6 +28,10 @@ const OutputView = {
     Console.print(OUTPUT_VIEW.total_tryCount(tryCount));
   },
 
+  printError(error) {
+    Console.print(error);
+  },
+
   decode(upOrDown) {
     const PASS = 'O';
     const FAIL = 'X';
