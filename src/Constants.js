@@ -1,3 +1,7 @@
+const START_MESSAGE = {
+  START: "다리 건너기 게임을 시작합니다.\n",
+};
+
 const ERROR_MESSAGE = {
   SIZE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   MOVE: "[ERROR] 이동할 칸은 'U' 또는 'D' 여야 합니다.",
@@ -34,6 +38,7 @@ const MOVE_VALID = ['U', 'D'];
 const RETRY_VALID = ['R', 'Q'];
 
 module.exports = {
+  START_MESSAGE,
   ERROR_MESSAGE, 
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
