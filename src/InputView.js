@@ -31,6 +31,9 @@ const InputView = {
       try {
         if (!Validate.validateMove(userInput))
           throw new Error(ERROR.MOVE_COMMAND);
+        bridgeGame.move(userInput);
+        this.printResultMap(bridgeGame);
+        this.manageResult(bridgeGame);
       } catch (e) {
         Console.print(e); //테스트 시에도 필요한지?? 필요 없으면 지우기
         this.readMoving(bridgeGame);
@@ -38,10 +41,31 @@ const InputView = {
     });
   },
 
+  printResultMap(bridgeGame) {
+    const bridgeState = bridgeGame.getbridgeState();
+    OutputView.printMap(bridgeState);
+  },
+
+  manageResult(bridgeGame) {
+    const { isFail, isSuccess } = bridgeGame.getGameState();
+    // 게임 실패
+    if (isFail) {
+      this.readGameCommand(bridgeGame);
+    }
+    //게임 성공
+    if (!isFail && isSuccess) {
+      this.printGameResult(bridgeGame, true);
+    }
+    //다음 턴 이동
+    if (!isFail && !isSuccess) {
+      this.readMoving(bridgeGame);
+    }
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {},
 };
 
 module.exports = InputView;
