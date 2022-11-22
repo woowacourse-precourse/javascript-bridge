@@ -27,7 +27,6 @@ class App {
 
   inputBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
-      if (!validateReadBridgeSize(bridgeSize)) this.inputBridgeSize();
       const solutionArr = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
       this.bridgeGame = new BridgeGame(solutionArr);
       this.inputMoving();
@@ -36,8 +35,6 @@ class App {
 
   inputMoving() {
     InputView.readMoving((moveKey) => {
-      if (!validateReadMoving(moveKey)) this.inputMoving();
-
       const isFail = this.bridgeGame.checkFail(moveKey);
       if (isFail) {
         OutputView.printMap(isFail);
@@ -69,8 +66,6 @@ class App {
 
   inputGameCommand(isFail) {
     InputView.readGameCommand((retryKey) => {
-      if (!validateReadGameCommand(retryKey)) this.inputGameCommand();
-
       this.insertRKey(retryKey);
       this.insertQKey(retryKey, isFail);
     });
