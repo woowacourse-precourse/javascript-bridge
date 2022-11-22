@@ -26,7 +26,17 @@ const InputView = {
       }
     });
   },
-  readGameCommand(game) {},
+  readGameCommand(game) {
+    Console.readLine(QUERY.RETRY, (command) => {
+      try {
+        validator.validateCommand(command);
+        if (!game.retry(command)) OutputView.printResult(game);
+        this.readMoving(game);
+      } catch (err) {
+        this.readError(err, () => this.readMoving(game));
+      }
+    });
+  },
   readError(err, callback) {
     OutputView.printError(err);
     callback();
