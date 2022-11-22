@@ -26,7 +26,7 @@ class Controller {
     try {
       InputValidator.isRightBridgeLength(length);
       this.makeAndSaveBridge(length);
-      this.moveBrige(this);
+      this.moveBrige();
     } catch (error) {
       outputView.printError(error);
       this.maker();
@@ -47,7 +47,7 @@ class Controller {
     );
   }
 
-  moveBrige (controller) {
+  moveBrige () {
     if (this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length) {
       inputView.readMoving(this.handleMoveBridge.bind(this));
     } else {
@@ -66,7 +66,7 @@ class Controller {
   handleMoveInput (string) {
     if (this.#bridgeGame.getBridge()[this.#bridgeGame.getMoveIndex()] === string) {
       this.#bridgeGame.incrementMoveIndex();
-      return this.moveBrige(this);
+      return this.moveBrige();
     }
     this.askRetryGame(this);
   }
@@ -111,7 +111,7 @@ class Controller {
   inputRetryOrQuit (string) {
     if (string === 'R') {
       this.#bridgeGame.setList();
-      this.moveBrige(this);
+      this.moveBrige();
       this.#bridgeGame.retry();
     }
     this.inputQuit(string);

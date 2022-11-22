@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { printBegin, printAskMove, printAskRetry } = require('./OutputView');
-const { GAME_MESSAGE } = require('../constants/game.constants');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
