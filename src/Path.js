@@ -2,10 +2,7 @@ const { PATH_TYPE, MARKING, PATH, UPSIDE } = require('./utils/const');
 const Validator = require('./utils/Validator');
 
 class Path {
-  /** @type {string[]} */
   #path;
-
-  /** @type {string[][]} */
   #pathMap;
 
   constructor() {

@@ -1,5 +1,3 @@
-// @ts-check
-
 const Bridge = require('./Bridge');
 const Path = require('./Path');
 const Validator = require('./utils/Validator');
@@ -61,10 +59,6 @@ class BridgeGame {
     return { status, isCorrect };
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @return {number}
-   */
   retry() {
     this.#path = new Path();
     this.#count += 1;
@@ -73,16 +67,13 @@ class BridgeGame {
 
   /**
    * @param {string} gameCommand
+   * @return {number}
    */
   convertStringToCommand(gameCommand) {
     Validator.validateEqual(gameCommand, [COMMAND.RETRY, COMMAND.QUIT]);
     return gameCommand === COMMAND.RETRY ? this.retry() : COMMAND_NUMBER.QUIT;
   }
 
-  /**
-   * 게임이 종료되었을 때 사용하는 메서드
-   * @returns {{count: number, pathMap: string[][], isSuccess: boolean}}
-   */
   getResultInfo() {
     const currentPath = this.#path.getPath();
 
