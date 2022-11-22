@@ -1,4 +1,4 @@
-const { GameState } = require('./constants/Constant.js');
+const { GAME_STATE } = require('./constants/Constant.js');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -27,13 +27,13 @@ class BridgeGame {
 
   getGameState() {
     if (this.#movingLog[0].concat(this.#movingLog[1]).includes('X')) {
-      return GameState.GAME_OVER;
+      return GAME_STATE.GAME_OVER;
     }
     if (this.#movingLog[0].length < this.#bridge.length) {
-      return GameState.PLAYING;
+      return GAME_STATE.PLAYING;
     }
 
-    return GameState.VICTORY;
+    return GAME_STATE.VICTORY;
   }
 
   getMovingLog() {

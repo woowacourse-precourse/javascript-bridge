@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../BridgeGame');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
-const { GameState } = require('../constants/Constant');
+const { GAME_STATE } = require('../constants/Constant');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -33,9 +33,9 @@ class BridgeGameController {
 
   checkBridgeGame() {
     const gameState = this.#bridgeGame.getGameState();
-    if (gameState === GameState.PLAYING) this.playBridgeGame();
-    if (gameState === GameState.GAME_OVER) this.requestRetryBridgeGame();
-    if (gameState === GameState.VICTORY) this.endBridgeGame();
+    if (gameState === GAME_STATE.PLAYING) this.playBridgeGame();
+    if (gameState === GAME_STATE.GAME_OVER) this.requestRetryBridgeGame();
+    if (gameState === GAME_STATE.VICTORY) this.endBridgeGame();
   }
 
   requestRetryBridgeGame() {

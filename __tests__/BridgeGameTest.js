@@ -1,5 +1,5 @@
 const BridgeGame = require('../src/BridgeGame.js');
-const { GameState } = require('../src/constants/Constant.js');
+const { GAME_STATE } = require('../src/constants/Constant.js');
 
 describe('브릿지 게임 테스트', () => {
   test('다리 이동 테스트', () => {
@@ -22,7 +22,7 @@ describe('브릿지 게임 테스트', () => {
     const bridge = ['U', 'U', 'D'];
     const bridgeGame = new BridgeGame(bridge);
     const way = ['U', 'U', 'D'];
-    const answer = [GameState.PLAYING, GameState.PLAYING, GameState.VICTORY];
+    const answer = [GAME_STATE.PLAYING, GAME_STATE.PLAYING, GAME_STATE.VICTORY];
 
     way.forEach((direction, idx) => {
       bridgeGame.move(direction);
@@ -34,7 +34,7 @@ describe('브릿지 게임 테스트', () => {
     const bridge = ['U', 'U', 'D'];
     const bridgeGame = new BridgeGame(bridge);
     const way = ['U', 'U', 'U'];
-    const answer = [GameState.PLAYING, GameState.PLAYING, GameState.GAME_OVER];
+    const answer = [GAME_STATE.PLAYING, GAME_STATE.PLAYING, GAME_STATE.GAME_OVER];
 
     way.forEach((direction, idx) => {
       bridgeGame.move(direction);
