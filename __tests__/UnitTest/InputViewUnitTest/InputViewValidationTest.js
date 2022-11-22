@@ -1,5 +1,5 @@
-const InputView = require('../../src/view/InputView');
-const { BRIDGE_SIZE_ERROR, MOVEMENT_ERROR, GAME_COMMAND_ERROR } = require('../../src/constants/error.constants');
+const InputView = require('../../../src/view/InputView');
+const { BRIDGE_SIZE_ERROR, MOVEMENT_ERROR, GAME_COMMAND_ERROR } = require('../../../src/constants/error.constants');
 
 describe('사용자 입력 예외처리 테스트', () => {
   test('예외 상황 - 다리의 길이가 정수가 아닌 경우', () => {

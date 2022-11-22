@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const InputView = require('../../src/view/InputView');
+const InputView = require('../../../src/view/InputView');
 
 describe('사용자 입력 테스트', () => {
   test('다리 길이 입력 테스트', () => {
