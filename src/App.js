@@ -1,14 +1,14 @@
-const Game = require("./Bridge.Domain/Game");
+const BridgeInteractPlayer = require("./Bridge.Domain/BridgeInteractPlayer");
 
 class App {
-  #bridgeGame = new Game();
+  #bridgeGame;
+  constructor() {
+    this.#bridgeGame = new BridgeInteractPlayer();
+  }
 
   play() {
-    this.#bridgeGame.start();
+    this.#bridgeGame.playerInputBridgeSize();
   }
 }
-
-const a = new App();
-a.play();
 
 module.exports = App;

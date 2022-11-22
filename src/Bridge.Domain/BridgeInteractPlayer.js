@@ -60,10 +60,13 @@ class BridgeInteractPlayer {
     switch (status) {
       case GAME.STATUS.PLAY:
         this.playerInputBridgeDirection();
+        break;
       case GAME.STATUS.FAIL:
         this.playerInputCommand();
+        break;
       case GAME.STATUS.END:
         this.playerEndThisGame(GAME.RESULT.WIN);
+        break;
     }
   }
 
