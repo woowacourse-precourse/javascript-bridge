@@ -1,5 +1,13 @@
+const GameController = require('./GameController.js');
+
 class App {
-  play() {}
+  constructor() {
+    this.gameController = new GameController();
+  }
+
+  play() {
+    this.gameController.play();
+  }
 }
 
 module.exports = App;
