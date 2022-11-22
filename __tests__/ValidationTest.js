@@ -28,7 +28,7 @@ describe('유효성 검사 테스트 3', () => {
 describe('유효성 검사 테스트 4', () => {
   test('게임 재시작/종료 입력 값이 범위를 벗어나면 예외가 발생', () => {
     expect(() => {
-      Validator.validateUpDown('X');
+      Validator.validateGameCommand('X');
     }).toThrowError(ERROR_MESSAGE.COMMAND_ERROR);
   });
 });
