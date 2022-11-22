@@ -1,4 +1,27 @@
-const { BRIDGE_RANGE, MOVE, RETRY, ERRORS } = require('./config.js');
+// const { BRIDGE_RANGE, MOVE, RETRY, ERRORS } = require('./config.js');
+
+const BRIDGE_RANGE = {
+  MIN: 3,
+  MAX: 20,
+};
+
+const MOVE = {
+  UP: 'U',
+  DOWN: 'D',
+};
+
+const RETRY = {
+  YES: 'R',
+  NO: 'Q',
+};
+
+const ERRORS = {
+  INVALID_BRIDGE_TYPE: '[ERROR] 다리 길이는 숫자여야 합니다.',
+  INVALID_BRIDGE_RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+
+  INVALID_MOVE_TYPE: '[ERROR] 이동 타입은 U/D이어야 합니다.',
+  INVALID_RESTART_TYPE: '[ERROR] 재시작 입력은 R/Q이어야 합니다.',
+};
 
 /**
  * 사용자로부터 받은 입력을 검증한다
