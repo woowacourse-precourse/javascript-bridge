@@ -13,8 +13,7 @@ const BridgeMaker = {
     const arr = [REQUIREMENT.DOWN, REQUIREMENT.UP];
 
     for(let i = 0 ; i < size ; i += 1) {
-      const number = generateRandomNumber(); 
-      bridge.push(arr[number]);  
+      bridge.push(arr[generateRandomNumber()]);  
     }
 
     return bridge;

@@ -15,6 +15,7 @@ class App {
   initGame(bridgeLength) {
     this.#bridge = new BridgeGame(bridgeLength);
     this.#attemptsCnt = 1;
+
     InputView.readMoving(this);
   }
   
@@ -26,12 +27,17 @@ class App {
 
   printBridge() {
     const strResult = this.#bridge.makeBridgeString();
+
     OutputView.printMap(strResult);
   }
 
   calcBridge() {
     const moveResult = this.#bridge.move();
 
+    this.moveResultAction(moveResult);
+  }
+  
+  moveResultAction(moveResult) {
     if (moveResult === MOVERESULT.WRONGBLOCK) {
       InputView.readGameCommand(this);
     } else if (moveResult === MOVERESULT.RIGHTBLOCK) {
@@ -40,7 +46,7 @@ class App {
       this.gameOver(GAMERESULT.CLEAR);
     }
   }
-  
+
   retryOrTerminate(input) {
     const tryAgain = this.#bridge.retry(input);
 
@@ -54,6 +60,7 @@ class App {
 
   gameOver(clear) { 
     const strResult = this.#bridge.makeBridgeString();
+    
     OutputView.printResult(this.#attemptsCnt, strResult, clear);
   }
 }

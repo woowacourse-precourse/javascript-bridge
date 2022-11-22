@@ -38,13 +38,9 @@ class BridgeGame {
   }
 
   checkBlock(block, cur, letter) {
-    if (cur !== letter) {
-      return ' ';
-    }
+    if (cur !== letter) return ' ';
 
-    if (block === letter) {
-      return REQUIREMENT.CANMOVE;
-    }
+    if (block === letter) return REQUIREMENT.CANMOVE;
 
     return REQUIREMENT.CANNOTMOVE;
   }
@@ -62,13 +58,9 @@ class BridgeGame {
   }
 
   getMoveResult(userInput, bridge, idx) {
-    if (userInput[idx] !== bridge[idx]) {
-      return MOVERESULT.WRONGBLOCK;
-    }
+    if (userInput[idx] !== bridge[idx]) return MOVERESULT.WRONGBLOCK;
     
-    if (userInput.length !== bridge.length) {
-      return MOVERESULT.RIGHTBLOCK; 
-    }
+    if (userInput.length !== bridge.length) return MOVERESULT.RIGHTBLOCK; 
     
     return MOVERESULT.GAMECLEAR;
   }

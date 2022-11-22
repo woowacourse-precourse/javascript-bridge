@@ -13,20 +13,28 @@ const InputView = {
         this.validateBridgeSize(input);
         return app.initGame(input);
       } catch {
-        MissionUtils.Console.print(ERROR.LENGTH);
         this.readBridgeSize(app);
       }
     }); 
   },
 
   validateBridgeSize(input) {
+    this.validateBridgeSizeLength(input);
+    this.validateBridgeSizeRange(input);
+  },
+
+  validateBridgeSizeLength(input) {
     const regex = /^[\d]{1,2}$/;
     
     if(!regex.test(input)) {
+      MissionUtils.Console.print(ERROR.LENGTH);
       throw new Error(ERROR.LENGTH);
     }
-    
+  },
+
+  validateBridgeSizeRange(input) {
     if (Number(input) < REQUIREMENT.MINLEN || Number(input) > REQUIREMENT.MAXLEN) {
+      MissionUtils.Console.print(ERROR.LENGTH);
       throw new Error(ERROR.LENGTH);
     }
   },
@@ -40,7 +48,6 @@ const InputView = {
         this.validateMove(input);
         return app.proceedGame(input);
       } catch {
-        MissionUtils.Console.print(ERROR.MOVE);
         this.readMoving(app);
       }
     });
@@ -48,6 +55,7 @@ const InputView = {
 
   validateMove(input) {
     if (input !== REQUIREMENT.UP && input !== REQUIREMENT.DOWN) {
+      MissionUtils.Console.print(ERROR.MOVE);
       throw new Error(ERROR.MOVE);
     }
   },
@@ -61,7 +69,6 @@ const InputView = {
         this.validateRetry(input);
         return app.retryOrTerminate(input);
       } catch {
-        MissionUtils.Console.print(ERROR.RETRY);
         this.readGameCommand(app);
       }
     });
@@ -69,6 +76,7 @@ const InputView = {
 
   validateRetry(input) {
     if (input !== REQUIREMENT.RETRY && input !== REQUIREMENT.QUIT) {
+      MissionUtils.Console.print(ERROR.RETRY);
       throw new Error(ERROR.RETRY);
     }
   },
