@@ -15,6 +15,17 @@ const InputView = {
     });
   },
 
+  /**
+   * 사용자가 이동할 칸을 입력받는다.
+   */
+  readMoving() {
+    MissionUtils.Console.readLine('이동할 칸을 선택해주세요.(위: U, 아래: D', (move) => {
+      if(move !== U && move !== D ){
+        throw Error('[ERROR] 이동을 위해 U 나 D 를 입력해주세요. ');
+      }
+    });
+  },
+
 };
 
 module.exports = InputView;
