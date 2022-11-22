@@ -30,12 +30,23 @@ const InputView = {
    */
   readMoving() {
     let moving;
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)",
-      (answer) => {
-        moving = answer;
-      }
-    );
+    try {
+      MissionUtils.Console.readLine(
+        "이동할 칸을 선택해주세요. (위: U, 아래: D)",
+        (answer) => {
+          moving = this.validateMoving(answer);
+        }
+      );
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+      return "err";
+    }
+    return moving;
+  },
+
+  validateMoving(moving) {
+    if (moving !== "U" && moving !== "D")
+      throw new Error("[ERROR] U나 D를 입력해야 합니다.");
     return moving;
   },
 

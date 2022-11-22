@@ -47,19 +47,9 @@ class App {
 
   makeMoving() {
     let moving = InputView.readMoving();
-    moving = this.validateMoving(moving);
+    if (moving == "err") return;
     this.movingCount++;
     return moving;
-  }
-  validateMoving(moving) {
-    try {
-      if (moving !== "U" && moving !== "D")
-        throw new Error("[ERROR] U나 D를 입력해야 합니다.");
-      return moving;
-    } catch (e) {
-      MissionUtils.Console.print(e.message);
-      return InputView.readMoving();
-    }
   }
 }
 
