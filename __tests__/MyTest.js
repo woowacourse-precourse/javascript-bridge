@@ -92,4 +92,18 @@ describe('다리 건너기 테스트', () => {
     expect(upBridgeRoute).toEqual(['O', 'O', ' ', 'X']);
     expect(downBridgeRoute).toEqual([' ', ' ', 'O', ' ']);
   });
+
+  test('게임을 재시작하는 기능', () => {
+    const bridgeGame = new BridgeGame(5);
+    const beforeBridge = bridgeGame.bridge;
+    const beforeTryCount = bridgeGame.tryCount;
+
+    bridgeGame.retry();
+
+    const afterBridge = bridgeGame.bridge;
+    const afterTryCount = bridgeGame.tryCount;
+
+    expect(beforeBridge).toEqual(afterBridge);
+    expect(beforeTryCount + 1).toEqual(afterTryCount);
+  });
 });
