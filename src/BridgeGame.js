@@ -59,6 +59,10 @@ class BridgeGame {
       this.retry();
       return;
     }
+
+    if (gameCommand === QUIT) {
+      this.quit(false);
+    }
   }
 
   /**
