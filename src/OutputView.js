@@ -1,12 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
-const UP = 1;
-const DOWN = 0;
+const {PRINT_MESSAGE} = require("./Message");
+const {BRIDGE_INDEX} = require("./Constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   printGameStart() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(PRINT_MESSAGE.GAME_START);
   },
 
   /**
@@ -15,8 +15,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(currBridge) {
-    const upBridge = currBridge[UP].join(" | ");
-    const downBridge = currBridge[DOWN].join(" | ");
+    const upBridge = currBridge[BRIDGE_INDEX.UP].join(" | ");
+    const downBridge = currBridge[BRIDGE_INDEX.DOWN].join(" | ");
     Console.print("[ " + upBridge + " ]");
     Console.print("[ " + downBridge + " ]");
   },
@@ -27,17 +27,17 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(currBridge, gameResult, trial) {
-    Console.print("\n최종 게임 결과");
+    Console.print(PRINT_MESSAGE.GAME_RESULT_TITLE);
     this.printMap(currBridge);
-    let GAME_RESULT;
+    let result;
     if(gameResult) {
-      GAME_RESULT = "성공";
+      result = PRINT_MESSAGE.GAME_WIN;
     }
     if(!gameResult) {
-      GAME_RESULT = "실패";
+      result = PRINT_MESSAGE.GAME_LOSE;
     }
-    Console.print(`\n게임 성공 여부: ${GAME_RESULT}`);
-    Console.print(`총 시도한 횟수: ${trial}`);
+    Console.print(`${PRINT_MESSAGE.GAME_RESULT} ${result}`);
+    Console.print(`${PRINT_MESSAGE.GAME_TRIAL} ${trial}`);
   },
 };
 

@@ -14,4 +14,5 @@ class App {
     InputView.readBridgeSize(bridgeGame);
   }
 }
+
 module.exports = App;

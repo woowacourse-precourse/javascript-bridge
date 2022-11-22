@@ -4,6 +4,15 @@ const INPUT_MESSAGE = {
     BRIDGE_RESTART: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 };
 
+const PRINT_MESSAGE = {
+    GAME_START: "다리 건너기 게임을 시작합니다.\n",
+    GAME_RESULT_TITLE: "\n최종 게임 결과",
+    GAME_WIN: "성공",
+    GAME_LOSE: "실패",
+    GAME_RESULT: "\n게임 성공 여부:",
+    GAME_TRIAL: "총 시도한 횟수:",
+};
+
 const ERROR_MESSAGE_BRIDGE_SIZE = {
     NUM: "[ERROR] 다리 길이는 숫자여야 합니다.\n",
     VALUE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n",
@@ -22,6 +31,7 @@ const ERROR_MESSAGE_GAMERESTART = {
 
 module.exports = {
     INPUT_MESSAGE,
+    PRINT_MESSAGE,
     ERROR_MESSAGE_BRIDGE_SIZE,
     ERROR_MESSAGE_USERCHOICE,
     ERROR_MESSAGE_GAMERESTART,
