@@ -6,6 +6,8 @@ const OutputView = require("./OutputView");
  */
 class BridgeGame {
   #BRIDGE = [];
+  #CUR_IDX = -1;
+  #MOVING = [];
 
   constructor(bridge) {
     this.#BRIDGE = bridge;
@@ -16,8 +18,25 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(moving, idx) {
-    return moving[idx] === this.#BRIDGE[idx] ? true : false;
+  move(moving) {
+    this.#MOVING.push(moving);
+    this.#CUR_IDX++;
+
+    this.changeToMap();
+
+    return moving === this.#BRIDGE[this.#CUR_IDX] ? true : false;
+  }
+
+  changeToMap() {
+    const UP = [];
+    const DOWN = [];
+
+    this.#MOVING.map((moving, idx) => {
+      moving === 'U' ? UP.push(moving === this.#BRIDGE[idx] ? ' O ' : ' X ') : DOWN.push(moving === this.#BRIDGE[idx] ? ' O ' : ' X ');
+      moving === 'U' ? DOWN.push('   ') : UP.push('   ');
+    });
+
+    OutputView.printMap(UP, DOWN);
   }
 
   /**
@@ -25,7 +44,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() { }
+  retry() {
+
+  }
 }
 
 module.exports = BridgeGame;
