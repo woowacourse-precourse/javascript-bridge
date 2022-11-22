@@ -1,4 +1,4 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 
 const Exception = {
   checkBridgeLength(input) {

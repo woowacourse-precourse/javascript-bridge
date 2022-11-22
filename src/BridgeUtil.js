@@ -1,6 +1,6 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
+
 const BridgeUtil = {
   getUserInput(bridgeGame) {
     InputView.readMoving(bridgeGame);

@@ -2,8 +2,6 @@ const BridgeMaker = require("./BridgeMaker.js");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeUtil = require("./BridgeUtil.js");
 
-const { Console, Random } = require("@woowacourse/mission-utils");
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
