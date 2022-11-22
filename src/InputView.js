@@ -69,7 +69,7 @@ const InputView = {
     Console.close();
   },
   getGameNext(bridgeGame) {
-    const isAnswer = bridgeGame.checkAnswer();
+    const isAnswer = bridgeGame.isAnswer();
     if (isAnswer) {
       return this.readMoving(bridgeGame);
     }
