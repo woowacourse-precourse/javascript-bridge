@@ -57,6 +57,18 @@ class BridgeGame {
     return this.print();
   }
 
+  hasWrongAnswer() {
+    const result = this.#movingRoute.flat().includes(MOVING.WRONG_ANSWER);
+    return result;
+  }
+
+  /**
+   */
+  hasAllAnswer() {
+    const result = this.#movingRoute[0].length === this.#bridge.length;
+    return result;
+  }
+
   retry() {
     this.#movingRoute = [[], []];
     this.#UserTryCount += 1;
@@ -67,8 +79,7 @@ class BridgeGame {
   }
 
   print() {
-    OutputView.printMap(this.#movingRoute);
-    return this.#movingRoute;
+    return OutputView.printMap(this.#movingRoute);
   }
 }
 
