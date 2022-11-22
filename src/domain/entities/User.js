@@ -12,7 +12,8 @@ class User {
   }
 
   getLog() {
-    return [...this.#log];
+    if (this.#log.length !== 0) return [...this.#log];
+    return [];
   }
 
   getLocation() {

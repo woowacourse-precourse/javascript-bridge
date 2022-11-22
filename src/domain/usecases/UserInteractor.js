@@ -24,7 +24,7 @@ class userInteractor {
   }
 
   getLog() {
-    return [...this.#user.getLog()];
+    return this.#user.getLog();
   }
 
   getLocation() {
