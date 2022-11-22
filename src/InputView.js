@@ -20,7 +20,7 @@ const InputView = {
   checkBridgeSize(str, bridgeGame){
     try{
       const length = parseInt(str);
-      if(!/^\d+$/.test(length)) throw ("[ERROR] 입력 오류.");
+      if(!/^\d+$/.test(str) || length < 3 || length > 20 && !Number.isInteger(str)) throw ("[ERROR] 입력 오류.");
       bridgeGame.init(BridgeMaker.makeBridge(length, generate));
       this.readMoving(bridgeGame);
     } catch(error){
