@@ -32,7 +32,6 @@ const InputView = {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
       if (!this.inputErrorProcess.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize"))
         return this.readBridgeSize();
-      // UseGameInfo.createBridge();
       GameInfo.bridge = BridgeMaker
         .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
       UseGameInfo.initializeGameInfo();

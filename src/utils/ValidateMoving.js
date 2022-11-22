@@ -1,4 +1,4 @@
-const { GAME_VALUES } = require("../constants/constant");
+const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
 
 class ValidateMoving {
   constructor(moving) {
@@ -10,7 +10,7 @@ class ValidateMoving {
   }
 
   set moving(moving) {
-    if (this.validate(moving) === false) throw new Error("[ERROR]");
+    if (this.validate(moving) === false) throw new Error(ERROR_MESSAGES.moving);
     else this._moving = moving;
   }
 

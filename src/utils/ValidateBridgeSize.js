@@ -1,4 +1,4 @@
-const { GAME_VALUES } = require("../constants/constant");
+const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
 
 class ValidateBridgeSize {
   constructor(bridgeSize) {
@@ -10,7 +10,7 @@ class ValidateBridgeSize {
   }
 
   set bridgeSize(bridgeSize) {
-    if (this.validate(bridgeSize) === false) throw new Error("[ERROR]");
+    if (this.validate(bridgeSize) === false) throw new Error(ERROR_MESSAGES.bridgeSize);
     this._bridgeSize = Number(bridgeSize);
   }
 

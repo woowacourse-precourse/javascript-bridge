@@ -6,8 +6,8 @@ class InputErrorProcess {
   inputErrorProcess(validClass, inputValue, objectCode) {
     try {
       GameInfo[objectCode] = new validClass(inputValue)[objectCode];
-    } catch {
-      OutputView.printMessage(ERROR_MESSAGES[objectCode]);
+    } catch (error) {
+      OutputView.printMessage(error);
       return false;
     }
     return true;
