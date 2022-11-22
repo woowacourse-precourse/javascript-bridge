@@ -4,6 +4,7 @@ const Validation = require("./validation/Validation");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 class App {
   constructor() {
@@ -35,6 +36,8 @@ class App {
         Console.log(error);
         return this.inputUpsideDown();
       }
+      this.bridgeGame.move(upsideDown);
+      OutputView.printMap(this.bridgeGame.getResult());
     });
   }
 }
