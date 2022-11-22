@@ -11,12 +11,12 @@ describe("게임 플레이 클래스 테스트", () => {
       const moved = ['U'];
       moved.push(moving);
       return moved;
-    })
+    });
     const moving = 'D';
     bridgePlay.playRound(moving);
 
-    expect(spyPrintMap).toBeCalledWith(bridgePlay.bridge,['U','D'])
-  })
+    expect(spyPrintMap).toBeCalledWith(bridgePlay.bridge,['U','D']);
+  });
 
   test("넘겨받은 이동 결과에 해당하는 다음단계를 진행한다. - case 0", () => {
     const spyReadCommand = jest.spyOn(InputView, 'readGameCommand');
@@ -53,5 +53,5 @@ describe("게임 플레이 클래스 테스트", () => {
     bridgePlay.playEnd();
 
     expect(spyPrintResult).toBeCalledWith(bridgePlay.bridge, ['U'], 2);
-  })
+  });
 });

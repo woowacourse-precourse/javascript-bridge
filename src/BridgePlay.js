@@ -21,13 +21,13 @@ class BridgePlay{
 
   playNext(){
     switch(this.bridgeGame.status()){
-      case 0:
+      case 0: // CAN NOT MOVE
         InputView.readGameCommand(this);
         break;
-      case 1:
+      case 1: // CAN MOVE
         this.newRound();
         break;
-      case 2:
+      case 2: // MOVE COMPLETE
         this.playEnd();
     }
   }

@@ -33,6 +33,7 @@ describe("입력 예외 처리 테스트", () => {
     mockQuestions(["2", "a"]);
     const logSpy = getLogSpy();
     InputView.readBridgeSize();
+
     expectLogContains(getOutput(logSpy), ["[ERROR] 다리 길이는 3", "[ERROR] 다리 길이는 숫자"]);
   });
 
@@ -40,6 +41,7 @@ describe("입력 예외 처리 테스트", () => {
     mockQuestions(["u"]);
     const logSpy = getLogSpy();
     InputView.readMoving();
+    
     expectLogContains(getOutput(logSpy), ["[ERROR] 이동할"]);
   });
 

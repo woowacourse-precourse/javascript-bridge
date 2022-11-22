@@ -24,7 +24,3 @@ class App {
 }
 
 module.exports = App;
-
-//test app
-const app = new App();
-app.play();

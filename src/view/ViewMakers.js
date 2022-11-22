@@ -33,17 +33,20 @@ const Map = {
         return this.makeMapEl(bridge[index], movedOne);
       }
       return this.NOTHING;
-    })
+    });
     return line;
   },
 
   makeMap(upLine, downLine){
-    return `[ ${upLine.join(' | ')} ]\n[ ${downLine.join(' | ')} ]\n`
+    return `[ ${upLine.join(' | ')} ]\n[ ${downLine.join(' | ')} ]\n`;
   },
 
 }
 
 const Result = {
+
+  SUCCESS : "성공",
+  FAIL: "실패",
 
   GAMERESULT : "최종 게임 결과",
   GAME_ATTEMPTS: "총 시도한 횟수: ",
@@ -51,9 +54,9 @@ const Result = {
 
   makeStringResult(bridge, moved){
     if(JSON.stringify(bridge)===JSON.stringify(moved)){
-      return "성공";
+      return this.SUCCESS;
     }
-    return "실패";
+    return this.FAIL;
   }
 
 }

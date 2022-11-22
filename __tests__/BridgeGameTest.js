@@ -1,14 +1,14 @@
 const BridgeGame = require("../src/BridgeGame");
 
 describe("게임 관리 클래스 테스트", () => {
-  const bridge = ['U','D','D','U','U','U','D']
+  const bridge = ['U','D','D','U','U','U','D'];
   const bridgeGame = new BridgeGame(bridge, {moved:[], attempts:1});
 
   test("이동한 칸을 방문 목록에 추가한다.", () => {
     const movings = ['U','D','D'];
     movings.forEach((moving)=>{
       bridgeGame.move(moving);
-    })
+    });
     const moved = bridgeGame.move('U');
 
     expect(moved).toEqual(['U','D','D','U']);
