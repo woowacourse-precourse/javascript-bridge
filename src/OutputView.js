@@ -18,7 +18,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap([first, second]) {
+  printMap(first, second) {
     const { START, LINE, END } = GAME_STATUS;
     const firstRow = `${START}${first.join(LINE)}${END}`;
     const secondRow = `${START}${second.join(LINE)}${END}`;
@@ -32,17 +32,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(moveList, result, count) {
+  printResult(firstRow, secondRow, result, count) {
     const { RESULT, SCORE, RETRY_CNT } = MESSAGE;
 
     Console.print(RESULT);
-    this.printMap(moveList);
-    Console.print(SCORE);
-    Console.print(RETRY_CNT + count);
+    OutputView.printMap(firstRow, secondRow);
+    Console.print(`${SCORE}${result}`);
+    Console.print(`${RETRY_CNT} ${count}`);
   },
 
   printError(error) {
     Console.print(error);
+  },
+
+  quit() {
+    Console.close();
   },
 };
 

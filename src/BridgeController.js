@@ -5,11 +5,11 @@ const { MESSAGE, GAME_STATUS } = require('./Message');
 const { printResult } = require('./OutputView');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
+const { Console } = require('@woowacourse/mission-utils');
 
 class bridgeController {
-  #bridge;
   constructor() {
-    this.#bridge = new BridgeGame();
+    this.bridge = new BridgeGame();
   }
 
   run() {
@@ -24,7 +24,7 @@ class bridgeController {
   inputSize(input) {
     try {
       Validate.isNumber(input);
-      this.#bridge.setBridge();
+      this.bridge.setBridge(input);
       this.getMoveInput();
     } catch (error) {
       OutputView.printError(error);
@@ -39,8 +39,9 @@ class bridgeController {
   inputMoveSpace(input) {
     try {
       Validate.isMoveInput(input);
-      this.#bridge.setMoveInput(input);
-      OutputView.printMap(this.#bridge.getBridgeMap());
+      this.bridge.setMoveInput(input);
+      const [first, second] = this.bridge.getBridgeMap();
+      OutputView.printMap(first, second);
       this.checkGame();
     } catch (error) {
       OutputView.printError(error);
@@ -49,22 +50,18 @@ class bridgeController {
   }
 
   checkGame() {
-    if (this.#bridge.move()) {
-      const { WIN } = GAME_STATUS;
-      return printResult(WIN);
+    if (this.bridge.move()) {
+      return printResult();
     }
-    if (this.#bridge.isFail()) {
-      return isRetry();
+    if (this.bridge.isFail()) {
+      return this.isRetry();
     }
     this.getMoveInput();
   }
 
-  printResult(status) {
-    OutputView.printResult(
-      this.#bridge.getBridgeMap(),
-      this.#bridge.getCount,
-      status
-    );
+  printResult() {
+    this.bridge.win();
+    return this.quit();
   }
 
   getRetry() {
@@ -82,14 +79,18 @@ class bridgeController {
   }
 
   checkRetry(input) {
-    const { RETRY, QUIT, LOSE } = GAME_STATUS;
+    const { RETRY, QUIT } = GAME_STATUS;
 
     if (input === RETRY) {
-      this.#bridge.retry();
+      this.bridge.retry();
       this.getMoveInput();
     }
 
-    if (input === QUIT) this.printResult(LOSE);
+    if (input === QUIT) this.bridge.lose();
+  }
+
+  quit() {
+    OutputView.exit();
   }
 }
 

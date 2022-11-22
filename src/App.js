@@ -6,5 +6,4 @@ class App {
     bridgeController.run();
   }
 }
-
 module.exports = App;
