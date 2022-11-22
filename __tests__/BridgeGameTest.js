@@ -42,3 +42,30 @@ describe('isCorrect 함수 반환값 검사', () => {
     expect(correct).toBeFalsy();
   });
 });
+
+describe('기능 - 게임 상태 판단 검사', () => {
+  test('다리를 다 건너면 isGameOver()과 isSucessful()이 true 값을 반환한다.', () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'D']);
+    bridgeGame.move('U');
+    bridgeGame.move('U');
+    bridgeGame.move('D');
+    expect(bridgeGame.isGameOver()).toBeTruthy();
+    expect(bridgeGame.isSuccessful()).toBeTruthy();
+  });
+
+  test('다리를 건너다 실패하면 isGameOver()은 true지만 isSucessful()은 false 값을 반환한다.', () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'D']);
+    bridgeGame.move('U');
+    bridgeGame.move('D');
+    expect(bridgeGame.isGameOver()).toBeTruthy();
+    expect(bridgeGame.isSuccessful()).toBeFalsy();
+  });
+
+  test('다리를 건너다 실패하고 재시도하면 isGameOver()과 isSucessful()은 false 값을 반환한다.', () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'D']);
+    bridgeGame.move('U');
+    bridgeGame.move('D');
+    expect(bridgeGame.isGameOver()).toBeFalsy();
+    expect(bridgeGame.isSuccessful()).toBeFalsy();
+  });
+});
