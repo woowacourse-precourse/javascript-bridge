@@ -19,6 +19,15 @@ class BridgeGame {
     this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 
+  setBridgeMap() {
+    const topBridge = [];
+    const bottomBridge = [];
+    for (let i = 0; i < this.#currentPosition; i++) {
+      this.insertCorrectBridge(topBridge, bottomBridge, this.#bridge[i]);
+    }
+    this.#bridgeMap = [topBridge, bottomBridge];
+  }
+
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
   }
