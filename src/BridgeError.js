@@ -4,7 +4,7 @@ const { MESSAGE } = require("./constants/CONSTANT");
 const BridgeError = {
   size(size) {
     try {
-      throw new Error(`[ERROR] "${size}"는 올바른 입력값이 아닙니다.`);
+      throw new Error(MESSAGE.ERROR.FEEDBACK(size));
     } catch (error) {
       Console.print(error.message);
       Console.print(MESSAGE.ERROR.SIZE);
@@ -13,7 +13,7 @@ const BridgeError = {
   },
   move(moveInput) {
     try {
-      throw new Error(`[ERROR] "${moveInput}"는 올바른 입력값이 아닙니다.`);
+      throw new Error(MESSAGE.ERROR.FEEDBACK(moveInput));
     } catch (error) {
       Console.print(error.message);
       Console.print(MESSAGE.ERROR.MOVE);
@@ -22,7 +22,7 @@ const BridgeError = {
   },
   command(command) {
     try {
-      throw new Error(`[ERROR] "${command}"는 올바른 입력값이 아닙니다.`);
+      throw new Error(MESSAGE.ERROR.FEEDBACK(command));
     } catch (error) {
       Console.print(error.message);
       return false;
