@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { INPUT_TEXT, ERROR_TEXT, NUMBER } = require('./Constant');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
@@ -13,14 +14,14 @@ const InputView = {
    */
 
   start() {
-    this.bridgeCount = 0;
-    this.roundCount = 1;
+    this.bridgeCount = NUMBER.INITAIL_BRIDGE;
+    this.roundCount = NUMBER.INITAIL_ROUND;
     this.bridgeGame = new BridgeGame(this.bridgeCount);
     this.readBridgeSize();
   },
 
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
+    Console.readLine(INPUT_TEXT.SIZE, (answer) => {
       try {
         this.inputBridgeSizeException(answer);
       } catch (err) {
@@ -33,7 +34,7 @@ const InputView = {
   inputBridgeSizeException(answer) {
     const ONLY_NUMBER = /^[3-9]{1}$|^[1-2]{1}[0-9]{1}$|^3{1}0{1}$/;
     if (!ONLY_NUMBER.test(answer)) {
-      throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
+      throw ERROR_TEXT.SIZE;
     }
     if (ONLY_NUMBER.test(answer)) {
       return this.bridgeSizetoArr(answer);
@@ -52,7 +53,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
+    Console.readLine(INPUT_TEXT.MOVEMENT, (answer) => {
       try {
         this.readMovingException(answer);
       } catch (err) {
@@ -65,7 +66,7 @@ const InputView = {
   readMovingException(letter) {
     const LimitedMovement = /[UD]/;
     if (!LimitedMovement.test(letter)) {
-      throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
+      throw ERROR_TEXT.MOVEMENT;
     }
     if (LimitedMovement.test(letter)) {
       this.letter = letter;
@@ -108,7 +109,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요', (answer) => {
+    Console.readLine(INPUT_TEXT.QUIT_OR_RETRY, (answer) => {
       try {
         this.readGameCommandException(answer);
       } catch (err) {
@@ -121,7 +122,7 @@ const InputView = {
   readGameCommandException(finishLetter) {
     const LimitedMovement = /[RQ]/;
     if (!LimitedMovement.test(finishLetter)) {
-      throw '[ERROR] 대문자 R 과 Q 를 입력해주세요.';
+      throw ERROR_TEXT.QUIT_OR_RETRY;
     }
     if (LimitedMovement.test(finishLetter)) {
       return this.finishorRestartGame(finishLetter);
@@ -145,7 +146,7 @@ const InputView = {
   },
 
   resetOutputBridge() {
-    this.bridgeCount = 0;
+    this.bridgeCount = NUMBER.INITAIL_BRIDGE;
     this.bridgeGame.retry();
     OutputView.resetOutputBridge();
   },
