@@ -13,7 +13,7 @@
 > ┃ ┣📜BridgeRandomNumberGenerator.js
 > ┃ ┗📜Constants.js
 > ┣📦validation
-> ┃ ┗📜LottoGameOperator.js
+> ┃ ┗📜Validation.js
 > ┣📦view
 > ┃ ┣📜InputView.js
 > ┃ ┗📜OutputView.js
