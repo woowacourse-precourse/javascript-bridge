@@ -38,6 +38,5 @@ module.exports = {
   UTIL,
   INPUT,
   OUTPUT,
-  NOT_CHOOSE,
   BRIDGE,
 };
