@@ -48,7 +48,7 @@ class BridgeGameProceed {
             this.bridgeGame.storage(result);
             this.dividePath(result);
         } catch (error) {
-            Console.print(error.message);
+            Console.print(`${error.message}\n`);
             this.game.call(this);
         }
     }
@@ -81,7 +81,7 @@ class BridgeGameProceed {
             if (retryOrNot === "R") this.callRetry();
             if (retryOrNot === "Q") this.callFail.call(this); 
         } catch (error) {
-            Console.print(error.message);
+            Console.print(`${error.message}\n`);
             this.fail.call(this);
         }
     }
