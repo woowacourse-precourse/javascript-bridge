@@ -32,13 +32,13 @@ class MainController {
    * @param userMovingInput {string} [유저 이동 input]
    * @param mainController [메인 컨트롤러]
    */
-  onUserMovingInput(userMovingInput, mainController) {
+  processUserMovingInput(userMovingInput, mainController) {
     mainController.userController.onUserMovingInput(userMovingInput);
   }
 
   // 유저 이동 입력 연결 메서드
   readUserMovingInput() {
-    InputView.readMoving(this.onUserMovingInput, this);
+    InputView.readMoving(this.processUserMovingInput, this);
   }
 
   /**
