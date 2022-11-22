@@ -2,7 +2,7 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGES, BRIDGE } = require("./Constants/Constants");
+const { MESSAGES, BRIDGE, NUMBERS } = require("./Constants/Constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
@@ -20,7 +20,11 @@ const InputView = {
   },
 
   readBridgeSize() {
-    const gameRec = { moveNum: 0, attemptNum: 1, bridgeAnswer: [] };
+    const gameRec = {
+      moveNum: NUMBERS.MOVENUM_START,
+      attemptNum: NUMBERS.ATTEMPTNUM_START,
+      bridgeAnswer: [],
+    };
     MissionUtils.Console.readLine(MESSAGES.ENTER_SIZE, inputLen => {
       this.checkBridgeSizeInput(inputLen, gameRec);
     });
