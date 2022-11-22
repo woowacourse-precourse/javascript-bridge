@@ -17,7 +17,8 @@ class App {
   async play() {
     OutputView.printStartMessage();
     let size = await this.#startGame();
-    let [result, moves] = await this.#temp(size);
+    let [result, moves] = await this.#getGameResult(size);
+
     return this.#end(result, moves);
   }
 
@@ -25,33 +26,22 @@ class App {
     this.#game = new BridgeGame();
     let size = await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
     this.#game.makeBridge();
-    return size;
-  }
 
-  #end(result, moves) {
-    OutputView.printResult(result, this.#attempts, moves);
+    return size;
   }
 
   async #getAndSetBridgeSize() {
     const input = await InputView.readBridgeSize();
     this.#game.setSize(input);
+
     return Number(input);
   }
 
-  async #temp(size) {
+  async #getGameResult(size) {
     let [attemptResult, moves] = await this.#makeAttempt(size);
 
     if (!attemptResult) {
-      while (true) {
-        try {
-          let reply = await InputView.readGameCommand();
-          let retry = await this.#game.retry(reply);
-          if (retry) return this.#temp(size);
-          break;
-        } catch (error) {
-          OutputView.printError(error);
-        }
-      }
+      return this.#tryCatch(this.#readReplyAndCheckRetry.bind(this), size);
     }
 
     return [attemptResult, moves];
@@ -60,10 +50,22 @@ class App {
   async #makeAttempt(size) {
     this.#attempts++;
     let round = 0;
-    let moves = [];
+
+    return this.#playRounds(round, size);
+  }
+
+  async #readReplyAndCheckRetry(size) {
+    let reply = await InputView.readGameCommand();
+    let retry = await this.#game.retry(reply);
+
+    return retry ? this.#getGameResult(size) : null;
+  }
+
+  async #playRounds(round, size) {
+    const moves = [];
 
     while (round < size) {
-      let [moveResult, command] = await this.#playRound(round, moves);
+      let [moveResult, command] = await this.#tryCatch(this.#playRound.bind(this), round, moves);
       moves[round++] = [moveResult, command];
 
       if (!moveResult) return [false, [...moves]];
@@ -72,25 +74,23 @@ class App {
     return [true, [...moves]];
   }
 
-  // round 에서 프린트까지!
   async #playRound(currentRound, moves) {
-    while (true) {
-      try {
-        // 이거 3개를 함수로 묶어버리면 될 듯
-        let command = await InputView.readMoving();
-        let moveResult = await this.#game.move(command, currentRound);
-        OutputView.printMap(moves.concat([[moveResult, command]]));
-        return [moveResult, command];
-      } catch (error) {
-        OutputView.printError(error);
-      }
-    }
+    let command = await InputView.readMoving();
+    let moveResult = await this.#game.move(command, currentRound);
+    let updatedMoves = moves.concat([[moveResult, command]]);
+    OutputView.printMap(updatedMoves);
+
+    return [moveResult, command];
   }
 
-  async #tryCatch(tryfunc) {
+  async #end(result, moves) {
+    OutputView.printResult(result, this.#attempts, moves);
+  }
+
+  async #tryCatch(tryfunc, ...args) {
     while (true) {
       try {
-        const result = await tryfunc();
+        const result = await tryfunc(...args);
         return result;
       } catch (error) {
         OutputView.printError(error);
@@ -100,3 +100,5 @@ class App {
 }
 
 module.exports = App;
+const app = new App();
+app.play();
