@@ -1,5 +1,5 @@
-const {Console} = require("@woowacourse/mission-utils");
-const { Message } = require("./ViewMakers");
+const { Console } = require("@woowacourse/mission-utils");
+const { Message } = require("../constants/Constants");
 const Validation = require("./InputValidation");
 
 const InputView = {

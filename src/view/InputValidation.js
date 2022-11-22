@@ -1,4 +1,4 @@
-const { Message } = require("./ViewMakers");
+const { GameSetting, Message } = require("../constants/Constants");
 const { Console } = require("@woowacourse/mission-utils");
 
 const Validation = {
@@ -8,19 +8,19 @@ const Validation = {
     if (!check.test(sizeInput)) {
       throw new Error(Message.BRIDGE_SIZE_NOT_NUMBER);
     }
-    if(sizeInput<3 || sizeInput>20){
+    if(sizeInput<GameSetting.BRIDGE_MIN || sizeInput>GameSetting.BRIDGE_MAX){
       throw new Error(Message.BRIDGE_SIZE_OUT_OF_RANGE);
     }
   },
 
   checkMoving(movingInput){
-    if (!(movingInput==='U' || movingInput==='D')){
+    if (!(movingInput===GameSetting.UP || movingInput===GameSetting.DOWN)){
       throw new Error(Message.MOVING_NOT_VALID);
     }
   },
 
   checkOption(optionInput){
-    if (!(optionInput==='Q' || optionInput==='R')){
+    if (!(optionInput===GameSetting.QUIT || optionInput===GameSetting.RETRY)){
       throw new Error(Message.OPTION_NOT_VALID);
     }
   },

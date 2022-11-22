@@ -1,6 +1,7 @@
 const OutputView = require("./view/OutputView");
 const InputView = require("./view/InputView");
 const BridgeGame = require("./BridgeGame");
+const { GameSetting } = require("./constants/Constants");
 
 class BridgePlay{
 
@@ -21,23 +22,23 @@ class BridgePlay{
 
   playNext(){
     switch(this.bridgeGame.status()){
-      case 0: // CAN NOT MOVE
+      case GameSetting.CAN_NOT_MOVE: 
         InputView.readGameCommand(this);
         break;
-      case 1: // CAN MOVE
+      case GameSetting.CAN_MOVE:
         this.newRound();
         break;
-      case 2: // MOVE COMPLETE
+      case GameSetting.MOVE_COMPLETE:
         this.playEnd();
     }
   }
 
   endOrRetry(option){
-    if(option==='R'){
+    if(option===GameSetting.RETRY){
       this.bridgeGame.retry();
       this.newRound();
       return;
-    }//option==='Q'
+    }//option===GameSetting.QUIT
     this.playEnd();
   }
 

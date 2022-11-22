@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { Message, Map, Result } = require("./ViewMakers");
+const { Map, Result } = require("./ViewMakers");
+const { GameSetting, Message, ResultElement } = require("../constants/Constants");
 
 const OutputView = {
 
@@ -8,17 +9,17 @@ const OutputView = {
   },
 
   printMap(bridge, moved){
-    const upLine = Map.makeLine(bridge, moved, 'U');
-    const downLine = Map.makeLine(bridge, moved, 'D');
+    const upLine = Map.makeLine(bridge, moved, GameSetting.UP);
+    const downLine = Map.makeLine(bridge, moved, GameSetting.DOWN);
     Console.print(Map.makeMap(upLine, downLine));
   },
 
   printResult(bridge, moved, attempts) {
-    Console.print(Result.GAMERESULT);
+    Console.print(ResultElement.GAMERESULT);
     this.printMap(bridge, moved);
-    Console.print(Result.IS_SUCCESS + `${Result.makeStringResult(bridge, moved)}`);
-    Console.print(Result.GAME_ATTEMPTS + `${attempts}`);
-    
+    Console.print(ResultElement.IS_SUCCESS + `${Result.makeStringResult(bridge, moved)}`);
+    Console.print(ResultElement.GAME_ATTEMPTS + `${attempts}`);
+
     Console.close();
   },
 
