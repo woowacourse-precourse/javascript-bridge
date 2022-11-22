@@ -10,6 +10,10 @@ class Validator {
 		if (!(move === 'U' || move === 'D'))
 			throw new Error('[ERROR] 이동할 칸은 U/D 중 하나여야 합니다.');
 	}
+	static isValidCommand(command) {
+		if (!(command === 'R' || command === 'Q'))
+			throw new Error('[ERROR] 커맨드는 R/Q 중 하나여야 합니다.');
+	}
 }
 
 module.exports = Validator;

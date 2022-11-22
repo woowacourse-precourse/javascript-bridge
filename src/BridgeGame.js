@@ -107,6 +107,8 @@ class BridgeGame {
 	}
 
 	handleRetryCommand(command) {
+		const isValid = this.validateRetryCommand(command);
+		if (!isValid) return;
 		if (command === 'R') {
 			this.trace = this.trace.slice(0, -1);
 			this.tryCnt += 1;
@@ -114,6 +116,17 @@ class BridgeGame {
 			return;
 		}
 		this.finish();
+	}
+
+	validateRetryCommand(command) {
+		try {
+			Validator.isValidCommand(command);
+			return true;
+		} catch (e) {
+			ViewManager.error(e);
+			this.retry();
+			return false;
+		}
 	}
 
 	finish() {
