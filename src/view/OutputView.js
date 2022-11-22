@@ -25,9 +25,8 @@ const OutputView = {
    */
   printResult(result, tryCount, map) {
     Console.print(GAME.END);
-
     this.printMap(map);
-    Console.print(GAME.GAME_SUCCESS + result);
+    Console.print(GAME.IS_GAME_SUCCESS + result);
     Console.print(GAME.GAME_TRY_COUNT + tryCount);
     Console.close();
   },

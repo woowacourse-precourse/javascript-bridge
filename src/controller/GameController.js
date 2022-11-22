@@ -1,6 +1,7 @@
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
+const { GAME } = require('../utils/constant');
 
 class GameController {
   constructor() {
@@ -64,7 +65,7 @@ class GameController {
   }
 
   end(isDone) {
-    const result = isDone ? '성공' : '실패';
+    const result = isDone ? GAME.SUCCESS : GAME.FAIL;
     OutputView.printResult(result, this.game.getTryCount(), this.game.getMap());
   }
 }

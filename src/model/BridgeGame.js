@@ -1,6 +1,7 @@
 const Bridge = require('./Bridge');
 const Moving = require('./Moving');
 const GameCommand = require('./GameCommand');
+const { SYMBOL } = require('../utils/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -33,25 +34,25 @@ class BridgeGame {
 
   setTopSide(isSuccess) {
     if (isSuccess) {
-      this.topSide.push('O');
-      this.downSide.push(' ');
+      this.topSide.push(SYMBOL.SUCCESS);
+      this.downSide.push(SYMBOL.BLANK);
     }
 
     if (!isSuccess) {
-      this.topSide.push('X');
-      this.downSide.push(' ');
+      this.topSide.push(SYMBOL.FAIL);
+      this.downSide.push(SYMBOL.BLANK);
     }
   }
 
   setDownSide(isSuccess) {
     if (isSuccess) {
-      this.topSide.push(' ');
-      this.downSide.push('O');
+      this.topSide.push(SYMBOL.BLANK);
+      this.downSide.push(SYMBOL.SUCCESS);
     }
 
     if (!isSuccess) {
-      this.topSide.push(' ');
-      this.downSide.push('X');
+      this.topSide.push(SYMBOL.BLANK);
+      this.downSide.push(SYMBOL.FAIL);
     }
   }
 
