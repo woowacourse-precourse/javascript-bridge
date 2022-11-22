@@ -25,6 +25,13 @@ class BridgeGame {
       throw Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
   }
+
+  validateUnd(und) {
+    console.log(und);
+    if (!(und === 'D' || und === 'U')) {
+      throw Error('[ERROR] 대문자 U , D 둘 중 하나만 입력해주세요.');
+    }
+  }
 }
 
 module.exports = BridgeGame;
