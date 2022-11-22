@@ -45,10 +45,17 @@ class InputHandling {
   handleGameCommand(command) {
     try {
       Validation.checkRestartOrDone(command);
+      this.decideRetryOrDone(command);
     } catch (err) {
       Console.print(err);
       InputView.readGameCommand(this.handleGameCommand.bind(this));
     }
+  }
+
+  decideRetryOrDone(command) {
+    const gameOutcome = this.bridgeGame.retry(command);
+    if (gameOutcome === GAME_OUTCOME.RESTART) InputView.readMoving(this.handleMovingValue.bind(this));
+    if (gameOutcome === GAME_OUTCOME.QUIT) Console.close();
   }
 }
 
