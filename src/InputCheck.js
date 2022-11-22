@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const InputView = require("./InputView");
 
 const InputCheck = {
   checkBridgeSize(inputBridgeSize) {
@@ -7,14 +8,15 @@ const InputCheck = {
   },
 
   isNumber(inputBridgeSize) {
+    const notNum =isNaN(inputBridgeSize)
     try {
-      if (isNaN(inputBridgeSize)) {
+      if (notNum) {
         throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
       }
     } catch (e) {
       Console.print(e.message);
-      return true;
     }
+    return !notNum
   },
 
   isCorrectRange(inputBridgeSize) {
