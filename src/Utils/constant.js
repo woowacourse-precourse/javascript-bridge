@@ -15,6 +15,11 @@ const MESSAGE = {
   },
 };
 
+const RANDOM = {
+  UP: 1,
+  DOWN: 0,
+};
+
 const BRIDGE = {
   MIN_LENGTH: 3,
   MAX_LENGTH: 20,
@@ -41,4 +46,5 @@ module.exports = {
   BRIDGE,
   ERROR,
   BUTTON,
+  RANDOM,
 };
