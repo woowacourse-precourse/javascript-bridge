@@ -1,7 +1,7 @@
 class InputError extends Error {
-  constructor(kind, message) {
+  constructor(name, message) {
     super(message);
-    this.kind = kind;
+    this.name = name;
   }
 }
 module.exports = InputError;
