@@ -1,12 +1,12 @@
 const BridgeGame = require("./BridgeGame");
-const OutputView = require("./OutputView");
+const GameManager = require("./GameManager");
 
 class App {
 
-
   play() {
-    OutputView.printStartMessage();
+    this.gameManager = new GameManager();
     this.bridgeGame = new BridgeGame();
+    this.gameManager.printStart();
     this.bridgeGame.start();
   }
 }
