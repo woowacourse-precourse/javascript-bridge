@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const Validator = require('../utils/Validator');
-const { BRIDGE_STRING, GAME_COMMAND_STRING } = require('../utils/constants');
+const Validator = require('../utils/Validator');
+const { BRIDGE_STRING, GAME_COMMAND_STRING } = require('../utils/constants');
 
 const InputView = {
   INPUT_MESSAGE: {
