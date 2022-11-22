@@ -1,6 +1,7 @@
 const { BRIDGE_RANGE, MOVING_TYPE, GAME_COMMAND, ERROR_MESSAGE } = require('../constants');
 const { isNull, isInRange, isOneInArray, isOneSize } = require('./Utils');
 
+/** 유효성 검사 조건들을 모아둔 객체 */
 const ValidationCondition = {
   checkNull: (source) => {
     if (isNull(source)) {
@@ -33,6 +34,7 @@ const ValidationCondition = {
   },
 };
 
+/** 각 타입에 맞게 유효성 결과를 반환하는 객체 */
 const Validation = {
   validateBridgeSize(source) {
     const { LOWER_INCLUSIVE: lower, UPPER_INCLUSIVE: upper } = BRIDGE_RANGE;

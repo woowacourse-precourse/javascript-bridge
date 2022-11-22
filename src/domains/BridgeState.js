@@ -1,14 +1,21 @@
 const { MOVING_TYPE, OUTPUT_CONSTANTS } = require('../constants');
 
+/** @type {(number | null)} */
 let bridgeSize = null;
-/**
- * @type {Array<string>}
- */
+
+/** @type {(Array<string> | null)} */
 let userBridge = null;
+
+/** @type {(Array<string> | null)} */
 let answerBridge = null;
+
+/** @type {number} */
 let tryCount = 0;
+
+/** @type {boolean} */
 let isClear = false;
 
+/** BridgeGame에 대한 State를 저장하는 객체 */
 const BridgeState = {
   initializeState() {
     bridgeSize = null;
@@ -22,6 +29,7 @@ const BridgeState = {
     return bridgeSize;
   },
 
+  /** @param {number} inputSize 다리의 크기 */
   setBridgeSize(inputSize) {
     bridgeSize = inputSize;
   },
@@ -30,6 +38,7 @@ const BridgeState = {
     return userBridge;
   },
 
+  /** @param {Array<string>} inputBridge 유저의 다리 데이터 */
   setUserBridge(inputBridge) {
     userBridge = inputBridge;
   },
@@ -38,6 +47,7 @@ const BridgeState = {
     userBridge = [];
   },
 
+  /** @param {MOVE_TYPE} moving 건너갈 칸 */
   addUserBridgeMoving(moving) {
     if (!userBridge) userBridge = [];
     userBridge.push(moving);
@@ -46,7 +56,7 @@ const BridgeState = {
   getAnswerBridge() {
     return answerBridge;
   },
-
+  /** @param {Array<string>} inputAnswerBridge 정답 다리 데이터 */
   setAnswerBridge(inputAnswerBridge) {
     answerBridge = inputAnswerBridge;
   },
@@ -63,6 +73,7 @@ const BridgeState = {
     return isClear;
   },
 
+  /** @param {boolean} inputIsClear 게임 클리어 여부 */
   setIsClear(inputIsClear) {
     isClear = inputIsClear;
   },
