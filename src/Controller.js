@@ -46,6 +46,7 @@ class Controller {
       this.validator.isUpAndDown(square);
       this.setBridge(square);
       OutputView.printMap(this.#currentBridge);
+      this.checkGameFinished();
     } catch (error) {
       Console.print(error);
       this.getDirection();
@@ -60,6 +61,11 @@ class Controller {
     this.#currentBridge.up = upBridge;
     this.#currentBridge.down = downBridge;
     this.#correct = correct;
+  }
+
+  checkGameFinished() {
+    if (this.#currentBridge.up.length === this.#bridge.length && this.#correct)
+      return true;
   }
 }
 
