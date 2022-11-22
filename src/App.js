@@ -9,6 +9,7 @@ class App {
   play() {
     OutputView.startGame();
     this.#readBridgeSize();
+    this.#readMoving();
   }
 
   #readBridgeSize() {
@@ -21,6 +22,26 @@ class App {
       this.#readBridgeSize();
     }
   }
+
+  #readMoving() {
+    const moving = InputView.readMoving();
+    try {
+      Validation.isValidMoving(moving);
+      this.#toMove(moving);
+    } catch (error) {
+      OutputView.printError(error.message);
+      this.#readMoving();
+    }
+  }
+
+  #toMove(moving) {
+    const isCorrect = this.#bridgeGame.move(moving);
+    OutputView.printMap(this.#bridgeGame.passedUpperBridgePads);
+    OutputView.printMap(this.#bridgeGame.passedLowerBridgePads);
+
+  }
+
+  
 }
 
 module.exports = App;
