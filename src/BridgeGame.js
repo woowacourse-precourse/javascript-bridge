@@ -15,14 +15,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(step, moving) {
-    const isMovable = moving === this.#bridge.charAt(step);
+    const isMovable = moving === this.#bridge[step];
 
     return isMovable;
   }
 
   getStepsSoFar(step) {
-    const previousSteps = this.#bridge.substr(0, step);
-    const currentStep = this.#bridge.charAt(step);
+    const previousSteps = this.#bridge.slice(0, step).join('');
+    const currentStep = this.#bridge[step];
     return [previousSteps, currentStep];
   }
 
