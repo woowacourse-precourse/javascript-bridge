@@ -80,6 +80,7 @@ const OutputView = {
    */
   printResult(gameResult, tryCount) {
     MissionUtils.Console.print(this.RESULT_VIEW(gameResult, tryCount));
+    MissionUtils.Console.close();
   },
 };
 
