@@ -1,3 +1,5 @@
+const MoveCommand = require('./constants/MoveCommand');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -13,7 +15,7 @@ const BridgeMaker = {
 			.fill(0)
 			.forEach(() => {
 				const number = generateRandomNumber();
-				bridge.push(number ? 'U' : 'D');
+				bridge.push(number ? MoveCommand.UP : MoveCommand.DOWN);
 			});
 		return bridge;
 	},

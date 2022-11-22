@@ -1,10 +1,12 @@
+const MoveCommand = require('./constants/MoveCommand');
+
 const MapMaker = {
 	up: [],
 	down: [],
 	makeMap(move, isCorrect, isFinish = false) {
 		if (isCorrect && isFinish) return this.styleMap();
-		if (move === 'U') this.fillUp(isCorrect);
-		if (move === 'D') this.fillDown(isCorrect);
+		if (move === MoveCommand.UP) this.fillUp(isCorrect);
+		if (move === MoveCommand.DOWN) this.fillDown(isCorrect);
 		const map = this.styleMap();
 		if (!isCorrect) this.clean();
 		return map;
