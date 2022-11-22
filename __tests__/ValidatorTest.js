@@ -117,4 +117,14 @@ describe('Validator 테스트', () => {
       BridgeValidator.checkPosition(9, 10);
     }).not.toThrow();
   });
+
+  test('문자도 Number을 거치면 숫자이다.', () => {
+    expect(() => {
+      BridgeValidator.isNumber('가');
+    }).toThrow();
+  });
+  test('문자도 Number을 거치면 숫자이다.', () => {
+    const isNumber = BridgeValidator.isNumber('1');
+    expect(isNumber).toEqual(true);;
+  });
 });
