@@ -46,9 +46,11 @@ class BridgeMap {
   }
 
   static createMapInfo({ gameState, originBridgeSize, tryCount }) {
+    const lastGameState = gameState.slice(-1)[0];
+
     return {
       map: `${this.upBridge}\n${this.downBridge}`,
-      lastResult: gameState.at(-1)[1],
+      lastResult: lastGameState[1],
       originBridgeSize,
       currentBridgeSize: gameState.length,
       tryCount,
