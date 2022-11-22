@@ -27,32 +27,38 @@ class BridgeGame {
 
   move(movingCommand) {
     const movingRouteIndex = this.#movingRoute[0].length;
+
     if (movingCommand === MOVING.UPPER) {
-      if (movingCommand === this.#bridge[movingRouteIndex]) {
-        this.#movingRoute[0].push(MOVING.RIGHT_ANSWER);
-        this.#movingRoute[1].push(MOVING.SPACE);
-      } else {
-        this.#movingRoute[0].push(MOVING.WRONG_ANSWER);
-        this.#movingRoute[1].push(MOVING.SPACE);
-      }
+      return this.moveToUpper(movingCommand, movingRouteIndex);
     } else {
-      if (movingCommand === this.#bridge[movingRouteIndex]) {
-        this.#movingRoute[1].push(MOVING.RIGHT_ANSWER);
-        this.#movingRoute[0].push(MOVING.SPACE);
-      } else {
-        this.#movingRoute[1].push(MOVING.WRONG_ANSWER);
-        this.#movingRoute[0].push(MOVING.SPACE);
-      }
+      return this.moveToLower(movingCommand, movingRouteIndex);
+    }
+  }
+
+  moveToUpper(movingCommand, movingRouteIndex) {
+    if (movingCommand === this.#bridge[movingRouteIndex]) {
+      this.#movingRoute[0].push(MOVING.RIGHT_ANSWER);
+      this.#movingRoute[1].push(MOVING.SPACE);
+    } else {
+      this.#movingRoute[0].push(MOVING.WRONG_ANSWER);
+      this.#movingRoute[1].push(MOVING.SPACE);
     }
     OutputView.printMap(this.#movingRoute);
     return this.#movingRoute;
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  moveToLower(movingCommand, movingRouteIndex) {
+    if (movingCommand === this.#bridge[movingRouteIndex]) {
+      this.#movingRoute[1].push(MOVING.RIGHT_ANSWER);
+      this.#movingRoute[0].push(MOVING.SPACE);
+    } else {
+      this.#movingRoute[1].push(MOVING.WRONG_ANSWER);
+      this.#movingRoute[0].push(MOVING.SPACE);
+    }
+    OutputView.printMap(this.#movingRoute);
+    return this.#movingRoute;
+  }
+
   retry() {
     this.#movingRoute = [[], []];
     this.#UserTryCount += 1;
