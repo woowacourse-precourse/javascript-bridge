@@ -1,3 +1,4 @@
+const { GAME_OUTCOME } = require('./Constants');
 const MapMaker = require('./MapMaker');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -16,7 +17,7 @@ class BridgeGame {
     if (direction !== this.#answerBridgeArray[this.#bridgeIndex - 1]) return this.stop(direction);
     if (this.#bridgeIndex === this.#answerBridgeArray.length) {
       this.mapMaker.makeFinalSuccess(direction);
-      return '우승';
+      return GAME_OUTCOME.FINAL_SUCCESS;
     }
     return this.move(direction);
   }
@@ -28,12 +29,12 @@ class BridgeGame {
   move(direction) {
     this.#bridgeIndex += 1;
     this.mapMaker.selectRightBridge(direction);
-    return '성공';
+    return GAME_OUTCOME.SUCCESS;
   }
 
   stop(direction) {
     this.mapMaker.selectWrongBridge(direction);
-    return '실패';
+    return GAME_OUTCOME.FAIL;
   }
 
   /**

@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { GAME_OUTCOME } = require('./Constants')
 const InputView = require('./InputView');
 const Validation = require('./Validation');
 const BridgeGame = require('./BridgeGame');
@@ -37,9 +38,9 @@ class InputHandling {
 
   decideNextConsolePrint(direction) {
     const gameOutcome = this.bridgeGame.decideMoveOrStop(direction);
-    if (gameOutcome === '실패') InputView.readGameCommand();
-    if (gameOutcome === '우승') Console.close();
-    if (gameOutcome === '성공') InputView.readMoving(this.handleMovingValue.bind(this));
+    if (gameOutcome === GAME_OUTCOME.FAIL) InputView.readGameCommand();
+    if (gameOutcome === GAME_OUTCOME.FINAL_SUCCESS) Console.close();
+    if (gameOutcome === GAME_OUTCOME.SUCCESS) InputView.readMoving(this.handleMovingValue.bind(this));
   }
 }
 
