@@ -1,4 +1,4 @@
-const { DIRECTION, OTHERSIDE_ELEMENT } = require('../constant');
+const { DIRECTION, MAP_ELEMENT } = require('../constant');
 
 class BridgeMap {
   #map;
@@ -18,7 +18,8 @@ class BridgeMap {
   updateMap(direction, elem) {
     const otherSide = DIRECTION[(DIRECTION[direction] + 1) % 2];
     this.#map[direction].push(elem);
-    this.#map[otherSide].push(OTHERSIDE_ELEMENT);
+    this.#map[otherSide].push(MAP_ELEMENT.OTHERSIDE);
+
     return Object.values(this.#map);
   }
 }

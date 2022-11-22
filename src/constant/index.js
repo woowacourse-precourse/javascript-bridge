@@ -40,6 +40,7 @@ const COMMAND = Object.freeze({
 const MAP_ELEMENT = Object.freeze({
   CROSS: 'O',
   FAIL: 'X',
+  OTHERSIDE: ' ',
 });
 
 const REGEX = Object.freeze({
@@ -47,8 +48,6 @@ const REGEX = Object.freeze({
 });
 
 const CAN_NOT_INCLUDES = ' ';
-
-const OTHERSIDE_ELEMENT = ' ';
 
 module.exports = {
   MESSAGE,
@@ -59,5 +58,4 @@ module.exports = {
   BRIDGE_SIZE,
   REGEX,
   MAP_ELEMENT,
-  OTHERSIDE_ELEMENT,
 };
