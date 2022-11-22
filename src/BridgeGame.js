@@ -30,8 +30,14 @@ class BridgeGame {
           OutputView.printMap({ bridge: this.bridge, trace: this.trace, positon: this.position });
           if (!IS_CORRECT) this.retry();
           else {
-            this.position += 1;
-            this.move();
+            const IS_SUCCESS = this.position === this.size - 1;
+
+            if (IS_SUCCESS) {
+              OutputView.printResult({ IS_SUCCESS, that: this });
+            } else {
+              this.position += 1;
+              this.move();
+            }
           }
         } else {
           throw new Error('U, D 만 입력 가능 합니다.');
@@ -60,7 +66,6 @@ class BridgeGame {
   setBridge(size) {
     this.size = size;
     this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    console.log(this.bridge);
     this.trace = new Array(size).fill(' ');
     this.move();
   }
