@@ -33,16 +33,19 @@ function getMap(bridge, path) {
   const map = initMap(path.length);
 
   for(let i = 0; i < path.length; i++) {
-    if(bridge[i] === path[i]) {
+    if (bridge[i] === path[i]) {
       map[path[i]][i] = 'O';
-    } else {
+    }
+    else {
       map[path[i]][i] = 'X';
     }
   }
   return map;
 }
+
 function initMap(length) {
   const map = {};
+  
   map[InputView.INPUT_UP_MOVING] = [];
   map[InputView.INPUT_DOWN_MOVING] = [];
 
@@ -55,10 +58,7 @@ function initMap(length) {
 }
 
 function getMapLine(map, line) {
-  let string = '[ ';
-  string += map[line].join(' | ');
-  string += ' ]';
-  return string;
+  return `[ ${map[line].join(' | ')} ]`;
 }
 
 module.exports = OutputView;
