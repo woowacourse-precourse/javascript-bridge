@@ -1,6 +1,7 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const Checker = require('./utils/Checker');
+const { convertToBridgeMap } = require('./utils/Converter');
 const Judge = require('./utils/Judge');
 
 /**
@@ -12,16 +13,8 @@ class BridgeGame {
   #movingState;
   constructor(n) {
     this.#bridge = makeBridge(n, generate);
-    this.#tryCnt = 0;
-    this.init();
-  }
-
-  /**
-   * 다리 건너기 게임 라운드 초기화
-   */
-  init() {
+    this.#tryCnt = 1;
     this.#movingState = [];
-    this.countTry();
   }
 
   /**
@@ -39,21 +32,15 @@ class BridgeGame {
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {
-    this.init();
-  }
-
-  /**
-   * 게임 시도 횟수를 센다.
-   */
-  countTry() {
-    this.#tryCnt++;
+    this.#movingState = [];
+    this.#tryCnt += 1;
   }
 
   /**
    * 게임 종료 여부를 확인한다.
    * @returns {boolean}
    */
-  checkGameOver() {
+  getIsGameOver() {
     return Checker.checkGameOver(this.#movingState, this.#bridge);
   }
 
@@ -61,7 +48,7 @@ class BridgeGame {
    * 게임 성공 여부를 확인한다.
    * @returns {boolean}
    */
-  judgeGameSuccess() {
+  getIsGameSuccess() {
     return Judge.judgeGameSuccess(this.#movingState, this.#bridge);
   }
 
@@ -74,11 +61,11 @@ class BridgeGame {
   }
 
   /**
-   * 게임 이동 상태를 조회한다.
-   * @returns {[string, boolean][]}
+   * 게임 이동 상태를 문자열로 반환한다.
+   * @returns {string}
    */
   getMovingState() {
-    return this.#movingState;
+    return convertToBridgeMap(this.#movingState);
   }
 }
 

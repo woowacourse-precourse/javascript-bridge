@@ -10,6 +10,7 @@ const {
 
 class App {
   #game;
+
   /**
    * 다리 건너기 게임을 실행한다.
    */
@@ -72,8 +73,8 @@ class App {
   handleMovingInput(input) {
     this.#game.move(input);
     OutputView.printMap(this.#game.getMovingState());
-    if (!this.#game.checkGameOver()) return this.askMove();
-    if (this.#game.judgeGameSuccess()) return this.end();
+    if (!this.#game.getIsGameOver()) return this.askMove();
+    if (this.#game.getIsGameSuccess()) return this.end();
     this.askRestart();
   }
 
@@ -113,7 +114,7 @@ class App {
     OutputView.printGameEnd();
     OutputView.printMap(this.#game.getMovingState());
     OutputView.printResult(
-      this.#game.judgeGameSuccess(),
+      this.#game.getIsGameSuccess(),
       this.#game.getTryCnt()
     );
   }

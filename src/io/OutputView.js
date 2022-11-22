@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_MSG, COMMON, GAME_RESULT } = require('../common/Constant');
-const { convertToBridgeMap } = require('../utils/Converter');
 const { success, fail } = GAME_RESULT;
 
 /**
@@ -8,11 +7,11 @@ const { success, fail } = GAME_RESULT;
  */
 const OutputView = {
   /**
-   * 현재까지 이동한 다리의 상태를 정/home/ahj/javascript-bridge/src/common해진 형식에 맞춰 출력한다.
-   * @param {[string, boolean][]} movingState 게임 상태
+   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
+   * @param {string} movingState 게임 상태
    */
   printMap(movingState) {
-    Console.print(convertToBridgeMap(movingState) + COMMON.newLine);
+    Console.print(movingState + COMMON.newLine);
   },
 
   /**
@@ -27,17 +26,17 @@ const OutputView = {
   },
 
   /**
-   * 게임 종료 메세지를 출력한다.
-   */
-  printGameEnd() {
-    Console.print(GAME_MSG.result);
-  },
-
-  /**
    * 게임 시작 메세지를 출력한다.
    */
   printGameStart() {
     Console.print(GAME_MSG.start + COMMON.newLine);
+  },
+
+  /**
+   * 게임 종료 메세지를 출력한다.
+   */
+  printGameEnd() {
+    Console.print(GAME_MSG.result);
   },
 
   /**
