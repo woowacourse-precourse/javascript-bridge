@@ -10,30 +10,19 @@ const InputView = {
         validator.is3To20(num);
         this.readMoving(BridgeGameSetter(num));
       } catch (error) {
-        this.errorHandlerInReadBridgeSize(error);
+        ErrorHandlers.errorHandlerInReadBridgeSize(error);
       }
     });
   },
-
-  errorHandlerInReadBridgeSize(error) {
-    Console.print(error);
-    InputView.readBridgeSize();
-  },
-
   readMoving(bridgeGame) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
       try {
         validator.isUorD(input);
         moveAndCheck(input, bridgeGame);
       } catch (error) {
-        this.errorHandlerInReadMoving(error, bridgeGame);
+        ErrorHandlers.errorHandlerInReadMoving(error, bridgeGame);
       }
     });
-  },
-
-  errorHandlerInReadMoving(error, bridgeGame) {
-    Console.print(error);
-    InputView.readMoving(bridgeGame);
   },
 
   readGameCommand(bridgeGame, blocks) {
@@ -42,9 +31,21 @@ const InputView = {
         validator.isRorQ(input);
         retryOrQuit(input, bridgeGame, blocks);
       } catch (error) {
-        this.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
+        ErrorHandlers.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
       }
     });
+  },
+};
+
+const ErrorHandlers = {
+  errorHandlerInReadBridgeSize(error) {
+    Console.print(error);
+    InputView.readBridgeSize();
+  },
+
+  errorHandlerInReadMoving(error, bridgeGame) {
+    Console.print(error);
+    InputView.readMoving(bridgeGame);
   },
 
   errorHandlerInReadGameCommand(error, bridgeGame, blocks) {
