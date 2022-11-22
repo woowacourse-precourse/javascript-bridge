@@ -6,26 +6,6 @@ const  generateRandomNumber  = require("./BridgeMaker");
 const BridgeMaker = require('./BridgeMaker');
 const generateNum = require('./BridgeRandomNumberGenerator');
 
-// 자 그러면 한가지 더 제약사항을 걸겠습니다
-// 그럼요
-/**
- * @returns {number}
- */
-function returnOne() { // 이 함수 내용 수정 가능
-  return 1; // 왜 배열밖에 안돼요
-}
-const asd = [returnOne()] // 수정 불가능
-console.log(asd) // 수정 가능
-
-// 이러면 어떻게되겠어요
-// 간단하잖아요
-// 왜 꼭 returnOne 안에서 배열을 만들어야해요
-// 밖에서 만들면 되지
-
-// 근데 그러면 여기서 1이 출력되겠죠 [1]이 아니라
-// 그러면 [1]을 출력하려면 어떻게해야되겠어요
-// 원하는것: 1이 담긴 배열 출력
-
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

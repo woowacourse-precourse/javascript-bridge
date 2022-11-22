@@ -18,7 +18,6 @@ const OutputView = {
       else tempStr1+=` ${arr1[i]} |`;
     }
     tempStr1+=']\n';
-   // MissionUtils.Console.print(tempStr);
 
     let tempStr2 ="";
     tempStr2+='[';
