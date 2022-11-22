@@ -52,49 +52,68 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("게임 재시작 테스트", () => {
-  // test("재시작1", () => {
-  //   const logSpy = getLogSpy();
-  //   mockRandoms([1, 0, 1]);
-  //   mockQuestions(["3", "D", "R", "U", "D", "U"]);
+  test("재시작1", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "D", "R", "U", "D", "U"]);
 
-  //   const app = new App();
-  //   app.play();
+    const app = new App();
+    app.play();
 
-  //   const log = getOutput(logSpy);
-  //   expectLogContains(log, [
-  //     "최종 게임 결과",
-  //     "[   ]",
-  //     "[ X ]",
-  //     "[ O |   | O ]",
-  //     "[   | O |   ]",
-  //     "게임 성공 여부: 성공",
-  //     "총 시도한 횟수: 2",
-  //   ]);
-  //   expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
-  // });
-  // test("재시작2", () => {
-  //   const logSpy = getLogSpy();
-  //   mockRandoms([1, 1, 0, 0, 1]);
-  //   mockQuestions(["5", "U", "D", "R", "U", "U", "U", "R", "U", "U", "D", "D", "U"]);
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+  test("재시작2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 1, 0, 0, 1]);
+    mockQuestions(["5", "U", "D", "R", "U", "U", "U", "R", "U", "U", "D", "D", "U"]);
 
-  //   const app = new App();
-  //   app.play();
+    const app = new App();
+    app.play();
 
-  //   const log = getOutput(logSpy);
-  //   expectLogContains(log, [
-  //     "최종 게임 결과",
-  //     "[ O |   ]",
-  //     "[   | X ]",
-  //     "[ O | O | X ]",
-  //     "[   |   |   ]",
-  //     "[ O | O |   |   | O ]",
-  //     "[   |   | O | O |   ]",
-  //     "게임 성공 여부: 성공",
-  //     "총 시도한 횟수: 3",
-  //   ]);
-  //   expectBridgeOrder(log, "[ O | O |   |   | O ]", "[   |   | O | O |   ]");
-  // });
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   ]",
+      "[   | X ]",
+      "[ O | O | X ]",
+      "[   |   |   ]",
+      "[ O | O |   |   | O ]",
+      "[   |   | O | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 3",
+    ]);
+    expectBridgeOrder(log, "[ O | O |   |   | O ]", "[   |   | O | O |   ]");
+  });
   test("게임 실패 후 재시작 없는 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[   ]", "[ X ]");
+  });
+
+    test("게임 실패 후 재시작 없는 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(["3", "D", "Q"]);

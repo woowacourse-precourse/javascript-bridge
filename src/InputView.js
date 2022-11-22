@@ -51,7 +51,6 @@ const InputView = {
 
     // 틀렸는지 확인
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
-      count += 1;
       // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
       console.log('틀림. 재시작? 종료?');
       OutputView.printMap(currentBridge);
@@ -74,6 +73,7 @@ const InputView = {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
       console.log(`재시작 여부 : ${input}, count: ${count}`);
       if(input==='R') {
+        count += 1;
         console.log('재시작 O');
         this.readMoving(game.retry(currentBridge), bridge, count);
       }
