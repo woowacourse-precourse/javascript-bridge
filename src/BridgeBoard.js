@@ -1,4 +1,5 @@
 const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class BridgeBoard {
   #bridgeBoard;
