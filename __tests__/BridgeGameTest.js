@@ -11,7 +11,7 @@ describe('다리 건너기 게임 테스트', () => {
   mockRandoms(['1', '0', '1']);
   const bridgeGame = new BridgeGame(new Bridge(3));
 
-  test('다리 건너기 테스트', () => {
+  test('다리 건너기 성공 테스트', () => {
     bridgeGame.move('U');
     const moveResult = bridgeGame.getMoveResult();
     const gameStatus = bridgeGame.getGameStatus();
@@ -20,7 +20,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(gameStatus).toEqual(0);
   });
 
-  test('다리 건너기 테스트', () => {
+  test('다리 건너기 성공 테스트', () => {
     bridgeGame.move('D');
     const moveResult = bridgeGame.getMoveResult();
     const gameStatus = bridgeGame.getGameStatus();
@@ -29,7 +29,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(gameStatus).toEqual(0);
   });
 
-  test('다리 건너기 테스트', () => {
+  test('다리 건너기 실패 테스트', () => {
     bridgeGame.move('D');
     const moveResult = bridgeGame.getMoveResult();
     const gameStatus = bridgeGame.getGameStatus();
@@ -39,11 +39,11 @@ describe('다리 건너기 게임 테스트', () => {
   });
 });
 
-describe('다리 건너기 게임 테스트', () => {
+describe('다리 건너기 게임 재시작 테스트', () => {
   mockRandoms(['1', '0', '1']);
   const bridgeGame = new BridgeGame(new Bridge(3));
 
-  test('다리 건너기 테스트', () => {
+  test('다리 건너기 성공 테스트', () => {
     bridgeGame.move('U');
     const moveResult = bridgeGame.getMoveResult();
     const gameStatus = bridgeGame.getGameStatus();
@@ -52,7 +52,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(gameStatus).toEqual(0);
   });
 
-  test('다리 건너기 테스트', () => {
+  test('다리 건너기 실패 테스트', () => {
     bridgeGame.move('U');
     const moveResult = bridgeGame.getMoveResult();
     const gameStatus = bridgeGame.getGameStatus();
