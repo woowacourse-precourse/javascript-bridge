@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
+const { FLAG } = require("./lib/constants");
 const OutputView = require("./OutputView");
 
 class GameController {
@@ -38,7 +39,8 @@ class GameController {
 
   checkRetry() {
     InputView.readGameCommand((command) => {
-      console.log(command);
+      if (command === FLAG.RETRY) this.game.retry(this.crossBridge.bind(this));
+      if (command === FLAG.QUIT) this.quit();
     });
   }
 
