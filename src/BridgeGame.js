@@ -1,6 +1,7 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./View/InputView");
+const { KEY } = require("./constants/constants");
 // 필드 추가 가능, 파일 경로 변경 가능, 메서드 이름 변경 불가능, 인자 변경 가능, 메서드 추가 가능
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 /**
@@ -44,13 +45,14 @@ class BridgeGame {
   start() {
     let location = 0;
     while (location <= this.#bridgeMap.length - 1) {
-      this.#correct = this.move(location++, InputView.readMoving());
+      this.#correct = this.move(location, InputView.readMoving());
       printMap(this.getBridgeMap(), location, this.#correct);
+      location += 1;
       if (!this.#correct) {
-        location = this.setCommand(game, location);
+        location = this.setCommand();
       }
     }
-    printResult(this, location, this.#correct);
+    printResult(this, location - 1, this.#correct);
   }
 
   setCommand() {

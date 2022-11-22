@@ -14,14 +14,14 @@ const OutputView = {
   },
 
   printMap(bridgeMap, location, correct) {
-    const map = { U: "[", D: "[" };
+    const maps = { U: "[", D: "[" };
     for (let i = 0; i < location; i++) {
-      map[bridgeMap[i]] += " O |";
-      map[OutputView.reverse(bridgeMap[i])] += "   |";
+      maps[bridgeMap[i]] += " O |";
+      maps[OutputView.reverse(bridgeMap[i])] += "   |";
     }
-    map[bridgeMap[location]] += correct ? " O ]" : "   ]";
-    map[OutputView.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
-    MissionUtils.Console.print(map[KEY.UP] + "\n" + map[KEY.DOWN]);
+    maps[bridgeMap[location]] += correct ? " O ]" : "   ]";
+    maps[OutputView.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
+    MissionUtils.Console.print(maps[KEY.UP] + "\n" + maps[KEY.DOWN]);
   },
 
   /**
