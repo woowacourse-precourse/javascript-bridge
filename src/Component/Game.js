@@ -3,12 +3,6 @@ const Bridge = require("./Bridge.js");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("../GameIO/OutputView");
 
-const MOVE = {
-  MOVE: "MOVE",
-  RESTART: "RESTART",
-  QUIT: "QUIT",
-};
-
 class Game {
   #bridge;
   #playCount;
@@ -60,7 +54,6 @@ class Game {
       this.getPrintResult();
     }
     if (IS_QUIT === "R") {
-      console.log("increase");
       this.increasePlayCount();
       this.bridgeGame.retry();
     }
