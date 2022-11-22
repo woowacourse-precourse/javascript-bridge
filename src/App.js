@@ -34,10 +34,10 @@ class App {
     InputView.readMoving(this.requestMovementDirection.bind(this));
   }
 
-  requestMovementDirection(moveCommand) {
+  requestMovementDirection(command) {
     try {
-      this.validator.checkMoveCommand(moveCommand);
-      OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand));
+      this.validator.checkMoveCommand(command);
+      OutputView.printMap(this.bridgeGame.drawBridgeMap(command));
       this.checkGameState();
     } catch (errorType) {
       OutputView.printError(errorType);
@@ -68,33 +68,33 @@ class App {
     return InputView.readGameCommand(this.requestRetryGame.bind(this));
   }
 
-  requestRetryGame(retryCommand) {
+  requestRetryGame(command) {
     try {
-      this.validator.checkRetryCommand(retryCommand);
-      this.checkRetryState(retryCommand);
+      this.validator.checkRetryCommand(command);
+      this.checkRetryState(command);
     } catch (errorType) {
       OutputView.printError(errorType);
       this.requestGameOverCommand();
     }
   }
 
-  checkRetryState(retryCommand) {
-    this.getQuitCommand(retryCommand);
-    this.getRetryCommand(retryCommand);
+  checkRetryState(command) {
+    this.getQuitCommand(command);
+    this.getRetryCommand(command);
   }
 
-  getQuitCommand(retryCommand) {
+  getQuitCommand(command) {
     const { quit } = GAME_COMMAND;
 
-    if (retryCommand === quit) {
+    if (command === quit) {
       this.#showResult();
     }
   }
 
-  getRetryCommand(retryCommand) {
+  getRetryCommand(command) {
     const { retry } = GAME_COMMAND;
 
-    if (retryCommand === retry) {
+    if (command === retry) {
       this.bridgeGame.retry();
       this.getBridgeMovementDirection();
     }
