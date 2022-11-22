@@ -40,7 +40,6 @@ class App {
         InputView.readMoving(this.#generatedBridge, this.#gameStatus);
         this.printBridge();
       }
-
       if (this.#gameStatus.wrongFlag) {
         this.chooseWrong();
         return;
