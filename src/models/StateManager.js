@@ -1,3 +1,5 @@
+const { GAME_STATUS } = require('../utils/constants');
+
 class StateManager {
   #stage;
 
@@ -21,20 +23,16 @@ class StateManager {
 
   retry() {
     this.#stage = 0;
-    this.#gameStatus = 'PLAYING';
+    this.#gameStatus = GAME_STATUS.PLAYING;
     this.#tryCount += 1;
   }
 
-  getStage() {
-    return this.#stage;
-  }
-
-  getGameStatus() {
-    return this.#gameStatus;
-  }
-
-  getTryCount() {
-    return this.#tryCount;
+  getGameState() {
+    return {
+      stage: this.#stage,
+      gameStatus: this.#gameStatus,
+      tryCount: this.#tryCount,
+    };
   }
 }
 

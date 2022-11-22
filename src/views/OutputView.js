@@ -6,6 +6,7 @@ const MESSAGE = Object.freeze({
   IS_CLEAR: (status) => `게임 성공 여부: ${status}`,
   TRY_COUNT: (count) => `총 시도한 횟수: ${count}`,
 });
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -13,6 +14,7 @@ const OutputView = {
   printStarting() {
     Console.print(`${MESSAGE.START}`);
   },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -25,6 +27,7 @@ const OutputView = {
   printError(error) {
     Console.print(`\n${error}`);
   },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

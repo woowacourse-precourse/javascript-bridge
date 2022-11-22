@@ -1,4 +1,10 @@
-const { BRIDGE } = require('../constants');
+const { MOVING } = require('../utils/constants');
+
+const MAP = Object.create({
+  PASS: 'O',
+  FAIL: 'X',
+  BLANK: ' ',
+});
 
 const MapGenerator = {
   topRow: [],
@@ -6,42 +12,42 @@ const MapGenerator = {
   bottomRow: [],
 
   generate(bridge, stage, moving) {
-    if (moving === BRIDGE.MOVING_UPPER) {
+    if (moving === MOVING.UPPER) {
       this.generateTopRow(bridge, stage, moving);
-      this.bottomRow.push(' ');
+      this.bottomRow.push(MAP.BLANK);
       return;
     }
 
     this.generateBottomRow(bridge, stage, moving);
-    this.topRow.push(' ');
+    this.topRow.push(MAP.BLANK);
   },
 
   generateTopRow(bridge, stage, moving) {
     if (bridge[stage] === moving) {
-      this.topRow.push('O');
+      this.topRow.push(MAP.PASS);
       return;
     }
 
-    this.topRow.push('X');
+    this.topRow.push(MAP.FAIL);
   },
 
   generateBottomRow(bridge, stage, moving) {
     if (bridge[stage] === moving) {
-      this.bottomRow.push('O');
+      this.bottomRow.push(MAP.PASS);
       return;
     }
 
-    this.bottomRow.push('X');
-  },
-
-  toString() {
-    const map = [this.topRow, this.bottomRow];
-    return map.map((row) => `[ ${row.join(' | ')} ]`);
+    this.bottomRow.push(MAP.FAIL);
   },
 
   reset() {
     this.topRow = [];
     this.bottomRow = [];
+  },
+
+  toString() {
+    const map = [this.topRow, this.bottomRow];
+    return map.map((row) => `[ ${row.join(' | ')} ]`);
   },
 };
 

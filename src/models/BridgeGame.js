@@ -1,7 +1,9 @@
 const MapGenerator = require('./MapGenerator');
 const StateManager = require('./StateManager');
+
+const { generate } = require('../utils/BridgeRandomNumberGenerator');
+const { GAME_STATUS } = require('../utils/constants');
 const BridgeMaker = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,7 +15,7 @@ class BridgeGame {
 
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, generate);
-    this.#stateManager = new StateManager(0, 'PLAYING', 1);
+    this.#stateManager = new StateManager(0, GAME_STATUS.PLAYING, 1);
   }
 
   /**
@@ -22,19 +24,19 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const stage = this.#stateManager.getStage();
+    const { stage } = this.#stateManager.getGameState();
     MapGenerator.generate(this.#bridge, stage, moving);
 
     this.checkFailOrClear(stage, moving);
 
-    this.#stateManager.increaseStage();
+    this.checkGamePlaying();
   }
 
   checkFailOrClear(stage, moving) {
     const isWrongMoving = this.#bridge[stage] !== moving;
 
     if (isWrongMoving) {
-      this.#stateManager.updateGameStatus('FAIL');
+      this.#stateManager.updateGameStatus(GAME_STATUS.FAIL);
       return;
     }
 
@@ -45,12 +47,16 @@ class BridgeGame {
     const isFinalStage = this.#bridge.length - 1 === stage;
 
     if (isFinalStage) {
-      this.#stateManager.updateGameStatus('CLEAR');
+      this.#stateManager.updateGameStatus(GAME_STATUS.CLEAR);
     }
   }
 
-  getStateManager() {
-    return this.#stateManager;
+  checkGamePlaying() {
+    const { gameStatus } = this.#stateManager.getGameState();
+
+    if (gameStatus === GAME_STATUS.PLAYING) {
+      this.#stateManager.increaseStage();
+    }
   }
 
   /**
@@ -61,6 +67,10 @@ class BridgeGame {
   retry() {
     this.#stateManager.retry();
     MapGenerator.reset();
+  }
+
+  getStateManager() {
+    return this.#stateManager;
   }
 }
 

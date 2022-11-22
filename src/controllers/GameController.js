@@ -1,23 +1,24 @@
-const OutputView = require('../views/OutputView');
-const InputView = require('../views/InputView');
-
 const BridgeGame = require('../models/BridgeGame');
+const MapGenerator = require('../models/MapGenerator');
+
+const InputView = require('../views/InputView');
+const OutputView = require('../views/OutputView');
+
+const { COMMAND, GAME_STATUS, STATUS_MESSAGE } = require('../utils/constants');
 const {
   validate,
   isBridgeSize,
   isMovingInput,
   isCommandInput,
-} = require('../Validator');
-
-const MapGenerator = require('../models/MapGenerator');
+} = require('../utils/Validator');
 
 class GameContoller {
   #bridgeGame;
 
   #gameStatusMap = {
-    PLAYING: this.inputMoving.bind(this),
-    FAIL: this.inputGameCommand.bind(this),
-    CLEAR: this.onGameOver.bind(this, '성공'),
+    [GAME_STATUS.PLAYING]: this.inputMoving.bind(this),
+    [GAME_STATUS.FAIL]: this.inputGameCommand.bind(this),
+    [GAME_STATUS.CLEAR]: this.onGameOver.bind(this, STATUS_MESSAGE.CLEAR),
   };
 
   start() {
@@ -69,7 +70,7 @@ class GameContoller {
   checkGameStatus() {
     const stateManager = this.#bridgeGame.getStateManager();
 
-    const gameStatus = stateManager.getGameStatus();
+    const { gameStatus } = stateManager.getGameState();
     this.#gameStatusMap[gameStatus]();
   }
 
@@ -87,12 +88,12 @@ class GameContoller {
   onInputGameCommand(command) {
     validate(command, isCommandInput);
 
-    if (command === 'R') {
+    if (command === COMMAND.RETRY) {
       this.onRetryCommand();
       return;
     }
 
-    this.onGameOver('실패');
+    this.onGameOver(STATUS_MESSAGE.FAIL);
   }
 
   onRetryCommand() {
@@ -105,7 +106,7 @@ class GameContoller {
     const map = MapGenerator.toString();
 
     const stateManager = this.#bridgeGame.getStateManager();
-    const tryCount = stateManager.getTryCount();
+    const { tryCount } = stateManager.getGameState();
 
     OutputView.printResult(map, status, tryCount);
   }
