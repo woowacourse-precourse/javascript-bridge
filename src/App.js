@@ -25,7 +25,7 @@ class App {
 
   makeGame(size){
     this.#bridgeGame = new BridgeGame(size);
-    Console.print(this.#bridgeGame.getBridgeShape());
+    Console.print("");
     this.selectMove();
   }
 
@@ -73,7 +73,7 @@ class App {
       this.selectMove();
     }
     else if(command === 'Q')
-     this.finish(command);
+      this.finish(command);
   }
 
   finish(){
