@@ -8,13 +8,13 @@ const InputValidator = {
   },
   checkIsNumber(input) {
     if (isNaN(input)) {
-      throw new Error(ERROR_MESSAGE.error ERROR_MESSAGE.onlyNumber);
+      throw new Error(ERROR_MESSAGE.onlyNumber);
     }
   },
 
   checkNumberRange(input, start, end) {
     if (input < start || input > end) {
-      throw new Error(ERROR_MESSAGE.error ERROR_MESSAGE.betweenRange);
+      throw new Error(ERROR_MESSAGE.betweenRange);
     }
   },
 };
