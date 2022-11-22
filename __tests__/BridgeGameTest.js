@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/model/BridgeGame');
 
 const makeBridgeGame = (bridge, moveCount) => new BridgeGame(bridge, moveCount);
 
