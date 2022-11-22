@@ -26,6 +26,10 @@ class BridgeGame {
     return currentMove === cuurrentFloor;
   }
 
+  checkDone() {
+    return this.moving.length === this.bridge.length;
+  }
+
 }
 
 module.exports = BridgeGame;
