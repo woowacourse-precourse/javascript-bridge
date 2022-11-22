@@ -25,10 +25,7 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     Console.print("\n");
-    const [highBridge, lowBridge] = this.makeTwoBridge();
-    console.log(highBridge);
-    console.log(lowBridge);
-    // this.move();
+    this.requestMove();
   }
   makeTwoBridge() {
     const highBridge = this.#bridge.map((direction) =>
