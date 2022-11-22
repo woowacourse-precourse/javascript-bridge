@@ -16,7 +16,7 @@ const InputView = {
         InputView.validateBridgeSize(Number(size));
         const bridge = makeBridge(size, generate);
         bridgeGame.setBridge(bridge);
-        // InputView.readMoving(bridgeGame);
+        InputView.readMoving(bridgeGame);
       } catch (error) {
         Console.print(error.message);
         InputView.readBridgeSize(bridgeGame);

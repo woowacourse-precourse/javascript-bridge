@@ -7,7 +7,7 @@ class BridgeGame {
   constructor() {
     this.bridge = null;
     this.bridgeMap = { U: [], D: [] };
-    this.count = 0;
+    this.count = 1;
   }
 
   setBridge(bridge) {
@@ -22,14 +22,26 @@ class BridgeGame {
   move(input) {
     this.paintMap(input);
     printMap(this.bridgeMap);
+    this.judgeNext();
   }
 
   paintMap(input) {
-    const curIdx = this.count;
+    const curIdx = this.bridgeMap.U.length;
     const check = this.bidge[curIdx] === input ? "O" : "X";
     this.bridgeMap[input].push(check);
     const other = input === "U" ? "D" : "U";
     this.bridgeMap[other].push(" ");
+  }
+
+  judgeNext() {
+    const curIdx = this.bridgeMap.U.length;
+    if (this.bridgeMap.U[curIdx] === "X" || this.bridgeMap.D[curIdx] === "X") {
+      return readGameCommand(this.bridge);
+    }
+    if (curIdx + 1 === this.bridge.length) {
+      return "win";
+    }
+    return readMoving(this.bridge);
   }
 
   /**
