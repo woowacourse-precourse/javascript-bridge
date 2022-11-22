@@ -2,7 +2,6 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const Validation = require("./utils/Validation");
-const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   #userGame;
@@ -19,7 +18,7 @@ class App {
         this.#userGame = new BridgeGame(size);
         this.moveUserBridge();
       } catch (e) {
-        Console.print(e);
+        OutputView.printError(e);
         this.createBridge();
       }
     });
@@ -52,7 +51,7 @@ class App {
         return;
       }
     } catch (e) {
-      Console.print(e);
+      OutputView.printError(e);
       this.gameover();
     }
   }
