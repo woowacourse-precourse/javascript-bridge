@@ -8,7 +8,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(bridgeShape);
+    bridgeGame.setBridgeAnswerDirections(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -28,7 +28,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(bridgeShape);
+    bridgeGame.setBridgeAnswerDirections(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -45,7 +45,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(bridgeShape);
+    bridgeGame.setBridgeAnswerDirections(bridgeShape);
     bridgeShape.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -58,7 +58,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(bridgeShape);
+    bridgeGame.setBridgeAnswerDirections(bridgeShape);
 
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);

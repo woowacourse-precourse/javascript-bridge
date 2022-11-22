@@ -5,7 +5,7 @@ const { getArrayLastIndex } = require("./utils");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeShape = [];
+  #bridgeAnswerDirections = [];
   #movingCommand = "";
   #currentBridgeCount = 0;
   #totalTryCount = 1;
@@ -36,11 +36,13 @@ class BridgeGame {
 
   isAnswerMovingCommand() {
     const currentBridgeIndex = this.#currentBridgeCount - 1;
-    return this.#movingCommand === this.#bridgeShape[currentBridgeIndex];
+    return (
+      this.#movingCommand === this.#bridgeAnswerDirections[currentBridgeIndex]
+    );
   }
 
-  setBridgeShape(bridgeSahpe) {
-    return (this.#bridgeShape = bridgeSahpe);
+  setBridgeAnswerDirections(bridgeAnswerDirections) {
+    return (this.#bridgeAnswerDirections = bridgeAnswerDirections);
   }
 
   getCurrentBridgeMap() {
@@ -66,11 +68,11 @@ class BridgeGame {
   }
 
   #isLastMove() {
-    return this.#currentBridgeCount === this.#bridgeShape.length;
+    return this.#currentBridgeCount === this.#bridgeAnswerDirections.length;
   }
 
   #getCurrentBridgeShape() {
-    return this.#bridgeShape.slice(0, this.#currentBridgeCount);
+    return this.#bridgeAnswerDirections.slice(0, this.#currentBridgeCount);
   }
 }
 
