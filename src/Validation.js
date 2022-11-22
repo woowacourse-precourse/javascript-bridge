@@ -6,9 +6,15 @@ const Validation = {
       throw '[ERROR] 다리 길이는 정수를 입력해야 합니다.';
     };
 
-    if (inputSize < 3 || inputSize > 20) {
+    if (Number(inputSize) < 3 || Number(inputSize) > 20) {
       throw '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
     };
+  },
+
+  moving(inputMoving) {
+    if (inputMoving !== "U" && inputMoving !== "D") {
+      throw '[ERROR] 이동할 칸은 U와 D 중 하나로 입력해야 합니다.'
+    }
   }
 
 };
