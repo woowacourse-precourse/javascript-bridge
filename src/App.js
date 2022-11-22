@@ -3,15 +3,16 @@ const InputView = require("../src/InputView");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
+const BridgeTest = require("../src/BridgeTest");
 
 class App {
   #bridgeGame;
   play() {
     OutputView.printStart();
     const bridgeSize = InputView.readBridgeSize();
-    this.#bridgeGame = new BridgeGame(
-      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
-    );
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    new BridgeTest(bridge);
+    this.#bridgeGame = new BridgeGame(bridge);
     this.playing();
   }
   playing() {
