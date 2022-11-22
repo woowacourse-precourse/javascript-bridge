@@ -10,7 +10,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = new Array(size);
     for (let i = 0; i < size; i++) {
-      let which = generateRandomNumber.generate();
+      let which = generateRandomNumber();
       if (which === 0) bridge[i] = "D";
       if (which === 1) bridge[i] = "U";
     }

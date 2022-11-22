@@ -8,9 +8,12 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   mainBridge: new BridgeGame(),
+  BRIGDETEXT: "다리의 길이를 입력해주세요.\n",
+  MOVETEXT: "이동할 칸을 선택해주세요. (위: U 아래: D)\n",
+  RETRYTEXT: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 
   readBridgeSize() {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
+    MissionUtils.Console.readLine(this.BRIGDETEXT, (number) => {
       try {
         this.checkPlayerInput(number);
         this.makeBridge(number);
@@ -23,7 +26,7 @@ const InputView = {
 
   makeBridge(number) {
     this.mainBridge.setBridge(
-      BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
+      BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator.generate)
     );
   },
 
@@ -47,22 +50,21 @@ const InputView = {
   },
 
   readMoving() {
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요.(위: U 아래: D)\n",
-      (input) => {
-        try {
-          this.checkPlayerMove(input);
-          this.checkAndMove(input);
-        } catch (e) {
-          MissionUtils.Console.print(e);
-          this.checkEndError(e);
-          if (e === 3) {
-            console.log("dha?");
-            MissionUtils.Console.close();
-          }
-        }
+    MissionUtils.Console.readLine(this.MOVETEXT, (input) => {
+      try {
+        this.checkPlayerMove(input);
+        this.checkAndMove(input);
+      } catch (e) {
+        this.checkifEnd();
       }
-    );
+    });
+  },
+
+  checkifEnd(e) {
+    this.readMoving();
+    if (e === 3) {
+      MissionUtils.Console.close();
+    }
   },
 
   checkPlayerMove(input) {
@@ -75,14 +77,12 @@ const InputView = {
     let tmplocation = this.mainBridge.getLocation();
     tmpbridge = this.mainBridge.getBridge();
     OutputView.printRight(input, tmplocation - 1);
-    OutputView.printMap();
   },
 
   printWrong(input) {
     let tmplocation = this.mainBridge.getLocation();
     tmpbridge = this.mainBridge.getBridge();
     OutputView.printWrong(input, tmplocation - 1);
-    OutputView.printMap();
   },
 
   checkAndMove(input) {
@@ -120,30 +120,18 @@ const InputView = {
     this.printWrong(input);
   },
 
-  printEndMove() {},
-
   readGameCommand() {
-    MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (input) => {
-        try {
-          this.checkRetryInput(input);
-          this.chooseRetry(input);
-        } catch (e) {
-          MissionUtils.Console.print(e);
-          this.readGameCommand();
-        }
+    MissionUtils.Console.readLine(this.RETRYTEXT, (input) => {
+      try {
+        this.chooseRetry(input);
+      } catch (e) {
+        this.readGameCommand();
       }
-    );
-  },
-
-  checkRetryInput(input) {
-    if (input !== "R" && input !== "Q") {
-      throw "[ERROR] R 혹은 Q을 입력해라!!";
-    }
+    });
   },
 
   chooseRetry(input) {
+    this.checkRetryInput(input);
     if (input === "R") {
       this.retry();
     }
@@ -151,6 +139,11 @@ const InputView = {
       this.finish();
     }
   },
+
+  checkRetryInput(input) {
+    if (input !== "R" && input !== "Q") throw "[ERROR] R 혹은 Q을 입력해라!!";
+  },
+
   retry() {
     this.mainBridge.retry();
     OutputView.reset();
