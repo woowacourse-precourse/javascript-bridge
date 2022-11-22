@@ -54,11 +54,7 @@ class BridgeGameController {
   moveNext(direction) {
     this.#BridgeGame.move(direction);
     OutputView.printMap(this.#BridgeGame.getBridgeMap());
-    this.isGameCompleted() ? this.endGame() : this.getMovingDirection();
-  }
-
-  isGameCompleted() {
-    return this.#BridgeGame.checkBridgeCrossed();
+    this.#BridgeGame.isBridgeCrossed() ? this.endGame() : this.getMovingDirection();
   }
 
   endGame() {

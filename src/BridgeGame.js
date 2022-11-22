@@ -21,7 +21,7 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  checkBridgeCrossed() {
+  isBridgeCrossed() {
     return this.#upBridge.length === this.#bridge.length;
   }
 
