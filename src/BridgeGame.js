@@ -11,17 +11,17 @@ class BridgeGame {
     Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
       this.#errorCheckFor(
         () => InputView.readBridgeSize(bridgeLength),
-        this.start
+        () => this.start()
       ).move();
     });
   }
 
   move() {
     Console.readLine(GAME_QUESTION.move, (command) => {
-      this.#errorCheckFor(() => InputView.readMoving(command), this.move);
-      OutputView.printMap();
-
-      this.#checkGameResult(controller.outputExit().result);
+      this.#errorCheckFor(
+        () => this.#successMoveEvent(command),
+        () => this.move()
+      );
     });
   }
 
@@ -29,9 +29,15 @@ class BridgeGame {
     Console.readLine(GAME_QUESTION.gameCommand, (command) => {
       this.#errorCheckFor(
         () => InputView.readGameCommand(command),
-        this.retry
+        () => this.retry()
       ).#checkGameCommand(command);
     });
+  }
+
+  #successMoveEvent(command) {
+    InputView.readMoving(command);
+    OutputView.printMap();
+    this.#checkGameResult(controller.outputExit().result);
   }
 
   #checkGameResult(gameState) {
