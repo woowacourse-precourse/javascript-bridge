@@ -14,7 +14,58 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, direction) {},
+  printMap(bridge, direction, step) {
+    let downSpace = this.printDownPassSpace(bridge, step);
+    downSpace += this.printDownCurrentSpace(bridge, direction, step);
+
+    let upSpace = this.printUpPassSpace(bridge, step);
+    upSpace += this.printUpCurrentSpace(bridge, direction, step);
+
+    Console.print(upSpace);
+    Console.print(downSpace);
+  },
+
+  printDownPassSpace(bridge, step) {
+    let downSpace = "[ ";
+    for (let space = 0; space < step; space++) {
+      if (bridge[space] === "D") downSpace = downSpace + "O | ";
+      else downSpace = downSpace + "  | ";
+    }
+    return downSpace;
+  },
+
+  printUpPassSpace(bridge, step) {
+    let upSpace = "[ ";
+    for (let space = 0; space < step; space++) {
+      if (bridge[space] === "U") upSpace = upSpace + "O | ";
+      else upSpace = upSpace + "  | ";
+    }
+    return upSpace;
+  },
+
+  printDownCurrentSpace(bridge, direction, step) {
+    let downSpace = "";
+    if (bridge[step] === direction) {
+      if (direction === "D") downSpace = downSpace + "O ]";
+      else downSpace = downSpace + "  ]";
+    } else {
+      if (direction === "D") downSpace = downSpace + "X ]";
+      else downSpace = downSpace + "  ]";
+    }
+    return downSpace;
+  },
+
+  printUpCurrentSpace(bridge, direction, step) {
+    let upSpace = "";
+    if (bridge[step] === direction) {
+      if (direction === "D") upSpace = upSpace + "  ]";
+      else upSpace = upSpace + "O ]";
+    } else {
+      if (direction === "D") upSpace = upSpace + "  ]";
+      else upSpace = upSpace + "X ]";
+    }
+    return upSpace;
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

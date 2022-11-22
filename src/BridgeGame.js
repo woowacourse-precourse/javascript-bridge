@@ -24,13 +24,11 @@ class BridgeGame {
    */
   move(bridge, direction) {
     this.#step = this.#step + 1;
-
     const moveResult = this.judge(bridge[this.#step], direction);
 
     if (moveResult === true && this.#step === bridge.length - 1) {
       return "finish";
     }
-
     return moveResult;
   }
 
@@ -55,6 +53,10 @@ class BridgeGame {
 
   getRetryCount() {
     return this.#retryCount;
+  }
+
+  getStep() {
+    return this.#step;
   }
 }
 

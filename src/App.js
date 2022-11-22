@@ -21,13 +21,13 @@ class App {
 
     while (isRetry === true) {
       isLive = await this.moveFunction(bridge);
-      if (isLive == "finish") {
-        isRetry = false;
-      } else {
+      if (isLive == "finish") isRetry = false;
+      else {
         const command = await InputView.readGameCommand();
         isRetry = this.#bridgeGame.retry(command);
       }
     }
+
     OutputView.printResult(this.#bridgeGame.getRetryCount(), isLive);
     InputView.close();
   }
@@ -37,8 +37,8 @@ class App {
 
     while (isLive === true) {
       const direction = await InputView.readMoving();
-
       isLive = this.#bridgeGame.move(bridge, direction);
+      OutputView.printMap(bridge, direction, this.#bridgeGame.getStep());
     }
 
     return isLive;
