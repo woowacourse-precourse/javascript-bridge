@@ -51,8 +51,7 @@ class BridgeGameProceed {
         } catch (error) {
             Console.print(`${error.message}\n`);
             this.game.call(this);
-        }
-    }
+    }}
 
     dividePath(result) {
         if (result.includes(BRIDGE_GAME_PROCEED.fail)) {
