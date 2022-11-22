@@ -14,13 +14,17 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (num) => {
-      size = num;
-      let bridge = Array(parseInt(size));
-      for (let i = 0; i < size; i++) {
-        bridge[i] = BridgeRandomNumberGenerator.generate();
+      size = Number(num);
+      if (size >= 3 && size <= 20) {
+        let bridge = Array(parseInt(size));
+        for (let i = 0; i < size; i++) {
+          bridge[i] = BridgeRandomNumberGenerator.generate();
+        }
+        let count = 0;
+        InputView.readBridgeSize(bridge, count);
+      } else {
+        throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
       }
-      let count = 0;
-      InputView.readBridgeSize(bridge, count);
     });
   },
 };
