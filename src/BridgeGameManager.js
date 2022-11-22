@@ -25,7 +25,7 @@ class BridgeGameManager {
     InputView.readBridgeSize((size) => {
       const { errorMsg } = Validation.checkBridgeSize(size);
       if (errorMsg)
-        return throwException(errorMsg, () => this.requestBridgeSize());
+        return throwException(errorMsg, this.requestBridgeSize.bind(this));
 
       this.createBridgeGame(size);
 
@@ -43,7 +43,7 @@ class BridgeGameManager {
     InputView.readMoving((direction) => {
       const { errorMsg } = Validation.checkDirection(direction);
       if (errorMsg)
-        return throwException(errorMsg, () => this.requestDirection());
+        return throwException(errorMsg, this.requestDirection.bind(this));
 
       this.#bridgeGame.move(direction);
       this.printBridgeCrossingResult();
@@ -69,8 +69,8 @@ class BridgeGameManager {
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
       const { errorMsg } = Validation.checkCommandOption(commandOption);
-      if (errorMsg)
-        return throwException(errorMsg, () => this.requestRestartOrQuit());
+      const callback = this.requestRestartOrQuit.bind(this);
+      if (errorMsg) return throwException(errorMsg, callback);
 
       this.actionAboutGameCommand(commandOption);
     });
