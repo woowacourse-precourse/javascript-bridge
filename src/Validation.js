@@ -32,6 +32,10 @@ const Validaton = {
                     throw (`[ERROR] 이동할 칸은 U 또는 D만 선택 가능합니다.`);
                 }
             }
+            catch(e){
+                Io.output(e);
+                return true;
+            }
         },
         validateUserRetryChoice(userInput){
             try{
