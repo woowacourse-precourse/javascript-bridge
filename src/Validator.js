@@ -1,4 +1,9 @@
-const { SIZE_RANGE_INCLUSIVE, ERROR } = require('./Constants');
+const {
+  ERROR,
+  SIZE_RANGE_INCLUSIVE,
+  VALID_DIRECTION,
+  VALID_RETRY_COMMAND,
+} = require('./Constants');
 
 const Validator = {
   validateBridgeSize(bridgeSize) {
@@ -26,15 +31,13 @@ const Validator = {
   },
 
   validateDirection(direction) {
-    const validDirection = /^U{1}$|^D{1}$/;
-    if (!validDirection.test(direction)) {
+    if (!VALID_DIRECTION.test(direction)) {
       throw ERROR.direction;
     }
   },
 
   validateGameCommand(command) {
-    const validRetryCommand = /^R{1}$|^Q{1}$/;
-    if (!validRetryCommand.test(command)) {
+    if (!VALID_RETRY_COMMAND.test(command)) {
       throw ERROR.retry;
     }
   },

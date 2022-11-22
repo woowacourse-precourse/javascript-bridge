@@ -20,11 +20,9 @@ const OutputView = {
   },
 
   printResult(bridgeMap, successful, numberOfAttempts) {
-    Console.print(MESSAGE.result);
+    Console.print(MESSAGE.resultTitle);
     this.printMap(bridgeMap);
-    Console.print('');
-    Console.print(MESSAGE.success(successful));
-    Console.print(MESSAGE.attempts(numberOfAttempts));
+    Console.print(MESSAGE.result(successful, numberOfAttempts));
     Console.close();
   },
 };

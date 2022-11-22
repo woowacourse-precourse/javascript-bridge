@@ -1,4 +1,4 @@
-const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
+const OPPOSITE = { U: 'D', D: 'U' };
 
 class BridgeMap {
   #map;
@@ -12,7 +12,7 @@ class BridgeMap {
   }
 
   mark(direction, mark) {
-    const oppositeDirection = OPPOSITE_DIRECTION[direction];
+    const oppositeDirection = OPPOSITE[direction];
     this.#map[direction].push(mark);
     this.#map[oppositeDirection].push(' ');
   }

@@ -1,8 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-
-const RETRY = { R: true, Q: false };
+const { RETRY } = require('./Constants');
 
 class BridgeGameController {
   #bridgeGame;

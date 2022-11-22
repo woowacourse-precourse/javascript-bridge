@@ -2,6 +2,7 @@ const BridgeGameStatus = require('./BridgeGameStatus');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeMap = require('./BridgeMap');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { MARK } = require('./Constants');
 
 class BridgeGame {
   #bridgeAnswer;
@@ -38,10 +39,10 @@ class BridgeGame {
 
   updateBridgeMap(direction, correct) {
     if (correct) {
-      return this.#bridgeMap.mark(direction, 'O');
+      return this.#bridgeMap.mark(direction, MARK.correct);
     }
 
-    return this.#bridgeMap.mark(direction, 'X');
+    return this.#bridgeMap.mark(direction, MARK.incorrect);
   }
 
   updateStatus(correct) {
