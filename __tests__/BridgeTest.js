@@ -41,4 +41,12 @@ describe("다리 관련 테스트", () => {
     expect(bridgeController.getIsSuccessMoving(["U", "D"])).toEqual(true);
     expect(bridgeController.getIsSuccessMoving(["U", "D", "U"])).toEqual(false);
   });
+
+  test("추가 움직임 가능 유무 테스트", () => {
+    bridgeController.setBridge(["U", "D", "D"]);
+
+    expect(bridgeController.getIsFinished(["U"])).toEqual(false);
+    expect(bridgeController.getIsFinished(["U", "D"])).toEqual(false);
+    expect(bridgeController.getIsFinished(["U", "D", "U"])).toEqual(true);
+  });
 });
