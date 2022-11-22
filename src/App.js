@@ -1,5 +1,11 @@
+const BridgeProcess = require('./controller/BridgeProcess');
+
 class App {
-  play() {}
+  #bridgeProcess = new BridgeProcess();
+
+  play() {
+    this.#bridgeProcess.start();
+  }
 }
 
 module.exports = App;
