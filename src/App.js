@@ -45,11 +45,19 @@ class App {
     let choice = readGameCommand();
     switch(true){
       case choice == "R":
+        BridgeGame.retry();
+        this.restart();
         break;
       case choice == "Q":
         printResult(setBridge, this.count, this.state);
         break;
     }
+  }
+  restart(){
+    this.userBridges = [];
+    this.state = true;
+    this.count += 1;
+    this.startGame();
   }
 
 }
