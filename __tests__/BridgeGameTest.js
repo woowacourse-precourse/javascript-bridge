@@ -28,3 +28,17 @@ describe('updateStatus 함수 호출 검사', () => {
     expect(spyGet).toBeCalledTimes(1);
   });
 });
+
+describe('isCorrect 함수 반환값 검사', () => {
+  const bridgeGame = new BridgeGame(['U', 'U', 'D']);
+
+  test('사용자가 입력한 칸이 건널 수 있는 칸이면 true를 반환한다.', () => {
+    const correct = bridgeGame.isCorrect('U');
+    expect(correct).toBeTruthy();
+  });
+
+  test('사용자가 입력한 칸이 건널 수 없는 칸이면 false를 반환한다.', () => {
+    const correct = bridgeGame.isCorrect('D');
+    expect(correct).toBeFalsy();
+  });
+});
