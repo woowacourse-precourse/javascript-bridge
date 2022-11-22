@@ -23,11 +23,9 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
-      if (!InputValueHandler.movingKey(key, bridgeGame)) {
-        return this.readMoving(bridgeGame);
-      }
-      if (InputValueHandler.checkSuccess(bridgeGame)) return;
-      if (InputValueHandler.checkMoveResult(key, bridgeGame)) {
+      const RESULT = InputValueHandler.movingKey(key, bridgeGame);
+      if (RESULT === 'success') return;
+      if (RESULT === false) {
         return this.readMoving(bridgeGame);
       }
       return this.readGameCommand(bridgeGame);

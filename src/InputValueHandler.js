@@ -18,7 +18,8 @@ const InputValueHandler = {
     }
     bridgeGame.move(key);
     OutputView.printMap(bridgeGame.getUserBridge());
-    return true;
+    if (this.checkSuccess(bridgeGame)) return 'success';
+    return !this.checkMoveResult(key, bridgeGame);
   },
 
   checkSuccess(bridgeGame) {
