@@ -3,8 +3,6 @@ const BRIDGE = {
     DOWN: "D",
 };
 
-const EMPTY = " ";
-
 const GAME_COMMAND = {
     RESTART: "R",
     QUIT: "Q",
@@ -23,11 +21,11 @@ const BRIDGE_SIZE = {
 const BRIDGE_FORMAT = {
     SUCCESS: "O",
     FAIL: "X",
+    EMPTY: " ",
 };
 
 module.exports = {
     BRIDGE,
-    EMPTY,
     GAME_COMMAND,
     BRIDGE_INDEX,
     BRIDGE_SIZE,

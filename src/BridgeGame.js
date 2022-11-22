@@ -1,6 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const Random = require("./BridgeRandomNumberGenerator");
-const {BRIDGE, BRIDGE_INDEX, BRIDGE_FORMAT, EMPTY} = require("./Constants");
+const {BRIDGE, BRIDGE_INDEX, BRIDGE_FORMAT} = require("./Constants");
 
 class BridgeGame {
   #userLocation;
@@ -75,12 +75,12 @@ class BridgeGame {
   
   updateCurrBridge(bridgeChoice, result) {
     if(bridgeChoice === BRIDGE.UP) {
-      this.#currBridge[BRIDGE_INDEX.DOWN].push(EMPTY);
+      this.#currBridge[BRIDGE_INDEX.DOWN].push(BRIDGE_FORMAT.EMPTY);
       this.#currBridge[BRIDGE_INDEX.UP].push(result);
     }
     if(bridgeChoice === BRIDGE.DOWN) {
       this.#currBridge[BRIDGE_INDEX.DOWN].push(result);
-      this.#currBridge[BRIDGE_INDEX.UP].push(EMPTY);
+      this.#currBridge[BRIDGE_INDEX.UP].push(BRIDGE_FORMAT.EMPTY);
     }
   }
 
