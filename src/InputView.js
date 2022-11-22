@@ -75,7 +75,7 @@ const InputView = {
       if (nextInput) this[nextInput]();
       if (nextOutput) OutputView[nextOutput](gameStatus);
     } catch (error) {
-      this.readGameCommand();
+      InputView.readGameCommand();
     }
   },
 };
