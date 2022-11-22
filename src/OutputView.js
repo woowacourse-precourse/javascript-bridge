@@ -29,6 +29,7 @@ const OutputView = {
     MissionUtils.Console.print(map[0]);
     MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_OR_FAILURE + result);
     MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_ATTEMPT + count);
+    MissionUtils.Console.close();
   },
 
   printException(error) {
