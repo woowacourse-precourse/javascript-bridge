@@ -12,7 +12,6 @@ const SIGN = {
   success: "O",
   fail: "X",
   blank: " ",
-  separator: " | ",
 };
 
 const IS_SUCCESS = {

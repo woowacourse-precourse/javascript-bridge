@@ -53,7 +53,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("게임 테스트", () => {
-  test("다리 길이 저장 테스트", () => {
+  test("다리 길이 저장 확인", () => {
     Controller.getSize(7);
     expect(Controller.size).toBe(7);
   });
@@ -77,7 +77,7 @@ describe("게임 테스트", () => {
     expect(Controller.tryCount).toBe(2);
   });
 
-  test("성공 여부 변경 확인", () => {
+  test("실패시 성공 여부 변경 확인", () => {
     failArray = OutputView.nowArray = ["X", " "];
     Controller.checkSuccess(failArray);
     expect(Controller.gameResult).toEqual("실패");

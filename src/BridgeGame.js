@@ -5,11 +5,11 @@ class BridgeGame {
 
   move(block, completeBridge) {
     Controller.addPlayerBlock(block);
-    const currentRound = Controller.playerArr.length - 1;
-    if (Controller.playerArr[currentRound] === completeBridge[currentRound]) {
+    const index = Controller.playerArr.length - 1;
+    if (Controller.playerArr[index] === completeBridge[index]) {
       Controller.successMove(block);
     }
-    if (Controller.playerArr[currentRound] !== completeBridge[currentRound]) {
+    if (Controller.playerArr[index] !== completeBridge[index]) {
       Controller.failMove(block);
     }
   }
