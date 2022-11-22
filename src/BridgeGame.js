@@ -17,21 +17,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  // move(SIZE, BridgeStatus) {
-  //   const BridgeIndex = 0;
-  //   const BridgeResultArray = [[], []];
-  //   InputView.readMoving(SIZE, BridgeStatus, BridgeIndex, BridgeResultArray);
-  // }
-
   move(userInput){
     const NowBridgeValue = this.BridgeStatus[this.BridgeIndex];
     const CompareResult = BridgeCompare.isSameBridge(userInput, NowBridgeValue);
     this.BridgeResultArray = BridgeCompare.makeBridgeResultArray(userInput, CompareResult, this.BridgeResultArray);
     OutputView.printMap(this.BridgeResultArray);
-    if(BridgeCompare.isCompleteBridge(this.SIZE, (this.BridgeIndex + 1))) return "win";  
-      // OutputView.printResult(BridgeResultArray, CompareResult, 10);      
+    this.BridgeIndex += 1; 
+    if(BridgeCompare.isCompleteBridge(this.SIZE, this.BridgeIndex)) return "win";  
     if(!CompareResult) return "end";
-     // this.readGameCommand(BridgeResultArray, CompareResult, SIZE, BridgeStatus);
     return "req";
   }
 

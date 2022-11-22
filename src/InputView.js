@@ -20,7 +20,6 @@ const InputView = {
         Validation.validateNumberRange(userInput);
         const SIZE = Number(userInput);
         const BridgeStatus = BridgeMaker.makeBridge(SIZE, BridgeRandomNumberGenerator.generate);
-        // bridgeGame.move(SIZE, BridgeStatus);
         bridgeGame = new BridgeGame(SIZE, BridgeStatus);
         this.readMoving();
       });
