@@ -100,6 +100,25 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   |   ]");
   });
 
+  test("실패 재시작 기능 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1", "0", "1"]);
+    mockQuestions(["5", "U", "D", "U", "U", "R", "U", "D", "U", "D", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O |   | O ]",
+      "[   | O |   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O |   | O ]", "[   | O |   | O |   ]");
+  });
+
   test("예외 테스트", () => {
     runException(["a"]);
   });
