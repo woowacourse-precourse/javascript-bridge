@@ -16,16 +16,14 @@ class Bridge {
   }
 
   make(size) {
-    this.validate(size);
     this.#size = size;
     this.#bridge = BridgeMaker.makeBridge(
       size,
       BridgeRandomNumberGenerator.generate
     );
     this.map.makeOriginBridgeMap(this.#bridge);
+    return this.#bridge;
   }
-
-  validate(size) {}
 
   isBridgeLeft() {
     return this.#step + 1 < this.#size;
