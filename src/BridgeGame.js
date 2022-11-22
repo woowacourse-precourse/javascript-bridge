@@ -20,6 +20,17 @@ class BridgeGame {
 
   retry(command) {}
 
+  result() {
+    const isSuccess = this.clear() ? '성공' : '실패';
+    const trial = this.#trial;
+
+    return [isSuccess, trial];
+  }
+
+  clear() {
+    return validator.isSameArr(this.#bridge, this.#history);
+  }
+
   over() {
     return validator.isSameArr(
       this.#bridge.slice(0, this.#history.length),
