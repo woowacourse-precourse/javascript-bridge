@@ -53,6 +53,7 @@ class BridgeGame {
 
   makeUserBridge(newState) {
     this.#userBridge.push(newState);
+    let userCanGo = false;
     if (
       this.#userBridge[this.#userBridge.length - 1] ===
       this.#computedBridge[this.#userBridge.length - 1]
@@ -64,15 +65,25 @@ class BridgeGame {
         this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.cantMovePlace);
         this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.canMovePlace);
       }
+      userCanGo = true;
     }
     OutputView.printMap({
       bridgeTop: this.#bridgeViewTop,
       bridgeBottom: this.#bridgeViewBottom,
     });
+    this.nextTurn(userCanGo);
   }
 
   drawBridge(targetBridge, pushState) {
     targetBridge.push(pushState);
+  }
+
+  nextTurn(userCanGo) {
+    userCanGo ? this.userMoving() : this.retryOrEnd();
+  }
+
+  retryOrEnd() {
+    console.log("retry? end ?");
   }
 
   /**
