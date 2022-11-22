@@ -5,15 +5,14 @@ const { SUCCESS, FAIL, CONTINUE, ANSWER, WRONG, EMPTY } =
 const { UP, DOWN } = require('../Utils/Constant').DIRECTION;
 
 class BridgeMap {
-  #bridge;
   #bridgeObject;
   #userAnswer;
   #bridgeSize;
 
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    this.convertObj();
+    const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    this.convertObj(bridge);
     this.resetUserAnswer();
   }
 
@@ -102,13 +101,17 @@ class BridgeMap {
     this.#userAnswer = reset;
   }
 
-  convertObj() {
+  convertObj(bridge) {
     let obj = { [UP]: [], [DOWN]: [] };
-    for (let i of this.#bridge) {
+    for (let i of bridge) {
       obj[UP].push(i === UP ? ANSWER : EMPTY);
       obj[DOWN].push(i === DOWN ? ANSWER : EMPTY);
     }
     this.#bridgeObject = obj;
+  }
+
+  get bridgeObject() {
+    return this.#bridgeObject;
   }
 }
 

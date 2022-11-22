@@ -38,8 +38,8 @@ class BridgeGame {
 
   retry = (input) => {
     Validator.gmaeCommand(input);
-    if (input === QUIT) this.#ctrl.end(FAIL, this.#user.round);
     if (input === RETRY) this.resetPlay();
+    if (input === QUIT) this.#ctrl.End(FAIL, this.#user.round);
   };
 
   selector(status) {
@@ -58,6 +58,17 @@ class BridgeGame {
     this.#bridgeMap.resetUserAnswer();
     this.#user.resetPosition();
     this.#ctrl.move(this.move);
+  }
+
+  get ctrl() {
+    return this.#ctrl;
+  }
+
+  get bridgeMap() {
+    return this.#bridgeMap;
+  }
+  get user() {
+    return this.#user;
   }
 }
 module.exports = BridgeGame;
