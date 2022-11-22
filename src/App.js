@@ -48,6 +48,7 @@ class App {
         this.moveUserBridge();
       } else if (input === "Q") {
         OutputView.printResult(this.#userGame);
+        Console.close();
         return;
       }
     } catch (e) {
