@@ -16,6 +16,8 @@ class App {
   play() {
     OutputView.printStartMessage();
     const bridgeGame = this.makeBridgeGame();
+    const [isSuccess, gamePlayCount] = this.executeGame(bridgeGame);
+    OutputView.printResult(isSuccess, gamePlayCount, bridgeGame);
   }
 
   makeBridge() {
@@ -45,6 +47,8 @@ class App {
       isSuccess = this.executeTry(bridgeGame); // 끝날때까지 수행
       continueGameCheck = this.checkRetry(bridgeGame, isSuccess);
     }
+
+    return [isSuccess, gamePlayCount];
   }
 
   executeTry(bridgeGame) {
