@@ -18,7 +18,7 @@ class BridgeGame {
 
   #playerPosition;
 
-  try = 0;
+  tryCount = 0;
 
   moveMap = new Map();
 
@@ -29,7 +29,7 @@ class BridgeGame {
 
   #reset() {
     this.#playerPosition = -1;
-    this.try += 1;
+    this.tryCount += 1;
     this.result = RESULT.SUCCESS;
     this.#resetMap();
   }

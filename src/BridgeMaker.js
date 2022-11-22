@@ -2,7 +2,7 @@ const { DIRECTION } = require('./constant/Constant');
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    let bridge = [];
+    const bridge = [];
 
     while (bridge.length < size) {
       bridge.push(generateRandomNumber());

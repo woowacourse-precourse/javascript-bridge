@@ -35,11 +35,11 @@ const OutputView = {
     this.nextLine();
   },
 
-  printResult(bridgeGame) {
+  printResult({ moveMap, result, tryCount }) {
     Console.print(MESSAGE.TITLE_RESULT);
-    OutputView.printMap(bridgeGame.moveMap);
-    Console.print(`${MESSAGE.PREFIX_SUCCESS}${bridgeGame.result}`);
-    Console.print(`${MESSAGE.PREFIX_TRY}${bridgeGame.try}`);
+    OutputView.printMap(moveMap);
+    Console.print(`${MESSAGE.PREFIX_SUCCESS}${result}`);
+    Console.print(`${MESSAGE.PREFIX_TRY}${tryCount}`);
     Console.close();
   },
 };
