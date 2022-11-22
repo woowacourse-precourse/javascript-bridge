@@ -13,7 +13,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const RANDOM_BRIDGE = [];
     readBridgeSize(size);
-    for(let i = 0; i < size, i++) {
+
+    for (let i = 0; i < size, i++) {
       const RANDOM_ALPHABET = generate[i] == 1 ? "U" : "D";
       RANDOM_BRIDGE.push(RANDOM_ALPHABET);
     }
