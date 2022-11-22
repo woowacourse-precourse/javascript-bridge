@@ -100,6 +100,31 @@ describe("다리 건너기 테스트", () => {
     });
   })
   
+  test("게임 재시작", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "U", "R", "U", "D", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   |   ]",
+      "[   | O | O ]",
+      "최종 게임 결과",
+    ]);
+  });
+
+  
   // test("기능 테스트", () => {
   //   const logSpy = getLogSpy();
   //   mockRandoms(["1", "0", "1"]);

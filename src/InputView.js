@@ -33,6 +33,7 @@ const InputView = {
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
       this.validateInput(moving);
+
       this.BRIDGE_GAME.move(moving) ? this.readMoving() : this.readGameCommand(); 
     })
   },
@@ -46,6 +47,8 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
+    this.BRIDGE_GAME.initValue();
+    
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
       this.validateAnswer(answer);
       answer === 'R' ? this.readMoving() : OutputView.printResult();

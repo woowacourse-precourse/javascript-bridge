@@ -13,6 +13,11 @@ class BridgeGame {
     this.#BRIDGE = bridge;
   }
 
+  initValue() {
+    this.#MOVING = [];
+    this.#CUR_IDX = -1;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -23,6 +28,9 @@ class BridgeGame {
     this.#CUR_IDX++;
 
     this.changeToMap();
+
+    if (this.#BRIDGE.length === this.#MOVING.length) 
+      OutputView.printResult();
 
     return moving === this.#BRIDGE[this.#CUR_IDX] ? true : false;
   }
