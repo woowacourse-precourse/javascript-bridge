@@ -1,3 +1,7 @@
+/* eslint-disable max-len */
+/* eslint-disable id-length */
+/* eslint-disable max-lines-per-function */
+
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
