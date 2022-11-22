@@ -5,6 +5,7 @@ const errorController = require("./utils/ErrorController");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 const Validation = require("./utils/Validation");
+const { RETRY_GAME, GAME_RESULT } = require("./constants/messages");
 
 class GameController {
   constructor() {
@@ -54,7 +55,7 @@ class GameController {
   }
   checkContinueGame() {
     if (this.bridgeGame.checkLast()) {
-      this.showGameResult("성공");
+      this.showGameResult(GAME_RESULT.SUCCESS);
     } else {
       this.inputStep();
     }
@@ -66,20 +67,20 @@ class GameController {
   }
   chooseRetryGame(input) {
     Validation.restartInput(input);
-    if (input === "R") {
+    if (input === RETRY_GAME.RETRY) {
       this.bridgeGame.retry();
       this.inputStep();
-    } else if (input === "Q") {
-      this.showGameResult("실패");
+    } else if (input === RETRY_GAME.QUIT) {
+      this.showGameResult(GAME_RESULT.FAIL);
     }
   }
   showGameResult(result) {
     const [upString, downString] = this.bridgeGame.getBridgeString();
+    const tryCount = this.bridgeGame.getTryCount();
     const gameResult = {
       upString,
       downString,
     };
-    const tryCount = this.bridgeGame.getTryCount();
     OutputView.printResult(gameResult, result, tryCount);
   }
 }

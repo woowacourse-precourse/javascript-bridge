@@ -25,10 +25,20 @@ const BRIDGE_DRAWER = {
   BAR: "|",
   NOTHING: "   ",
 };
+const RETRY_GAME = {
+  RETRY: "R",
+  QUIT: "Q",
+};
+const GAME_RESULT = {
+  SUCCESS: "성공",
+  FAIL: "실패",
+};
 
 module.exports = {
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
   ERROR_MESSAGE,
   BRIDGE_DRAWER,
+  RETRY_GAME,
+  GAME_RESULT,
 };
