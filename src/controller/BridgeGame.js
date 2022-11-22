@@ -115,7 +115,24 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.resetMoving();
+  }
+
+  resetMoving() {
+    const countUp = this.#moving.count + 1;
+    this.#moving = {
+      result: true,
+      state: {
+        Up: [],
+        Down: [],
+      },
+      position: 0,
+      count: countUp,
+      size: 0,
+    };
+    return this.#moving;
+  }
 }
 
 module.exports = BridgeGame;
