@@ -7,11 +7,13 @@ const ViewManager = require('./ViewManager');
 class BridgeGame {
 	bridge;
 	trace;
+	isCorrect;
 	recentMove;
 
 	constructor() {
 		this.bridge = [];
 		this.trace = '';
+		this.isCorrect = false;
 		this.recentMove = '';
 	}
 
@@ -42,6 +44,13 @@ class BridgeGame {
 	handleMove(move) {
 		this.trace += move;
 		this.recentMove = move;
+		this.evaluateMove();
+	}
+
+	evaluateMove() {
+		if (this.bridge[this.trace.length - 1] === this.recentMove) this.isCorrect = true;
+		else this.isCorrect = false;
+		ViewManager.map(this.recentMove, this.isCorrect);
 	}
 }
 

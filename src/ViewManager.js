@@ -13,6 +13,10 @@ class ViewManager {
 	static move(callback) {
 		InputView.readMoving(callback);
 	}
+
+	static map(recentMove, isCorrect) {
+		OutputView.printMap(recentMove, isCorrect);
+	}
 }
 
 module.exports = ViewManager;
