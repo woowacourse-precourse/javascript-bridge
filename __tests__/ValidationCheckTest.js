@@ -23,7 +23,7 @@ describe("1. 숫자 타입을 정확히 확인해 주는가?", () => {
   test.each(testCase_pass)(
     "$testId. 숫자값을 받았을 때, $param",
     ({ param }) => {
-      expect(ValidationCheck.isNumber(param)).toBe(true);
+      expect(ValidationCheck.isNumber(param));
     }
   );
 });
@@ -48,7 +48,7 @@ describe("2. 값의 타입을 정확히 확인해 주는가? ", () => {
   test.each(testCase_pass)(
     "$testId. 값의 타입이 정확할 때, $param",
     ({ param }) => {
-      expect(ValidationCheck.isExactVarType(...param)).toBe(true);
+      expect(ValidationCheck.isExactVarType(...param));
     }
   );
 });
@@ -72,7 +72,7 @@ describe("3. 숫자가 해당 범위안에 있지 잘 확인해 주는가?", () 
   test.each(testCase_pass)(
     "$testId. 숫자가 해당 범위 안에 들어있을 때, $param",
     ({ param }) => {
-      expect(ValidationCheck.isNumberIntheRange(...param)).toBe(true);
+      expect(ValidationCheck.isNumberIntheRange(...param));
     }
   );
 });
@@ -93,72 +93,7 @@ describe("4. 문자열이 해당 목록 안에 들어있는지 잘 확인해 주
   test.each(testCase_pass)(
     "$testId 문자열이 해당 목록 안에 들어있을 때 , $param",
     ({ param }) => {
-      expect(ValidationCheck.isStringIntheList(...param)).toBe(true);
-    }
-  );
-});
-
-describe("5. 객체안의 프로퍼티 목록과, 프로퍼티 밸류의 값이 정확한지 잘 확인해 주는가?", () => {
-  const testCase_fail_notCorrectProperty = [
-    {
-      testId: "4-1",
-      param: [
-        { a: 1, b: 1 },
-        { a: 1, x: 1 },
-      ],
-    },
-    {
-      testId: "4-2",
-      param: [
-        { a: 1, b: 1 },
-        { a: 1, b: 1, x: 1 },
-      ],
-    },
-  ];
-
-  test.each(testCase_fail_notCorrectProperty)(
-    "$testId 객체안의 프로퍼티 목록이 일치 하지 않을 때, $param",
-    ({ param }) => {
-      expect(() => ValidationCheck.isExactObjectStructure(...param)).toThrow();
-    }
-  );
-
-  const testCase_fail_notSameType = [
-    {
-      testId: "4-3",
-      param: [
-        { a: 1, b: 1 },
-        { a: "hi", b: 1 },
-      ],
-    },
-    {
-      testId: "4-4",
-      param: [
-        { a: [], b: {} },
-        { a: {}, b: [] },
-      ],
-    },
-  ];
-  test.each(testCase_fail_notSameType)(
-    "$testId  객체안의 프로퍼티 목록은 일치하지만, 값의 타입이 다를 때, $param",
-    ({ param }) => {
-      expect(() => ValidationCheck.isExactObjectStructure(...param)).toThrow();
-    }
-  );
-
-  const testCase_pass = [
-    {
-      testId: "4-5",
-      param: [
-        { a: [], b: 1 },
-        { a: [], b: 2 },
-      ],
-    },
-  ];
-  test.each(testCase_pass)(
-    "$testId 객체안의 프로퍼티 목록과 값의 타입이 모두 일치할 때 ,$param",
-    ({ param }) => {
-      expect(ValidationCheck.isExactObjectStructure(...param)).toBe(true);
+      expect(ValidationCheck.isStringIntheList(...param));
     }
   );
 });
