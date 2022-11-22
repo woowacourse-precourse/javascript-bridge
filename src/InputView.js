@@ -14,13 +14,20 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.', (bridgeLen) => {
-      console.log(`다리 길이 : ${bridgeLen}`);
-
-      const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
-      currentBridge = this.readMoving([[],[]], bridge, 1);
-      // 이동 후, 게임 진행 가능한지 확인
-    })
+    try{
+      Console.readLine('다리의 길이를 입력해주세요.', (bridgeLen) => {
+        console.log(`다리 길이 : ${bridgeLen}`);
+        if(!(3<=bridgeLen && bridgeLen<=20)) throw "[ERROR] 다리 길이는 3~20 사이의 숫자만 입력 가능합니다.";
+        if(isNaN(bridgeLen)) throw "[ERROR] 숫자만 입력하세요.";
+        const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
+        currentBridge = this.readMoving([[],[]], bridge, 1);
+        // 이동 후, 게임 진행 가능한지 확인
+      })
+    } catch(e){
+      Console.print(e);
+      this.readBridgeSize();
+    }
+    
   },
 
   /**
