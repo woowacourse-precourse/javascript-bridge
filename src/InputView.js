@@ -44,8 +44,8 @@ const InputView = {
   },
 
   checkBridgeSize(bridgesize){
-    const size = Number(bridgesize);
-    if(size < 3 || size > 20 || isNaN(size)) throw Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    if(isNaN(bridgesize)) throw new Error('[ERROR] 다리 길이는 숫자여야 합니다.');
+    if(bridgesize < 3 || bridgesize > 20) throw Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
 
   makeBridge(bridgeSize) {
