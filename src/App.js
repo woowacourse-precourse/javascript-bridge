@@ -2,6 +2,7 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 const Validation = require('./Validation');
+const { GAME } = require('./Constants');
 
 class App {
   #bridgeGame;
@@ -38,10 +39,40 @@ class App {
     const isCorrect = this.#bridgeGame.move(moving);
     OutputView.printMap(this.#bridgeGame.passedUpperBridgePads);
     OutputView.printMap(this.#bridgeGame.passedLowerBridgePads);
-
+    this.#isCorrectPad(isCorrect);
   }
 
-  
+  #isCorrectPad(Correct) {
+    if (Correct) {
+      if (this.#bridgeGame.isOver()) {
+        this.#printResult(GAME.COMPLETE);
+        return;
+      }
+      this.#readMoving();
+      return;
+    }
+    this.#readGameCommand();
+  }
+
+  #readGameCommand() {
+    const command = InputView.readGameCommand();
+    try {
+      Validation.isValidCommand(command);
+      const isRetry = this.#bridgeGame.retry(command);
+      this.#retry(isRetry);
+    } catch (error) {
+      OutputView.printError(error.message);
+      this.#readGameCommand();
+    }
+  }
+
+  #printResult(isCompleted) {
+    return;
+  }
+
+  #retry(isRetry) {
+    return;
+  }
 }
 
 module.exports = App;
