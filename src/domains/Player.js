@@ -56,7 +56,7 @@ class Player {
    * @returns {boolean}
    */
   isArrived() {
-    return this.getNextPosition() >= this.#bridge.getSize();
+    return Boolean(this.#movingHistory[this.#bridge.getSize() - 1]?.isSurvived());
   }
 }
 

@@ -24,6 +24,7 @@ module.exports = {
     // JSDoc과 관련된 오류 침묵
     'jsdoc/require-param-description': 'off',
     'jsdoc/require-returns-description': 'off',
+    'jsdoc/require-yield': 'off',
   },
   overrides: [
     // 테스트 파일을 대상으로 일부 규칙 비활성화

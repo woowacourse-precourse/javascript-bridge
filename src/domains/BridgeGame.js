@@ -54,9 +54,19 @@ class BridgeGame {
    * 사용자가 칸을 이동할 때 사용하는 메서드
    *
    * @param {string} tile
+   * @returns {boolean} 성공적으로 움직였는지
    */
   move(tile) {
     return this.#player.move(tile);
+  }
+
+  /**
+   * 다리를 성공적으로 건넜는지 확인하는 메서드
+   *
+   * @returns {boolean}
+   */
+  isArrived() {
+    return this.#player.isArrived();
   }
 
   /**

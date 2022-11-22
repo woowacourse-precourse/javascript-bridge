@@ -2,7 +2,7 @@ const ArrayValidator = require('./ArrayValidator');
 const StringValidator = require('./StringValidator');
 const NumberValidator = require('./NumberValidator');
 const Validator = require('./Validator');
-const { Tile } = require('../constants');
+const { Tile, BridgeSize, GameCommand } = require('../constants');
 
 /**
  * @param {any} value
@@ -32,9 +32,29 @@ function validateTiles(value) {
   return new ArrayValidator(value).each((validator) => validator.pipe(validateTile));
 }
 
+/**
+ * @param {any} value
+ */
+function validateBridgeSize(value) {
+  return new StringValidator(value)
+    .shouldNumeric()
+    .as(NumberValidator)
+    .shouldInteger()
+    .shouldRangeInclusive(BridgeSize.LOWER_INCLUSIVE, BridgeSize.UPPER_INCLUSIVE);
+}
+
+/**
+ * @param {any} value
+ */
+function validateGameCommand(value) {
+  return new StringValidator(value).shouldOneOf(Object.values(GameCommand));
+}
+
 module.exports = {
   validate,
   validateNumber,
   validateTile,
   validateTiles,
+  validateBridgeSize,
+  validateGameCommand,
 };
