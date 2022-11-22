@@ -110,7 +110,14 @@ const InputView = {
       MissionUtils.Console.print(ERROR.RETRY_OR_QUIT);
       this.printUpO(bridgeGame);
     }
+    this.answerIsR(bridgeGame, answer);
+  },
+
+  answerIsR(bridgeGame, answer) {
     if (answer === 'R') {
+      if (bridgeGame.realBridge[0].length <= 1) {
+        return this.readMoving(this.bridge, this.size);
+      }
       this.printRetryBridge(bridgeGame);
     }
   },
