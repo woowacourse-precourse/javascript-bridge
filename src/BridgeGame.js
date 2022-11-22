@@ -2,7 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #userBridge = [];
+  #userMoves = [];
   #bridge;
 
   /**
@@ -18,7 +18,15 @@ class BridgeGame {
    * @param {('U'|'D')} direction - 이동 방향
    */
   move(direction) {
-    this.#userBridge.push(direction);
+    this.#userMoves.push(direction);
+  }
+
+  getBridge() {
+    return [...this.#bridge];
+  }
+
+  getUserMoves() {
+    return [...this.#userMoves];
   }
 
   /**
@@ -30,23 +38,23 @@ class BridgeGame {
   }
 
   #isStartWith() {
-    const [bridge, userBridge] = [this.#bridge, this.#userBridge];
+    const [bridge, userMoves] = [this.#bridge, this.#userMoves];
 
     return (
-      userBridge.filter((userDirection, index) => userDirection === bridge[index]).length ===
-      userBridge.length
+      userMoves.filter((userDirection, index) => userDirection === bridge[index]).length ===
+      userMoves.length
     );
   }
 
   #hasLessLength() {
-    return this.#userBridge.length < this.#bridge.length;
+    return this.#userMoves.length < this.#bridge.length;
   }
 
   isSuccess() {
-    const [bridge, userBridge] = [this.#bridge, this.#userBridge];
+    const [bridge, userMoves] = [this.#bridge, this.#userMoves];
 
     return bridge
-      .map((direction, index) => direction === userBridge[index])
+      .map((direction, index) => direction === userMoves[index])
       .every((isSame) => isSame);
   }
 
