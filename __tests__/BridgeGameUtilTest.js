@@ -2,9 +2,9 @@ const {
   makeMapObj,
   makeMap,
   validationMakeMapObjProps,
-} = require("../src/Util/OutputView.util");
+} = require("../src/Util/BridgeGame.util");
 
-describe("OutputView Util Func Test", () => {
+describe("BridgeGame Util Func Test", () => {
   test("validationMakeMapObjProps execute false", () => {
     //given
     const answer = 0;

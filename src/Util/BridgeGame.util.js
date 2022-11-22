@@ -1,4 +1,4 @@
-const validationMakeMapObjProps = (answer) => answer > 1 || answer < 0;
+const validationMakeMapObjProps = (answer) => answer !== "U" || answer !== "D";
 
 const makeMapObj = (answer, input) => {
   const length = Math.min(answer.length, input.length);
@@ -8,7 +8,7 @@ const makeMapObj = (answer, input) => {
       validationMakeMapObjProps(answer[i]) ||
       validationMakeMapObjProps(input[i])
     ) {
-      throw new Error("[ERROR] 인자는 0과 1로 이루어져야합니다.");
+      throw new Error("[ERROR] 인자는 'U'와 'D'로 이루어져야합니다.");
     }
     const value = answer[i] === input[i];
     map[i] = value;
@@ -21,13 +21,13 @@ const makeMap = (input, obj) => {
   const secondFloor = [];
   for (let i = 0; i < length; i++) {
     if (validationMakeMapObjProps(input[i])) {
-      throw new Error("[ERROR] input은 0과 1로 이루어져야합니다.");
+      throw new Error("[ERROR] input은 'U'와 'D'로 이루어져야합니다.");
     }
     if (typeof obj[i] !== "boolean") {
       throw new Error("[ERROR] obj의 value는 boolean 타입이어야합니다.");
     }
-    const target = input[i] === 0 ? firstFloor : secondFloor;
-    const other = input[i] === 0 ? secondFloor : firstFloor;
+    const target = input[i] === "U" ? firstFloor : secondFloor;
+    const other = input[i] === "D" ? secondFloor : firstFloor;
     target.push(obj[i] ? " O " : " X ");
     other.push("   ");
   }
