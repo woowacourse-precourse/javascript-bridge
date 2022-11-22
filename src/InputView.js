@@ -45,6 +45,7 @@ const InputView = {
     if (bg.retry(input))
       return readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
 
+    OutputView.printResult(bg);
     close();
   }
 };

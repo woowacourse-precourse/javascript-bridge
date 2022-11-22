@@ -17,7 +17,6 @@ class BridgeGame {
     this.#gameStatus = false;
     this.topText = '';
     this.bottomText = '';
-    // console.log(this.#bridge);
   }
 
   showResult() {
