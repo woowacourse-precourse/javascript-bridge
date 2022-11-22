@@ -20,7 +20,7 @@ class BridgeGameStatus {
    */
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, generate);
-    this.#gameStatus = { accMoveCount: 0, curMoveCount: 0, movedRoutes: [] };
+    this.#gameStatus = { accMoveCount: 1, curMoveCount: 0, movedRoutes: [] };
   }
 
   /**
