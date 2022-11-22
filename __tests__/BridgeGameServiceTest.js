@@ -1,7 +1,7 @@
-const BridgeGameService = require("../src/Service/BridgeGameService.js");
-const OutputView = require("../src/View/OutputView.js");
-const InputView = require("../src/View/InputView.js");
-const BridgeGameModel = require("../src/Model/BridgeGameModel.js");
+const BridgeGameService = require("../src/service/BridgeGameService.js");
+const OutputView = require("../src/view/OutputView.js");
+const InputView = require("../src/view/InputView.js");
+const BridgeGameModel = require("../src/model/BridgeGameModel.js");
 const BridgeMaker = require("../src/BridgeMaker.js");
 const Misc = require("../src/utils/Misc.js");
 const { mockQuestions } = require("./ApplicationTest");
@@ -41,6 +41,8 @@ const mockBridgeGameModel = () => {
     "start",
     "retry",
     "update",
+    "read",
+    "result",
     "checkBridge",
     "checkUser",
     "checkRetry",
@@ -128,5 +130,20 @@ describe("BridgeGameService 클래스 테스트", () => {
     expect(bridgeGameModel.update).toHaveBeenCalledTimes(1);
     expect(outputView.printMap).toHaveBeenCalledTimes(1);
     expect(task).toHaveBeenCalledTimes(1);
+  });
+
+  test("endGame 로직 테스트", () => {
+    const bridgeGameService = new BridgeGameService(
+      inputView,
+      outputView,
+      bridgeGameModel
+    );
+
+    mockPipe();
+
+    bridgeGameService.endGame();
+
+    expect(bridgeGameModel.result).toHaveBeenCalledTimes(1);
+    expect(outputView.printResult).toHaveBeenCalledTimes(1);
   });
 });
