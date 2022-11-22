@@ -64,10 +64,23 @@ class GameController {
         this.bridgeGame.retry();
         return this.getDirection();
       }
+      if (gameCommand === DIRECTION_KEY.QUIT) {
+        this.printFinalResult();
+        Console.close();
+      }
     } catch (message) {
       this.errorReinput(this.getRetryOrQuit, message);
     }
   }
+
+  printFinalResult() {
+    const moveRecord = this.bridgeGame.getMoveRecord();
+    const isSucceeded = this.bridgeGame.isSucceed();
+    const tryCount = this.bridgeGame.getTryCount();
+
+    OutputView.printResult(moveRecord, isSucceeded, tryCount);
+  }
+
   errorReinput(reAsk, errMessage) {
     OutputView.printError(errMessage);
     reAsk.call(this);
