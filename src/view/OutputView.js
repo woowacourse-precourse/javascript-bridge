@@ -12,8 +12,7 @@ const OutputView = {
 
   printResult(drawBridge, result, attemps) {
     Console.print(RESULT_MESSAGE.finalGameResult);
-    Console.print(drawBridge.upBridge);
-    Console.print(drawBridge.downBridge + '\n');
+    this.printMap(drawBridge);
     Console.print(RESULT_MESSAGE.crossingResult(result));
     Console.print(RESULT_MESSAGE.totalNumberOfAttempts(attemps));
   },

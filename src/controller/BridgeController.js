@@ -83,9 +83,7 @@ class BridgeController {
     ) {
       return this.requestGameCommand();
     }
-
     if (this.#bridgeGame.isSuccess()) return this.controlFinish(CROSSING_RESULT_MESSAGE.success);
-
     return this.requestBridgeMovemoment();
   }
 

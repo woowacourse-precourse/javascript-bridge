@@ -1,3 +1,5 @@
+const { CROSSING_RESULT, DIRECTION } = require('../utils/constants');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -30,14 +32,26 @@ class BridgeGame {
   }
 
   move() {
-    return this.#userBridge.reduce((trace, position, index) => {
-      if (position === this.#bridge[index]) {
-        position === 'U' ? trace.push(['O', ' ']) : trace.push([' ', 'O']);
-      } else if (position !== this.#bridge[index]) {
-        position === 'U' ? trace.push(['X', ' ']) : trace.push([' ', 'X']);
+    return this.#userBridge.reduce((trace, direction, index) => {
+      if (direction === this.#bridge[index]) {
+        this.#firstTrace(trace, direction);
+      } else if (direction !== this.#bridge[index]) {
+        this.#traceFromSecond(trace, direction);
       }
       return trace;
     }, []);
+  }
+
+  #firstTrace(trace, direction) {
+    return direction === DIRECTION.up
+      ? trace.push([CROSSING_RESULT.success, DIRECTION.nothing])
+      : trace.push([DIRECTION.nothing, CROSSING_RESULT.success]);
+  }
+
+  #traceFromSecond(trace, direction) {
+    return direction === DIRECTION.up
+      ? trace.push([CROSSING_RESULT.fail, DIRECTION.nothing])
+      : trace.push([DIRECTION.nothing, CROSSING_RESULT.fail]);
   }
 
   retry() {
