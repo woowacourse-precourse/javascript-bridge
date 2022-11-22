@@ -1,6 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-const BridgeGame = require('../src/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 
 const mockQuestions = (answers) => {
@@ -70,7 +69,7 @@ describe('다리 건너기 테스트', () => {
 
     const app = new App();
 
-    // app.play();
+    app.play();
 
     app.play().then(() => {
       const log = getOutput(logSpy);
