@@ -136,13 +136,28 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    console.log(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)"
-    );
+    this.view.readGameCommand((command) => {
+      this.validateCommand(command);
+      if (command === "R") {
+        this.model.initSpace();
+        return this.move();
+      }
+      return this.end();
+    });
+  }
+
+  /**
+   * @param {string} 게임 다시 시도 여부 입력, R 또는 Q가 아닐 경우 ERROR 메시지 출력.
+   */
+  validateCommand = (command) => {
+    if (command !== "R" || command !== "Q")
+      this.view.printError("[ERROR] 입력한 값이 R 또는 Q가 아닙니다.");
+  };
+
+  end() {
+    console.log("최종 게임 결과");
   }
 }
 

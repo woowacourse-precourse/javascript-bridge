@@ -15,10 +15,17 @@
   };
 
   /**
-   * 이동한 칸을 추가하는 메서드
+   * 사용자가 이동한 칸을 추가하는 메서드
    */
   pushSpace = (space) => {
     this.userSpaces.push(space);
+  };
+
+  /**
+   * 사용자가 이동한 칸을 초기화하는 메서드
+   */
+  initSpace = () => {
+    this.userSpaces = [];
   };
 }
 
