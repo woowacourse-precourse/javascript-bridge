@@ -30,6 +30,10 @@ class BridgeGame {
     return this.moving.length === this.bridge.length;
   }
 
+  makeBridge(length) {
+    this.bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
+  }
+
 }
 
 module.exports = BridgeGame;
