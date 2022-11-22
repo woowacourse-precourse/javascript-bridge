@@ -8,12 +8,12 @@ const { Console } = require('@woowacourse/mission-utils');
 class App {
   bridge;
   bridgeGame;
-  moveCount;
+
   constructor() {
     this.bridge = new Bridge();
     this.bridgeGame = new BridgeGame(this.bridge, this.userBridge);
-    this.moveCount = 0;
   }
+
   play() {
     OutputView.printStart();
     this.startGame();
@@ -30,8 +30,7 @@ class App {
   moveOnBridge() {
     Console.print(this.bridge.condition);
     InputView.readMoving((movement) => {
-      this.bridgeGame.move(movement, this.moveCount);
-      this.moveCount += 1;
+      this.bridgeGame.move(movement);
       this.comparisonOperator();
     });
   }
@@ -39,6 +38,7 @@ class App {
     const currentMap = this.bridgeGame.comparisonOperator();
     const up = currentMap[0];
     const down = currentMap[1];
+    console.log('up: ', up, ', down: ', down);
     this.showMap(up, down);
   }
   showMap(up, down) {
@@ -54,6 +54,7 @@ class App {
         this.bridgeGame.retry();
         this.moveOnBridge();
       } else if (restartOrQuit === 'Q') {
+        Console.close();
       }
     });
   }

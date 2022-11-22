@@ -6,10 +6,12 @@ const UserBridge = require('../model/UserBridge');
 
 class BridgeGame {
   gameCount;
+  moveCount;
   bridge;
   userBridge;
   constructor(bridge) {
     this.gameCount = 0;
+    this.moveCount = 0;
     this.bridge = bridge;
     this.userBridge = new UserBridge();
   }
@@ -33,16 +35,18 @@ class BridgeGame {
   /**
    * 플레이어가 칸을 이동할 때 사용하는 메서드
    * @param {string} movement 플레이어가 이동할 칸 (U 또는 D)
-   * @param {number} moveCount 플레이어가 이번 게임에서 이동한 횟수
    */
-  move(movement, moveCount) {
-    if (movement === this.bridge.condition[moveCount]) {
-      // const result = [this.bridge.condition[moveCount], 'O'];
+  move(movement) {
+    if (movement === this.bridge.condition[this.moveCount]) {
       this.userBridge.condition.push('O');
     } else {
-      // const result = [this.bridge.condition[moveCount], 'X'];
       this.userBridge.condition.push('X');
     }
+    this.addMoveCount();
+  }
+
+  addMoveCount() {
+    this.moveCount += 1;
   }
 
   /**
@@ -53,6 +57,8 @@ class BridgeGame {
     let up = [];
     let down = [];
     for (let i = 0; i < this.userBridge.condition.length; i++) {
+      console.log(this.bridge);
+      console.log(this.userBridge);
       const currentResult = this.getCurrentMap(this.bridge.condition[i], this.userBridge.condition[i]);
       up.push(currentResult[0]);
       down.push(currentResult[1]);
@@ -89,6 +95,7 @@ class BridgeGame {
    */
   retry() {
     this.addGameCount();
+    this.moveCount = 0;
     this.userBridge = new UserBridge();
   }
 }
