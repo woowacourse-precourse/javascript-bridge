@@ -1,4 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const ERROR = require('../Constants/ErrorMessage');
+const OutputView = require('../OutputView');
 
 class BridgeLengthInput {
   #userInput;
@@ -10,7 +12,7 @@ class BridgeLengthInput {
   check() {
     try {
       if (this.isNotValidNumber() || this.isNotValidRange() || this.isNotInteger())
-        throw new Error(Console.print('[ERROR] 3~20 사이의 숫자만 입력 가능합니다.'));
+        throw new Error(OutputView.ErrorMessage(ERROR.INVALID_LENGTH));
       return true;
     } catch {
       return false;
@@ -39,7 +41,7 @@ class DirectionChoiceInput {
   check() {
     try {
       if (!this.isValidInput())
-        throw new Error('[ERROR] U 또는 D만 입력 가능합니다.');
+        throw new Error(OutputView.ErrorMessage(ERROR.MOVE_ORDER));
       return true;
     } catch {
       return false;
@@ -60,7 +62,7 @@ class RetryInput {
   check() {
     try {
       if (!this.isValidInput())
-        throw new Error('[ERROR] Q 또는 R만 입력 가능합니다.');
+        throw new Error(OutputView.ErrorMessage(ERROR.RETRY_COMMAND));
       return true;
     } catch {
       return false;
