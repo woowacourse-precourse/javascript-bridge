@@ -41,4 +41,11 @@ const RESULT = {
   },
 };
 
-module.exports = { MESSAGE, INPUT, BRIDGE, ERROR, SIZE_RANGE, RESULT };
+module.exports = {
+  MESSAGE,
+  INPUT,
+  BRIDGE,
+  ERROR,
+  SIZE_RANGE,
+  RESULT,
+};

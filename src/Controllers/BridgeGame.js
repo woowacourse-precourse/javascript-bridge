@@ -1,7 +1,6 @@
 const Validation = require('../Utilities/Validation');
-const { MESSAGE, INPUT } = require('../Constants');
 const IBridgeGame = require('./IBridgeGame');
-
+const { MESSAGE } = require('../Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -88,7 +87,7 @@ class BridgeGame extends IBridgeGame {
   }
 
   retryOrQuit(userRetry) {
-    if (userRetry === INPUT.RESTART) {
+    if (userRetry === 'R') {
       this.model.reset();
       this.reset();
       this.move();
