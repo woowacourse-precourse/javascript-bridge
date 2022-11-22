@@ -51,4 +51,19 @@ describe("다리 게임 클래스 테스트", () => {
     });
     expect(bridgeGame.lengthCompare()).toEqual(false);
   });
+
+  test("최종 출력에서 필요로 하는 인자들을 변환하여 반환하는 메서드의 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "U", "D"]);
+    const item = ["U", "U", "D"];
+
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.returnUpDownTryCountArray()).toEqual([
+      "[ O | O |   ]",
+      "[   |   | O ]",
+      "성공",
+      1,
+    ]);
+  });
 });
