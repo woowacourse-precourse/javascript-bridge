@@ -87,6 +87,7 @@ class Controller {
 
   commandForm(input) {
     try {
+      this.validation.isRestartOrQuit(input);
       Console.print(input);
     } catch (error) {
       Console.print(error);
