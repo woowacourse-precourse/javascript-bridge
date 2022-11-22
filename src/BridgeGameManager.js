@@ -47,8 +47,6 @@ class BridgeGameManager {
     if (command === GAME_STATE.QUIT)
       return OutputView.printResult(this.#bridgeGame.getCurrentState());
   }
-
-  makeBridgeState() {}
 }
 
 module.exports = BridgeGameManager;
