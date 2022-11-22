@@ -2,6 +2,10 @@ const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE, MESSAGE, MAP } = require('./constant/Bridge');
 
 const OutputView = {
+  printStartMessage() {
+    Console.print(MESSAGE.START);
+  },
+
   printMap(map) {
     const upper = MAP.START + map[BRIDGE.UPPER].join(MAP.DELIMITER) + MAP.END;
     const lower = MAP.START + map[BRIDGE.LOWER].join(MAP.DELIMITER) + MAP.END;

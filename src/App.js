@@ -9,7 +9,7 @@ class App {
   #game;
 
   play() {
-    Console.print(MESSAGE.START);
+    OutputView.printStartMessage();
     this.readBridgeSize();
   }
 
