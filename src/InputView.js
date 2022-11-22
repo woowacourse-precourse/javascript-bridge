@@ -17,9 +17,7 @@ const InputView = {
     Console.readLine(GUIDE_MESSAGE.INPUT_MOVE, callback);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   * 8. 재시도 여부 입력
+  /** 8. 재시도 여부 입력(사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.)
    */
   readGameCommand(callback) {
     Console.readLine(GUIDE_MESSAGE.INPUT_TRY, callback);
