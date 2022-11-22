@@ -24,11 +24,16 @@ class BridgeGame {
   move(direction) {
     this.#userBridge.move(direction, this.#bridge);
   }
+
   isCorrectDirection(direction) {
     return this.#userBridge.isCorrectDirection(direction, this.#bridge);
   }
   isEnd() {
     return this.#userBridge.isEnd(this.#bridge);
+  }
+  isGameFinish(direction) {
+    console.log(this.isEnd() && this.isCorrectDirection(direction));
+    return this.isEnd() && this.isCorrectDirection(direction);
   }
   getResult() {
     return [this.mapBridge(), this.#playCount];

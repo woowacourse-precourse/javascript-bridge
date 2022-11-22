@@ -14,19 +14,27 @@ class User {
     );
     return [highBridge, lowBridge];
   }
-  makeTwoErrorBridge(bridge) {
+  makeHighBridge(bridge) {
     const highBridge = bridge.map((direction, index) => {
       if (index === this.#userBridge.length - 1) {
         return direction === "U" ? "X" : " ";
       }
       return direction === "U" ? "O" : " ";
     });
+    return highBridge;
+  }
+  makeLowBridge(bridge) {
     const lowBridge = bridge.map((direction, index) => {
       if (index === this.#userBridge.length - 1) {
         return direction === "D" ? "X" : " ";
       }
       return direction === "D" ? "O" : " ";
     });
+    return lowBridge;
+  }
+  makeTwoErrorBridge(bridge) {
+    const highBridge = this.makeHighBridge(bridge);
+    const lowBridge = this.makeLowBridge(bridge);
     return [highBridge, lowBridge];
   }
   changeBridgeOutfit(highBridge, lowBridge) {
@@ -52,7 +60,8 @@ class User {
     this.#userBridge.push(direction);
   }
   isCorrectDirection(direction, bridge) {
-    if (direction === bridge[this.#userBridge.length]) {
+    console.log(bridge[this.#userBridge.length - 1]);
+    if (direction === bridge[this.#userBridge.length - 1]) {
       return true;
     }
     return false;

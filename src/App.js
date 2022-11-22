@@ -28,19 +28,26 @@ class App {
     InputView.readMoving(this.moveUser.bind(this));
   }
   moveUser(direction) {
-    if (this.#bridgeGame.isCorrectDirection(direction)) {
-      this.#bridgeGame.move(direction);
-      OutputView.printMap(this.#bridgeGame.mapBridge());
-      if (this.#bridgeGame.isEnd()) {
-        this.winGame(true);
-        return;
-      }
-      this.requestMove();
-      return;
-    }
     this.#bridgeGame.move(direction);
+    if (this.#bridgeGame.isGameFinish(direction)) {
+      return this.isEnd();
+    }
+    if (this.#bridgeGame.isCorrectDirection(direction)) {
+      return this.isCorrect();
+    }
+    this.isFail();
+  }
+  isCorrect() {
+    OutputView.printMap(this.#bridgeGame.mapBridge());
+    this.requestMove();
+  }
+  isFail() {
     OutputView.printMap(this.#bridgeGame.mapErrorBridge());
     this.requestRetry();
+  }
+  isEnd() {
+    this.winGame(true);
+    return;
   }
   winGame(result) {
     const [bridge, playCount] = this.#bridgeGame.getResult();
