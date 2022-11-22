@@ -1,5 +1,13 @@
 const ValidationError = require('../errors/ValidationError');
 
+/**
+ * 값을 검증하는 클래스입니다.
+ *
+ * - as는 다른 검증 클래스로의 전환을 뜻합니다. 이 과정에서 값이 변경될 수 있습니다.
+ * - should는 값이 조건을 만족해야한다는 뜻입니다.
+ * - pipe는 값을 사용자 정의 validate 함수로 넘겨줍니다.
+ * - get은 검증이 끝난 후의 값을 얻을 때 사용합니다.
+ */
 class Validator {
   /** @type {any} */
   #value;
@@ -79,6 +87,9 @@ class Validator {
     return validate(this.#value);
   }
 
+  /**
+   * 검증이 끝난 값을 반환합니다.
+   */
   get() {
     return this.#value;
   }
