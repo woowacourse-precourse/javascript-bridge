@@ -57,6 +57,11 @@ const Controller = {
         Controller.move(bridgeGame)
     },
 
+    reGame(bridgeGame) {
+        bridgeGame.retry();
+        Controller.move(bridgeGame);    
+    },
+
 }
 
 module.exports = Controller;
