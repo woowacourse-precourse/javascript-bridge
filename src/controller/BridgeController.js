@@ -43,13 +43,21 @@ class BridgeController {
   }
 
   /**
+   * 다리 저장 연결 메서드
+   * @param newBridge {string[]} [새로운 다리]
+   */
+  setBridge(newBridge) {
+    this.#bridgeModel.setBridge(newBridge);
+  }
+
+  /**
    * 유저에게 다리 길이를 입력 받은 후 다리 생성 및 저장한다.
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
   processBridgeSizeInput(bridgeLengthInput) {
     try {
       validate(bridgeLengthInput);
-      this.#bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
+      this.setBridge(this.getCreatedBridge(bridgeLengthInput));
       this.#mainController.readUserMovingInput();
     } catch (errorLog) {
       this.#mainController.printError(errorLog);
