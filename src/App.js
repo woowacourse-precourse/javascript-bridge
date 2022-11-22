@@ -41,12 +41,7 @@ class App {
 
       this.bridgeGame.move(this.#bridge, moving);
       OutputView.printMap(this.bridgeGame.getMoving());
-
-      if (this.bridgeGame.isFail(this.#bridge, moving)) return this.askGameCommand();
-
-      if (!this.bridgeGame.isEnd(this.#bridge.length)) return this.movingBridge();
-
-      return this.victoryGame();
+      return this.checkProgressGame(moving);
     });
   }
 
@@ -62,6 +57,14 @@ class App {
 
       return this.quitGame();
     });
+  }
+
+  checkProgressGame(moving) {
+    if (this.bridgeGame.isFail(this.#bridge, moving)) return this.askGameCommand();
+
+    if (!this.bridgeGame.isEnd(this.#bridge.length)) return this.movingBridge();
+
+    return this.victoryGame();
   }
 
   victoryGame() {
