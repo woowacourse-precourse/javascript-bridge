@@ -27,8 +27,6 @@ class Controller {
     });
   }
   
-
-
   play() {
     readMoving((moving) => {
       try{
@@ -77,9 +75,8 @@ class Controller {
   }
 
   end(isMatch){
-    printResultMap();
-    this.showMap();
-    printResult(isMatch, this.#tryingNum);
+    const map = this.#bridgeGame.result();
+    printResult(isMatch, this.#tryingNum, () => printMap(map));
   }
 }
 

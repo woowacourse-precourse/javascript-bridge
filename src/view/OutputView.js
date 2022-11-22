@@ -8,15 +8,13 @@ const OutputView = {
     Console.print(`[ ${map[MOVE_STRING.DOWN].join(' | ')} ]`);
   },
 
-  printResult(isMatch, tryingNum) {
+  printResult(isMatch, tryingNum, printMap) {
+    Console.print(OUTPUT_MESSAGE.PRINT_RESULT_MAP);
+    printMap();
     const result = isMatch? RESULT_STRING.SUCCESS : RESULT_STRING.FAIL;
     Console.print(`${OUTPUT_MESSAGE.PRINT_FINAL_RESULT}${result}`);
     Console.print(`${OUTPUT_MESSAGE.PRINT_TRY_NUMBER}${tryingNum}`);
     Console.close();
-  },
-
-  printResultMap(){
-    Console.print(OUTPUT_MESSAGE.PRINT_RESULT_MAP);
   },
   
   printMessage(message){
