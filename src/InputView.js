@@ -27,20 +27,25 @@ const InputView = {
       Console.print(e);
       this.readBridgeSize();
     }
-    
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(currentBridge, bridge, count) {
-    console.log('입력받는다!');
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
-      console.log(`이동할 칸 : ${input}`);
-      currentBridge=game.move(currentBridge, bridge, input); // class
-      this.stillMoving(currentBridge, bridge, count);
-    })
-    return currentBridge;
+    try{
+      Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+        console.log(`이동할 칸 : ${input}`);
+        if(input!=="U" && input!=="D") throw "[ERROR] U와 D중 하나만 입력 가능합니다.";
+        currentBridge=game.move(currentBridge, bridge, input); // class
+        this.stillMoving(currentBridge, bridge, count);
+      })
+      return currentBridge;
+    } catch(e){
+      Console.print(e);
+      this.readMoving(currentBridge, bridge, count);
+    }
+
   },
 
   /**
