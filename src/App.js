@@ -38,13 +38,18 @@ class App {
   }
 
   regame(input) {
-    console.log(input);
-    if (input === "R") {
-      this.#userGame.retry();
-      this.moveUserBridge();
-    } else if (input === "Q") {
-      OutputView.printResult(this.#userGame);
-      return;
+    try {
+      Validation.validateUserInput(input);
+      if (input === "R") {
+        this.#userGame.retry();
+        this.moveUserBridge();
+      } else if (input === "Q") {
+        OutputView.printResult(this.#userGame);
+        return;
+      }
+    } catch (e) {
+      Console.print(e);
+      this.regame(input);
     }
   }
 
