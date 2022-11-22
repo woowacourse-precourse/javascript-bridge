@@ -18,6 +18,21 @@ const OutputView = {
     Console.print(downBridge+MESSAGE.bridge.bridgeEnd);
   },
 
+  printBridgeMap(message, count, size){
+    if(count ==1) {
+      arr1=MESSAGE.bridge.bridgeStart+message[0];
+      arr2=MESSAGE.bridge.bridgeStart+message[1];
+      OutputView.printMap(arr1,arr2);
+    } else {
+      arr1+=MESSAGE.bridge.bridgeAgain+message[0];
+      arr2+=MESSAGE.bridge.bridgeAgain+message[1];
+      OutputView.printMap(arr1,arr2);
+      if(count == size) {
+        OutputView.printResult('success');
+      }
+    }
+  },
+
   printResult(score){ 
     Console.print('최종 게임 결과');
     Console.print(arr1+MESSAGE.bridge.bridgeEnd);
@@ -30,6 +45,7 @@ const OutputView = {
     }
     Console.print(`총 시도한 횟수: ${OutputView.checkRestartCount()}`)//카운트 세기
   },
+
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
