@@ -24,6 +24,7 @@ const InputView = {
             bridgeSize,
             BridgeRandomNumberGenerator.generate
           );
+          this.readMoving();
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readBridgeSize();
@@ -35,7 +36,21 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (moveLocation) => {
+        try {
+          if (moveLocation !== "D" && moveLocation !== "U") {
+            throw "[ERROR] U 혹은 D만 입력 가능합니다.";
+          }
+        } catch (e) {
+          MissionUtils.Console.print(e);
+          this.readMoving();
+        }
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
