@@ -15,4 +15,9 @@ describe('출력 테스트', () => {
     OutputView.printStartMessage();
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(MESSAGES.start));
   });
+
+  test('결과 출력', () => {
+    OutputView.printResult();
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(MESSAGES.start));
+  });
 });
