@@ -1,6 +1,6 @@
-const Io = require('../utils/io');
-const { INPUT } = require('../constants/views');
-const { Validator } = require('../utils/validator');
+const Io = require('./utils/io');
+const { INPUT } = require('./constants/views');
+const { Validator } = require('./utils/validator');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -11,9 +11,14 @@ const InputView = {
    */
   readBridgeSize(callback) {
     return Io.input(INPUT.BRIDGE_SIZE, (size) => {
-      Validator.isVaildSize(size);
-      Io.output('');
-      callback(size);
+      try {
+        Validator.isVaildSize(size);
+        Io.output('');
+        callback(size);
+      } catch (error) {
+        Io.output(error);
+        this.readBridgeSize(callback);
+      }
     });
   },
 
@@ -21,9 +26,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    return Io.input(INPUT.MOVE_UP_OR_DOWN, (char) => {
-      Validator.isVaildMovingChar(char);
-      callback(char);
+    return Io.input(INPUT.EITHER_UP_OR_DOWN, (char) => {
+      try {
+        Validator.isVaildMovingChar(char);
+        callback(char);
+      } catch (error) {
+        Io.output(error);
+        this.readMoving(callback);
+      }
     });
   },
 
@@ -32,8 +42,13 @@ const InputView = {
    */
   readGameCommand(callback) {
     return Io.input(INPUT.RETRY_OR_QUIT, (char) => {
-      Validator.isVaildCommandChar(char);
-      callback(char);
+      try {
+        Validator.isVaildCommandChar(char);
+        callback(char);
+      } catch (error) {
+        Io.output(error);
+        this.readGameCommand(callback);
+      }
     });
   },
 };
