@@ -20,8 +20,13 @@ class App {
   }
 
   handleBridgeSize(size) {
-    this.#bridgeGame = new BridgeGame(size);
-    InputView.readMoving(this.handleBridgeMoveing);
+    try {
+      this.#bridgeGame = new BridgeGame(size);
+      InputView.readMoving(this.handleBridgeMoveing);
+    } catch (error) {
+      OutputView.printError(error);
+      InputView.readBridgeSize(this.handleBridgeSize);
+    }
   }
 
   handleBridgeMoveing(und) {
