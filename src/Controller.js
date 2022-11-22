@@ -51,13 +51,13 @@ class Controller {
   }
 
   inputGameCommand() {
-    const callback = (input) => {
+    const readGameCommandCallback = (input) => {
       Validator.validateGameCommand(input);
       if (input === QUIT) return this.outputView.printResult(FAIL, this.model);
       BridgeGame.retry(this.model);
       return this.inputMoving();
     };
-    return this.inputView.readGameCommand(callback);
+    return this.inputView.readGameCommand(readGameCommandCallback);
   }
 }
 
