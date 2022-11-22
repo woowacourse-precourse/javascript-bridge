@@ -10,40 +10,40 @@ class App {
   startGame() {
     InputView.readBridgeSize((size) => {
       size = Number(size);
-      const bridge = new BridgeGame(
+      const bridgeGame = new BridgeGame(
         BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate),
         0,
         1
       );
-      this.progressGame(bridge);
+      this.progressGame(bridgeGame);
     });
   }
 
-  progressGame(bridge) {
+  progressGame(bridgeGame) {
     InputView.readMoving((answer) => {
-      if (bridge.checkInputIsCorrect(answer)) {
-        this.moveUserBridge(answer, bridge);
+      if (bridgeGame.checkInputIsCorrect(answer)) {
+        this.moveUserBridge(answer, bridgeGame);
         return;
       }
 
-      this.stopUserBridge(answer, bridge);
-      this.askRetry(bridge);
+      this.stopUserBridge(answer, bridgeGame);
+      this.askRetry(bridgeGame);
     });
   }
 
-  moveUserBridge(answer, bridge) {
-    bridge.move(answer);
-    OutputView.printMap(bridge.getCurrentBridge());
+  moveUserBridge(answer, bridgeGame) {
+    bridgeGame.move(answer);
+    OutputView.printMap(bridgeGame.getCurrentBridge());
 
-    if (!this.checkIsGameSuccess(bridge)) {
-      bridge.addStep();
-      this.progressGame(bridge);
+    if (!this.checkIsGameSuccess(bridgeGame)) {
+      bridgeGame.addStep();
+      this.progressGame(bridgeGame);
     }
   }
 
-  checkIsGameSuccess(bridge) {
-    if (bridge.checkIsLastStep()) {
-      OutputView.printResult(STATES.SUCCESS, bridge);
+  checkIsGameSuccess(bridgeGame) {
+    if (bridgeGame.checkIsLastStep()) {
+      OutputView.printResult(STATES.SUCCESS, bridgeGame);
       Console.close();
       return true;
     }
@@ -51,12 +51,12 @@ class App {
     return false;
   }
 
-  stopUserBridge(answer, bridge) {
-    bridge.stop(answer);
-    OutputView.printMap(bridge.getCurrentBridge());
+  stopUserBridge(answer, bridgeGame) {
+    bridgeGame.stop(answer);
+    OutputView.printMap(bridgeGame.getCurrentBridge());
   }
 
-  askRetry(bridge) {
+  askRetry(bridgeGame) {
     InputView.readGameCommand((answer) => {
       switch (answer) {
         case INPUT_VALUE.QUIT:

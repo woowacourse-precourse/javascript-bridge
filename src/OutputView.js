@@ -59,19 +59,19 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(state, bridge) {
-    this.printFianlResult(bridge);
-    this.printGameSummury(state, bridge);
+  printResult(state, bridgeGame) {
+    this.printFianlResult(bridgeGame);
+    this.printGameSummury(state, bridgeGame);
   },
 
-  printFianlResult(bridge) {
+  printFianlResult(bridgeGame) {
     Console.print(OUTPUT.FINAL_RESULT);
-    this.printMap(bridge.getCurrentBridge());
+    this.printMap(bridgeGame.getCurrentBridge());
   },
 
-  printGameSummury(state, bridge) {
+  printGameSummury(state, bridgeGame) {
     Console.print(`${OUTPUT.WHETHER_SUCCESS_OR_FALI}: ${state}`);
-    Console.print(`${OUTPUT.TOTAL_ROUND}: ${bridge.getRound()}`);
+    Console.print(`${OUTPUT.TOTAL_ROUND}: ${bridgeGame.getRound()}`);
   },
 };
 
