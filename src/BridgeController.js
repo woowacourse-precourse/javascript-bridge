@@ -3,7 +3,6 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 
-// 게임 로직 관리
 class BridgeController {
     constructor(views) {
         this.bridgeGame = new BridgeGame();
@@ -28,10 +27,6 @@ class BridgeController {
         this.requestMoving();
     }
 
-    requestMoving() {
-        this.inputView.readMoving(this.createMoving.bind(this));
-    }
-
     bridgeSizeException(bridgeSize) {
         try{
             Exception.isInvalidBridgeSize(bridgeSize);
@@ -39,6 +34,10 @@ class BridgeController {
             this.outputView.printError(err);
             this.requestBridegeSize();
         }
+    }
+
+    requestMoving() {
+        this.inputView.readMoving(this.createMoving.bind(this));
     }
 
     createMoving(moving) {
@@ -56,12 +55,12 @@ class BridgeController {
     }
 
     handleMovingResult(result) {
-        this.bridgeGame.printBridge(this.outputView); 
+        this.outputView.printMap(this.bridgeGame.getMoveInfo());
         switch (result) {
             case 'next': this.requestMoving(); break;
             case 'fail': this.requestRetry(); break;
-            case 'success': // 게임 성공
-                this.bridgeGame.printResults(this.outputView, true);
+            case 'success': 
+                this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), true);
                 break;
         }
     }
@@ -79,7 +78,7 @@ class BridgeController {
         if(result === 'retry') {
             this.requestMoving();
         } else if(result === 'quit') {
-            this.bridgeGame.printResults(this.outputView, false);
+            this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), false);
         }
     }
 
@@ -91,7 +90,6 @@ class BridgeController {
             this.requestRetry();
         }
     }
-
 }
 
 module.exports = BridgeController;
