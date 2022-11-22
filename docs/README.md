@@ -1,32 +1,39 @@
 # 미션 - 다리 건너기
 
 ## 🚀 기능 구현 목록
-[ ] BridgeGame.js 구현
-​	[ ] move 구현
-  [ ] 인자로 moving을 받는다
-  [ ] 해당 부분을 저장한다
- [ ] 현재 진행상황을 저장하는 필드를 가지고 있다
-  [ ] 다리의 윗줄, 아랫줄 따로 저장한다
-  [ ] 정답 다리 정보도 가지고 있다
-  [ ] 시도 횟수 정보도 가지고 있다
-​	[ ] retry 구현
-  [ ] 인자로 command를 받는다
-  [ ] 다시 시도하면 현재 진행상황을 지우고 시도한 회수를 1회 추가한다
+[x] BridgeGame.js 구현
+	[x] move 구현
+		[x] 인자로 moving을 받는다
+		[x] 해당 부분을 실제 다리와 비교한다
+		[x] 비교한 것에 따라 `'O'`, `'X'`, `' '`의 경우와 윗줄 아랫줄로 나누어 저장한다
+		[x] 발판이 몇 번째인지 정보를 갱신한다
+		[x] 반환 값으로 존재하는 발판을 선택했는지, 발판을 고른 결과를 윗줄 아랫줄로 나누어 반환한다
+	[x] 현재 진행상황을 저장하는 필드를 가지고 있다
+		[x] 다리의 윗줄, 아랫줄 따로 저장한다
+		[x] 정답 다리 정보도 가지고 있다
+		[x] 시도 횟수 정보도 가지고 있다
+		[x] 현재 몇 번째 발판인지 정보도 가지고 있다
+	[x] retry 구현
+		[x] 인자로 command를 받는다
+		[x] 다시 시도하면 현재 진행상황을 지우고 시도한 회수를 1회 추가한다
+		[x] 재시작을 하는지 하지 않는지 boolean 값으로 반환한다
 
 [x] BridgeMaker.js 구현
-​	[x] makeBridge 구현
+	[x] makeBridge 구현
 
 [x] InputView.js 구현
-​	[x] readBridgeSize 구현
-​	[x] readMoving 구현
-​	[x] readGameCommand 구현
+	[x] readBridgeSize 구현
+	[x] readMoving 구현
+	[x] readGameCommand 구현
 
 [ ] OutputView.js 구현
-​	[ ] printMap 구현
-​	[ ] printResult 구현
+	[ ] printMap 구현
+	[ ] printResult 구현
 
 [ ] Constants.js 구현
-​	[x] MESSAGE 구현
+	[x] MESSAGE 구현
+	[x] PAD 구현
+	[x] COMMAND 구현
 
 [ ] Validation.js 구현
 	[ ] isValidBridgeSize 구현
