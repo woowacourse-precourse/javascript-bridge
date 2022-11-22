@@ -39,24 +39,26 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving U 혹은 D
-   * @return {{moveStatus: number, pathMap: string[][]}}
+   * @return {{status: number, pathMap: string[][]}}
    */
   move(moving) {
     const currentPath = this.#path.push(moving);
-    return this.comparePath(currentPath, this.#bridge);
+    const { status, isCorrect } = this.comparePath(currentPath, this.#bridge);
+    const pathMap = this.#path.markOX(isCorrect);
+
+    return { status, pathMap };
   }
 
   /**
    * @param {string[]} currentPath
    * @param {Bridge} bridge
-   * @returns {{moveStatus: number, pathMap: string[][]}}
+   * @returns {{status: number, isCorrect: boolean}}
    */
   comparePath(currentPath, bridge) {
-    const moveStatus = bridge.compare(currentPath);
+    const status = bridge.compare(currentPath);
     const isCorrect = bridge.isCorrect(currentPath);
-    const pathMap = this.#path.markOX(isCorrect);
 
-    return { moveStatus, pathMap };
+    return { status, isCorrect };
   }
 
   /**
