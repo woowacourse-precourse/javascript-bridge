@@ -1,5 +1,5 @@
-const Application = require('./Application');
 const Validation = require('./Validation');
+const Application = require('./utils/Application');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스

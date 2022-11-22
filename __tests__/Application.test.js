@@ -1,4 +1,4 @@
-const Application = require('../src/Application');
+const Application = require('../src/utils/Application');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
 const VALIDATION_ARRAY_TEXT = '[ERROR] 전달된 인수는 배열 타입이 아닙니다.';
