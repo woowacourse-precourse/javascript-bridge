@@ -48,9 +48,9 @@ class BridgeHq {
     this.inputMove();
   }
   getMoveResult() {
-    const currentMap = this.game.judgmentCommand();
-    if (currentMap) {
-      return this.printCurrentMap(currentMap);
+    const currentMoveResult = this.game.judgmentCommand();
+    if (currentMoveResult) {
+      return this.printCurrentMap(currentMoveResult);
     }
     // return this.retryGame();
   }
