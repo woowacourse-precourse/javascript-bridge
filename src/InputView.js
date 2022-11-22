@@ -18,9 +18,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(CONSOLE_MESSAGE.bridgeLengthInput, (input) => {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.bridgeSizeInput, (input) => {
       try {
-        this.exception.validateBridgeLength(input);
+        this.exception.validateBridgeSize(input);
       } catch (error) {
         return this.readBridgeSize();
       }

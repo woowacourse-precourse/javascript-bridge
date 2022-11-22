@@ -7,7 +7,7 @@ describe('예외 클래스 테스트', () => {
 
     INPUTS.forEach((input) => {
       expect(() => {
-        exception.validateBridgeLength(input);
+        exception.validateBridgeSize(input);
       }).toThrow('[ERROR]');
     });
   });
