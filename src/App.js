@@ -41,7 +41,8 @@ class App {
     let [attemptResult, moves] = await this.#makeAttempt(size);
 
     if (!attemptResult) {
-      return this.#tryCatch(this.#readReplyAndCheckRetry.bind(this), size);
+      let result = await this.#tryCatch(this.#readReplyAndCheckRetry.bind(this), size);
+      if (result) return result;
     }
 
     return [attemptResult, moves];
