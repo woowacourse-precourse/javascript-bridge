@@ -192,7 +192,11 @@ true를 리턴한다.
 
 ## 게임 실행 결과
 
-![BridgeGame 실행 😁](../img//BridgeGame.gif)
+![BridgeGame 실행 😁](../img/BridgeGame.gif)
+
+## 작성자의 프리코스 소감 블로그 주소
+
+[링크텍스트](https://velog.io/@tkdgk1996/series)
 
 ## 작성자
 
