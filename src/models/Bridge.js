@@ -1,6 +1,11 @@
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
+const BRIDGE_SIZE = Object.freeze({
+  min: 3,
+  max: 20,
+});
+
 class Bridge {
   #bridge;
 
@@ -18,7 +23,7 @@ class Bridge {
   }
 
   #isInRange(number) {
-    return number >= 3 && number <= 20;
+    return number >= BRIDGE_SIZE.min && number <= BRIDGE_SIZE.max;
   }
 
   #isNumber(value) {
