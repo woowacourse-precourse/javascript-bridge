@@ -1,11 +1,3 @@
-/*
-제공된 OutputView 객체를 활용해 구현해야 한다.
-OutputView의 `파일 경로`는 변경할 수 있다. 🙆‍♂️
-OutputView의 `메서드의 이름`은 변경할 수 없다. 🙅‍♀️
-`인자`는 필요에 따라 추가하거나 변경할 수 있다. 🙆‍♂️
-값 출력을 위해 필요한 `메서드`를 추가할 수 있다. 🙆‍♂️
- */
-
 const { Console } = require('@woowacourse/mission-utils');
 
 const { MESSAGE, MOVING, MOVING_RESULT } = require('../utils/constants');
