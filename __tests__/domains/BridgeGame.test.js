@@ -1,3 +1,5 @@
+const { Tile } = require('../../src/constants');
+const Bridge = require('../../src/domains/Bridge');
 const BridgeGame = require('../../src/domains/BridgeGame');
 const ValidationError = require('../../src/errors/ValidationError');
 
@@ -6,5 +8,13 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(() => {
       new BridgeGame('odd value');
     }).toThrow(ValidationError);
+  });
+
+  test('시도 횟수가 잘 올라가는지 테스트', () => {
+    const bridgeGame = new BridgeGame(new Bridge([Tile.UP, Tile.DOWN]));
+    expect(bridgeGame.getTrialCount()).toBe(1);
+
+    bridgeGame.retry();
+    expect(bridgeGame.getTrialCount()).toBe(2);
   });
 });
