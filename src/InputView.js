@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker.js");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
+const { generate } = BridgeRandomNumberGenerator;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -12,10 +13,20 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (str) => {
-      const length = parseInt(str);
-      bridgeGame.init(BridgeMaker.makeBridge(length,BridgeRandomNumberGenerator));
-      this.readMoving(bridgeGame);
+      this.checkBridgeSize(str, bridgeGame);
     });
+  },
+
+  checkBridgeSize(str, bridgeGame){
+    try{
+      const length = parseInt(str);
+      if(!/^\d+$/.test(length)) throw ("[ERROR] 입력 오류.");
+      bridgeGame.init(BridgeMaker.makeBridge(length, generate));
+      this.readMoving(bridgeGame);
+    } catch(error){
+      MissionUtils.Console.print(error);
+      this.readBridgeSize(bridgeGame);
+    }
   },
 
   /**
@@ -23,12 +34,15 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (str) => {
-      if(["U", "D"].includes(str)){
-        const result = bridgeGame.move(str);
-        this.checkReturn(bridgeGame, result);
-      }
-      else throw ("[ERROR] 입력 오류");
-    })
+      try{
+        if(["U", "D"].includes(str)){
+          const result = bridgeGame.move(str);
+          this.checkReturn(bridgeGame, result);
+        } else throw ("[ERROR] 입력 오류.");
+      } catch(error) {;
+        MissionUtils.Console.print(error);
+        this.readMoving(bridgeGame);
+      }})
   },
 
   /**
@@ -52,12 +66,17 @@ const InputView = {
   },
 
   checkInput(str, bridgeGame){
-    if(str === "R"){
-      const result = bridgeGame.retry();
-      this.checkReturn(bridgeGame, result);
+    try{
+      if(str === "R"){
+        const result = bridgeGame.retry();
+        this.checkReturn(bridgeGame, result);
+      }
+      else if(str === "Q") OutputView.printResult(bridgeGame, false);
+      else throw ("[ERROR] 입력 오류");
+    } catch(error){
+      MissionUtils.Consloe.print(error);
+      this.readGameCommand(bridgeGame);
     }
-    else if(str === "Q") OutputView.printResult(bridgeGame, false);
-    else throw ("[ERROR] 입력 오류");
   }
 };
 
