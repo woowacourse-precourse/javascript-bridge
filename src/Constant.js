@@ -29,8 +29,8 @@ const INDEX_OFFSET_MAP_AND_MOVING_COMMANDS = 1;
  * InputView
  */
 const INPUT_BRIDGE_LENGTH_LINE = '다리의 길이를 입력해주세요.\n';
-const INPUT_MOVE_COMMAND_LINE = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
-const INPUT_RETRY_QUIT_LINE = '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
+const INPUT_MOVE_COMMAND_LINE = `\n이동할 칸을 선택해주세요. (위: ${MOVE_COMMAND_UP}, 아래: ${MOVE_COMMAND_DOWN})\n`;
+const INPUT_RETRY_QUIT_LINE = `\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GAME_COMMAND_RESTART}, 종료: ${GAME_COMMAND_QUIT})\n`;
 
 /**
  * OutputView
