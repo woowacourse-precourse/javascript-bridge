@@ -10,19 +10,11 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    BridgeMaker.validateSize(size);
-
     return Array.from({ length: size }, () => {
       const number = generateRandomNumber();
       if (number === BridgeMaker.UP_FLOOR) return 'U';
       if (number === BridgeMaker.DOWN_FLOOR) return 'D';
     });
-  },
-
-  validateSize(size) {
-    if (!Number.isInteger(size) || size < 1) {
-      throw new Error('[ERROR] 최소 1이상 길이의 다리만 생성할 수 있습니다.');
-    }
   },
 };
 
