@@ -2,16 +2,19 @@ const BridgeBoard = require("./BridgeBoard");
 const InputView = require("./InputView")
 const OutputView = require('./OutputView')
 const Validation = require('./Validations')
-const ERROR = require('./Error')
+const ERROR = require('./Error');
+const BridgeController = require("./BridgeController");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridgeBoard;
+  #bridgeController;
   #round;
   #try;
   constructor() {
     this.#bridgeBoard = new BridgeBoard();
+    this.#bridgeController = new BridgeController
     this.#round = 0;
     this.#try = 1;
   }
@@ -32,7 +35,7 @@ class BridgeGame {
   clearRound(){
     this.#bridgeBoard.movePlayer();
     if(this.#bridgeBoard.isLastRound()){
-      this.moveFinalRound();
+      this.printFinalRound();
     }else{
       this.moveNextRound(this.#bridgeBoard.getClearedBridge())
     }
@@ -40,25 +43,23 @@ class BridgeGame {
   
   moveNextRound(board){
     this.#round++;
-    OutputView.printMap(board);
-    InputView.readMoving(this);
+    this.#bridgeController.moveNext(board, this);
   }
 
-  moveFinalRound(){
-    OutputView.printResult(this.#try,this.#bridgeBoard.getClearedBridge());
+  printFinalRound(){
+    this.#bridgeController.moveFinalRound(this.#try,this.#bridgeBoard.getClearedBridge())
   }
 
   faildRound(){
-    OutputView.printFailResult(this.#try,this.#bridgeBoard.getClearedBridge());
-    InputView.readGameCommand(this);
+    this.#bridgeController.moveFinalRound(this,this.#try,this.#bridgeBoard.getClearedBridge())
   }
+
   setGameCommand(command){
     if(command === 'Q'){
-      OutputView.close();
+      this.#bridgeController.close()
     }else{
       this.retry();
     }
-
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -69,20 +70,19 @@ class BridgeGame {
     this.#try++;
     this.#round=0;
     this.#bridgeBoard.resetBoard();
-    InputView.readMoving(this);
+    this.#bridgeController.moveBlock();
   }
 
   play(size) {
     try{
-      this.validateSize(size)
-      this.#bridgeBoard.makeBoard(size);
-      InputView.readMoving(this);      
+      this.validateSize(size)   
     }catch(error){
-      OutputView.printError(error)
-      InputView.readBridgeSize
+      this.#bridgeController.printError(error, this)
     }
+    this.#bridgeBoard.makeBoard(size);
+    this.#bridgeController.moveBlock(this)
   }
-
+  
   validateSize(size){
     Validation.validateNumber(size);
     Validation.validateRange([3,20],size);
