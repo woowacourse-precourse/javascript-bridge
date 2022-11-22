@@ -1,7 +1,12 @@
+const {Console} = require("@woowacourse/mission-utils");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  gameStart() {
+    Console.print("다리 건너기 게임을 시작합니다.\n");
+  },
   /**
    * 다리의 길이를 입력받는다.
    */
