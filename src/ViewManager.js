@@ -9,6 +9,10 @@ class ViewManager {
 	static setBridge(callback) {
 		InputView.readBridgeSize(callback);
 	}
+
+	static move(callback) {
+		InputView.readMoving(callback);
+	}
 }
 
 module.exports = ViewManager;
