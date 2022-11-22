@@ -1,7 +1,7 @@
 const InputView = require("./View/InputView");
 const { Console } = require("@woowacourse/mission-utils");
 const GameController = require("./Controller/GameController");
-const { ERROR_MSG } = require("./Messages/constants");
+const { ERROR_MSG, GUIDE_MSG } = require("./Messages/constants");
 const {
   ValidCmd,
   ValidMove,
@@ -10,6 +10,7 @@ const {
 
 class App {
   play() {
+    Console.print(GUIDE_MSG.INIT_MSG);
     this.inputSize();
   }
 
@@ -106,8 +107,5 @@ class App {
     this.inputMoving();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
