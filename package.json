@@ -15,8 +15,7 @@
     "prettier": "^2.7.1"
   },
   "scripts": {
-    "test": "jest --detectOpenHandles --watch",
-    "start": "node ./src/App.js"
+    "test": "jest --detectOpenHandles --watch"
   },
   "repository": {
     "type": "git",
