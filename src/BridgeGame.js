@@ -1,6 +1,6 @@
 const { SIGN, STATUS, KEYS } = require('./utils/constants');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
