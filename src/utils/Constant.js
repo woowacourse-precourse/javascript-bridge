@@ -6,8 +6,6 @@ const Constant = {
   DOWN: "D",
   RETRY: "R",
   QUIT: "Q",
-  BRIDGE_MIN_SIZE: 3,
-  BRIDGE_MAX_SIZE: 20,
   O: "O",
   X: "X",
   INPUT: {

@@ -5,31 +5,22 @@ class Validate {
     if (String(bridgeSize).length > 2) {
       throw new Error(Constant.ERROR.ONLY_ONE_NUMBER);
     }
-
     if (isNaN(bridgeSize)) {
       throw new Error(Constant.ERROR.ONLY_NUMBER);
     }
-    if (
-      bridgeSize < Constant.BRIDGE_MIN_SIZE ||
-      bridgeSize > Constant.BRIDGE_MAX_SIZE
-    ) {
+    if (bridgeSize < 3 || bridgeSize > 20) {
       throw new Error(Constant.ERROR.BRIDGE_SIZE);
     }
   }
 
   //사용자 움직일 칸에 대한 입력 유효성 검사
   static validateUserInputMove(userInput) {
-    let regexOnlyUorD = /[UD]/g;
-    if (
-      userInput === Constant.UP.toLowerCase() ||
-      userInput === Constant.DOWN.toLowerCase()
-    ) {
+    if (userInput === "u" || userInput === "d") {
       throw new Error(Constant.ERROR.ONLY_UPPERCASE);
     }
-    if (!regexOnlyUorD.test(userInput)) {
+    if (!/[UD]/g.test(userInput)) {
       throw new Error(Constant.ERROR.ONLY_U_OR_D);
     }
-
     if (userInput.length >= 2) {
       throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
     }
@@ -37,17 +28,12 @@ class Validate {
 
   //게임 다시 시작할 지 입력할 때 검증
   static validateUserInputRetry(inputRetry) {
-    let regexOnlyRorD = /[RQ]/g;
-    if (
-      inputRetry === Constant.RETRY.toLowerCase() ||
-      inputRetry === Constant.QUIT.toLowerCase()
-    ) {
+    if (inputRetry === "r" || inputRetry === "q") {
       throw new Error(Constant.ERROR.ONLY_UPPERCASE);
     }
-    if (!regexOnlyRorD.test(inputRetry)) {
+    if (!/[RQ]/g.test(inputRetry)) {
       throw new Error(Constant.ERROR.ONLY_R_OR_Q);
     }
-
     if (inputRetry.length >= 2) {
       throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
     }
