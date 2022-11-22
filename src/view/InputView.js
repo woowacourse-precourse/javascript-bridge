@@ -3,6 +3,7 @@ const { INPUT_MESSAGE } = require("../model/component");
 const LengthError = require("../error/LengthError");
 const BridgeMaker = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
+const { printMap, printResult } = require("../view/OutputView");
 
 const InputView = {
   lengthInput: null,
@@ -27,7 +28,23 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.CELL_MESSAGE, (input) => {
       new CellError(input);
       this.cellInput = input;
+      printMap(this.result);
+      this.tryLength();
     });
+  },
+
+  tryLength() {
+    this.count += 1;
+    this.moving();
+  },
+
+  moving() {
+    if (
+      this.count < this.computerNum.length &&
+      /X/g.test(this.result) === false
+    ) {
+      this.readMoving();
+    }
   },
 
   /**
