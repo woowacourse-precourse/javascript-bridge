@@ -1,3 +1,5 @@
+const { BASE } = require('../Constants');
+
 class Base {
   #inputValue;
   constructor(inputValue) {
@@ -6,18 +8,18 @@ class Base {
 
   checkUOrD() {
     if (/[^UD]/g.test(this.#inputValue)) {
-      throw new Error('[ERROR]');
+      throw new Error(`${BASE.error}${BASE.u_or_d}`);
     }
   }
   checkROrQ() {
     if (/[^RQ]/g.test(this.#inputValue)) {
-      throw new Error('[ERROR]');
+      throw new Error(`${BASE.error}${BASE.r_or_q}`);
     }
   }
 
   checkLength() {
     if (this.isNotLengthOne()) {
-      throw new Error('[ERROR]');
+      throw new Error(`${BASE.error}${BASE.one_length}`);
     }
     return this.#inputValue;
   }
@@ -28,7 +30,7 @@ class Base {
 
   checkNumberLength() {
     if (!this.isLengthOneOrTwo()) {
-      throw new Error('[ERROR]');
+      throw new Error(`${BASE.error}${BASE.two_length}`);
     }
     return this.#inputValue;
   }
@@ -39,13 +41,13 @@ class Base {
 
   checkOnlyNumber() {
     if (/\D/.test(this.#inputValue)) {
-      throw 'ERROR';
+      throw new Error(`${BASE.error}${BASE.only_number}`);
     }
   }
 
   checkCorrectNumberRange() {
     if (this.isFitRange()) {
-      throw new Error('[ERROR]');
+      throw new Error(`${BASE.error}${BASE.range}`);
     }
   }
 
