@@ -22,10 +22,12 @@ class App {
     }
     result === 2 ? this.gameSuccess() : this.gameOver();
   }
-  gameOver() {}
   gameSuccess() {
     OutputView.printResult(this.#bridgeGame.getCurrentMap(2), "성공", this.#bridgeGame.getNumberOfTry());
     return;
+  }
+  gameOver() {
+    let gameCommand = InputView.readGameCommand();
   }
 }
 
