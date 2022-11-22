@@ -1,4 +1,3 @@
-const Validate = require("./Validate");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const{ MOVING, RETRY, RESULT, CONTROL } = require("./constants/Values");
@@ -13,16 +12,12 @@ class BridgeGame {
   #count;
 
   constructor() {
-  
     this.#stairs = { bridge: [] };
     this.#player = { step: [], upsides: [], downsides: [] };
     this.#count = 1;
-
   }
 
   ready(size) {
-    const validate = new Validate();
-    validate.validateBridgeSize(size);
     const bridgeInformation = makeBridge(Number(size), generate);
     this.#stairs.bridge = bridgeInformation;
     this.addBridgeCondition();
@@ -98,8 +93,6 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(command) {
-    const validate = new Validate();
-    validate.validateCommand(command);
     if(command === RETRY.REPLAY) {
       this.#count += 1;
       this.initialize();

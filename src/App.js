@@ -30,6 +30,7 @@ class App {
 
   tryBuildBridge(size) {
     try {
+      this.validate.validateBridgeSize(size);
       this.brideGame.ready(size);
       this.requestMoving();
     } catch(error) {
@@ -42,7 +43,7 @@ class App {
       this.validate.validateMove(moving);
       this.brideGame.move(moving);
       OutputView.printMap(this.brideGame.getUp(),this.brideGame.getDown());
-      this.decideControl(this.brideGame.getScore());
+      this.decideController(this.brideGame.getScore());
     } catch(error) {
       this.retryRequestMoving();
     }
@@ -50,14 +51,15 @@ class App {
 
   tryBuildRetry(command) {
     try{
+      this.validate.validateCommand(command);
       let controlKey = this.brideGame.retry(command);
-      this.decideControl(controlKey);
+      this.decideController(controlKey);
     } catch(error) {
       this.retryRequestCommand();
     }
   }
 
-  decideControl(controlKey) {
+  decideController(controlKey) {
     if(controlKey === CONTROL.PASS_STEP) this.requestMoving();
     if(controlKey === CONTROL.GAME_END) {
       let movingList = this.brideGame.getRecordSteps();
