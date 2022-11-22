@@ -6,7 +6,6 @@ const OutputView = require('./OutputView');
 
 class Player {
     createBridgeAnswer() {
-        OutputView.printInputSize();
         const size = InputView.readBridgeSize();
         const generator = BridgeRandomNumber.generate;
         const bridgeAnswer = BridgeMaker.makeBridge(size, generator);
@@ -36,7 +35,6 @@ class Player {
     }
 
     moveAndPrint(bridgeGame) {
-        OutputView.printInputMove();
         const movingInput = InputView.readMoving();
         const currentBridge = bridgeGame.move(movingInput);
         OutputView.printMap(currentBridge);
@@ -59,7 +57,6 @@ class Player {
     }
 
     getGameCommandInput(bridgeGame) {
-        OutputView.printInputRetry();
         const gameCommandInput = InputView.readGameCommand();
         const isRetried = bridgeGame.retry(gameCommandInput);
 
