@@ -13,7 +13,12 @@ const OutputView = {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult() {},
+  printResult(map, tryNum, result) {
+    Console.print(
+      `\n최종 게임 결과\n${map.upper}\n${map.lower}\n\n게임 성공 여부: ${result}\n총 시도한 횟수: ${tryNum}`
+    );
+    Console.close();
+  },
 
   /**
    * 게임 시작을 알리는 문구를 출력한다.
