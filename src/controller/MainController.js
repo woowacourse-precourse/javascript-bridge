@@ -3,6 +3,8 @@ const UserController = require("./UserController");
 const BridgeGame = require("../BridgeGame");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
+const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
+const { USER_RESTART_MESSAGES } = require("../constants/Messages");
 
 class MainController {
   constructor() {
@@ -66,13 +68,21 @@ class MainController {
     OutputView.printResult(movingStatus, isSuccess, userTryCount);
   }
 
+  /**
+   * 유저 재시작여 여부 입력을 검증한다.
+   * @param userRestartInput {string} [유저 재시작 여부 입력]
+   */
+  validateUserRestart(userRestartInput) {
+    if (!GENERAL_CONSTANTS.USER_RESTART_REGEX.test(userRestartInput)) {
+      throw new Error(USER_RESTART_MESSAGES.INPUT_ERROR);
+    }
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
-    if (this.userController.getTryCount() === 1) {
-      OutputView.printOpening();
-      InputView.readBridgeSize(this.onBridgeSizeInput, this);
-    }
+    OutputView.printOpening();
+    InputView.readBridgeSize(this.onBridgeSizeInput, this);
   }
 }
 
