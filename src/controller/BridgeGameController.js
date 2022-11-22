@@ -1,7 +1,8 @@
-const Bridge = require("../model/Bridge");
 const OutputView = require('../view/OutputView');
 const { ERROR_HANDLING } = require('./Error');
 const { GAME_STATE } = require("../assets/constants");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 
 /**
  * View로 부터 받은 요청을 처리하는 Controller
@@ -15,7 +16,8 @@ class BridgeGameController {
     makeBridge(bridgeGame, size) {
         try {
             const InputView = require("../view/InputView");
-            bridgeGame.setBridge(new Bridge(size));
+            const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+            bridgeGame.setBridge(bridge);
             InputView.readMoving(bridgeGame);
         } catch (error) {
             ERROR_HANDLING[error.message](bridgeGame, error.message);

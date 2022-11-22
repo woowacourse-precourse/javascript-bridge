@@ -1,4 +1,3 @@
-const Bridge = require('../src/model/Bridge');
 const BridgeMaker = require("../src/BridgeMaker");
 const { ERROR } = require('../src/controller/Error');
 
@@ -24,6 +23,13 @@ describe("Bridge 테스트", () => {
         [["A"], ERROR.BRIDGE_SIZE_NOT_NUMBER],
         [["UD"], ERROR.BRIDGE_SIZE_NOT_NUMBER]
     ])("다리 길이 입력 예외 테스트", (bridgeSize, ERROR) => {
-        expect(() => { new Bridge(bridgeSize); }).toThrow(ERROR);
+        expect(() => { BridgeMaker.vaildateBridgeSize(bridgeSize) }).toThrow(ERROR.BRIDGE_SIZE_OUT_BOUNDARY);
+    });
+
+    test.each([
+        [["A"], ERROR.BRIDGE_SIZE_NOT_NUMBER],
+        [["UD"], ERROR.BRIDGE_SIZE_NOT_NUMBER]
+    ])("다리 길이 입력 예외 테스트", (bridgeSize, ERROR) => {
+        expect(() => { BridgeMaker.vaildateBridgeSize(bridgeSize) }).toThrow(ERROR.BRIDGE_SIZE_NOT_NUMBER);
     });
 });

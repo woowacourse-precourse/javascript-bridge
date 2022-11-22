@@ -1,4 +1,3 @@
-const Bridge = require("../src/model/Bridge");
 const BridgeGame = require("../src/model/BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
 const { ERROR } = require('../src/controller/Error');
@@ -23,12 +22,13 @@ describe("BridgeGame 테스트", () => {
     });
 
     test.each([
-        [[1, 0, 1], ["U", "D"], ["O", " "], [" ", "O"]],
-        [[1, 0, 1], ["U", "D", "U"], ["O", " ", "O"], [" ", "O", " "]],
+        [["U", "D", "U"], ["U", "D"], ["O", " "], [" ", "O"]],
+        [["U", "D", "U"], ["U", "D", "U"], ["O", " ", "O"], [" ", "O", " "]],
     ])("이동 로그 출력 반환 테스트", (bridge, moveTypes, upHistory, downHistory) => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
-        bridgeGame.setBridge(new Bridge(bridge.length));
+        bridgeGame.setBridge(bridge);
+        console.log('bridge', bridge);
         for (let moveType of moveTypes)
             bridgeGame.move(moveType);
         expect(bridgeGame.getUpDownHistory()).toEqual([upHistory, downHistory]);
@@ -41,7 +41,7 @@ describe("BridgeGame 테스트", () => {
     ])("이동 실패 테스트", (bridge, moveTypes) => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
-        bridgeGame.setBridge(new Bridge(bridge.length));
+        bridgeGame.setBridge(bridge);
         expect(() => {
             for (let moveType of moveTypes)
                 bridgeGame.move(moveType);

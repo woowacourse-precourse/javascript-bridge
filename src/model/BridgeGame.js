@@ -23,7 +23,7 @@ class BridgeGame {
    * @returns {string[]} 다리 데이터, 위로 갈수 있으면 U, 아래로 갈 수 있으면 D
    */
   getBridge() {
-    return this.#bridge.getBridge();
+    return this.#bridge;
   }
 
   /**
@@ -95,7 +95,7 @@ class BridgeGame {
    * @returns 
    */
   getEndPosition() {
-    return this.getBridge().length - 1;
+    return this.#bridge.length - 1;
   }
 
   /**
@@ -106,12 +106,11 @@ class BridgeGame {
    */
   getUpDownHistory() {
     let upDownHistory = new Array(2).fill(0).map(() => new Array(this.#moveHistory.length).fill(" "));
-    let bridge = this.#bridge.getBridge();
 
     for (let position = 0; position < this.#moveHistory.length; position++) {
-      if (this.#moveHistory[position] === bridge[position])
+      if (this.#moveHistory[position] === this.#bridge[position])
         this.changeUpDownHistory(upDownHistory, position, HISTORY.ALIVE);
-      if (this.#moveHistory[position] !== bridge[position])
+      if (this.#moveHistory[position] !== this.#bridge[position])
         this.changeUpDownHistory(upDownHistory, position, HISTORY.DIE);
     }
     return [upDownHistory[0], upDownHistory[1]];
