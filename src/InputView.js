@@ -31,7 +31,7 @@ const InputView = {
   },
 
   readGameCommand(BRIDGE, NEXTBRIDGE, CURRENTLOCATION,TRIALS) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요.', (retryInput)=>{
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (retryInput)=>{
       if(Validate.validateRetryinput(retryInput)){return this.readGameCommand(BRIDGE, NEXTBRIDGE, CURRENTLOCATION,TRIALS)}
       const RETRYCHECK = BridgeGame.retry(retryInput)
       if (RETRYCHECK == 0) {return this.readMoving(BRIDGE, Constants.STARTBRIDGE, 0, TRIALS+1)}
