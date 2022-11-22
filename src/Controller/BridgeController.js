@@ -127,6 +127,4 @@ class BridgeController {
   };
 }
 
-// const game = new BridgeController();
-// game.requestBridgeSizeToView();
 module.exports = BridgeController;
