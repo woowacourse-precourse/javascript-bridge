@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
-const { ERROR } = require('../src/constants');
+const { ERROR, MESSAGE } = require('../src/constants');
 const Validator = require('../src/Validator');
 
 const mockQuestions = (answers) => {
@@ -137,17 +137,24 @@ describe('플레이어 입력값의 유효성 검사', () => {
     });
   });
 
-  // test('게임 시작 메시지를 출력한다.', () => {
-  //   const logSpy = getLogSpy();
+  test('게임 시작 메시지를 출력한다.', () => {
+    const logSpy = getLogSpy();
 
-  //   const app = new App();
+    const app = new App();
 
-  //   const log = getOutput(logSpy);
-  //   app.play();
-  //   app.play().then(() => {
-  //     expectLogContains(log, [MESSAGE.ENTRY]);
-  //   });
+    const log = getOutput(logSpy);
+    app.play().then(() => {
+      expectLogContains(log, [MESSAGE.ENTRY]);
+    });
+  });
 
-  //   expectLogContains(log, [MESSAGE.ENTRY]);
-  // });
+  test('다리를 만든다.', () => {
+    mockQuestions(['4']);
+
+    const app = new App();
+
+    app.play().then(() => {
+      expect(app.game.result.getResultAsArray().length).toEqual(4);
+    });
+  });
 });
