@@ -9,7 +9,7 @@ const { SizeCommand, MovingCommand } = require('./command');
 /**
  * 게임 종료 시점 상태 객체 타입 정의
  * @typedef {Object} FinalStatus
- * @property {BridgeMaps} bridgeMap
+ * @property {BridgeMaps} bridgeMaps
  * @property {boolean} isWin
  * @property {number} tryCount
  */
@@ -93,11 +93,11 @@ class BridgeGame {
    * @return {FinalStatus} 마지막 게임 상태 객체
    */
   quit(isCrossed) {
-    const bridgeMap = this.getMap();
+    const bridgeMaps = this.getMap();
     const isWin = this.isWin(isCrossed);
     const tryCount = this.#status.getTryCount();
 
-    return { bridgeMap, isWin, tryCount };
+    return { bridgeMaps, isWin, tryCount };
   }
 }
 

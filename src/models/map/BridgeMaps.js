@@ -14,7 +14,7 @@ class BridgeMaps {
    * 다리 지도 가져올 때 사용하는 메서드
    * @returns {Array.<BridgeMap.BridgeProcess>}
    */
-  getMap() {
+  getMaps() {
     return [this.#upside.getState(), this.#downside.getState()];
   }
 

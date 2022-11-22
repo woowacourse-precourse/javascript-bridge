@@ -14,8 +14,8 @@ const OutputView = {
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {BridgeMaps} bridgeMap
    */
-  printMap(bridgeMap) {
-    const [upside, downside] = bridgeMap.getMap();
+  printMap(bridgeMaps) {
+    const [upside, downside] = bridgeMaps.getMaps();
 
     const upsideString = OutputUtils.stringifyBridgeMap(upside);
     const downsideString = OutputUtils.stringifyBridgeMap(downside);
@@ -28,9 +28,9 @@ const OutputView = {
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * @param {BridgeGame.FinalStatus} param0
    */
-  printResult({ bridgeMap, isWin, tryCount }) {
+  printResult({ bridgeMaps, isWin, tryCount }) {
     Console.print(GAME_MESSAGE.RESULT_TITLE);
-    OutputView.printMap(bridgeMap);
+    OutputView.printMap(bridgeMaps);
     Console.print('');
     Console.print(GAME_MESSAGE.WIN_OPTION + OutputUtils.convertToWinMessage(isWin));
     Console.print(GAME_MESSAGE.TRY_COUNT + tryCount);

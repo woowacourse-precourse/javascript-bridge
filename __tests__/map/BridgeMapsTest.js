@@ -4,7 +4,7 @@ const { MovingCommand } = require('../../src/models/command');
 describe('다리 지도 클래스 테스트', () => {
   test('초기 지도 상태 테스트', () => {
     const bridgeMaps = new BridgeMaps();
-    const result = bridgeMaps.getMap();
+    const result = bridgeMaps.getMaps();
 
     expect(result).toStrictEqual([[], []]);
   });
@@ -19,7 +19,7 @@ describe('다리 지도 클래스 테스트', () => {
 
       const bridgeMaps = new BridgeMaps();
       bridgeMaps.add(movingCommand, currentBridge);
-      const result = bridgeMaps.getMap()[index];
+      const result = bridgeMaps.getMaps()[index];
 
       expect(result).toStrictEqual(expected);
     },
@@ -35,7 +35,7 @@ describe('다리 지도 클래스 테스트', () => {
 
       const bridgeMaps = new BridgeMaps();
       bridgeMaps.add(movingCommand, currentBridge);
-      const result = bridgeMaps.getMap()[index];
+      const result = bridgeMaps.getMaps()[index];
 
       expect(result).toStrictEqual(expected);
     },
@@ -49,7 +49,7 @@ describe('다리 지도 클래스 테스트', () => {
 
     const bridgeMaps = new BridgeMaps();
     bridgeMaps.add(movingCommand, currentBridge);
-    const result = bridgeMaps.getMap()[index];
+    const result = bridgeMaps.getMaps()[index];
 
     expect(result).toStrictEqual(expected);
   });
