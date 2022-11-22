@@ -14,7 +14,13 @@ class App {
     );
     this.playing();
   }
-  playing() {}
+  playing() {
+    let result = 1;
+    while (result === 1) {
+      result = this.#bridgeGame.move(InputView.readMoving());
+      OutputView.printMap(this.#bridgeGame.getCurrentMap(result));
+    }
+  }
 }
 
 module.exports = App;
