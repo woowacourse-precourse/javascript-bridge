@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const BridgeMaker = require("../src/BridgeMaker"); 
+const Controller = require("../src/Controller");
+const OutputView = require("../src/OutputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -51,38 +52,35 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
-    const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
-    }, jest.fn());
-
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(["U", "D", "D"]);
+describe("게임 테스트", () => {
+  test("다리 길이 저장 확인", () => {
+    Controller.getSize(7);
+    expect(Controller.size).toBe(7);
   });
 
-  test("기능 테스트", () => {
-    const logSpy = getLogSpy();
-    mockRandoms([1, 0, 1]);
-    mockQuestions(["3", "U", "D", "U"]);
-
-    const app = new App();
-    app.play();
-
-    const log = getOutput(logSpy);
-    expectLogContains(log, [
-      "최종 게임 결과",
-      "[ O |   | O ]",
-      "[   | O |   ]",
-      "게임 성공 여부: 성공",
-      "총 시도한 횟수: 1",
-    ]);
-    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  test("입력된 이동 인풋이 플레이어 배열에 저장 되는지 확인", () => {
+    Controller.addPlayerBlock("U");
+    expect(Controller.playerArr).toEqual(["U"]);
   });
 
-  test("예외 테스트", () => {
-    runException(["a"]);
+  test("입력된 이동 인풋에 따라 현재 이동 결과 배열에 저장 되는지 확인", () => {
+    Controller.successMove("U");
+    expect(Controller.arrayState).toEqual([["O"], [" "]]);
   });
-  
+
+  test("커맨드 인풋 에러 검증 확인", () => {
+    expect(Controller.isCommandError("ㅁ")).toBeTruthy();
+  });
+
+  test("시도 횟수 증가 테스트", () => {
+    Controller.addTrialCount();
+    expect(Controller.tryCount).toBe(2);
+  });
+
+  test("실패시 성공 여부 변경 확인", () => {
+    failArray = OutputView.nowArray = ["X", " "];
+    Controller.checkSuccess(failArray);
+    expect(Controller.gameResult).toEqual("실패");
+  });
+
 });
