@@ -4,6 +4,11 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
+const {
+  isBridgeSizeValid,
+  isMovingCommandValid,
+  isGameCommandValid,
+} = require("./Validator");
 
 const START_GAME = "다리 건너기 게임을 시작합니다.";
 
@@ -16,20 +21,27 @@ class App {
 
   startGame() {
     Console.print(START_GAME);
-    this.createBridge();
-    this.moveBridge();
+    this.getBridgeSize();
   }
 
-  //다리 생성
-  createBridge() {
-    let size = InputView.readBridgeSize();
+  getBridgeSize() {
+    InputView.readBridgeSize(this.createBridge.bind(this));
+  }
 
-    this.bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate
-    );
-
-    this.game = new BridgeGame(this.bridge, []);
+  //다리생성
+  createBridge(size) {
+    try {
+      isBridgeSizeValid(size);
+      this.bridge = BridgeMaker.makeBridge(
+        size,
+        BridgeRandomNumberGenerator.generate
+      );
+      this.game = new BridgeGame(this.bridge, []);
+      this.moveBridge();
+    } catch (e) {
+      Console.print(e);
+      this.getBridgeSize();
+    }
   }
 
   //게임 진행
