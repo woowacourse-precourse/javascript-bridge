@@ -24,26 +24,21 @@ const OutputView = {
     this.printMap(answer, input);
   },
 
-  printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.");
-  },
-  printRequestBridgeLength() {
-    Console.print("다리의 길이를 입력해주세요.");
-  },
-  printRequestUserMove() {
-    Console.print("이동할 칸을 선택해주세요. (위: U, 아래: D)");
-  },
-  printRequestReplay() {
-    Console.print(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)"
-    );
-  },
   printGameResult(flag) {
-    Console.print(`게임 성공 여부: ${flag ? "성공" : "실패"}`);
+    return `게임 성공 여부: ${flag ? "성공" : "실패"} \n`;
   },
   printTryGame(count) {
-    Console.print(`총 시도한 횟수: ${count}`);
+    return `총 시도한 횟수: ${count} \n`;
   },
+
+  printStart() {
+    Console.print("다리 건너기 게임을 시작합니다.\n");
+  },
+
+  printRequestBridgeLength: "다리의 길이를 입력해주세요. \n",
+  printRequestUserMove: "이동할 칸을 선택해주세요. (위: U, 아래: D) \n",
+  printRequestReplay:
+    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q) \n",
 };
 
 module.exports = OutputView;
