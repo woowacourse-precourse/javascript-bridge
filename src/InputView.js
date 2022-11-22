@@ -75,12 +75,16 @@ const InputView = {
     return (answer) => {
       const gameCmd = TypeConverter.toString(answer);
       const isValidCmd = Validator.validGameCommand(gameCmd);
-      const isEndGame = gameCmd === GAME_CMD.quit;
+      const isQuitGame = gameCmd === GAME_CMD.quit;
 
       if (!isValidCmd) {
         throw new Error(ERROR_MSG.invalidGameCmd);
       }
-      if (isEndGame) return OutputView.printResult(bridgeGame);
+
+      if (isQuitGame) {
+        bridgeGame.quit();
+        return OutputView.printResult(bridgeGame);
+      }
 
       bridgeGame.retry();
       this.readLine(MSG.inputMoveDirection, this.readMoving(bridgeGame));
