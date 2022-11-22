@@ -134,4 +134,22 @@ describe("추가 기능 테스트", () => {
     ]);
     expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
   });
+  test("시도 횟수 기능 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0]);
+    mockQuestions(["3", "D", "R", "D", "R", "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O | X ]",
+      "[   |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 3",
+    ]);
+    expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
+  });
 });
