@@ -33,8 +33,8 @@ class View {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    */
-  printMap(firstLine, secondLine) {
-    OutputView.printMap(firstLine, secondLine);
+  printMap(map) {
+    OutputView.printMap(map);
   }
 
   /**
@@ -47,8 +47,8 @@ class View {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult() {
-    OutputView.printResult();
+  printResult(map, result) {
+    OutputView.printResult(map, result);
   }
 }
 

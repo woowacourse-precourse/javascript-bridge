@@ -14,9 +14,9 @@ const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    */
-  printMap(firstLine, secondLine) {
-    Console.print(firstLine);
-    Console.print(secondLine);
+  printMap(map) {
+    Console.print(map.firstLine);
+    Console.print(map.secondLine);
   },
 
   /**
@@ -30,7 +30,13 @@ const OutputView = {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult() {},
+  printResult(map, result) {
+    Console.print("최종 게임 결과");
+    Console.print(map.firstLine);
+    Console.print(map.secondLine);
+    Console.print("");
+    Console.print(`게임 성공 여부: ${result === "success" ? "성공" : "실패"}`);
+  },
 };
 
 module.exports = OutputView;
