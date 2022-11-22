@@ -1,6 +1,7 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/App');
-const BridgeMaker = require('../src/BridgeMaker');
+const MissionUtils = require("@woowacourse/mission-utils");
+const App = require("../src/App");
+const BridgeMaker = require("../src/BridgeMaker");
+const BridgeGame = require("../src/model/BridgeGame");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -19,23 +20,13 @@ const mockRandoms = (numbers) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
   return logSpy;
 };
 
 const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join('');
-};
-
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ['[ERROR]']);
+  return [...logSpy.mock.calls].join("");
 };
 
 const expectLogContains = (received, logs) => {
@@ -51,37 +42,60 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-describe('다리 건너기 테스트', () => {
-  test('다리 생성 테스트', () => {
+const resetBridgeGame = () => {
+  BridgeGame.movingCount = 0;
+  BridgeGame.currentState = [];
+  BridgeGame.tryCount = 0;
+};
+
+describe("다리 건너기 테스트", () => {
+  afterEach(() => resetBridgeGame());
+
+  test("정상적으로 다리를 생성한다.", () => {
     const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(['U', 'D', 'D']);
+    expect(bridge).toEqual(["U", "D", "D"]);
   });
 
-  test('기능 테스트', () => {
+  test("다리 건너기를 성공한다.", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
-    mockQuestions(['3', 'U', 'D', 'U']);
+    mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
     app.play();
 
     const log = getOutput(logSpy);
     expectLogContains(log, [
-      '최종 게임 결과',
-      '[ O |   | O ]',
-      '[   | O |   ]',
-      '게임 성공 여부: 성공',
-      '총 시도한 횟수: 1',
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 1",
     ]);
-    expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test('예외 테스트', () => {
-    runException(['a']);
+  test("다리 건너기를 실패한다.", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([0, 0, 1, 1]);
+    mockQuestions(["4", "D", "D", "U", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   |   | O |   ]",
+      "[ O | O |   | X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[   |   | O |   ]", "[ O | O |   | X ]");
   });
 });
