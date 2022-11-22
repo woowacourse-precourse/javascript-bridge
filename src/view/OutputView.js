@@ -15,7 +15,7 @@ const OutputView = {
    * @param errorLog {object} [Error 객체]
    */
   printError(errorLog) {
-    Console.print(errorLog);
+    Console.print(errorLog.message);
   },
 
   /**
