@@ -28,6 +28,10 @@ class GameResult {
     const existing = this.#result.get(index);
     this.#result.set(index, { ...existing, player: value });
   }
+
+  getCurrentPosition() {
+    return this.getResultAsArray().findIndex(([, value]) => !value.player);
+  }
 }
 
 module.exports = GameResult;

@@ -1,6 +1,6 @@
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
-const { MESSAGE } = require('./constants');
+const { MESSAGE, INPUT_FORMAT } = require('./constants');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -12,6 +12,7 @@ class App {
     OutputView.printMessage(MESSAGE.ENTRY);
     const size = await this.getBridgeSize();
     await this.game.makeBridge(size);
+    await this.handleMovement();
   };
 
   // UI 분리
@@ -40,6 +41,19 @@ class App {
       OutputView.printMessage(error.message);
       this.getGameCommand();
     }
+  };
+
+  handleMovement = async () => {
+    if (this.isContinue()) {
+    }
+  };
+
+  getCurrentPosition = () => {
+    return this.game.getCurrentPosition();
+  };
+
+  isContinue = () => {
+    return this.getCurrentPosition() > -1;
   };
 }
 
