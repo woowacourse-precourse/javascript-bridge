@@ -9,7 +9,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
-      return parseInt(generateRandomNumber()) === 0 ? 'D' : 'U';
+      return generateRandomNumber() === 0 ? 'D' : 'U';
     });
   },
 };
