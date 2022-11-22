@@ -11,8 +11,6 @@ class GameManager {
     InputView.readMoving(callback);
   }
 
-  validatePosition() {}
-
   askRetry(callback) {
     InputView.readGameCommand(callback);
   }
