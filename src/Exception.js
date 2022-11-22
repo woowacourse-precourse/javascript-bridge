@@ -19,10 +19,13 @@ class Exception{
         return (isNaN(number));
     }
 
+    checkInput(space){
+        return space === "U" || space === "D" ? true : false
+    };
 
     checkSpace(space){
         try{
-            if (space !== "U" || space !== "D") throw new Error("[ERROR] U 또는 D를 입력해주세요.");
+            if (!this.checkInput) throw new Error("[ERROR] U 또는 D를 입력해주세요.");
         }catch(error){
             Console.print(error.message);
             return true;
@@ -30,9 +33,13 @@ class Exception{
         
     }
 
+    checkRestartInput(restart){
+        return restart === "R" || restart === "Q" ? true : false
+    }
+    
     checkRestart(restart){
         try{
-            if (space !== "R" || space !== "Q") throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
+            if (!this.checkRestartInput) throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
         }catch(error){
             Console.print(error.message);
             return true;
