@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const OutputView = {
 
   printStart(){
-    Console.print("다리건너기 게임을 시작합니다.");
+    Console.print("다리건너기 게임을 시작합니다.\n");
   },
   printMap([upBridge, downBridge]) {
     Console.print(`[ ${upBridge.join(' | ')} ]\n[ ${downBridge.join(' | ')} ]\n`);

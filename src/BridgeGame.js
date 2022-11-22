@@ -1,14 +1,16 @@
-const { printMap } = require('./OutputView');
+// const { printMap } = require('./OutputView');
 const {WAY} = require('./constant')
 class BridgeGame {
   #bridge;
   #myWay;
   #attempts;
+  #step;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#myWay = [[], []];
-    this.#attempts = 0;
+    this.#attempts = 1;
+    this.#step = 0;
   }
   move(key) {
     if(key === 'U') {
@@ -19,21 +21,36 @@ class BridgeGame {
       this.#myWay[WAY.UP_WAY].push(' ');
       this.#myWay[WAY.DOWN_WAY].push(key);
     }
-    this.#attempts++;
+    this.#step++;
   }
+  isRightWay(key){
+    if(key === this.#bridge[this.#step]) return true;
+    return false; 
+  }
+  retry() {
+    this.#attempts += 1;
+    this.#myWay = [[],[]];
+    this.#step = 0;
+  }
+
+  isLast(){
+    return this.#bridge.length === this.#myWay[0].length;
+  }
+
   getMyWay(){
     return this.#myWay;
   }
-  test(){
-    console.log(this.#myWay);
+
+  getAttempts(){
+    return this.#attempts;
   }
 
   
 }
 
 
-let bg = new BridgeGame(['U', 'D', 'D']);
-bg.move('U');
-bg.move('D');
-bg.test();
-printMap(bg.getMyWay());
+// let bg = new BridgeGame(['U', 'D', 'D']);
+// bg.move('U');
+// bg.move('U');
+// bg.test();
+// printMap(bg.getMyWay());
