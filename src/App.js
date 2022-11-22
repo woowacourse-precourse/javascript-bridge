@@ -59,4 +59,7 @@ class App {
     OutputView.close();
   }
 }
+const app = new App();
+app.play();
+
 module.exports = App;

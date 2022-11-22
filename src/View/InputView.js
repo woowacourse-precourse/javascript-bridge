@@ -7,24 +7,34 @@ const { Console } = MissionUtils;
 
 const InputView = {
   readBridgeSize(callback) {
-    InputView.readUntilValid(MESSAGE.ASK_BRIDGE_SIZE, callback, Validator.bridgeSizeValidate);
+    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (input) => {
+      try {
+        Validator.bridgeSizeValidate(input);
+        callback(input);
+      } catch (error) {
+        InputView.inputErrorHandler(error.message, InputView.readBridgeSize.bind(null, callback));
+      }
+    });
   },
 
   readMoving(callback) {
-    InputView.readUntilValid(MESSAGE.ASK_MOVING, callback, Validator.movingValidate);
+    Console.readLine(MESSAGE.ASK_MOVING, (input) => {
+      try {
+        Validator.movingValidate(input);
+        callback(input);
+      } catch (error) {
+        InputView.inputErrorHandler(error.message, InputView.readMoving.bind(null, callback));
+      }
+    });
   },
 
   readGameCommand(callback) {
-    InputView.readUntilValid(MESSAGE.ASK_GAME_COMMAND, callback, Validator.commandValidate);
-  },
-
-  readUntilValid(msg, callback, validator) {
-    Console.readLine(msg, (input) => {
+    Console.readLine(MESSAGE.ASK_GAME_COMMAND, (input) => {
       try {
-        validator(input);
+        Validator.commandValidate(input);
         callback(input);
       } catch (error) {
-        InputView.inputErrorHandler(error.message, InputView.readUntilValid.bind(null, callback));
+        InputView.inputErrorHandler(error.message, InputView.readGameCommand.bind(null, callback));
       }
     });
   },
