@@ -58,7 +58,7 @@ const InputView = {
       })
     })
   },
-  gameCommandInputCheck(){
+  gameCommandInputCheck(input){
     try{
       if(!(input === 'R' || input === 'Q'))throw new Error('[ERROR]: R(재시작) 또는 Q(끝내기)를 입력해주세요')
     }catch(error){
