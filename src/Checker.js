@@ -18,6 +18,12 @@ const Checker = {
       Error.throw(ERR_MSG_BRIDGE_SIZE_RANGE);
     }
   },
+
+  select(input) {
+    const directionSet = new Set(["U", "D"]);
+    if (directionSet.has(input)) return;
+    Error.throw(ERR_MSG_DIRECTION);
+  },
 };
 
 module.exports = Checker;
