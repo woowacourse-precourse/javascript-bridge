@@ -1,5 +1,5 @@
 # **📚 MVC 설계**
-- `App.js` : `Bridge` 객체를 생성 후 실행 시켜주는 역할.
+- `App.js` : `Controller` 객체를 생성 후 실행 시켜주는 역할.
 
 ## **🗃️ Model**
 - `BridgeGame.js` : 게임 진행에 필요한 변수를 처리하거나 반환한다.
@@ -12,7 +12,7 @@
 - `OutputView.js` : 출력값을 보여주는 역할.
 
 ## **🎮 Controller**
-- `Bridge.js`: 다리 건너기 게임을 관리하는 역할.
+- `Controller.js`: 다리 건너기 게임을 관리하는 역할.
 
 --- 
 
@@ -36,8 +36,8 @@
         ┣━ 📑 ErrorMessage.js : 에러 메세지 문자열 관리 파일
         ┣━ 📑 helper.js : 기타 추가 함수
         ┗━ 📑 Message.js : 메세지 문자열 관리 파일
-    ┣━ 📑 App.js : Bridge 객체를 호출하는 파일
-    ┣━ 📑 Bridge.js : 게임 전체 프로세서를 관리하며, 필요한 값을 호출하는 파일
+    ┣━ 📑 App.js : Controller 객체를 호출하는 파일
+    ┣━ 📑 Controller.js : 게임 전체 프로세서를 관리하며, 필요한 값을 호출하는 파일
     ┣━ 📑 BridgeGame.js : 게임을 진행시 변수를 저장하며, 필요한 값을 반환한다.
     ┣━ 📑 BridgeMaker.js : 입력받은 사이즈 만큼 다리 생성
     ┣━ 📑 BridgeRandomNumberGenerator.js : 난수 생성 파일 
