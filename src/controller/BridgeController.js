@@ -17,8 +17,8 @@ const BridgeController = class extends GameController {
   inputBridgeSize() {
     const callbackInputBridgeSize = (size) => {
       this.checkBridgeSize(size);
-      this.saveSize(size);
-      this.prebuildBridge(size);
+      super.saveSize(size);
+      super.prebuildBridge(size);
       this.inputMoving();
     };
 
@@ -36,18 +36,10 @@ const BridgeController = class extends GameController {
     }
   }
 
-  saveSize(input) {
-    this.bridgeGame.saveSize(input);
-  }
-
-  prebuildBridge(input) {
-    this.bridgeGame.precompose(input);
-  }
-
   inputMoving() {
     const callbackInputMoving = (moving) => {
       this.checkMoving(moving);
-      this.saveMoving(moving);
+      super.saveMoving(moving);
       this.printMap(moving);
     };
 
@@ -63,10 +55,6 @@ const BridgeController = class extends GameController {
     } finally {
       if (confirmedInput !== input) return this.inputMoving();
     }
-  }
-
-  saveMoving(input) {
-    this.bridgeGame.saveUpOrDown(input);
   }
 
   printMap(input) {
@@ -108,7 +96,7 @@ const BridgeController = class extends GameController {
   }
 
   retryOrQuit(input) {
-    if (this.isRetry(input)) {
+    if (BridgeController.isRetry(input)) {
       this.bridgeGame.retry();
       return this.inputMoving();
     }
@@ -116,7 +104,7 @@ const BridgeController = class extends GameController {
     this.bridgeGame.end();
   }
 
-  isRetry(input) {
+  static isRetry(input) {
     const RETRY = 'R';
     return input === RETRY;
   }
