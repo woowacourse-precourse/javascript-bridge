@@ -1,5 +1,6 @@
 const JudgeInteractor = require('../domain/usecases/JudgeInteractor');
 const GameInteractor = require('../domain/usecases/GameInteractor');
+const STATUS = require('./service.constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -9,15 +10,20 @@ class BridgeGame {
     this.bridgeInteractor = BridgeInteractor;
     this.JudgeInteractor = new JudgeInteractor(this.userInteractor, this.bridgeInteractor);
     this.gameInteractor = new GameInteractor();
+    this.#init();
   }
 
   makeBridge(size) {
     this.bridgeInteractor.makeBridge(size);
   }
 
-  init() {
-    this.gameInteractor.addTry();
+  resetUser() {
     this.userInteractor.init();
+  }
+
+  #init() {
+    this.gameInteractor.addTry();
+    this.resetUser();
   }
 
   /**
@@ -29,14 +35,12 @@ class BridgeGame {
     this.userInteractor.move(direction);
   }
 
-  judge({ success, fending, failure }) {
+  getGameStatus() {
     if (this.JudgeInteractor.judge()) {
-      if (this.JudgeInteractor.isSucceed()) {
-        return success();
-      }
-      return fending();
+      if (this.JudgeInteractor.isComplete()) return { status: STATUS.done };
+      return { status: STATUS.running };
     }
-    failure();
+    return { status: STATUS.failure };
   }
 
   /**
@@ -44,8 +48,8 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retryTrigger(command, { restart, exit }) {
-    this.gameInteractor.triggerGameCommand(command,  { restart, exit });
+  retry(command, { restart, exit }) {
+    this.gameInteractor.retry(command,  { restart, exit });
   }
 
   exit(isSuccess) {

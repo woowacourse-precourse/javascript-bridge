@@ -3,6 +3,7 @@ const UserInteractor = require('../domain/usecases/UserInteractor');
 const ViewInteractor = require('../domain/usecases/ViewInteractor');
 
 const BridgeGame = require('../service/BridgeGame');
+const STATUS = require('../service/service.constants');
 
 class Controller {
   constructor() {
@@ -10,6 +11,15 @@ class Controller {
     const bridge = new BridgeInteractor();
     this.service = new BridgeGame(user, bridge);
     this.viewer = new ViewInteractor(user, bridge);
+    this.BehaviorHash = this.setStateBehavior();
+  }
+
+  setStateBehavior() {
+    return new Map([
+      [STATUS.done, this.exit.bind(this, true)],
+      [STATUS.running, this.playRoutine.bind(this)],
+      [STATUS.failure, this.retry.bind(this, false)],
+    ]);
   }
 
   play() {
@@ -20,18 +30,10 @@ class Controller {
   }
 
   playRoutine() {
-    this.service.init();
-    this.aliveRoutine();
-  }
-
-  aliveRoutine() {
     this.viewer.getMove((direction) => {
       this.move(direction);
-      this.service.judge({
-        success: this.exit.bind(this, true),
-        fending: this.aliveRoutine.bind(this),
-        failure: this.retry.bind(this, false),
-      });
+      const { status } = this.service.getGameStatus();
+      this.BehaviorHash.get(status)();
     });
   }
 
@@ -42,8 +44,11 @@ class Controller {
 
   retry() {
     this.viewer.getGameCommand((command) => {
-      this.service.retryTrigger(command, {
-        restart: this.playRoutine.bind(this), exit: this.exit.bind(this),
+      this.service.retry(command, {
+        restart: () => {
+          this.service.resetUser();
+          this.playRoutine();
+        }, exit: this.exit.bind(this),
       });
     });
   }

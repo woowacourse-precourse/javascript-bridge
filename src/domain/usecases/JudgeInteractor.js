@@ -18,7 +18,7 @@ class JudgeInteractor {
     return BridgeSpace === this.#user.getCurrentDirection();
   }
 
-  isSucceed() {
+  isComplete() {
     return this.#bridge.getSize() === this.#user.getLocation();
   }
 }
