@@ -43,8 +43,13 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', (input) => {
-      checkBridgeSize(Number(input));
-      callback(Number(input));
+      try {
+        checkBridgeSize(Number(input));
+        callback(Number(input));
+      } catch (error) {
+        Console.print(error.message);
+        InputView.readBridgeSize(callback);
+      }
     });
   },
 
@@ -54,8 +59,13 @@ const InputView = {
    */
   readMoving(callback) {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
-      checkMoving(input);
-      callback(input);
+      try {
+        checkMoving(input);
+        callback(input);
+      } catch (error) {
+        Console.print(error.message);
+        InputView.readMoving(callback);
+      }
     });
   },
 
@@ -66,8 +76,13 @@ const InputView = {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (input) => {
-        checkGameCommand(input);
-        callback(input);
+        try {
+          checkGameCommand(input);
+          callback(input);
+        } catch (error) {
+          Console.print(error.message);
+          InputView.readGameCommand(callback);
+        }
       },
     );
   },
