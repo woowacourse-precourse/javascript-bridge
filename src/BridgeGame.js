@@ -28,15 +28,11 @@ class BridgeGame {
   }
 
   progressTest(currentStatus) {
-    if (currentStatus.length === this.size) {
+    if (currentStatus.length === this.size)
       return 'end';
-    }
-    else if (currentStatus.indexOf(false) === -1) {
+    else if (currentStatus.indexOf(false) === -1)
       return 'correct';
-    }
-    else if (currentStatus.indexOf(false) !== -1) {
-      return 'not correct';
-    }
+    else if (currentStatus.indexOf(false) !== -1)
     return 'error';
   }
 

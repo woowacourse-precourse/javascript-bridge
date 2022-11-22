@@ -43,19 +43,20 @@ class GameController {
 
     progressGame(currentStatus, progressStatus, retryCount) {
         OutputView.printMap(this.#bridge, currentStatus);
-        if (progressStatus === 'end') {
-            OutputView.printResult(this.#bridge, currentStatus, true, retryCount);
-        }
-        if (progressStatus === 'correct') {
+        if (progressStatus === 'end')
+            OutputView.printResult(this.#bridgeGame, true);
+        else if (progressStatus === 'correct') 
             this.movingBridge();
-        }
-        if (progressStatus === 'not correct') {
-            const command = InputView.readGameCommand();
-            OutputView.printResult(this.#bridge, currentStatus, false, retryCount);
-            if (command === 'R') {
-                bridgeGame.retry();
-                this.movingBridge();
-            }
+        else if (progressStatus === 'not correct')
+            this.gameOver();
+    }
+
+    gameOver() {
+        const command = InputView.readGameCommand();
+        OutputView.printResult(this.#bridgeGame, false);
+        if (command === 'R') {
+            this.#bridgeGame.retry();
+            this.movingBridge();
         }
     }
 }
