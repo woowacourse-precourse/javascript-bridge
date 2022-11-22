@@ -17,7 +17,7 @@ const BridgeModel = class extends GameModel {
   }
 
   createBridge(bridgeSize) {
-    this.#bridge = makeBridge(bridgeSize, generate);
+    this.#bridge = makeBridge(Number(bridgeSize), generate);
   }
 
   setStateToReplay() {

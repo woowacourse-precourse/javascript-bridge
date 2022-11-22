@@ -15,8 +15,6 @@ const BridgeGame = class extends GameCtrl {
 
   #gameProcess() {
     this.view.readBridgeSize((bridgeSize) => {
-      bridgeSize = parseInt(bridgeSize);
-
       const callbackHandler = this.#defineGameProcessHandlers(bridgeSize);
       this.model.validation.validateBridgeSize(bridgeSize, callbackHandler);
     });
