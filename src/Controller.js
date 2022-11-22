@@ -37,17 +37,22 @@ class Controller {
   inputMoving() {
     const readMovingCallback = (input, index) => {
       Validator.validateUpDown(input);
-      const OX = input === this.inputView.birdgeStrArr[index] ? CROSS_OR_NOT.YES : CROSS_OR_NOT.NO;
-      this.reflectMapResult(input, OX);
-      if (OX === CROSS_OR_NOT.NO) return this.inputGameCommand();
-      return index === this.inputView.bridgeSize - 1 && this.outputView.printResult(SUCCESS, this.model);
+      const checkCrossOrNotResult = this.reflectMapResult(input, index);
+      return checkCrossOrNotResult && index === this.inputView.bridgeSize - 1 && this.outputView.printResult(SUCCESS, this.model);
     };
     return this.inputView.readMoving(readMovingCallback, 0);
   }
 
-  reflectMapResult(upOrDown, crossOrNot) {
-    BridgeGame.move(upOrDown, crossOrNot, this.model);
+  reflectMapResult(upOrDown, Index) {
+    const OX = upOrDown === this.inputView.birdgeStrArr[Index] ? CROSS_OR_NOT.YES : CROSS_OR_NOT.NO;
+    BridgeGame.move(upOrDown, OX, this.model);
     this.outputView.printMap(this.model);
+    return this.checkCrossOrNot(OX);
+  }
+
+  checkCrossOrNot(crossOrNot) {
+    if (crossOrNot === CROSS_OR_NOT.NO) return this.inputGameCommand();
+    return true;
   }
 
   inputGameCommand() {
