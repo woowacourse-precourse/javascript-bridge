@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const ValidateBridgeSize = require("../src/utils/ValidateBridgeSize");
 const ValidateGameCommand = require("../src/utils/ValidateGameCommand");
 const ValidateMoving = require("../src/utils/ValidateMoving");
