@@ -23,6 +23,8 @@ const OutputView = {
 
     Console.print(upSpace);
     Console.print(downSpace);
+
+    return [upSpace, downSpace];
   },
 
   printDownPassSpace(bridge, step) {
@@ -72,10 +74,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(retryCount, isLive) {
+  printResult(retryCount, isLive, resultMap) {
     let gameResult;
     if (isLive) gameResult = "성공";
     else gameResult = "실패";
+    Console.print("최종 게임 결과");
+    Console.print(resultMap[0]);
+    Console.print(resultMap[1]);
 
     Console.print(`게임 성공 여부: ${gameResult}`);
     Console.print(`총 시도한 횟수: ${retryCount}`);

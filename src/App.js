@@ -7,6 +7,7 @@ const Console = MissionUtils.Console;
 
 class App {
   #bridgeGame = new BridgeGame();
+  #resultMap;
 
   async play() {
     OutputView.printStart();
@@ -28,7 +29,11 @@ class App {
       }
     }
 
-    OutputView.printResult(this.#bridgeGame.getRetryCount(), isLive);
+    OutputView.printResult(
+      this.#bridgeGame.getRetryCount(),
+      isLive,
+      this.#resultMap
+    );
     InputView.close();
   }
 
@@ -38,7 +43,11 @@ class App {
     while (isLive === true) {
       const direction = await InputView.readMoving();
       isLive = this.#bridgeGame.move(bridge, direction);
-      OutputView.printMap(bridge, direction, this.#bridgeGame.getStep());
+      this.#resultMap = OutputView.printMap(
+        bridge,
+        direction,
+        this.#bridgeGame.getStep()
+      );
     }
 
     return isLive;
