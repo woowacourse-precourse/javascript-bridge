@@ -9,22 +9,16 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    let result = 0;
-    MissionUtils.Console.readLine(Const.MESSAGE.GAME_START, (input) => {
-      if (!validation.validateBridgeLength(input)) throw new Error(Const.ERROR_MESSAGE.ERROR_SIZE);
-      result = input;
-    });
+    const result = this.read(Const.MESSAGE.GAME_START);
+    if (!validation.validateBridgeLength(result)) throw new Error(Const.ERROR_MESSAGE.ERROR_SIZE);
     return result;
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    let result = null;
-    MissionUtils.Console.readLine(Const.MESSAGE.MOVE, (input) => {
-      if (!validation.validationMove(input)) throw new Error(Const.ERROR_MESSAGE.ERROR_MOVE);
-      result = input;
-    });
+    const result = this.read(Const.MESSAGE.MOVE);
+    if (!validation.validationMove(result)) throw new Error(Const.ERROR_MESSAGE.ERROR_MOVE);
     return result;
   },
 
@@ -32,9 +26,14 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    let result = null;
-    MissionUtils.Console.readLine(Const.MESSAGE.RETRY, (input) => {
-      if (!validation.validationMove(input)) throw new Error(Const.ERROR_MESSAGE.ERROR_RETRY);
+    const result = this.read(Const.MESSAGE.RETRY);
+    if (!validation.validationRetry(result)) throw new Error(Const.ERROR_MESSAGE.ERROR_RETRY);
+    return result;
+  },
+
+  read(message) {
+    let result;
+    MissionUtils.Console.readLine(message, (input) => {
       result = input;
     });
     return result;
