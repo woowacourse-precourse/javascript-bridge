@@ -73,7 +73,17 @@ class App {
     this.bridgeGame.retry();
     this.mainRound();
   }
-  
+
+  managePassCase() {
+    this.bridgeGame.move();
+    OutputView.printMap(this.bridgeGame.getBridgeMap());
+    if (this.bridgeGame.isFinish()) {
+      this.bridgeGame.endWithSuccess();
+      return;
+    }
+    this.mainRound();
+  }
+
 }
 
 module.exports = App;
