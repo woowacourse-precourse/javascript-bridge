@@ -93,6 +93,16 @@ class App {
     }
     this.resultGame("실패");
   }
+
+  resultGame(result) {
+    Console.print("\n최종 게임 결과");
+    this.printCurrentBridge(result);
+    this.end();
+  }
+
+  end() {
+    Console.close();
+  }
   }
 }
 
