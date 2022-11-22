@@ -15,8 +15,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callBack) {
-    Console.readLine(MESSAGE.requestDirection, callBack);
+  readMoving(isRetry, callBack) {
+    Console.readLine(
+      `${isRetry ? '' : '\n'}${MESSAGE.requestDirection}`,
+      callBack
+    );
   },
 
   /**

@@ -10,9 +10,11 @@ const { throwException } = require('./libs/ErrorHandler');
 
 class BridgeGameManager {
   #bridgeGame;
+  #isRetry;
 
   constructor() {
     this.#bridgeGame = null;
+    this.#isRetry = false;
   }
 
   start() {
@@ -28,7 +30,6 @@ class BridgeGameManager {
         return throwException(errorMsg, this.requestBridgeSize.bind(this));
 
       this.createBridgeGame(size);
-
       this.requestDirection();
     });
   }
@@ -40,14 +41,13 @@ class BridgeGameManager {
   }
 
   requestDirection() {
-    InputView.readMoving((direction) => {
+    InputView.readMoving(this.#isRetry, (direction) => {
       const { errorMsg } = Validation.checkDirection(direction);
       if (errorMsg)
         return throwException(errorMsg, this.requestDirection.bind(this));
 
       this.#bridgeGame.move(direction);
       this.printMovingResult();
-
       this.actionAboutMoving();
     });
   }
@@ -59,7 +59,12 @@ class BridgeGameManager {
   }
 
   actionAboutMoving() {
-    if (this.#bridgeGame.isFail()) return this.requestRestartOrQuit();
+    this.#isRetry = false;
+
+    if (this.#bridgeGame.isFail()) {
+      this.#isRetry = true;
+      return this.requestRestartOrQuit();
+    }
 
     if (this.#bridgeGame.isLast()) return this.quit();
 
