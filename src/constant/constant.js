@@ -7,6 +7,8 @@ const UTIL = Object.freeze({
   QUIT: 'Q',
   SUCCESS: '성공',
   FAIL: '실패',
+  FIRST: 1,
+  INIT: 0,
 });
 
 const INPUT = Object.freeze({
@@ -19,27 +21,23 @@ const OUTPUT = Object.freeze({
   START: '다리 건너기 게임을 시작합니다.\n',
   RESULT_MENT: '최종 게임 결과',
   NEWLINE: '',
+  IS_SUCCESS_GAME: (result) => `게임 성공 여부: ${result}`,
+  TOTAL_TRIES: (tries) => `총 시도한 횟수: ${tries}`,
+  UPPER: (upper) => `[${upper}]`,
+  LOWER: (lower) => `[${lower}]\n`,
 });
 
-const NOT_CHOOSE = Object.freeze({
-  FIRST_BLOCK: '   ',
-  AFTER_FIRST_BLOCK: '|   ',
+const BRIDGE = Object.freeze({
+  FIRST_BLOCK: (state) => ` ${state} `,
+  AFTER_FIRST_BLOCK: (state) => `| ${state} `,
+  NOT_CHOOSE_FIRST_BLOCK: '   ',
+  NOT_CHOOSE_AFTER_FIRST_BLOCK: '|   ',
 });
-
-const UPPER_BRIDGE = (upper) => `[${upper}]`;
-const LOWER_BRIDGE = (lower) => `[${lower}]\n`;
-const IS_SUCCESS_GAME = (result) => `게임 성공 여부: ${result}`;
-const TOTAL_TRIES = (tries) => `총 시도한 횟수: ${tries}`;
-const RECORD_BRIDGE = (state) => ` ${state} `;
 
 module.exports = {
   UTIL,
   INPUT,
   OUTPUT,
   NOT_CHOOSE,
-  UPPER_BRIDGE,
-  LOWER_BRIDGE,
-  IS_SUCCESS_GAME,
-  TOTAL_TRIES,
-  RECORD_BRIDGE,
+  BRIDGE,
 };
