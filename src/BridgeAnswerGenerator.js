@@ -13,7 +13,7 @@ class BridgeAnswerPath {
   get size() {
     return this.#answerBridge.size;
   }
-  setAnswerBridge() {
+  buildBridge() {
     this.#answerBridge.path = BridgeMaker.makeBridge(this.#answerBridge.size, generateRandomNumber);
   }
 }

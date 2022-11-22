@@ -13,7 +13,7 @@ class BridgeGameController {
   constructor() {
     this.model = {
       bridgeGame: new BridgeGame(),
-      validPath: new BridgeAnswerPath(),
+      answerBridge: new BridgeAnswerPath(),
       bridgeMap: new BridgeMap(),
     };
   }
@@ -28,17 +28,17 @@ class BridgeGameController {
   }
 
   #updateAnswerBridgeSize(bridgeSize) {
-    this.model.validPath.size = Number(bridgeSize);
+    this.model.answerBridge.size = Number(bridgeSize);
   }
 
   #updateAnswerBridgePath() {
     if (this.#isBridgeLengthNotValid()) return this.updateBridgeLengthFromUser();
-    this.model.validPath.setAnswerBridge();
+    this.model.answerBridge.buildBridge();
     this.updateMoveDirectionFromUser();
   }
 
   #isBridgeLengthNotValid() {
-    return !BridgegLengthValidator.validate(this.model.validPath.size);
+    return !BridgegLengthValidator.validate(this.model.answerBridge.size);
   }
 
   updateMoveDirectionFromUser() {
@@ -48,12 +48,12 @@ class BridgeGameController {
   }
 
   #isGameCleared() {
-    return this.model.validPath.size === this.model.bridgeGame.getMyCurrentPosition();
+    return this.model.answerBridge.size === this.model.bridgeGame.getMyCurrentPosition();
   }
 
   #updateUserMovement(direction) {
     if (this.#isDirectionNotValid(direction)) return this.updateMoveDirectionFromUser();
-    if (this.model.bridgeGame.move(direction, this.model.validPath.getbridge())) {
+    if (this.model.bridgeGame.move(direction, this.model.answerBridge.getbridge())) {
       this.model.bridgeMap.updateMyPositionForward(direction, STATE.VALID.symbol);
       return this.#showMovedPath().updateMoveDirectionFromUser();
     }
