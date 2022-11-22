@@ -11,6 +11,8 @@ class BridgeGame {
 
   #size;
 
+  #count;
+
   constructor() {
     this.#bridge = [];
     this.#moving = {
@@ -20,9 +22,9 @@ class BridgeGame {
         Down: [],
       },
       position: 0,
-      count: 1,
     };
-    this.#size;
+    this.#size = 0;
+    this.#count = 1;
   }
 
   make(size) {
@@ -107,7 +109,7 @@ class BridgeGame {
   }
 
   getCount() {
-    return this.#moving.count;
+    return this.#count;
   }
 
   /**
@@ -117,10 +119,10 @@ class BridgeGame {
    */
   retry() {
     this.resetMoving();
+    this.#count += 1;
   }
 
   resetMoving() {
-    const countUp = this.#moving.count + 1;
     this.#moving = {
       result: true,
       state: {
@@ -128,10 +130,7 @@ class BridgeGame {
         Down: [],
       },
       position: 0,
-      count: countUp,
-      size: 0,
     };
-    return this.#moving;
   }
 }
 

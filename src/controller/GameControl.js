@@ -1,3 +1,4 @@
+const VALID_VALUE = require('../constant/ValidValue');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const BridgeGame = require('./BridgeGame');
@@ -48,14 +49,22 @@ class GameControl {
 
   askRetry() {
     const retry = InputView.readGameCommand();
-    if (retry === 'R') {
-      this.bridgeGame.retry();
-      this.orderMoving();
+    if (retry === VALID_VALUE.RETRY.RETRY) {
+      this.runRetry();
     }
-    if (retry === 'Q') {
-      const success = false;
-      this.runFinalOutput(success);
+    if (retry === VALID_VALUE.RETRY.QUIT) {
+      this.runQuit();
     }
+  }
+
+  runRetry() {
+    this.bridgeGame.retry();
+    this.orderMoving();
+  }
+
+  runQuit() {
+    const success = false;
+    this.runFinalOutput(success);
   }
 
   runFinalOutput(success) {
