@@ -19,9 +19,8 @@ const BridgeMaker = {
       if (bridgeIndex === BRIDGE.DOWN_INDEX) {
         bridge.push(BRIDGE.DOWN);
       }
-
-      return bridge;
     }
+    return bridge;
   },
 };
 
