@@ -59,7 +59,7 @@ class Manager {
   }
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      const { errorMsg } = Validation.checkCommandOption(commandOption);
+      const { errorMsg } = Validation.validateCommandOption(commandOption);
       if (errorMsg)
         return throwException(errorMsg, () => this.requestRestartOrQuit());
 
