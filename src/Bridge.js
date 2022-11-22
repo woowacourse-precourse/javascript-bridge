@@ -2,16 +2,18 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class Bridge {
-  #size;
   #bridge;
 
-  constructor(size) {
-    this.#size = size;
+  constructor(bridge) {
+    this.#bridge = bridge;
   }
 
-  //prettier-ignore
-  createBridge() {
-    this.#bridge = BridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
+  canMove(position, index) {
+    return this.#bridge[index] === position;
+  }
+
+  size() {
+    return this.#bridge.length;
   }
 }
 module.exports = Bridge;
