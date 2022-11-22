@@ -1,20 +1,76 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge;
+  #marker = 0;
+  #numberOfTry = 1;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  constructor(bridge) {
+    this.#bridge = bridge;
+  }
+
+  move(nextStep) {
+    if (nextStep === this.#bridge[this.#marker]) {
+      this.#marker += 1;
+      return [this.getUBlock(), this.getDBlock()];
+    } else {
+      return wrongStep(nextStep, this.getUBlock(), this.getDBlock());
+    }
+  }
+
+  getUBlock() {
+    let UBlock = [];
+
+    for (let i = 0; i < this.#marker; i++) {
+      if (this.#bridge[i] === 'U') UBlock.push('O');
+      if (this.#bridge[i] === 'D') UBlock.push(' ');
+    }
+    return UBlock;
+  }
+
+  getDBlock() {
+    let DBlock = [];
+
+    for (let i = 0; i < this.#marker; i++) {
+      if (this.#bridge[i] === 'D') DBlock.push('O');
+      if (this.#bridge[i] === 'U') DBlock.push(' ');
+    }
+    return DBlock;
+  }
+
+  isFinish() {
+    if (this.#marker === this.#bridge.length) {
+      return true;
+    }
+    return false;
+  }
+
+  retry() {
+    this.#marker = 0;
+    this.#numberOfTry += 1;
+  }
+
+  getNumberOfTry() {
+    return this.#numberOfTry;
+  }
 }
+
+const wrongStep = (nextStep, UBlock, DBlock) => {
+  if (nextStep === 'U') {
+    pushXToUBlock(UBlock, DBlock);
+  }
+  if (nextStep === 'D') {
+    pushXToDBlock(UBlock, DBlock);
+  }
+  return [UBlock, DBlock];
+};
+
+const pushXToUBlock = (UBlock, DBlock) => {
+  UBlock.push('X');
+  DBlock.push(' ');
+};
+
+const pushXToDBlock = (UBlock, DBlock) => {
+  UBlock.push(' ');
+  DBlock.push('X');
+};
 
 module.exports = BridgeGame;
