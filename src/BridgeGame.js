@@ -32,6 +32,30 @@ class BridgeGame {
       throw Error('[ERROR] 대문자 U , D 둘 중 하나만 입력해주세요.');
     }
   }
+  /**
+   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * <p>
+   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
+  move(command) {
+    this.validateUnd(command);
+    this.#userState.push(command);
+
+    const lastIndex = this.#userState.length - 1;
+
+    if (this.#bridge[lastIndex] === this.#userState[lastIndex]) {
+      if (this.#bridge.length === this.#userState.length) {
+        this.#condition = 0;
+        this.#countTry += 1;
+      } else {
+        this.#condition = 1;
+      }
+    } else {
+      this.#condition = 2;
+      this.#countTry += 1;
+    }
+    return [this.#condition, this.#bridge, this.#userState, this.#countTry];
+  }
 }
 
 module.exports = BridgeGame;
