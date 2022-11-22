@@ -16,12 +16,11 @@ const InputView = {
   readBridgeSize(data) {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       try {
+        this.printEmptyString();
         error.bridgeSizeError(answer);
 
-        data["bridge"] = BridgeMaker.makeBridge(
-          Number(answer),
-          BridgeRandomNumberGenerator.generate
-        );
+        data["bridge"] = BridgeMaker.makeBridge(Number(answer), BridgeRandomNumberGenerator.generate);
+
         this.readMoving(data);
       } catch (error) {
         MissionUtils.Console.print(error);
@@ -30,70 +29,92 @@ const InputView = {
     });
   },
 
+  printEmptyString() {
+    return console.log("\n");
+  },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(data) {
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (answer) => {
-        try {
-          error.movingError(answer);
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (answer) => {
+      try {
+        error.movingError(answer);
 
-          data["currentAnswer"] = answer;
-          data = bridgeGame.move(data);
-          OutputView.printMap(data);
-          if (data["status"] === "continue") {
-            if (data["callCount"] === data["bridge"].length) {
-              data["status"] = "성공";
-              return OutputView.printResult(data);
-            }
-            this.readMoving(data);
-          }
-          if (data["status"] === "fail") {
-            this.readGameCommand(data);
-          }
-        } catch (error) {
-          MissionUtils.Console.print(error);
-          data["currentAnswer"] = "";
-          this.readMoving(data);
-        }
+        this.calculateMovingResult(answer, data);
+
+        return data["status"] === "continue" ? this.continueGame(data) : this.failedGame(data);
+      } catch (error) {
+        this.handleMovingError(error);
       }
-    );
+    });
+  },
+
+  calculateMovingResult(answer, data) {
+    data["currentAnswer"] = answer;
+    data = bridgeGame.move(data);
+    OutputView.printMap(data);
+  },
+
+  continueGame(data) {
+    const tryCount = data["callCount"];
+    const successCount = data["bridge"].length;
+
+    return tryCount === successCount ? this.successGame(data) : this.readMoving(data);
+  },
+
+  failedGame(data) {
+    if (data["status"] === "fail") {
+      return this.readGameCommand(data);
+    }
+  },
+
+  successGame(data) {
+    const tryCount = data["callCount"];
+    const successCount = data["bridge"].length;
+    if (tryCount === successCount) {
+      data["status"] = "성공";
+      return OutputView.printResult(data);
+    }
+  },
+
+  handleMovingError(error) {
+    MissionUtils.Console.print(error);
+    data["currentAnswer"] = "";
+    return this.readMoving(data);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(data) {
-    MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (answer) => {
-        try {
-          error.gameCommandError(answer);
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (answer) => {
+      try {
+        error.gameCommandError(answer);
 
-          data["currentAnswer"] = answer;
-          bridgeGame.retry(data);
+        data = this.calculateCommand(data, answer);
 
-          this.checkStatus(data);
-        } catch (error) {
-          MissionUtils.Console.print(error);
-          data["currentAnswer"] = "";
-          this.readGameCommand(data);
-        }
+        this.retryOrNot(data);
+      } catch (error) {
+        this.handleGameCommandError(errror, data);
       }
-    );
+    });
   },
 
-  checkStatus(data) {
-    if (data["status"] === "retry") {
-      data["try"] += 1;
-      return this.readMoving(data);
-    }
-    if (data["status"] === "quit") {
-      data["status"] = "실패";
-      return OutputView.printResult(data);
-    }
+  calculateCommand(data, answer) {
+    data["currentAnswer"] = answer;
+    const retryOrNot = bridgeGame.retry(data);
+    return retryOrNot;
+  },
+
+  retryOrNot(data) {
+    return data["status"] === "retry" ? this.readMoving(data) : OutputView.printResult(data);
+  },
+
+  handleGameCommandError(error, data) {
+    MissionUtils.Console.print(error);
+    data["currentAnswer"] = "";
+    return this.readGameCommand(data);
   },
 };
 
