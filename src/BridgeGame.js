@@ -1,4 +1,4 @@
-const { BRIDGE_VIEW } = require('./utils/Constants');
+const { RESULT } = require('./utils/Constants');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 /**
@@ -10,6 +10,8 @@ class BridgeGame {
 		round: 0,
 		state: true,
 		movingLogs: [],
+		try: 1,
+		gameResult: '',
 	};
 
 	createBridge(size) {
@@ -34,6 +36,19 @@ class BridgeGame {
 		return this.#infomation.state === false;
 	}
 
+	checkFinish() {
+		const { round, bridge } = this.#infomation;
+		return round === bridge.length;
+	}
+
+	getGameResult() {
+		return this.#infomation.gameResult;
+	}
+
+	getTryCount() {
+		return this.#infomation.try;
+	}
+
 	/**
 	 * 사용자가 게임을 다시 시도할 때 사용하는 메서드
 	 * <p>
@@ -41,6 +56,15 @@ class BridgeGame {
 	 */
 	retry() {
 		this.#resetInformation();
+		this.#infomation.try += 1;
+	}
+
+	win() {
+		this.#infomation.gameResult = RESULT.win;
+	}
+
+	fail() {
+		this.#infomation.gameResult = RESULT.fail;
 	}
 
 	#resetInformation() {
