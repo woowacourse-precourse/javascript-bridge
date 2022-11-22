@@ -2,6 +2,7 @@ const Bridge = require('./Bridge');
 const Map = require('./Map');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { printStart, printMap } = require('./OutputView');
+const { RETRY, QUIT } = require('./Command');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -53,7 +54,12 @@ class BridgeGame {
     readGameCommand(this.decideToRetryOrQuit.bind(this));
   }
 
-  decideToRetryOrQuit(gameCommand) {}
+  decideToRetryOrQuit(gameCommand) {
+    if (gameCommand === RETRY) {
+      this.retry();
+      return;
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
