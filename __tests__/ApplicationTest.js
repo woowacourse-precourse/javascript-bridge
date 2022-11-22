@@ -1,8 +1,9 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
-const { MESSAGE, ERROR } = require('../src/constants');
+const { ERROR } = require('../src/constants');
 const Validator = require('../src/Validator');
+
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -52,40 +53,40 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-// describe('다리 건너기 테스트', () => {
-//   test('다리 생성 테스트', () => {
-//     const randomNumbers = [1, 0, 0];
-//     const mockGenerator = randomNumbers.reduce((acc, number) => {
-//       return acc.mockReturnValueOnce(number);
-//     }, jest.fn());
+describe('다리 건너기 테스트', () => {
+  test('다리 생성 테스트', () => {
+    const randomNumbers = [1, 0, 0];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
 
-//     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-//     expect(bridge).toEqual(['U', 'D', 'D']);
-//   });
+    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+    expect(bridge).toEqual(['U', 'D', 'D']);
+  });
 
-//   test('기능 테스트', () => {
-//     const logSpy = getLogSpy();
-//     mockRandoms([1, 0, 1]);
-//     mockQuestions(['3', 'U', 'D', 'U']);
+  // test('기능 테스트', () => {
+  //   const logSpy = getLogSpy();
+  //   mockRandoms([1, 0, 1]);
+  //   mockQuestions(['3', 'U', 'D', 'U']);
 
-//     const app = new App();
-//     app.play().then(() => {
-//       const log = getOutput(logSpy);
-//       expectLogContains(log, [
-//         '최종 게임 결과',
-//         '[ O |   | O ]',
-//         '[   | O |   ]',
-//         '게임 성공 여부: 성공',
-//         '총 시도한 횟수: 1',
-//       ]);
-//       expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
-//     });
-//   });
+  //   const app = new App();
+  //   app.play().then(() => {
+  //     const log = getOutput(logSpy);
+  //     expectLogContains(log, [
+  //       '최종 게임 결과',
+  //       '[ O |   | O ]',
+  //       '[   | O |   ]',
+  //       '게임 성공 여부: 성공',
+  //       '총 시도한 횟수: 1',
+  //     ]);
+  //     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
+  //   });
+  // });
 
-//   test('예외 테스트', () => {
-//     runException(['a']);
-//   });
-// });
+  // test('예외 테스트', () => {
+  //   runException(['a']);
+  // });
+});
 
 describe('플레이어 입력값의 유효성 검사', () => {
   test('다리 사이즈 유효성 검사 - 정상 범위', () => {
@@ -135,4 +136,18 @@ describe('플레이어 입력값의 유효성 검사', () => {
       }).toThrow(ERROR.INPUT_GAME_COMMAND);
     });
   });
+
+  // test('게임 시작 메시지를 출력한다.', () => {
+  //   const logSpy = getLogSpy();
+
+  //   const app = new App();
+
+  //   const log = getOutput(logSpy);
+  //   app.play();
+  //   app.play().then(() => {
+  //     expectLogContains(log, [MESSAGE.ENTRY]);
+  //   });
+
+  //   expectLogContains(log, [MESSAGE.ENTRY]);
+  // });
 });
