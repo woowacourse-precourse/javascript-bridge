@@ -108,9 +108,36 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
       (answer) => {
-        console.log(`다리의 길이: ${answer}`);
+        this.retryExceptionCatch(answer, turnNumber, inputMoveUpDown);
+        const brgGame = new BridgeGame();
+        let isRetry = brgGame.retry(answer);
+        this.isRetryGame(isRetry, turnNumber, inputMoveUpDown);
+        if (isRetry == 0) MissionUtils.Console.close();
       }
     );
+  },
+  isRetryGame(isRetry, turnNumber, inputMoveUpDown) {
+    let moveAndBool = inputMoveUpDown + "F";
+    if (isRetry == 1) {
+      this.tryCount++;
+      this.readMoving(0);
+    }
+    if (isRetry == 0)
+      OutputView.printResult(turnNumber, moveAndBool, this.tryCount);
+  },
+
+  retryExceptionCatch(answer, turnNumber, inputMoveUpDown) {
+    try {
+      this.retryExceptionProcess(answer);
+    } catch (e) {
+      MissionUtils.Console.print(e);
+      if (e) this.readGameCommand(turnNumber, inputMoveUpDown);
+    }
+  },
+
+  retryExceptionProcess(answer) {
+    if (answer != this.RETRY_COMMAND && answer != this.QUIT_COMMAND)
+      throw "[ERROR] R 혹은 Q만 입력할 수 있습니다.";
   },
 };
 
