@@ -22,23 +22,18 @@ class BridgeGameController {
     );
     BridgeGame.setBridge(randBridge);
     this.#rand_bridge = BridgeGame.getBridge();
+    this.moveDirection();
   }
 
   moveDirection() {
-    return InputView.readMoving();
+    const direction = InputView.readMoving();
+    this.move(direction);
   }
 
-  move(movement) {
-    const step = this.moveDirection();
-    const current = this.#rand_bridge[movement];
-    if (current == BRIDGE_DIRECTION.DOWN) {
-      Bridge.upBridge.push(current === step ? "O" : "X");
-      Bridge.downBridge.push(" ");
-    }
-    if (current === BRIDGE_DIRECTION.UP) {
-      Bridge.downBridge.push(current === step ? "O" : "X");
-      Bridge.upBridge.push(" ");
-    }
+  move(step, movement) {
+    BridgeGame.move(step, movement);
+    OutputView.printMap();
+    this.moveDirection();
   }
 }
 
