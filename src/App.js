@@ -4,7 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
-const InputValidate = require("./utils/InputValidate");
+const InputValidator = require("./utils/InputValidator");
 const { COMMAND } = require("./utils/constants");
 
 class App {
@@ -17,7 +17,7 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      if (!this.#tryValidate(InputValidate.checkBridgeSize, size)) {
+      if (!this.#tryValidate(InputValidator.checkBridgeSize, size)) {
         this.requestBridgeSize();
         return;
       }
@@ -34,7 +34,7 @@ class App {
 
   requestMovingDirection() {
     InputView.readMoving((direction) => {
-      if (!this.#tryValidate(InputValidate.checkMovingDirection, direction)) {
+      if (!this.#tryValidate(InputValidator.checkMovingDirection, direction)) {
         this.requestMovingDirection();
         return;
       }
@@ -54,7 +54,7 @@ class App {
 
   requsetRetryCommand() {
     InputView.readGameCommand((command) => {
-      if (!this.#tryValidate(InputValidate.checkRetryOrQuitCommand, command)) {
+      if (!this.#tryValidate(InputValidator.checkRetryOrQuitCommand, command)) {
         this.requsetRetryCommand();
         return;
       }

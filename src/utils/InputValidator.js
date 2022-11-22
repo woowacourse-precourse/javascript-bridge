@@ -1,7 +1,7 @@
 const { BRIDGE_SIZE, DIRECTION, COMMAND } = require("./constants");
 const { ERROR_MESSAGE } = require("./messages");
 
-const InputValidate = {
+const InputValidator = {
   checkBridgeSize(size) {
     if (!Number(size)) {
       throw new Error(ERROR_MESSAGE.BRIDGE_NUMBER_TYPE);
@@ -24,4 +24,4 @@ const InputValidate = {
   },
 };
 
-module.exports = InputValidate;
+module.exports = InputValidator;
