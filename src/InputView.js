@@ -43,6 +43,14 @@ const InputView = {
     const bridgeGame = new BridgeGame();
     if(bridgeGame.move(bridge, moves)) {
       OutputView.printMap(bridge, moves);
+      if(bridge.length !== moves.length) {
+        this.readMoving(bridge, moves, count);
+      } else {
+        MissionUtils.Console.print("최종 게임 결과");
+        OutputView.printMap(bridge, moves);
+        OutputView.printResult(true, count);
+        MissionUtils.Console.close();
+      }
     } else {
       OutputView.printMap(bridge, moves);
       this.readGameCommand(count);
