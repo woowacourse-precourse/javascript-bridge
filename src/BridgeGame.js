@@ -7,8 +7,10 @@ const Command = require("./constants/Command");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
+
   constructor() {
-    this.bridge = new Bridge();
+    this.#bridge = new Bridge();
   }
 
   /**
@@ -17,7 +19,7 @@ class BridgeGame {
    */
   setBridge(size) {
     const bridgeMake = BridgeMaker.makeBridge(size, generate);
-    this.bridge.setBridge(bridgeMake);
+    this.#bridge.setBridge(bridgeMake);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -35,12 +37,12 @@ class BridgeGame {
    * @param {number} isSuccess
    */
   updateBirdge(isSuccess) {
-    const next = this.bridge.getBridge()[this.bridge.getCrossBridgeSize()];
+    const next = this.#bridge.getBridge()[this.#bridge.getCrossBridgeSize()];
     const [right, wrong] = next === Command.DOWN ? [1, 0] : [0, 1];
-    const crossBridge = this.bridge.getCrossBridge();
+    const crossBridge = this.#bridge.getCrossBridge();
     crossBridge[right].push(isSuccess ? " O " : "   ");
     crossBridge[wrong].push(isSuccess ? "   " : " X ");
-    this.bridge.setCrossBridge(crossBridge);
+    this.#bridge.setCrossBridge(crossBridge);
   }
 
   /**
@@ -49,8 +51,8 @@ class BridgeGame {
    * @returns {number} 0: 실패, 1: 성공, 2: 도착지에 도착
    */
   checkBridge(moving) {
-    const bridge = this.bridge.getBridge();
-    const crossBridge = this.bridge.getCrossBridge();
+    const bridge = this.#bridge.getBridge();
+    const crossBridge = this.#bridge.getCrossBridge();
     if (bridge[crossBridge[0].length] !== moving) return 0;
     if (crossBridge[0].length + 1 === bridge.length) return 2;
     return 1;
@@ -61,7 +63,7 @@ class BridgeGame {
    * @returns {string[][]} 건너온 다리 상태
    */
   getBridge() {
-    return this.bridge.getCrossBridge();
+    return this.#bridge.getCrossBridge();
   }
 
   /**
@@ -70,7 +72,7 @@ class BridgeGame {
    * @return {number} 현재까지 시도한 횟수 + 1
    */
   retry(tryCount) {
-    // this.#crossBridge = [[], []];
+    this.#bridge.setCrossBridge([[], []]);
     return tryCount + 1;
   }
 }
