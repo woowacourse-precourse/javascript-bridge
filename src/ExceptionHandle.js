@@ -11,6 +11,7 @@ const exceptionHandler = {
         if (userInput < 3 || userInput > 20) throw new Error(errMessage);
         return true;
     },
+
     /**
      * @param {string} userInput
      * @return {boolean} valid 여부를 리턴함.

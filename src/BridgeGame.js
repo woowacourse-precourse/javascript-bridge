@@ -1,8 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const BridgeMaker = require('./BridgeMaker');
-const exceptionHandler = require('./ExceptionHandle');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,7 +6,6 @@ class BridgeGame {
     #position; // 현재 index.
     #tryCount;
     #length;
-    #OutputView;
 
     /**
      * 필드를 새로 생성한 다리 정보로 업데이트한다.

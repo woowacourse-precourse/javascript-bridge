@@ -1,10 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
-const OutputView = require('./OutputView');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeGame = require('./BridgeGame');
-const exceptionHandler = require('./ExceptionHandle');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class App {
     play() {
@@ -12,8 +7,5 @@ class App {
         InputView.readBridgeSize();
     }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
