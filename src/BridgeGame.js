@@ -54,6 +54,7 @@ class BridgeGame {
       InputView.readGameCommand(re);
       if (re === 'R') {
         this.#attempts++;
+        this.#bridgeHistory = [];
         this.move(bridge);
       } else {
         OutputView.printResult(

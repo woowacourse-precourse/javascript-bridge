@@ -18,7 +18,7 @@ class App {
       InputView.readBridgeSize(bridgeSize);
       const bridge = BridgeMaker.makeBridge(
         bridgeSize,
-        BridgeRandomNumberGenerator,
+        BridgeRandomNumberGenerator.generate,
       );
 
       this.#bridgeGame.move(bridge);
