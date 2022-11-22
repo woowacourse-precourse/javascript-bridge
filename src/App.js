@@ -8,7 +8,10 @@ class App {
     this.bridgeGame = new BridgeGame();
   }
 
-  play() {}
+  play() {
+    OutputView.printStartMessage();
+    this.buildBridge();
+  }
 }
 
 module.exports = App;
