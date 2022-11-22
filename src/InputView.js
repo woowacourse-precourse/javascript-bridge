@@ -34,6 +34,7 @@ const InputView = {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (answer) => {
         gameCommand = answer;
     });
+    this.checkGameCommand(gameCommand);
     return gameCommand;
   },
   checkBridgeSize(bridgeSize) {
@@ -48,6 +49,14 @@ const InputView = {
     try {
       if (moving !== "U" && moving !== "D")
         throw new Error("[ERROR] U나 D를 입력해야 합니다.");
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+    }
+  },
+  checkGameCommand(gameCommand) {
+    try {
+      if (gameCommand !== "R" && gameCommand !== "Q")
+        throw new Error("[ERROR] R이나 Q를 입력해야 합니다.");
     } catch (e) {
       MissionUtils.Console.print(e.message);
     }
