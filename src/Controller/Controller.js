@@ -24,6 +24,13 @@ const Controller = {
         })
     },
 
+    controllerMoveCallback(input, bridgeGame) {
+        bridgeGame.move(input);
+        const map = bridgeGame.getMap();
+        OutputView.printMap(map);
+        Controller.process(bridgeGame);
+    },
+    
 }
 
 module.exports = Controller;
