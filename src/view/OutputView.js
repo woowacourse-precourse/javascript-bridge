@@ -1,5 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
+const {
+  BRIDGE_INPUT_MESSAGES,
+  FINAL_RESULT_MESSAGES,
+} = require("../constants/Messages");
 
 const OutputView = {
   // 첫 시작 메세지를 출력한다.
@@ -26,11 +29,39 @@ const OutputView = {
   },
 
   /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 최종 성공 여부를 출력한다.
+   * @param isSuccess {boolean} [게임 성공 여부]
    */
-  printResult() {},
+  printFinalSuccessOrFailure(isSuccess) {
+    const successOrFailureMessage = FINAL_RESULT_MESSAGES.SUCCESS_OR_FAILURE;
+    if (isSuccess) {
+      Console.print(successOrFailureMessage + FINAL_RESULT_MESSAGES.SUCCESS);
+    }
+    if (!isSuccess) {
+      Console.print(successOrFailureMessage + FINAL_RESULT_MESSAGES.FAILURE);
+    }
+  },
+
+  /**
+   * 총 시도한 횟수를 출력한다.
+   * @param userTryCount {number} [유저의 시도 횟수]
+   */
+  printUserTryCount(userTryCount) {
+    Console.print(FINAL_RESULT_MESSAGES.TRY_COUNT + userTryCount);
+  },
+
+  /**
+   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
+   * @param movingStatus {{up: string[], down: string[]}} [다리별 움직임 성공여부]
+   * @param isSuccess {boolean} [유저의 최종 성공여부]
+   * @param userTryCount {number} [유저의 시도 횟수]
+   */
+  printResult(movingStatus, isSuccess, userTryCount) {
+    Console.print(FINAL_RESULT_MESSAGES.OPENING);
+    this.printMap(movingStatus);
+    this.printFinalSuccessOrFailure(isSuccess);
+    this.printUserTryCount(userTryCount);
+  },
 };
 
 module.exports = OutputView;
