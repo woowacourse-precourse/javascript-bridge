@@ -25,8 +25,13 @@ const InputView = {
 
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (input) => {
-      callback(input);
+      this.validateGameCommand(input);
     });
+  },
+
+  validateGameCommand(endingKey) {
+    if (endingKey !== "R" && endingKey !== "Q")
+      throw new Error('[ERROR] 재시작 또는 종료("R" 또는 "Q")를 입력해주세요.');
   },
 };
 
