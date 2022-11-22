@@ -4,10 +4,9 @@ const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../Model/BridgeGame");
 const Bridge = require("../Model/Bridge");
-const { BRIDGE_DIRECTION } = require("../constants/GameCondition.js");
+const { STATE } = require("../constants/GameCondition.js");
 class BridgeGameController {
-  #bridge_size;
-  //   #random_bridge;
+  #attempt = 1;
   #BridgeGame = new BridgeGame();
 
   start() {
@@ -32,8 +31,12 @@ class BridgeGameController {
   inputGameCommand(map) {
     // TODO: change
     const cmd = InputView.readGameCommand();
-    if (cmd === "R") this.#BridgeGame.retry();
-    if (cmd === "Q") OutputView.printResult(map, "실패", 2);
+    if (cmd === "R") {
+      this.#BridgeGame.retry();
+      this.#attempt += 1;
+      this.inputMoveDirection();
+    }
+    if (cmd === "Q") OutputView.printResult(map, STATE.FAIL, this.#attempt);
   }
 
   /**
@@ -51,12 +54,11 @@ class BridgeGameController {
     }
     if (isSuccess && this.#BridgeGame.isEnd()) {
       //성공하면
-      OutputView.printResult(map, "성공", 1);
+      OutputView.printResult(map, STATE.SUCCESS, this.#attempt);
       return;
-    } else {
-      this.#BridgeGame.increaseStep();
-      this.inputMoveDirection();
     }
+    this.#BridgeGame.increaseStep();
+    this.inputMoveDirection();
   }
 }
 
