@@ -17,8 +17,8 @@ class BridgeGameContoller {
         this.#map = [];
     }
 
-    init(){
-        this.#game[Const.KEY.BRIDGE] = maker.makeBridge(this.#initBridgeLength(),generate.generate);
+    makeBridge(length){
+        this.#game[Const.KEY.BRIDGE] = maker.makeBridge(length,generate.generate);
     }
 
     move(){
@@ -69,14 +69,14 @@ class BridgeGameContoller {
      * 실제로 library를 이용해서 입력받는 함수는 InputView에 따로 존재하나, try{}catch(e){} error 처리 후
      * @returns {number}
      */
-    #initBridgeLength(){
+    initBridgeLength(){
         try{
             const len = input.readBridgeSize();
             return len !== undefined ? len : null;
         }
         catch(e){
             output.printMessage(e);
-            this.#initBridgeLength();
+            throw e;
         }
     }
 
@@ -110,9 +110,6 @@ class BridgeGameContoller {
         return this.#game[key];
     }
 
-    getTry(){
-        return this.#totalTry;
-    }
 }
 
 module.exports = BridgeGameContoller;
