@@ -68,6 +68,9 @@ const OutputView = {
   },
   printError(error){
     Console.print(error)
+  },
+  close(){
+    Console.close()
   }
 };
 
