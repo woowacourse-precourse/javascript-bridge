@@ -15,8 +15,9 @@ describe("BridgeGame 테스트", () => {
 
   test("오답일 때 다리 상태 반환", () => {
     const { topBridge, bottomBridge } = bridgeGame.insertFailValue(bridgeGame.move());
-    expect(topBridge).toEqual(["O", " ", " "]);
-    expect(bottomBridge).toEqual([" ", "O", "X"]);
+
+    expect(topBridge).toEqual(["O", " ", "X"]);
+    expect(bottomBridge).toEqual([" ", "O", " "]);
   });
 
   test("mpveCount만큼 누적된 정답 다리 상태 반환", () => {
