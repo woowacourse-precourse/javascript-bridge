@@ -12,10 +12,11 @@ class App {
 
   play() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize(this.readBridgeSize.bind(this));
+    InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 
-  readBridgeSize(length) {
+  makeBridge(length) {
+    this.validateBridgeLength(length);
     this.#game.makeRealBridge(Number(length));
     this.readMoving();
   }
@@ -25,6 +26,7 @@ class App {
   }
 
   move(cmd) {
+    this.validateMoveCommand(cmd);
     let result = this.#game.move(cmd);
     OutputView.printMap(this.#game.userBridge);
     this.checkFinish(result);
@@ -32,8 +34,7 @@ class App {
 
   checkFinish(result) {
     if (result === gameConst.sign.O_SIGN && this.#game.ifFinish()) {
-        OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, true);
-        Console.close();
+        this.exitGame(true)
         return;
     }
     if(result === gameConst.sign.O_SIGN) {
@@ -44,13 +45,40 @@ class App {
   }
 
   makeDecision(cmd) {
+    this.validateRetryCommand(cmd);
     if (cmd === gameConst.cmd.RETRY_CMD) {
       this.#game.retry();
       this.readMoving();
       return;
     } 
-    OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, false);
+    this.exitGame(false);
+  }
+
+  exitGame(success){
+    OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, success);
     Console.close();
   }
+  
+  validateBridgeLength(length) {
+    if (isNaN(length)) {
+      throw new Error(gameConst.error.BRIDGE_ERROR);
+    }
+    if (Number(length) < 3 || Number(length) > 20) {
+      throw new Error(gameConst.error.BRIDGE_ERROR);
+    }
+  }
+  
+  validateMoveCommand(cmd) {
+    if (cmd !== gameConst.cmd.UP_CMD && cmd !== gameConst.cmd.DOWN_CMD) {
+      throw new Error(gameConst.error.MOVE_COMMAND_ERROR);
+    }
+  }
+
+  validateRetryCommand(cmd) {
+    if (cmd !== gameConst.cmd.QUIT_CMD && cmd !== gameConst.cmd.RETRY_CMD) {
+      throw new Error(gameConst.error.RETRY_COMMAND_ERROR);
+    }
+  }
+
 }
 module.exports = App;
