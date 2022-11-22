@@ -30,6 +30,9 @@ class BridgeGame {
    */
   retry() {
     this.increaseCount();
+    while (this.#input.length) {
+      this.popInput();
+    }
   }
 
   setBridge(num) {
@@ -55,7 +58,7 @@ class BridgeGame {
     this.#input.push(userReply);
   }
 
-  popInuput() {
+  popInput() {
     return this.#input.pop();
   }
 }
