@@ -8,7 +8,11 @@ const MESSAGE = require("./message");
 let bridgeSize,bridgeBase;
 class App {
   play() {
+    this.gameStart();
+  }
 
+  gameStart() {
+    this.makeBridgeBase();
   }
 
   failPlace(inputMove) {
