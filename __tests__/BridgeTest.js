@@ -52,4 +52,16 @@ describe('makeResultMap 테스트', () => {
     OutputView.makeResultMap(['U', 'D', 'D']);
     expect(spyMergeBlock).toBeCalledTimes(2);
   });
+
+  test('makeUpSideBlock, makeDownSideblock 함수 테스트', () => {
+    const testMoveInput = [[{ isRightDirect: true, moveInput: 'U' }, { isRightDirect: true, moveInput: 'D' }, { isRightDirect: true, moveInput: 'D' }],
+      [{ isRightDirect: true, moveInput: 'D' }, { isRightDirect: true, moveInput: 'D' }, { isRightDirect: false, moveInput: 'U' }],
+    ];
+    const upSideResult = ['O |   |  ', '  |   | X'];
+    const downSideResult = ['  | O | O', 'O | O |  '];
+    testMoveInput.forEach((element, idx) => {
+      expect(OutputView.makeUpSideBlock(element)).toEqual(upSideResult[idx]);
+      expect(OutputView.makeDownSideBlock(element)).toEqual(downSideResult[idx]);
+    });
+  });
 });
