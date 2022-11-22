@@ -1,6 +1,6 @@
 ## 📜 다이어그램
 
-<img src="bridge_diagram.png">
+<img src="js_bridge.png">
 <br/>
 
 ## 🧱 설계 사항
