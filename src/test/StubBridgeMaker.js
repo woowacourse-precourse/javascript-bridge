@@ -1,5 +1,5 @@
 const StubBridgeMaker = {
-  makeBridge(size = 2, generate) {
+  makeBridge(size, generate) {
     return ["U", "D", "D"];
   },
 };
