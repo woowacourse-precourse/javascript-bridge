@@ -33,7 +33,7 @@ const GamePlaying = {
       this.gameMap = bridgeGame.bridgeDrawing(movePoint, true);
       OutputView.printMap(this.gameMap);
     } catch (error) {
-      console.log(error);
+      OutputView.printException(error);
     }
     return true;
   },
@@ -54,20 +54,20 @@ const GamePlaying = {
     try {
       retry = bridgeGame.retry(command);
     } catch (error) {
-      console.log(error);
+      OutputView.printException(error);
     }
     return retry;
   },
   BridgeMaker() {
     let bridge;
     try {
-      const birdgeSize = InputView.readBridgeSize();
+      const bridgeSize = InputView.readBridgeSize();
       bridge = BridgeMaker.makeBridge(
-        birdgeSize,
+        bridgeSize,
         BridgeRandomNumberGenerator.generate
       );
     } catch (error) {
-      console.log(error);
+      OutputView.printException(error);
     }
     return bridge;
   },

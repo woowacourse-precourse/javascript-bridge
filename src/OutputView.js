@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const OUTPUT_MESSAGE = require("./constans/OutputMessage");
+const ERROR_MESSAGE = require("./constans/ErrorMessage");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -28,6 +29,21 @@ const OutputView = {
     MissionUtils.Console.print(map[0]);
     MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_OR_FAILURE + result);
     MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_ATTEMPT + count);
+  },
+
+  printException(error) {
+    if (error === "숫자 입력이 아님") {
+      MissionUtils.Console.print(ERROR_MESSAGE.ONLY_NUMBER);
+    }
+    if (error === "3~20 사이의 숫자가 아님") {
+      MissionUtils.Console.print(ERROR_MESSAGE.BRIDGE_SIZE_OUT);
+    }
+    if (error === "U 또는 D가 아님") {
+      MissionUtils.Console.print(ERROR_MESSAGE.MOVE_POINT_OUT);
+    }
+    if (error === "R 또는 Q가 아님") {
+      MissionUtils.Console.print(ERROR_MESSAGE.RESTART_EXPTION);
+    }
   },
 };
 

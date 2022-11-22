@@ -4,6 +4,7 @@ class App {
   play() {
     GamePlaying.gameStartPrint();
     const bridge = GamePlaying.BridgeMaker();
+    if (!bridge) return;
     let result = false;
     let count = 0;
     while (1) {
