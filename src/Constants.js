@@ -11,6 +11,13 @@ const INPUT_MESSAGE = Object.freeze({
   retryEnd: `(재시도: R, 종료: Q)\n`,
 });
 
+const STATE_CONSTANT = Object.freeze({
+  up: "U",
+  down: "D",
+  canMovePlace: "O",
+  cantMovePlace: " ",
+});
+
 const RESULT_MESSAGE = Object.freeze({
   resultMessage: `\n최종 게임 결과\n`,
   successInfo: `\n게임 성공 여부: `,
@@ -23,5 +30,6 @@ const RESULT_MESSAGE = Object.freeze({
 module.exports = {
   INFO_MESSAGE,
   INPUT_MESSAGE,
+  STATE_CONSTANT,
   RESULT_MESSAGE,
 };

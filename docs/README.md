@@ -17,7 +17,7 @@
   - [x] 다리를 생성한다
 - [] `userMove()` (사용자 이동)
   - [x] `InputView` 클래스를 통해 사용자가 이동할 칸을 입력받는다(`readMoving()`)
-  - [] `OutputView` 클래스를 통해 현재까지 이동한 다리의 상태를 출력한다
+  - [x] `OutputView` 클래스를 통해 현재까지 이동한 다리의 상태를 출력한다
 - [] `userMoveResult` (사용자 이동 결과)
   - [] 이동할 수 있는 칸일 경우 `userMove()`를 재진행한다
   - [] 이동할 수 없는 칸일 경우 `retryOrEnd()`를 호출한다

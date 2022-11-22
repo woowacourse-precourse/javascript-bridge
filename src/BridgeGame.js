@@ -1,13 +1,21 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { INFO_MESSAGE, INPUT_MESSAGE } = require("./Constants");
+const { INFO_MESSAGE, INPUT_MESSAGE, STATE_CONSTANT } = require("./Constants");
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const { printMessage } = require("./OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #userBridge = [];
+
+  #computedBridge = [];
+
+  #bridgeViewTop = [];
+  #bridgeViewBottom = [];
+
   gameStart() {
     printMessage(INFO_MESSAGE.start);
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
@@ -17,6 +25,7 @@ class BridgeGame {
 
   getInput(input) {
     const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator);
+    this.#computedBridge = bridge;
     this.userMoving();
   }
 
@@ -24,6 +33,7 @@ class BridgeGame {
     InputView.readMoving(
       `${INPUT_MESSAGE.selectNextPosition} ${INPUT_MESSAGE.UpDown}`,
       (input) => {
+        this.move(input);
         console.log(input);
       }
     );
@@ -34,8 +44,35 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
-    console.log("move");
+  move(input) {
+    this.makeUserBridge(input);
+    // this.#userBridge.push(input);
+    // console.log("move");
+    // console.log(this.#userBridge);
+  }
+
+  makeUserBridge(newState) {
+    this.#userBridge.push(newState);
+    if (
+      this.#userBridge[this.#userBridge.length - 1] ===
+      this.#computedBridge[this.#userBridge.length - 1]
+    ) {
+      if (newState === STATE_CONSTANT.up) {
+        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.canMovePlace);
+        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.cantMovePlace);
+      } else {
+        this.drawBridge(this.#bridgeViewTop, STATE_CONSTANT.cantMovePlace);
+        this.drawBridge(this.#bridgeViewBottom, STATE_CONSTANT.canMovePlace);
+      }
+    }
+    OutputView.printMap({
+      bridgeTop: this.#bridgeViewTop,
+      bridgeBottom: this.#bridgeViewBottom,
+    });
+  }
+
+  drawBridge(targetBridge, pushState) {
+    targetBridge.push(pushState);
   }
 
   /**
