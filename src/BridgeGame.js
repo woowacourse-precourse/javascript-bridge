@@ -22,30 +22,26 @@ class BridgeGame {
     const bridgeAnswer = data["bridge"][data["callCount"]];
     const userAnswer = data["currentAnswer"];
 
-    bridgeAnswer === userAnswer ? this.correctCase(data) : this.incorrectCase(data);
+    bridgeAnswer === userAnswer ? this.moveCorrectCase(data) : this.moveIncorrectCase(data);
     return data;
   }
 
-  correctCase(data) {
+  moveCorrectCase(data) {
     const correct = "O";
     const empty = " ";
 
     data["currentAnswer"] === "U" ? this.defineString(data, correct, empty) : this.defineString(data, empty, correct);
-    return data;
+    data["status"] = "continue";
   }
 
-  incorrectCase(data) {
+  moveIncorrectCase(data) {
     const incorrect = "X";
     const empty = " ";
 
     data["currentAnswer"] === "U" ? this.defineString(data, incorrect, empty) : this.defineString(data, empty, incorrect);
-    return data;
+    data["status"] = "fail";
   }
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
   defineString(data, upperString, lowerString) {
     data["callCount"] === 0 ? this.startString(data, upperString, lowerString) : this.middleString(data, upperString, lowerString);
   }
@@ -54,20 +50,23 @@ class BridgeGame {
     data["upperBridge"] += this.bridgeString.start(upperString);
     data["lowerBridge"] += this.bridgeString.start(lowerString);
     data["callCount"] += 1;
-    data["status"] = "continue";
-    return data;
   }
 
   middleString(data, upperString, lowerString) {
     data["upperBridge"] += this.bridgeString.middle(upperString);
     data["lowerBridge"] += this.bridgeString.middle(lowerString);
     data["callCount"] += 1;
-    data["status"] = "continue";
-    return data;
   }
+  /**
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * <p>
+   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
 
   retry(data) {
-    data["currentAnswer"] === "R" ? this.enterRetry(data) : this.enterQuit(data);
+    const retry = "R";
+
+    data["currentAnswer"] === retry ? this.enterRetry(data) : this.enterQuit(data);
     return data;
   }
 
@@ -76,11 +75,11 @@ class BridgeGame {
     data["callCount"] = 0;
     data["upperBridge"] = "";
     data["lowerBridge"] = "";
+    data["try"] += 1;
   }
 
   enterQuit(data) {
-    data["status"] = "quit";
-    return data;
+    data["status"] = "실패";
   }
 }
 
