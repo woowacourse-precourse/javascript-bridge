@@ -3,11 +3,11 @@ const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator'
 
 describe('BridgeMaker 테스트', () => {
   test('0인 경우 아래 칸(D)', () => {
-    expect(BridgeMaker.convertDorU(0)).toEqual('D');
+    expect(BridgeMaker.convert(0)).toEqual('D');
   });
 
   test('1인 경우 위 칸(U)', () => {
-    expect(BridgeMaker.convertDorU(1)).toEqual('U');
+    expect(BridgeMaker.convert(1)).toEqual('U');
   });
 
   test.each([

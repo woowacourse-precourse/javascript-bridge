@@ -1,5 +1,5 @@
-const BridgeGame = require('./BridgeGame');
-const ViewManager = require('./ViewManager');
+const BridgeGame = require('./domains/BridgeGame');
+const ViewManager = require('./views/ViewManager');
 
 class App {
   play() {

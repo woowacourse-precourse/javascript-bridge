@@ -1,7 +1,8 @@
-const Bridge = require('./domains/Bridge');
+const Bridge = require('./Bridge');
+const BridgeStatus = require('./BridgeStatus');
 const GameException = require('./GameException');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,7 +16,8 @@ class BridgeGame {
   create(size) {
     GameException.handleBridgeSizeException(size);
     this.#bridge = new Bridge(
-      BridgeMaker.makeBridge(size, () => BridgeRandomNumberGenerator.generate())
+      BridgeMaker.makeBridge(size, () => BridgeRandomNumberGenerator.generate()),
+      new BridgeStatus()
     );
     console.log(this.#bridge.getArray());
   }

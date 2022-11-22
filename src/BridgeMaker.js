@@ -4,10 +4,8 @@
 const { GAME_COMMAND } = require('../lib/constans');
 
 const BridgeMaker = {
-  convertDorU(index) {
-    const downUp = [GAME_COMMAND.down, GAME_COMMAND.up];
-
-    return downUp[index];
+  convert(index) {
+    return index === 0 ? GAME_COMMAND.down : GAME_COMMAND.up;
   },
   /**
    * @param {number} size 다리의 길이
@@ -18,7 +16,7 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let i = 0; i < size; i++) {
-      bridge[i] = this.convertDorU(generateRandomNumber());
+      bridge[i] = this.convert(generateRandomNumber());
     }
 
     return bridge;

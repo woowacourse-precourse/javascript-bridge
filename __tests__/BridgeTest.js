@@ -1,7 +1,8 @@
 const Bridge = require('../src/domains/Bridge');
+const BridgeStatus = require('../src/domains/BridgeStatus');
 
 describe('Bridge 클래스 테스트', () => {
-  const bridge = new Bridge(['D', 'U', 'D']);
+  const bridge = new Bridge(['D', 'U', 'D'], new BridgeStatus());
 
   test('입력값과 현재 칸의 값이 같으면 건너기를 성공한다.', () => {
     expect(bridge.cross('D').status).toEqual([['O', ' ']]);

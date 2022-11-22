@@ -13,6 +13,10 @@ class BridgeStatus {
     this.#array[step] = [' ', ' '];
     this.#array[step][position] = isMatch ? 'O' : 'X';
   }
+
+  init() {
+    this.#array = [];
+  }
 }
 
 module.exports = BridgeStatus;

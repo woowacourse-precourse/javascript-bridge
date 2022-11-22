@@ -1,6 +1,6 @@
-const InputView = require('./views/InputView');
-const OutputView = require('./views/OutputView');
-const { parseNumber } = require('../lib/utils');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const { parseNumber } = require('../../lib/utils');
 
 class ViewManager {
   #game;

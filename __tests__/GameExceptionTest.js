@@ -1,4 +1,4 @@
-const GameException = require('../src/GameException');
+const GameException = require('../src/domains/GameException');
 
 describe('handleBridgeSizeException 테스트', () => {
   test('아무 값도 입력하지 않은 경우 예외가 발생한다.', () => {
