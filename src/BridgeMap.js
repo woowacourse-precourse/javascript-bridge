@@ -1,24 +1,14 @@
-const {
-  DIRECTION,
-  BRIDGE_PARTS,
-  SIGN,
-  BRIDGE,
-} = require('./Constants/constant');
+const { DIRECTION, BRIDGE_PARTS, BRIDGE } = require('./Constants/constant');
 
 class BridgeMap {
-  #upperBridge;
+  #upperBridge = [BRIDGE_PARTS.entrance];
 
-  #downerBridge;
-
-  constructor() {
-    this.#upperBridge = [BRIDGE_PARTS.entrance];
-    this.#downerBridge = [BRIDGE_PARTS.entrance];
-  }
+  #downerBridge = [BRIDGE_PARTS.entrance];
 
   create(game) {
     const records = game.getRecords();
+    const bridge = game.getBridge();
     records.forEach((direction, idx) => {
-      const bridge = game.getBridge();
       this.checkDirection(direction, bridge[idx]);
       this.createPier();
     });
@@ -34,17 +24,21 @@ class BridgeMap {
   }
 
   markUpperBridge(direction, nextDirection) {
-    if (direction === nextDirection)
+    if (direction === nextDirection) {
       this.#upperBridge = [...this.#upperBridge, BRIDGE.crossable];
-    else this.#upperBridge = [...this.#upperBridge, BRIDGE.uncrossable];
-    this.#downerBridge = [...this.#downerBridge, SIGN.empty_space];
+    } else {
+      this.#upperBridge = [...this.#upperBridge, BRIDGE.uncrossable];
+    }
+    this.#downerBridge = [...this.#downerBridge, BRIDGE.empty_space];
   }
 
   markDownerBridge(direction, nextDirection) {
-    if (direction === nextDirection)
+    if (direction === nextDirection) {
       this.#downerBridge = [...this.#downerBridge, BRIDGE.crossable];
-    else this.#downerBridge = [...this.#downerBridge, BRIDGE.uncrossable];
-    this.#upperBridge = [...this.#upperBridge, SIGN.empty_space];
+    } else {
+      this.#downerBridge = [...this.#downerBridge, BRIDGE.uncrossable];
+    }
+    this.#upperBridge = [...this.#upperBridge, BRIDGE.empty_space];
   }
 
   createPier() {
