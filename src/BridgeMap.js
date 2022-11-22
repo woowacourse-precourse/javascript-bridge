@@ -1,4 +1,4 @@
-const { MOVE_INDEX, RIGHT, WRONG } = require('./Constants');
+const { MOVE_INDEX, RIGHT, WRONG, UNSELECTED } = require('./Constants');
 
 const BridgeMap = {
   generate(answer, userMove) {
@@ -6,7 +6,7 @@ const BridgeMap = {
     userMove.forEach((step, index) => {
       if (answer[index] === step) map[MOVE_INDEX[step]].push(RIGHT);
       if (answer[index] !== step) map[MOVE_INDEX[step]].push(WRONG);
-      map[1 - MOVE_INDEX[step]].push(' ');
+      map[1 - MOVE_INDEX[step]].push(UNSELECTED);
     });
 
     return map;

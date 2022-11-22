@@ -1,5 +1,6 @@
 const WRONG = 'X';
 const RIGHT = 'O';
+const UNSELECTED = ' ';
 
 const MOVE = {
   up: 'U',
@@ -41,6 +42,7 @@ const GAME = {
 module.exports = {
   WRONG,
   RIGHT,
+  UNSELECTED,
   MOVE,
   COMMAND,
   MOVE_INDEX,
