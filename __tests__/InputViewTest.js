@@ -1,4 +1,4 @@
-const InputView = require('../src/InputView');
+const InputView = require('../src/view/InputView');
 
 describe('사용자 입력 값 테스트', () => {
   test('다리 길이 확인', () => {
