@@ -60,4 +60,20 @@ describe('Validator 테스트', () => {
       BridgeValidator.checkBridge(bridge, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MAX);
     }).toThrow();
   });
+
+  test('다음 다리로 건너는 값은 U, D이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('T');
+    }).toThrow();
+  });
+  test('다음 다리로 건너는 값은 U, D이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('U');
+    }).not.toThrow();
+  });
+  test('다음 다리로 건너는 값은 U, D이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('D');
+    }).not.toThrow();
+  });
 });
