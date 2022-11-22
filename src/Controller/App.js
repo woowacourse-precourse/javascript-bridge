@@ -21,19 +21,15 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
-      this.checkBridgeSize(bridgeSize);
+      const errorMsg = this.validate.checkBridgeSize(bridgeSize);
+      if (errorMsg !== null) {
+        OutputView.printMsg(errorMsg);
+
+        return this.requestBridgeSize();
+      }
       this.createBridgeGame(bridgeSize);
       this.requestMoving();
     });
-  }
-
-  checkBridgeSize(bridgeSize) {
-    const [isValid, errorMsg] = this.validate.checkBridgeSize(bridgeSize);
-    if (!isValid) {
-      OutputView.printMsg(errorMsg);
-
-      this.requestBridgeSize();
-    }
   }
 
   createBridgeGame(bridgeSize) {
@@ -43,7 +39,12 @@ class App {
 
   requestMoving() {
     InputView.readMoving((direction) => {
-      this.checkMovingDirection(direction);
+      const errorMsg = this.validate.checkMovingDirection(direction);
+      if (errorMsg !== null) {
+        OutputView.printMsg(errorMsg);
+
+        return this.requestMoving();
+      }
 
       const [canCross, playerUpperState, playerLowerState] =
         this.bridgeGame.move(direction);
@@ -51,15 +52,6 @@ class App {
 
       this.calculateNextStep(canCross, playerUpperState);
     });
-  }
-
-  checkMovingDirection(direction) {
-    const [isValid, errorMsg] = this.validate.checkMovingDirection(direction);
-    if (!isValid) {
-      OutputView.printMsg(errorMsg);
-
-      this.requestMoving();
-    }
   }
 
   printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState) {
@@ -76,20 +68,15 @@ class App {
 
   requestGameCommand() {
     InputView.readGameCommand((command) => {
-      this.checkGameCommand(command);
+      const errorMsg = this.validate.checkGameCommand(command);
+      if (errorMsg !== null) {
+        OutputView.printMsg(errorMsg);
+        return this.requestGameCommand();
+      }
       command === GAME_OPTION.REPLAY ? this.retry() : this.quit();
     });
   }
-
-  checkGameCommand(command) {
-    const [isValid, errorMsg] = this.validate.checkGameCommand(command);
-    if (!isValid) {
-      OutputView.printMsg(errorMsg);
-
-      this.requestGameCommand();
-    }
-  }
-
+  
   retry() {
     this.bridgeGame.retry();
     this.requestMoving();
