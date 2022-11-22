@@ -29,9 +29,9 @@ class BridgeController {
     if (!HandleValidate.checkValidate(Validate.validateSizeRange, Number(size))) {
       return this.requestBridgeSize();
     }
+
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     this.#bridgeGame.updateBridge(bridge);
-
     OutputView.printLineBreak();
     this.requestBridgeMovemoment();
   }

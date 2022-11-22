@@ -5,8 +5,8 @@ const { CROSSING_RESULT, DIRECTION } = require('../utils/constants');
  */
 class BridgeGame {
   #bridge;
-  #numberOfAttempts;
   #userBridge;
+  #numberOfAttempts;
 
   constructor() {
     this.#bridge = [];
@@ -23,8 +23,7 @@ class BridgeGame {
   }
 
   isSuccess() {
-    if (this.#bridge.length === this.#userBridge.length) return true;
-    return false;
+    return !!(this.#bridge.length === this.#userBridge.length);
   }
 
   getNumberOfAttempts() {
