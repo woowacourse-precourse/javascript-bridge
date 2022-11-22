@@ -8,9 +8,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(result) {
-    MissionUtil.Console.print(result.join('|'));
-    MissionUtil.Console.print(result.join("|"));
+  printMap(bridges) {
+    MissionUtil.Console.print("[ "+bridges.upper.join(' | ')+ " ]");
+    MissionUtil.Console.print("[ "+bridges.lower.join(' | ')+ " ]");
+
   },
 
   /**
@@ -18,15 +19,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridge,result,count) {
-    MissionUtil.Console.print("게임결과 ");
-    OutputView.printMap(bridge);
-    if(result == true){
+  printResult(setBridge, count, result) {
+    MissionUtil.Console.print("최종 게임 결과\n");
+    OutputView.printMap(setBridge);
+    if(result == true) 
       MissionUtil.Console.print("게임 성공 여부: 성공");
-    }
-    else{
+    else
       MissionUtil.Console.print("게임 성공 여부: 실패");
-    }
     MissionUtil.Console.print("총 시도한 횟수: "+ count);
   },
 };

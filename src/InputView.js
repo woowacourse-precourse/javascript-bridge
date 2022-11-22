@@ -12,7 +12,6 @@ const InputView = {
     MissionUtil.Console.readLine("다리의 길이를 입력해주세요", (input)=>{
       if(Number(input)<3 || Number(input)>20 || isNaN(input)){
         MissionUtil.Console.print("[ERROR] 다리길이는 3부터 20 사이의 숫자여야 합니다");
-        // throw new Error("[ERROR] 다리길이는 3부터 20 사이의 숫자여야 합니다");
       }
       else{
         BridgeSize = Number(input);
