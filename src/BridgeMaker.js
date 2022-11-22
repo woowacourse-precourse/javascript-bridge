@@ -23,7 +23,8 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     return new Array(size).fill(undefined).map((e) => {
-      return Number(generateRandomNumber()) == 1 ? "U" : "D";
+      const numbers = generateRandomNumber();
+      return Number(numbers) == 1 ? "U" : "D";
     });
   },
 };
