@@ -1,3 +1,4 @@
+const Bridge = require("./Bridge");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const Command = require("./constants/Command");
@@ -6,11 +7,8 @@ const Command = require("./constants/Command");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge;
-  #crossBridge;
-
   constructor() {
-    this.#crossBridge = [[], []];
+    this.bridge = new Bridge();
   }
 
   /**
@@ -18,7 +16,8 @@ class BridgeGame {
    * @param {number} size 다리길이
    */
   setBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, generate);
+    const bridgeMake = BridgeMaker.makeBridge(size, generate);
+    this.bridge.setBridge(bridgeMake);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -36,10 +35,12 @@ class BridgeGame {
    * @param {number} isSuccess
    */
   updateBirdge(isSuccess) {
-    const next = this.#bridge[this.#crossBridge[0].length];
+    const next = this.bridge.getBridge()[this.bridge.getCrossBridgeSize()];
     const [right, wrong] = next === Command.DOWN ? [1, 0] : [0, 1];
-    this.#crossBridge[right].push(isSuccess ? " O " : "   ");
-    this.#crossBridge[wrong].push(isSuccess ? "   " : " X ");
+    const crossBridge = this.bridge.getCrossBridge();
+    crossBridge[right].push(isSuccess ? " O " : "   ");
+    crossBridge[wrong].push(isSuccess ? "   " : " X ");
+    this.bridge.setCrossBridge(crossBridge);
   }
 
   /**
@@ -48,8 +49,10 @@ class BridgeGame {
    * @returns {number} 0: 실패, 1: 성공, 2: 도착지에 도착
    */
   checkBridge(moving) {
-    if (this.#bridge[this.#crossBridge[0].length] !== moving) return 0;
-    if (this.#crossBridge[0].length + 1 === this.#bridge.length) return 2;
+    const bridge = this.bridge.getBridge();
+    const crossBridge = this.bridge.getCrossBridge();
+    if (bridge[crossBridge[0].length] !== moving) return 0;
+    if (crossBridge[0].length + 1 === bridge.length) return 2;
     return 1;
   }
 
@@ -58,7 +61,7 @@ class BridgeGame {
    * @returns {string[][]} 건너온 다리 상태
    */
   getBridge() {
-    return [[...this.#crossBridge[0]], [...this.#crossBridge[1]]];
+    return this.bridge.getCrossBridge();
   }
 
   /**
@@ -67,7 +70,7 @@ class BridgeGame {
    * @return {number} 현재까지 시도한 횟수 + 1
    */
   retry(tryCount) {
-    this.#crossBridge = [[], []];
+    // this.#crossBridge = [[], []];
     return tryCount + 1;
   }
 }
