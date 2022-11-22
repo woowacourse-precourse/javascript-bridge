@@ -33,6 +33,15 @@ class BridgeGame {
     this.#moveList = [];
     this.#tryCount += 1;
   }
+
+  getLastResult() {
+    return this.#moveList[this.#moveList.length - 1].result;
+  }
+
+  getFinalResult() {
+    const lastResult = this.getLastResult();
+    return lastResult === true && this.#moveList.length === this.#bridge.length;
+  }
 }
 
 module.exports = BridgeGame;
