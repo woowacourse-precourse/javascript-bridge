@@ -1,3 +1,5 @@
+const { validateTiles } = require('../validators');
+
 /**
  * 하나의 다리를 나타내는 클래스입니다.
  * 다리는 타일로 구성되어있으며 각 타일의 위치 좌표는 0으로 시작합니다.
@@ -10,7 +12,7 @@ class Bridge {
    * @param {string[]} tiles
    */
   constructor(tiles) {
-    this.#tiles = tiles;
+    this.#tiles = validateTiles(tiles).get();
   }
 
   /**
