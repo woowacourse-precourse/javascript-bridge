@@ -1,13 +1,10 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  size;
-
   #bridges;
 
   #state;
@@ -18,15 +15,13 @@ class BridgeGame {
     this.#bridges = [];
     this.#state = [];
     this.#tryCount = 1;
-    InputView.readBridgeSize(this);
   }
 
-  makeBridge() {
+  makeBridge(len) {
     this.#bridges = BridgeMaker.makeBridge(
-      this.size,
+      len,
       BridgeRandomNumberGenerator.generate
     );
-    InputView.readMoving(this);
   }
 
   /**
@@ -38,17 +33,12 @@ class BridgeGame {
     this.#state.push(position);
     let isPossible = false;
     if (this.#bridges[this.#state.length - 1] === position) isPossible = true;
-    OutputView.printMap(this.#state, isPossible);
-    if (isPossible) {
-      if (this.#state.length === this.#bridges.length) this.quit(isPossible);
-      if (this.#state.length !== this.#bridges.length)
-        InputView.readMoving(this);
-    }
-    if (!isPossible) InputView.readGameCommand(this);
-  }
-
-  quit(isSuccess) {
-    OutputView.printResult(this.#state, isSuccess, this.#tryCount);
+    return {
+      state: this.#state,
+      lastPosition: this.#state.length === this.#bridges.length,
+      isPossible,
+      tryCount: this.#tryCount
+    };
   }
 
   /**
@@ -59,7 +49,6 @@ class BridgeGame {
   retry() {
     this.#state = [];
     this.#tryCount += 1;
-    InputView.readMoving(this);
   }
 }
 

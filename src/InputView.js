@@ -14,16 +14,15 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(game) {
+  readBridgeSize(callback) {
     Console.readLine(QUESTIONS.bridgeSize, len => {
       try {
         if (!validateBridgeSize(len))
           throw new Error(ERROR_MSG.invalidBridgeSize);
-        game.size = +len;
-        game.makeBridge();
+        callback(len);
       } catch (error) {
         Console.print(error.message);
-        this.readBridgeSize(game);
+        this.readBridgeSize(callback);
       }
     });
   },
@@ -31,15 +30,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(game) {
+  readMoving(callback) {
     Console.readLine(QUESTIONS.movePosition, position => {
       try {
         if (!validatePosition(position))
           throw new Error(ERROR_MSG.invalidPosition);
-        game.move(position);
+        callback(position);
       } catch (error) {
         Console.print(error.message);
-        this.readMoving(game);
+        this.readMoving(callback);
       }
     });
   },
@@ -47,20 +46,20 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(game) {
+  readGameCommand(retryCallback, quitCallback) {
     Console.readLine(QUESTIONS.retry, command => {
       try {
         if (!validateRetryCommand(command))
           throw new Error(ERROR_MSG.invalidRetryCommand);
         if (command === RETRY_COMMAND_TYPE[0]) {
-          game.retry();
+          retryCallback();
         }
         if (command === RETRY_COMMAND_TYPE[1]) {
-          game.quit(false);
+          quitCallback();
         }
       } catch (error) {
         Console.print(error.message);
-        this.readGameCommand(game);
+        this.readGameCommand(retryCallback, quitCallback);
       }
     });
   }

@@ -1,14 +1,13 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT_MSG } = require('./constants');
-const BridgeGame = require('./BridgeGame');
+const GameController = require('./GameController');
 
 class App {
   play() {
-    Console.print(OUTPUT_MSG.start);
-    const game = new BridgeGame();
+    const gameController = new GameController();
+    gameController.start();
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
+
 module.exports = App;
