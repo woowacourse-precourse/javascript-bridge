@@ -8,17 +8,15 @@ const isInteger = Number.isInteger;
  * @return {boolean} 입력값이 유효하면 true 반환
  */
 const validateBridgeSizeInput = (input) => {
+  const convertedInput = Number(input);
   try {
-    const convertedInput = Number(input);
-    if (input.length > 2)
-      throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.COUNT_EXCEPTION);
     if (isNaN(convertedInput) || !isInteger(convertedInput))
       throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.TYPE_EXCEPTION);
     if (convertedInput < 3 || convertedInput > 20)
       throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.RANGE_EXCEPTION);
     return true;
   } catch (error) {
-    Console.print(error.message);
+    return Console.print(error.message);
   }
 };
 

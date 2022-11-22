@@ -16,7 +16,6 @@ const MESSAGES = {
   },
   EXCEPTIONS: {
     BRIDGE: {
-      COUNT_EXCEPTION: "[ERROR] 다리 길이의 입력 값을 1개만 입력해주세요.",
       TYPE_EXCEPTION: "[ERROR] 다리 길이의 입력 값은 정수여야 합니다.",
       RANGE_EXCEPTION: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
     },
