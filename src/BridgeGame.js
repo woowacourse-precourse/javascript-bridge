@@ -13,7 +13,6 @@ class BridgeGame {
   }
 
   decideMoveOrStop(direction) {
-    console.log(direction);
     if (direction !== this.#answerBridgeArray[this.#bridgeIndex - 1]) return this.stop(direction);
     return this.move(direction);
   }
@@ -23,11 +22,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
+    this.#bridgeIndex += 1;
     this.mapMaker.selectRightBridge(direction);
+    return '성공';
   }
 
   stop(direction) {
     this.mapMaker.selectWrongBridge(direction);
+    return '실패';
   }
 
   /**

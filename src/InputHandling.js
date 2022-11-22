@@ -3,7 +3,7 @@ const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const Validation = require('./Validation');
-const BridgeGame = require('./BridgeGame')
+const BridgeGame = require('./BridgeGame');
 
 class InputHandling {
   #answerBridgeArray;
@@ -16,6 +16,7 @@ class InputHandling {
     try {
       Validation.checkBridgeSize(size);
       this.#answerBridgeArray = makeBridge(size, generate);
+      this.bridgeGame = new BridgeGame(this.#answerBridgeArray);
       InputView.readMoving(this.handleMovingValue.bind(this));
     } catch (error) {
       Console.print(error);
@@ -24,14 +25,20 @@ class InputHandling {
   }
 
   handleMovingValue(direction) {
-    try{
+    try {
       Validation.checkMovingValue(direction);
-      this.bridgeGame = new BridgeGame(this.#answerBridgeArray);
-      this.bridgeGame.decideMoveOrStop(direction);
+
+      this.decideNextConsolePrint(direction);
     } catch (error) {
       Console.print(error);
       InputView.readMoving(this.handleMovingValue.bind(this));
     }
+  }
+
+  decideNextConsolePrint(direction) {
+    const gameOutcome = this.bridgeGame.decideMoveOrStop(direction);
+    if (gameOutcome === '실패') InputView.readGameCommand();
+    if (gameOutcome === '성공') InputView.readMoving(this.handleMovingValue.bind(this));
   }
 }
 
