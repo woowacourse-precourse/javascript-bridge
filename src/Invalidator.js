@@ -1,4 +1,4 @@
-const { BRIDGE, MAP } = require('./constants');
+const { BRIDGE, MAP, COMMAND } = require('./constants');
 
 const Invalidator = {
   inValidBlank: (input) => input.includes(' '),
@@ -11,6 +11,7 @@ const Invalidator = {
 
   inValidMoving: (moving) => moving !== MAP.UP_SIDE_STR && moving !== MAP.DOWN_SIDE_STR,
 
+  inValidCommand: (command) => command !== COMMAND.RETRY && command !== COMMAND.QUIT,
 };
 
 module.exports = Invalidator;

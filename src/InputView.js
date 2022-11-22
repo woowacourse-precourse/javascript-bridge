@@ -7,6 +7,7 @@ const {
   inValidString,
   inValidSize,
   inValidMoving,
+  inValidCommand,
 } = require('./Invalidator');
 
 const InputView = {
@@ -57,6 +58,30 @@ const InputView = {
     }
   },
 
+  readGameCommand(retryOrQuit) {
+    try {
+      Console.readLine(MESSAGE.INPUT_COMMNAD, (command) => {
+        this.validateCommand(command);
+        retryOrQuit(command);
+      });
+    } catch (error) {
+      Console.print(error);
+    }
+  },
+
+  validateCommand(command) {
+    if (inValidNumber(command)) {
+      throwError(ERROR_MESSAGE.INPUT_STR);
+    }
+
+    if (inValidBlank(command)) {
+      throwError(ERROR_MESSAGE.INPUT_BLANK);
+    }
+
+    if (inValidCommand(command)) {
+      throwError(ERROR_MESSAGE.COMMNAD);
+    }
+  },
 };
 
 module.exports = InputView;

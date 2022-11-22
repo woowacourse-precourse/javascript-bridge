@@ -16,6 +16,10 @@ const MAP = {
   DOWN_SIDE_NUM: 0,
 };
 
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
 
 const RESULT = {
   SUCCESS: '성공',
@@ -26,7 +30,9 @@ const MESSAGE = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
   INPUT_SIZE: '다리의 길이를 입력해주세요.',
   INPUT_MOVING: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
+  INPUT_COMMNAD: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
 };
+
 const ERROR_PREFIX = '[ERROR]';
 
 const ERROR_MESSAGE = {
@@ -43,6 +49,7 @@ module.exports = {
   MAP,
   RESULT,
   MESSAGE,
+  COMMAND,
   ERROR_PREFIX,
   ERROR_MESSAGE,
 };
