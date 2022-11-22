@@ -1,9 +1,9 @@
-const InputView = require("./InputView");
+const InputView = require("../views/InputView");
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const OutputView = require("./OutputView");
-const InputValidator = require("./InputValidator");
-const SETTING = require("./constant/setting");
+const BridgeGame = require("../BridgeGame");
+const OutputView = require("../views/OutputView");
+const InputValidator = require("../InputValidator");
+const SETTING = require("../constant/setting");
 
 class BridgeGameController {
   #BridgeGame;
