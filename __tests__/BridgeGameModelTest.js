@@ -1,4 +1,4 @@
-const BridgeGameModel = require("../src/Model/BridgeGameModel.js");
+const BridgeGameModel = require("../src/model/BridgeGameModel.js");
 
 describe("BridgeGameModel 클래스 테스트", () => {
   test("유저가 'U'를 입력할 때, jump 메서드로 데이터를 가공한다.", () => {
