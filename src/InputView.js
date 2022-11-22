@@ -10,15 +10,9 @@ const { FINAL } = require("./Constant");
 const OutputView = require("./OutputView");
 
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize(bridge, bridgeGame) {
-    Console.readLine(`${COMMAND.INPUT}\n`, (bridgeSize) => {
+    Console.readLine(COMMAND.INPUT, (bridgeSize) => {
       if(checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
 
       bridge.setBridge(Number(bridgeSize));
@@ -26,26 +20,17 @@ const InputView = {
     });
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(bridge, bridgeGame) {
-    Console.readLine(`${COMMAND.MOVE}\n`, (space) => {
+    Console.readLine(COMMAND.MOVE, (space) => {
       if(checkSpace(space)) return this.readMoving(bridge,bridgeGame);
-
       bridgeGame.move(space, bridge);
       OutputView.printMap(bridgeGame);
-
       if (bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand(bridge, bridgeGame);
       if (bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult(FINAL.SUCCESS, bridgeGame);
-
       return this.readMoving(bridge, bridgeGame);
     });
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(bridge, bridgeGame) {
     Console.readLine(COMMAND.RESTART, (restart) => {
       if(checkRestart(restart)) return this.readGameCommand(bridge,bridgeGame);
