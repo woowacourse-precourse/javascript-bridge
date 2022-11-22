@@ -12,7 +12,7 @@ class App {
     OutputView.printMessage(MESSAGE.ENTRY);
     const size = await this.getBridgeSize();
     await this.game.makeBridge(size);
-    // await this.handleMovement();
+    await this.handleMovement();
   };
 
   // UI 분리
@@ -48,7 +48,7 @@ class App {
       if (await this.isSuccessFulMovement()) {
         return await this.handleSuccess();
       }
-      // return await this.handleCommand();
+      return await this.handleCommand();
     }
 
     return this.handleSuccessFulFinish();
@@ -96,7 +96,7 @@ class App {
   };
 
   handleFinish = (type) => {
-    // OutputView.printResult(type, this.game.resultMap);
+    OutputView.printResult(type, this.game.result);
   };
 }
 

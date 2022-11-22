@@ -46,9 +46,8 @@ class GameResult {
   }
 
   makeHistory() {
-    const history = this.getResultAsArray().filter(([, value]) => value.player);
+    const history = this.getAsArray().filter(([, value]) => value.player);
     const sides = Array.from({ length: 2 }, () => []);
-
     for (let i = 0; i < history.length; i++) {
       const [up, down] = this.makeHistoryLine(history[i][1]);
 
@@ -65,7 +64,6 @@ class GameResult {
     const notSelected = OUTPUT_FORMAT.NOT_SELECTED;
 
     const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSelected] : [notSelected, selected];
-
     return [up, down];
   }
 }
