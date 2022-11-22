@@ -9,6 +9,14 @@ const model = new BridgeGameModel();
 const controller = new BridgeGameController(model);
 model.setBridgeSize(4); // 길이가 4인 다리로 테스트 작성
 
+const getModelUserMove = (userMove) => {
+  userMove.forEach((step) => {
+    model.setUserMove(step);
+  });
+
+  return model.getUserMove();
+};
+
 describe('다리 건너기 컨트롤러 테스트', () => {
   beforeEach(() => {
     model.initialize();
@@ -18,12 +26,7 @@ describe('다리 건너기 컨트롤러 테스트', () => {
     // 이 때까지 입력한 값들이 전부 맞았지만, 길이는 다른 경우(끝까지 다 맞추지는 않은 경우)
     const bridge = model.getBridge();
     const userMove = bridge.slice(0, 3);
-
-    userMove.forEach((step) => {
-      model.setUserMove(step);
-    });
-
-    const modelUserMove = model.getUserMove();
+    const modelUserMove = getModelUserMove(userMove);
 
     controller.setCurrentResult();
 
@@ -35,11 +38,7 @@ describe('다리 건너기 컨트롤러 테스트', () => {
   test('현재 결과값 받아오기 테스트 2', () => {
     // 끝까지 전부 맞춘 경우
     const bridge = model.getBridge();
-    bridge.forEach((step) => {
-      model.setUserMove(step);
-    });
-
-    const modelUserMove = model.getUserMove();
+    const modelUserMove = getModelUserMove(bridge);
 
     controller.setCurrentResult();
 
@@ -60,12 +59,7 @@ describe('다리 건너기 컨트롤러 테스트', () => {
     }
 
     const userMove = [...bridge.slice(0, 2), ...[wrongStep]];
-
-    userMove.forEach((step) => {
-      model.setUserMove(step);
-    });
-
-    const modelUserMove = model.getUserMove();
+    const modelUserMove = getModelUserMove(userMove);
 
     controller.setCurrentResult();
 
@@ -87,12 +81,7 @@ describe('다리 건너기 컨트롤러 테스트', () => {
     }
 
     const userMove = [...bridge.slice(0, 3), ...[wrongStep]];
-
-    userMove.forEach((step) => {
-      model.setUserMove(step);
-    });
-
-    const modelUserMove = model.getUserMove();
+    const modelUserMove = getModelUserMove(userMove);
 
     controller.setCurrentResult();
 
