@@ -1,7 +1,6 @@
 const OutputView = require('./OutputView.js');
 const InputView = require('./InputView.js');
 const BridgeGame = require('./BridgeGame.js');
-const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   /**
@@ -11,7 +10,7 @@ class App {
     OutputView.printHi();
 
     InputView.readBridgeSize((bridgeLength) => {
-      this.game = new BridgeGame(+bridgeLength);
+      this.game = new BridgeGame(bridgeLength);
       this.playOneStep();
     });
   }
@@ -27,7 +26,6 @@ class App {
       if (this.game.reachedEndOfBridge && !this.game.isGameOver) OutputView.printResult(this.game);
       else if (this.game.isGameOver) this.askRetryGame();
       else this.playOneStep();
-      Console.close();
     });
   }
 
@@ -38,7 +36,6 @@ class App {
     InputView.readGameCommand((willRetry) => {
       if (this.game.retry(willRetry)) this.playOneStep();
       else OutputView.printResult(this.game);
-      Console.close();
     });
   }
 }
