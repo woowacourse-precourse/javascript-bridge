@@ -28,7 +28,34 @@ class App {
     this.manageBridge(bridgeSize);
   }
 
-  
+  manageBridge(bridgeSize) {
+    this.bridgeGame.setBridge(bridgeSize);
+    this.mainRound();
+  }
+
+  mainRound() {
+    InputView.readMoving(this.tryValidateMove.bind(this));
+  }
+
+  tryValidateMove(direction) {
+    try {
+      Validator.validateDirection(direction);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.mainRound();
+      return;
+    }
+    this.manageMove(direction);
+  }
+
+  manageMove(direction) {
+    if (this.bridgeGame.isMoveFail(direction)) {
+      this.manageFailCase();
+      return;
+    }
+    this.managePassCase();
+  }
+
 }
 
 module.exports = App;
