@@ -1,22 +1,26 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 
-const mockQuestions = (answers) => {
+export const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => acc.mockImplementationOnce((_, callback) => {
+  answers.reduce((acc, input) => acc.mockImplementationOnce((__, callback) => {
     callback(input);
   }), MissionUtils.Console.readLine);
 };
 
-const mockRandoms = (numbers) => {
+export const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => acc.mockReturnValueOnce(number), MissionUtils.Random.pickNumberInRange);
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange,
+  );
 };
 
-const getLogSpy = () => {
+export const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
@@ -50,7 +54,10 @@ const expectBridgeOrder = (received, upside, downside) => {
 describe('다리 건너기 테스트', () => {
   test('다리 생성 테스트', () => {
     const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers.reduce((acc, number) => acc.mockReturnValueOnce(number), jest.fn());
+    const mockGenerator = randomNumbers.reduce(
+      (acc, number) => acc.mockReturnValueOnce(number),
+      jest.fn(),
+    );
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(['U', 'D', 'D']);
