@@ -25,8 +25,7 @@ class BridgeGameController {
       this.#model.makeBridge(bridgeSize);
       this.#requestMoveDirection();
     } catch (error) {
-      this.#view.print(`\n${error.message}\n`);
-      this.#requestBridgeSize();
+      this.#handleOnError(error, this.#requestBridgeSize.bind(this));
     }
   }
 
@@ -49,8 +48,7 @@ class BridgeGameController {
       this.#view.printMap(map);
       moveNextRound();
     } catch (error) {
-      this.#view.print(`\n${error.message}\n`);
-      this.#requestMoveDirection(round);
+      this.#handleOnError(error, this.#requestMoveDirection.bind(this, round));
     }
   }
 
@@ -67,17 +65,17 @@ class BridgeGameController {
 
       retryOrQuit();
     } catch (error) {
-      this.#view.print(`\n${error.message}\n`);
-      this.#requestGameCommand();
+      this.#handleOnError(error, this.#requestGameCommand.bind(this));
     }
   }
 
-  /**
-   * 사용자가 게임을 종료할 때 사용하는 메서드
-   */
+  #handleOnError(error, callback) {
+    this.#view.print(`\n${error.message}\n`);
+    callback();
+  }
+
   #quit() {
     const gameResult = this.#model.getGameResult();
-
     this.#view.printResult(gameResult);
 
     Console.close();
