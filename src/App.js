@@ -10,13 +10,17 @@ class App {
   play() {
 
   }
-  
+
+
   makeBridgeBase() {
     bridgeSize=readBridgeSize()
     bridgeBase=makeBridge(bridgeSize,generate);
     this.bridgeTransfer();
   }
 
+  bridgeTransfer(){
+    this.compareInputScore(bridgeSize,bridgeBase);
+  }
 
 }
 
