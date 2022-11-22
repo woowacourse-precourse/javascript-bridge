@@ -7,7 +7,7 @@ const CONSTANT = {
     COUNT: '총 시도한 횟수: ',
     CHECK_ANSWER: '게임 성공 여부: ',
     RETRY_QUIT: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-    FINAL: '\n최종 게임 결과',
+    FINAL: '최종 게임 결과',
   },
 
   RESULT: {
