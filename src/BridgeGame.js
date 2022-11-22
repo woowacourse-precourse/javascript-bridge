@@ -11,12 +11,12 @@ class BridgeGame {
   #bridgeBoard;
   #bridgeController;
   #round;
-  #try;
+  #attempt;
   constructor() {
     this.#bridgeBoard = new BridgeBoard();
     this.#bridgeController = new BridgeController
     this.#round = 0;
-    this.#try = 1;
+    this.#attempt = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -53,24 +53,24 @@ class BridgeGame {
   }
 
   printFinalRound(){
-    this.#bridgeController.moveFinalRound(this.#try,this.#bridgeBoard.getClearedBridge())
+    this.#bridgeController.moveFinalRound(this.#attempt,this.#bridgeBoard.getClearedBridge())
   }
 
   faildRound(direction){
-    this.#bridgeController.moveFailedRound(this.#try,this.#bridgeBoard.getClearedBridge(),direction)
+    this.#bridgeController.moveFailedRound(this.#attempt,this.#bridgeBoard.getClearedBridge(),direction)
     this.#bridgeController.readGameCommand(this)
   }
 
   setGameCommand(command){
     try{
       Validation.validateCommand(['R','Q'], ERROR.notGameCommand, command)
+      if(command === 'Q'){
+        this.#bridgeController.close()
+      }else{
+        this.retry();
+      }
     }catch(error){
       this.#bridgeController.printError(error, this.#bridgeController.readGameCommand ,this)
-    }
-    if(command === 'Q'){
-      this.#bridgeController.close()
-    }else{
-      this.retry();
     }
   }
   /**
@@ -79,7 +79,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#try++;
+    this.#attempt++;
     this.#round=0;
     this.#bridgeBoard.resetBoard();
     this.#bridgeController.moveBlock(this);
