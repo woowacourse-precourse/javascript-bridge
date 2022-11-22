@@ -1,16 +1,16 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { isWrongDirection, isCommandRetry } = require('./BridgeGame');
-const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeMap = require('./BridgeMap');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { isCommandRetry, isWrongDirection } = require('./Model/BridgeGame');
+const BridgeGame = require('./Model/BridgeGame');
+const BridgeMap = require('./Model/BridgeMap');
 const {
   readMoving,
-  repeatReadMoving,
-  readGameCommand,
   readBridgeSize,
-} = require('./InputView');
-const { printResult, printMap } = require('./OutputView');
+  readGameCommand,
+  repeatReadMoving,
+} = require('./View/InputView');
+const { printMap, printResult } = require('./View/OutputView');
 
 class BridgeGameController {
   static initGame(size) {

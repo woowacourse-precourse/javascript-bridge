@@ -1,6 +1,6 @@
 const BridgeGameController = require('./BridgeGameController');
-const InputView = require('./InputView');
-const { printStartMessage } = require('./OutputView');
+const InputView = require('./View/InputView');
+const { printStartMessage } = require('./View/OutputView');
 
 class App {
   #view;

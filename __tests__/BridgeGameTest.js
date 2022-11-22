@@ -1,6 +1,6 @@
-const { isCommandRetry } = require('../src/BridgeGame');
-const BridgeGame = require('../src/BridgeGame');
 const { ERROR_MESSAGE } = require('../src/Constants/message');
+const { isCommandRetry } = require('../src/Model/BridgeGame');
+const BridgeGame = require('../src/Model/BridgeGame');
 
 describe('BridgeGame 클래스 테스트', () => {
   test('move - 이동할 방향을 입력받고 올바르게 기록하는지 검사', () => {

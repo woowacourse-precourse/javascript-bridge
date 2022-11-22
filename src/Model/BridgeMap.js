@@ -1,4 +1,4 @@
-const { DIRECTION, BRIDGE_PARTS, BRIDGE } = require('./Constants/constant');
+const { DIRECTION, BRIDGE_PARTS, BRIDGE } = require('../Constants/constant');
 
 class BridgeMap {
   #upperBridge = [BRIDGE_PARTS.entrance];

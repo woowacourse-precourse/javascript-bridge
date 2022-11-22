@@ -1,5 +1,5 @@
-const { RESULT, DIRECTION, COMMAND } = require('./Constants/constant');
-const { checkCorrectDirection, checkCorrectCommand } = require('./Validator');
+const { RESULT, DIRECTION, COMMAND } = require('../Constants/constant');
+const { checkCorrectDirection, checkCorrectCommand } = require('../Validator');
 
 class BridgeGame {
   #bridge;
