@@ -1,3 +1,5 @@
+const { OUTPUT_MESSAGES } = require("./utils/constants");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -26,6 +28,17 @@ class BridgeGame {
       InputView.readMoving(bridge, [], attempt + 1);
     } else if (retry == "Q") {
       OutputView.printResult(false, attempt);
+      Console.close();
+    }
+  }
+
+  finish(steps, bridge, attempt) {
+    if (steps.length != bridge.length) {
+      InputView.readMoving(bridge, steps, attempt);
+    } else {
+      Console.print(OUTPUT_MESSAGES.RESULT);
+      OutputView.printMap(bridge, steps);
+      OutputView.printResult(true, attempt);
       Console.close();
     }
   }
