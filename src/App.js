@@ -30,14 +30,20 @@ class App {
   }
 
   handleBridgeMoveing(und) {
-    const [condition, bridge, userState, countTry] = this.#bridgeGame.move(und);
-
-    OutputView.printMap(bridge, userState);
-
-    this.#bridge = bridge;
-    this.#userState = userState;
-    this.#countTry = countTry;
-    this.next(condition);
+    try {
+      const [condition, bridge, userState, countTry] =
+        this.#bridgeGame.move(und);
+      OutputView.printMap(bridge, userState);
+      [this.#bridge, this.#userState, this.#countTry] = [
+        bridge,
+        userState,
+        countTry,
+      ];
+      this.next(condition);
+    } catch (error) {
+      OutputView.printError(error);
+      InputView.readMoving(this.handleBridgeMoveing);
+    }
   }
 
   next(condition) {
