@@ -13,7 +13,7 @@ const runMove = (bridgeGame, route) => {
 };
 
 describe("브릿지 게임 클래스 테스트", () => {
-  test("잘못 된 길로 이동 했을 때, 추락", () => {
+  test("isFallen(): 플레이어 이동(잘못 된 길)", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const playerRoute = ["U", "U"];
 
@@ -22,7 +22,7 @@ describe("브릿지 게임 클래스 테스트", () => {
     expect(bridgeGame.isFallen()).toBeTruthy();
   });
 
-  test("올바른 된 길로 이동 했을 때, 추락하지 않음", () => {
+  test("isFallen(): 플레이어 이동(올바른 길)", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const playerRoute = ["U", "D"];
 
@@ -31,7 +31,34 @@ describe("브릿지 게임 클래스 테스트", () => {
     expect(bridgeGame.isFallen()).toBeFalsy();
   });
 
-  test("재시도 두 번, 둘째 칸에서 실패", () => {
+  test("isClear(): 다리를 모두 통과", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const playerRoute = ["U", "D", "U"];
+
+    runMove(bridgeGame, playerRoute);
+
+    expect(bridgeGame.isClear()).toBeTruthy();
+  });
+
+  test("getMap(): 플레이어가 이동 한 경로 가져오기(올바른 길)", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const playerRoute = ["U", "D"];
+
+    runMove(bridgeGame, playerRoute);
+
+    expect(bridgeGame.getMap()).toEqual(["[ O |   ]", "[   | O ]"]);
+  });
+
+  test("getMap(): 플레이어가 이동 한 경로 가져오기(잘못된 길)", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const playerRoute = ["U", "U"];
+
+    runMove(bridgeGame, playerRoute);
+
+    expect(bridgeGame.getMap()).toEqual(["[ O | X ]", "[   |   ]"]);
+  });
+
+  test("getResult(): 재시도 두 번, 둘째 칸에서 실패", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const retryCount = 2;
     const playerRoute = ["U", "U"];
@@ -46,7 +73,7 @@ describe("브릿지 게임 클래스 테스트", () => {
     expect(tryCount).toEqual(3);
   });
 
-  test("재시도 한 번, 성공", () => {
+  test("getResult(): 재시도 한 번, 성공", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const retryCount = 1;
     const playerRoute = ["U", "D", "U"];
