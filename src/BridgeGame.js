@@ -19,6 +19,7 @@ class BridgeGame {
 
     return this.round;
   }
+  
   countGame() {
     this.totalGame++;
 
