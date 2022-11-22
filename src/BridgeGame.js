@@ -10,12 +10,9 @@ class BridgeGame {
 
   #status;
 
-  #numberOfAttempts;
-
   constructor() {
     this.#bridgeMap = new BridgeMap();
     this.#status = new BridgeGameStatus();
-    this.#numberOfAttempts = 1;
   }
 
   setBridge(bridgeSize) {
@@ -66,7 +63,6 @@ class BridgeGame {
   retry() {
     this.#status.initialize();
     this.#bridgeMap.initialize();
-    this.#numberOfAttempts += 1;
   }
 
   isSuccessful() {
@@ -79,10 +75,6 @@ class BridgeGame {
 
   getBridgeMap() {
     return this.#bridgeMap.getRows();
-  }
-
-  getNumberOfAttempts() {
-    return this.#numberOfAttempts;
   }
 }
 

@@ -7,8 +7,11 @@ const RETRY = { R: true, Q: false };
 class BridgeGameController {
   #bridgeGame;
 
+  #numberOfAttempts;
+
   constructor() {
     this.#bridgeGame = new BridgeGame();
+    this.#numberOfAttempts = 1;
   }
 
   run() {
@@ -51,7 +54,7 @@ class BridgeGameController {
     OutputView.printResult(
       this.#bridgeGame.getBridgeMap(),
       this.#bridgeGame.isSuccessful(),
-      this.#bridgeGame.getNumberOfAttempts()
+      this.#numberOfAttempts
     );
   }
 
@@ -61,6 +64,7 @@ class BridgeGameController {
 
   checkRetry(command) {
     if (RETRY[command]) {
+      this.#numberOfAttempts += 1;
       this.#bridgeGame.retry();
       return this.askMove();
     }
