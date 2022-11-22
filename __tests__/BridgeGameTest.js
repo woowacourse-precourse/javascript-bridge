@@ -12,4 +12,9 @@ describe("BridgeGame 클래스 테스트", () => {
     const bridgeGame = new BridgeGame(3);
     expect(()=>{bridgeGame.move('a')}).toThrow(ERROR_MESSAGE.INPUT_MOVING);}
   );
+
+  test("재시도 입력은 U 혹은 D 여야 한다.", () => {
+    const bridgeGame = new BridgeGame(3);
+    expect(()=>{bridgeGame.retry('a')}).toThrow(ERROR_MESSAGE.INPUT_RETRY);}
+  );
 });
