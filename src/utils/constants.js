@@ -16,3 +16,9 @@ const ERROR_MESSAGES = {
     SQUARE_ERROR: "[ERROR] 이동할 칸은 U 또는 D로 입력해야 합니다. (위: U, 아래: D)",
     RETRY_ERROR: "[ERROR] 종료하려면 R 또는 Q를 입력해주세요.",
 };
+
+module.exports = {
+    INPUT_MESSAGES,
+    OUTPUT_MESSAGES,
+    ERROR_MESSAGES,
+}
