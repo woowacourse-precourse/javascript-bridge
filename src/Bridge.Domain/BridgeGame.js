@@ -8,7 +8,7 @@ class BridgeGame {
   #status;
 
   constructor() {
-    this.#status = GAME.STATUS.START;
+    this.#status = GAME.STATUS.PLAY;
   }
 
   init(size) {
@@ -20,19 +20,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(player, playerDirection) {
-    let goResult;
     const index = player.getCurrentPositionAndMovePlayer();
     const answerDirection = this.#bridge.getBridgePosition(index);
-    if (playerDirection === answerDirection) goResult = true;
-    if (playerDirection !== answerDirection) goResult = false;
-    //bridge , index , result -> shape
-    if (goResult && index + 1 === this.#bridge.getBridgeArrayLength())
+    if (playerDirection !== answerDirection) this.#status = GAME.STATUS.FAIL;
+    if (
+      playerDirection === answerDirection &&
+      index + 1 === this.#bridge.getBridgeArrayLength()
+    )
       this.#status = GAME.STATUS.END;
-    return [
-      this.#bridge.getBridgeSliceArrFirstToPosition(index),
-      goResult,
-      this.#status,
-    ];
+    return [this.#bridge.getBridgeSliceArrFirstToPosition(index), this.#status];
   }
 
   /**
@@ -40,7 +36,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#status = GAME.STATUS.PLAY;
+  }
 }
 
 module.exports = BridgeGame;

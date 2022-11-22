@@ -20,7 +20,8 @@ const BRIDGE = {
 const GAME = {
   STATUS: {
     END: 100,
-    START: 101,
+    PLAY: 101,
+    FAIL: 102,
   },
   RESULT: {
     WIN: true,

@@ -1,57 +1,68 @@
-const OutputView = require("../Bridge.UI/OutputView");
 const BRIDGE_PRINT = require("../lib/Bridge");
-const { BRIDGE } = require("../lib/Const");
+const { BRIDGE, GAME } = require("../lib/Const");
 
 class BridgeGameShape {
   #currentShape;
 
-  getCurrentBridgeGameShape(bridgeArr, result) {
-    const upShape = this.makeUpShape(bridgeArr, result);
-    const downShape = this.makeDownShape(bridgeArr, result);
+  getCurrentBridgeGameShape(bridgeArr, status) {
+    const upShape = this.makeUpShape(bridgeArr, status);
+    const downShape = this.makeDownShape(bridgeArr, status);
     this.#currentShape = upShape + "\n" + downShape;
     return this;
   }
 
-  makeUpShape(bridgeArr, result) {
-    const arr = this.upBridgeShapeWithResult(bridgeArr, result);
+  makeUpShape(bridgeArr, status) {
+    let arr;
+    if (status === GAME.STATUS.PLAY || status === GAME.STATUS.END)
+      arr = this.upBridgeShape(bridgeArr);
+    if (status === GAME.STATUS.FAIL)
+      arr = this.upBridgeShapeWhenFail(bridgeArr);
     const UpShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
       BRIDGE_PRINT.END
     }`;
     return UpShape;
   }
 
-  upBridgeShapeWithResult(bridgeArr, result) {
-    return bridgeArr.map((direction, index) => {
-      if (direction === BRIDGE.UP.SHAPE) {
-        if (bridgeArr.length === index + 1) {
-          if (!result) return BRIDGE_PRINT.CANT_MOVE;
-          if (result) return BRIDGE_PRINT.CAN_MOVE;
-        }
-        return BRIDGE_PRINT.CAN_MOVE;
-      }
+  upBridgeShape(bridgeArr) {
+    return bridgeArr.map((direction) => {
       if (direction === BRIDGE.DOWN.SHAPE) return BRIDGE_PRINT.BLANK;
+      if (direction === BRIDGE.UP.SHAPE) return BRIDGE_PRINT.CAN_MOVE;
     });
   }
 
-  makeDownShape(bridgeArr, result) {
-    const arr = this.downBridgeShapeWithResult(bridgeArr, result);
-    const DownShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
+  upBridgeShapeWhenFail(bridgeArr) {
+    const resultArr = this.upBridgeShape(bridgeArr);
+    const print = resultArr.pop();
+    if (print === BRIDGE_PRINT.BLANK) resultArr.push(BRIDGE_PRINT.CANT_MOVE);
+    if (print === BRIDGE_PRINT.CAN_MOVE) resultArr.push(BRIDGE_PRINT.BLANK);
+    return resultArr;
+  }
+
+  makeDownShape(bridgeArr, status) {
+    let arr;
+    if (status === GAME.STATUS.PLAY || status === GAME.STATUS.END)
+      arr = this.downBridgeShape(bridgeArr);
+    if (status === GAME.STATUS.FAIL)
+      arr = this.downBridgeShapeWhenFail(bridgeArr);
+    const downShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
       BRIDGE_PRINT.END
     }`;
-    return DownShape;
+    return downShape;
   }
 
-  downBridgeShapeWithResult(bridgeArr, result) {
-    return bridgeArr.map((direction, index) => {
-      if (direction === BRIDGE.DOWN.SHAPE) {
-        if (bridgeArr.length === index + 1) {
-          if (!result) return BRIDGE_PRINT.CANT_MOVE;
-          if (result) return BRIDGE_PRINT.CAN_MOVE;
-        }
-        return BRIDGE_PRINT.CAN_MOVE;
-      }
+  downBridgeShape(bridgeArr) {
+    return bridgeArr.map((direction) => {
       if (direction === BRIDGE.UP.SHAPE) return BRIDGE_PRINT.BLANK;
+      if (direction === BRIDGE.DOWN.SHAPE) return BRIDGE_PRINT.CAN_MOVE;
     });
+  }
+
+  downBridgeShapeWhenFail(bridgeArr) {
+    const resultArr = this.downBridgeShape(bridgeArr);
+    const print = resultArr.pop();
+    if (print === BRIDGE_PRINT.BLANK) resultArr.push(BRIDGE_PRINT.CANT_MOVE);
+    if (print === BRIDGE_PRINT.CAN_MOVE) resultArr.push(BRIDGE_PRINT.BLANK);
+    return resultArr;
   }
 
   getCurrentShape() {

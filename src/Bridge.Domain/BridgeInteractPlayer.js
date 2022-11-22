@@ -26,43 +26,45 @@ class BridgeInteractPlayer {
     this.#bridgeGame.init(size);
     OutputView.printGameStart();
     InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-  }
-
-  playerInputBridgeDirection(direction) {
-    InputException.playerDirectionValidate(direction);
-    const [bridgeArr, result, status] = this.#bridgeGame.move(
-      this.#player,
-      direction
-    );
-    this.playerGoResultOutput(bridgeArr, result, status);
     return;
   }
 
-  playerGoResultOutput(resultBridgeArr, result, status) {
-    OutputView.printResult(
-      this.#bridgeGameShape
-        .getCurrentBridgeGameShape(resultBridgeArr, result)
-        .getCurrentShape()
+  playerInputBridgeDirection(direction) {
+    try {
+      InputException.playerDirectionValidate(direction);
+    } catch (error) {
+      OutputView.printError(error);
+    }
+    this.playerGoResultOutput(
+      direction,
+      this.#bridgeGame.move(this.#player, direction)
     );
-    this.playerGoBridgeNext(result, status);
+    return;
   }
 
-  playerGoBridgeNext(result, status) {
-    if (status === GAME.STATUS.END) {
-      this.playerEndThisGame(
-        this.#bridgeGameShape.getCurrentShape(),
-        GAME.RESULT.WIN
-      );
-      return;
-    }
-    if (result) {
-      InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-      return;
-    }
+  playerGoResultOutput(direction, [resultBridgeArr, status]) {
+    OutputView.printResult(
+      this.#bridgeGameShape
+        .getCurrentBridgeGameShape(resultBridgeArr, status, direction)
+        .getCurrentShape()
+    );
+    this.playerGoBridgeNext(status);
+    return;
+  }
 
-    if (!result) {
-      InputView.readGameCommand(this.playerInputCommandBridgeRetry.bind(this));
-      return;
+  playerGoBridgeNext(status) {
+    switch (status) {
+      case GAME.STATUS.PLAY:
+        InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+        break;
+      case GAME.STATUS.FAIL:
+        InputView.readGameCommand(
+          this.playerInputCommandBridgeRetry.bind(this)
+        );
+        break;
+      case GAME.STATUS.END:
+        this.playerEndThisGame(GAME.RESULT.WIN);
+        break;
     }
   }
 
@@ -71,6 +73,7 @@ class BridgeInteractPlayer {
     InputException.playerCommandValidate(command);
     if (command === BRIDGE.GAME.RETRY) {
       this.#player.bridgeGameRetry();
+      this.#bridgeGame.retry();
       InputView.readMoving(this.playerInputBridgeDirection.bind(this));
       return;
     }
@@ -83,9 +86,9 @@ class BridgeInteractPlayer {
     }
   }
 
-  playerEndThisGame(bridgeResult, isWin) {
+  playerEndThisGame(isWin) {
     OutputView.printGameEnd(
-      bridgeResult,
+      this.#bridgeGameShape.getCurrentShape(),
       isWin,
       this.#player.getBridgeGameTryCount()
     );

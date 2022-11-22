@@ -90,9 +90,11 @@
 
     - [x] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
     - [x] 다리 위쪽 모양을 만드는 기능#makeUpShape
-    - [x] 다리 위쪽 결과 포함하는 모양 문자열을 만드는 기능#upBridgeShapeWithResult
-    - [x] 다리 아래쪽 모양을 만드는 기능#makeDownShape
-    - [x] 다리 아래쪽 결과 포함하는 모양 문자열을 만드는 기능#downBridgeShapeWithResult
+    - [x] 다리 위쪽 성공 결과 모양 문자열을 만드는 기능#upBridgeShape
+    - [x] 다리 위쪽 실패 결과 모양 문자열을 만드는 기능#upBridgeShapeWhenFail
+    - [x] 다리 위쪽 모양을 만드는 기능#makeDownShape
+    - [x] 다리 아래쪽 성공 결과 모양 문자열을 만드는 기능#downBridgeShape
+    - [x] 다리 아래쪽 실패 결과 모양 문자열을 만드는 기능#downBridgeShapeWhenFail
     - [x] 다리 현재 모양을 반환하는 기능#getCurrentShape
 
   - [ ] 다리 건너기 게임 #BridgeGame

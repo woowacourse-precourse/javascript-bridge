@@ -17,7 +17,8 @@ const InputException = {
   },
 
   playerCommandValidate(command) {
-    if (command != BRIDGE.GAME.RETRY || command != BRIDGE.GAME.END)
+    const commandArr = [BRIDGE.GAME.RETRY, BRIDGE.GAME.END];
+    if (!commandArr.includes(command))
       throw exception("올바른 입력값이 아닙니다.");
   },
 };
