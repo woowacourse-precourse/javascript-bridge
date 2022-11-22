@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
+const OutputView = require('../src/OutputView');
 
 describe('다리 길이 입력값 유효성 검사', () => {
   test('다리 길이는 3이상 20이하의 숫자이다.', () => {
@@ -42,5 +43,13 @@ describe('buildBridge 테스트', () => {
       bridgeGame.buildBridge(element);
       expect(bridgeGame.getBridgeLength()).toEqual(parseInt(element, 10));
     });
+  });
+});
+
+describe('makeResultMap 테스트', () => {
+  test('mergeTwoBlock 함수 호출횟수 확인', () => {
+    const spyMergeBlock = jest.spyOn(OutputView, 'mergeTwoBlock');
+    OutputView.makeResultMap(['U', 'D', 'D']);
+    expect(spyMergeBlock).toBeCalledTimes(2);
   });
 });
