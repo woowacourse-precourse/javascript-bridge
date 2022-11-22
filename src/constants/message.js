@@ -12,7 +12,7 @@ const GAME_MSG_START = '다리 건너기 게임을 시작합니다.';
 const REQUEST_MSG = Object.freeze({
   bridgeSize: '\n다리의 길이를 입력해주세요.\n',
   direction: `\n이동할 칸을 선택해주세요. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL})\n`,
-  retryOrQuit: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  retryOrQuit: `\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${RESTART_COMMAND}, 종료: ${QUIT_COMMAND})\n`,
 });
 
 const ERROR_MSG = Object.freeze({
