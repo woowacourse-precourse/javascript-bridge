@@ -14,8 +14,8 @@ class BridgeGameController {
     this.#gameService.generateBridge(size);
   }
 
-  inputMove(move) {
-    return this.#gameService.moveBridge(move);
+  inputMove(direction) {
+    return this.#gameService.moveBridge(direction);
   }
 
   getMap() {

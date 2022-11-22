@@ -15,8 +15,8 @@ class BridgeGameService {
     this.#bridgeGame = new BridgeGame(new Bridge(bridge));
   }
 
-  moveBridge(position) {
-    return this.#bridgeGame.move(position);
+  moveBridge(direction) {
+    return this.#bridgeGame.move(direction);
   }
 
   getMap() {

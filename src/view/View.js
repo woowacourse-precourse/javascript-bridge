@@ -41,11 +41,11 @@ class View {
   }
 
   #getPositionToMove() {
-    return (position) => {
+    return (direction) => {
       const bridgePositionValidator = new BridgePositionValidator();
       try {
-        bridgePositionValidator.validate(position);
-        const isMove = this.#gameController.inputMove(position);
+        bridgePositionValidator.validate(direction);
+        const isMove = this.#gameController.inputMove(direction);
         const bridgeMap = this.#gameController.getMap();
         this.#printBridge(bridgeMap);
         this.#nextStep(isMove);

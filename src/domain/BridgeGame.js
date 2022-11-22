@@ -15,8 +15,8 @@ class BridgeGame {
     this.#attempts = 1;
   }
 
-  canMove(position) {
-    return this.#bridge.canMove(position, this.#bridgeMap[GAME_CONDITION.UP_INDEX].length);
+  canMove(direction) {
+    return this.#bridge.canMove(direction, this.#bridgeMap[GAME_CONDITION.UP_INDEX].length);
   }
 
   #countAttempt() {
@@ -29,19 +29,19 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  move(position) {
-    if (this.canMove(position)) {
-      this.#makeMap(position, GAME_CONDITION.STATUS_SUCCESS);
+  move(direction) {
+    if (this.canMove(direction)) {
+      this.#makeMap(direction, GAME_CONDITION.STATUS_SUCCESS);
       return GAME_CONDITION.STATUS_SUCCESS;
     }
 
-    this.#makeMap(position, GAME_CONDITION.STATUS_FAIL);
+    this.#makeMap(direction, GAME_CONDITION.STATUS_FAIL);
 
     return GAME_CONDITION.STATUS_FAIL;
   }
 
-  #makeMap(position, state) {
-    const movePosition = this.#checkUpOrDown(position);
+  #makeMap(direction, state) {
+    const movePosition = this.#checkUpOrDown(direction);
     const blankPosition = 1 - movePosition;
     const positionState = state ? GAME_CONDITION.CAN_MOVE : GAME_CONDITION.CAN_NOT_MOVE;
 
@@ -49,8 +49,8 @@ class BridgeGame {
     this.#bridgeMap[blankPosition].push(GAME_CONDITION.BLANK_MOVE);
   }
 
-  #checkUpOrDown(position) {
-    return position === GAME_CONDITION.MOVE_UP ? GAME_CONDITION.UP_INDEX : GAME_CONDITION.DOWN_INDEX;
+  #checkUpOrDown(direction) {
+    return direction === GAME_CONDITION.MOVE_UP ? GAME_CONDITION.UP_INDEX : GAME_CONDITION.DOWN_INDEX;
   }
 
   getMap() {
