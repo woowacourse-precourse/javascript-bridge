@@ -13,7 +13,7 @@ const OutputView = {
     let upBridge = currentBridge[0].join(' | ');
     let downBridge = currentBridge[1].join(' | ');
     MissionUtils.Console.print(`[ ${upBridge} ]\n`);
-    MissionUtils.Console.print(`[ ${downBridge} ]`);
+    MissionUtils.Console.print(`[ ${downBridge} ]\n`);
   },
 
   /**
@@ -33,8 +33,16 @@ const OutputView = {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
+  printInputSize() {
+    MissionUtils.Console.print('다리의 길이를 입력해주세요.');
+  },
+
   printInputMove() {
     MissionUtils.Console.print('이동할 칸을 선택해주세요. (위 : U, 아래 : D)');
+  },
+
+  printInputRetry() {
+    MissionUtils.Console.print('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
   },
 
   printGameSuccess(gameSuccess) {
