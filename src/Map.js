@@ -19,6 +19,10 @@ class Map {
 
     return [this.#upperRow, this.#lowerRow];
   }
+
+  getMapRows() {
+    return [this.#upperRow, this.#lowerRow];
+  }
 }
 
 module.exports = Map;

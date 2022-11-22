@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
 const Map = require('./Map');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { printStart, printMap } = require('./OutputView');
+const { printStart, printMap, printResult } = require('./OutputView');
 const { RETRY, QUIT } = require('./Command');
 
 /**
@@ -80,7 +80,9 @@ class BridgeGame {
     readMoving(this.move.bind(this));
   }
 
-  quit(isSuccess) {}
+  quit(isSuccess) {
+    printResult(this.#map.getMapRows(), isSuccess);
+  }
 }
 
 module.exports = BridgeGame;
