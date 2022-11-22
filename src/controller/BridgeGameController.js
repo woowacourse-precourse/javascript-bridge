@@ -1,12 +1,11 @@
 const BridgeGame = require("../BridgeGame");
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
-const BridgeMaker = require("../BridgeMaker");
 const { close } = require("../utils/utils");
 const BridgegLengthValidator = require("../utils/BridgeLengthValidator");
 const DirectionValidator = require("../utils/DirectionValidator");
 const RegameCommandValidator = require("../utils/RegameCommandValidator");
-const ValidPathBridge = require("../ValidPathBridge");
+const ValidPathBridge = require("../AnswerBridgeModel");
 const { STATUS } = require("../constants/message");
 
 class BridgeGameController {
@@ -24,7 +23,7 @@ class BridgeGameController {
   updateBridgeAccordingInput(bridgeSize) {
     this.model.validPath.size = Number(bridgeSize);
     if (this.isBridgeLengthNotValid()) return this.getBridgeLengthFromUser();
-    this.model.validPath.bridge = BridgeMaker.makeBridge;
+    this.model.validPath.setAnswerBridge();
     this.getMoveDirectionFromUser();
   }
 
@@ -42,7 +41,7 @@ class BridgeGameController {
 
   updateUserMovement(direction) {
     if (this.isDirectionNotValid(direction)) return this.getMoveDirectionFromUser();
-    if (this.model.bridgeGame.move(direction, this.model.validPath.bridge)) {
+    if (this.model.bridgeGame.move(direction, this.model.validPath.getbridge())) {
       this.showMovedPath();
       return this.getMoveDirectionFromUser();
     }
