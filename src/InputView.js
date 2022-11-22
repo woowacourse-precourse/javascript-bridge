@@ -20,6 +20,7 @@ const InputView = {
       });
     } catch (error) {
       Console.print(error);
+      this.readBridgeSize(makeBridge);
     }
   },
 
@@ -40,6 +41,7 @@ const InputView = {
         movePlayer(moving);
       } catch (error) {
         Console.print(error);
+        this.readMoving(movePlayer);
       }
     });
   },
@@ -66,6 +68,7 @@ const InputView = {
       });
     } catch (error) {
       Console.print(error);
+      this.readGameCommand(retryOrQuit);
     }
   },
 
