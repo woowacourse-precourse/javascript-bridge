@@ -92,4 +92,18 @@ describe('Validator 테스트', () => {
       BridgeValidator.checkInputNext('Q');
     }).not.toThrow();
   });
+
+  test('만약 현재 다리 건너는 길이와, 마지막 다리가 같다면 게임이 끝난다.', () => {
+    expect(() => {
+      BridgeValidator.checkFinish(11, 10);
+    }).toThrow();
+  });
+  test('만약 현재 다리 건너는 길이와, 마지막 다리가 같다면 게임이 끝난다.', () => {
+    const isFinish = BridgeValidator.checkFinish(10, 10);
+    expect(isFinish).toEqual(true);;
+  });
+  test('만약 현재 다리 건너는 길이와, 마지막 다리가 같다면 게임이 끝난다.', () => {
+    const isFinish = BridgeValidator.checkFinish(9, 10);
+    expect(isFinish).toEqual(false);;
+  });
 });
