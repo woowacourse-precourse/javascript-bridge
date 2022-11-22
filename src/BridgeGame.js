@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { SHORT_CUT, GAME_STRING, NUMBER } = require('./constants');
+const { SHORT_CUT, GAME_STRING, NUMBER, GAME_RESULT } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -114,6 +114,13 @@ class BridgeGame {
       upBridge: [...upBridge, GAME_STRING.normal],
       downBridge: [...downBridge, GAME_STRING.fail],
     };
+  }
+
+  static getResultString(success) {
+    if (success) {
+      return `${GAME_RESULT.result} ${GAME_RESULT.success}`;
+    }
+    return `${GAME_RESULT.result} ${GAME_RESULT.fail}`;
   }
 
   /**

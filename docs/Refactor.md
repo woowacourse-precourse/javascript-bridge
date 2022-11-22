@@ -20,3 +20,8 @@
 
 - [x] refactor: InputView에 있던 예외 처리 함수를 분리
 - Validations 파일 추가
+
+### 테스트
+
+- [x] test: 사용자 입력 예외 함수 테스트 파일 추가
+- [x] test: 다리 건너기 게임 함수 테스트 파일 추가

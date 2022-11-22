@@ -89,7 +89,6 @@ const InputView = {
       }
     });
   },
-
   getRetry(userInput, bridgeGame) {
     retryValidation(userInput);
     if (userInput === SHORT_CUT.retry) {

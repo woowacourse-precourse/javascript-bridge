@@ -36,20 +36,17 @@ const ERROR_RULE_MESSAGE = Object.freeze({
 });
 
 const ERROR_BRIDGE_MESSAGE = Object.freeze({
-  message: `다리 길이는 ${BRIDGE_RANGE.start}부터 ${BRIDGE_RANGE.end} 사이의 숫자여야 합니다.`,
   number: `${ERROR_SUBJECT} 숫자가 아닌 다른 문자가 포함되어 있습니다. ${ERROR_RULE_MESSAGE.bridge}`,
   integer: `${ERROR_SUBJECT} 자연수가 아닌 소수를 입력하였습니다. ${ERROR_RULE_MESSAGE.bridge}`,
   range: `${ERROR_SUBJECT} 숫자가 범위를 벗어났습니다. ${ERROR_RULE_MESSAGE.bridge}`,
 });
 
 const ERROR_PLAYING_MESSAGE = Object.freeze({
-  message: `이동할 칸의 입력은 ${SHORT_CUT.up} 혹은 ${SHORT_CUT.down}여야 합니다.`,
   lowercase: `${ERROR_SUBJECT} 대문자가 아닌 소문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.playing}`,
   wrong: `${ERROR_SUBJECT} ${SHORT_CUT.up} 또는 ${SHORT_CUT.down}가 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.playing}`,
 });
 
 const ERROR_RETRY_MESSAGE = Object.freeze({
-  message: `게임 종료 여부의 입력은 ${SHORT_CUT.retry} 혹은 ${SHORT_CUT.quit}여야 합니다.`,
   lowercase: `${ERROR_SUBJECT} 대문자가 아닌 소문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.retry}`,
   wrong: `${ERROR_SUBJECT} ${SHORT_CUT.retry} 또는 ${SHORT_CUT.quit}가 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.retry}`,
 });
@@ -70,6 +67,7 @@ const GAME_RESULT = Object.freeze({
 });
 
 module.exports = {
+  ERROR_SUBJECT,
   GAME_STRING,
   ERROR_BRIDGE_MESSAGE,
   GAME_BOOLEAN,
