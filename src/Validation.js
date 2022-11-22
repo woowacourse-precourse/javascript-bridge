@@ -14,7 +14,7 @@ const Validation = {
     return !this.isSame(elem1, elem2);
   },
   isInRange(start, end, number) {
-    if (end < start) throw new Error(errorMessage.End_Exceed_Start);
+    if (end < start) throw new Error(errorMessage.END_EXCEED_START);
     if (number < start || number > end) return false;
     return true;
   },
