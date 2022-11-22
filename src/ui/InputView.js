@@ -24,7 +24,7 @@ const InputView = {
   readMoving() {
     return new Promise((resolve) => {
       Console.readLine(
-        "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+        "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
         (inputDirection) => {
           if (this.validateDirection(inputDirection)) {
             resolve(inputDirection);
@@ -40,7 +40,7 @@ const InputView = {
   readGameCommand() {
     return new Promise((resolve) => {
       Console.readLine(
-        "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+        "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
         (commandInput) => {
           if (this.validateCommand(commandInput)) {
             resolve(commandInput);

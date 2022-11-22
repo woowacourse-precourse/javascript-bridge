@@ -2,9 +2,6 @@ const BridgeGame = require("./BridgeGame");
 const InputView = require("./ui/InputView");
 const OutputView = require("./ui/OutputView");
 
-const MissionUtils = require("@woowacourse/mission-utils");
-const Console = MissionUtils.Console;
-
 class App {
   #bridgeGame = new BridgeGame();
   #resultMap;
@@ -15,7 +12,6 @@ class App {
     const BRIDGE_SIZE = await InputView.readBridgeSize();
 
     const bridge = this.#bridgeGame.make(BRIDGE_SIZE);
-    Console.print(bridge);
 
     let isRetry = true;
     let isLive;

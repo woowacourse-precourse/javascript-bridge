@@ -1,5 +1,5 @@
 /**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
+ * 사용자에게 게임 진행 상황과 결과를MissionUtils.Console 출력하는 역할을 한다.
  */
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
@@ -78,11 +78,11 @@ const OutputView = {
     let gameResult;
     if (isLive) gameResult = "성공";
     else gameResult = "실패";
-    Console.print("최종 게임 결과");
+    Console.print("\n최종 게임 결과");
     Console.print(resultMap[0]);
     Console.print(resultMap[1]);
 
-    Console.print(`게임 성공 여부: ${gameResult}`);
+    Console.print(`\n게임 성공 여부: ${gameResult}`);
     Console.print(`총 시도한 횟수: ${retryCount}`);
   },
 };
