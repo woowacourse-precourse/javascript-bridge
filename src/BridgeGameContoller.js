@@ -6,11 +6,15 @@ const Const = require('../src/constant/constant');
 
 class BridgeGameContoller {
     #game;
+    #map;
+    #totalTry;
 
     constructor() {
         this.#game = {
             current:0,
         };
+        this.#totalTry = 1;
+        this.#map = [];
     }
 
     init(){
