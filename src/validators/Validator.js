@@ -17,9 +17,9 @@ class Validator {
   }
 
   /**
-   * @param {any|function(any)} assertion
-   * @param expression
+   * @param {any|function(any)} expression
    * @param {string|function(any)} errorExpression
+   * @returns {this}
    */
   should(expression, errorExpression) {
     const assertion = typeof expression === 'function' ? expression(this.#value) : expression;
