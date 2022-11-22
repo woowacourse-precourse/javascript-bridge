@@ -1,4 +1,5 @@
 const BridgeBoard = require('./BridgeBoard');
+const PLAY_COMMAND = require('./Static/Command');
 const Validation = require('./Validations');
 const ERROR = require('./Static/Error');
 
@@ -24,7 +25,11 @@ class BridgeGame {
    */
   move(direction) {
     try {
-      Validation.validateCommand(['U', 'D'], ERROR.notPlayCommand, direction);
+      Validation.validateCommand(
+        [PLAY_COMMAND.up, PLAY_COMMAND.down],
+        ERROR.notPlayCommand,
+        direction,
+      );
       this.decideSuccess(direction);
     } catch (error) {
       this.#bridgeController.printError(

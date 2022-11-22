@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const PLAY_COMMAND = require('./Static/Command');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -14,8 +15,8 @@ const OutputView = {
     Console.print(`${this.makeMap(downBridge)}\n`);
   },
   makeBridge(bridge) {
-    const upBridge = this.makeLine(bridge, 'U', 'O');
-    const downBridge = this.makeLine(bridge, 'D', 'O');
+    const upBridge = this.makeLine(bridge, PLAY_COMMAND.up, 'O');
+    const downBridge = this.makeLine(bridge, PLAY_COMMAND.down, 'O');
     return { upBridge, downBridge };
   },
   makeMap(bridge) {
@@ -42,7 +43,7 @@ const OutputView = {
     return { upLine, downLine };
   },
   makeFailBlock(direction) {
-    if (direction === 'U') {
+    if (direction === PLAY_COMMAND.up) {
       return ['X', ' '];
     }
     return [' ', 'X'];
