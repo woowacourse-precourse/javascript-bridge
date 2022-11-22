@@ -23,7 +23,7 @@ const OutputView = {
    */
   printResult(map, isSuccess, attempt) {
     Console.print(PRINT_MESSAGE.RESULT);
-    Console.print(PRINT_MESSAGE.MAP(map[0], map[1]));
+    this.printMap(map[0], map[1]);
     Console.print(PRINT_MESSAGE.IS_SUCCESS(isSuccess));
     Console.print(PRINT_MESSAGE.ATTEMPT(attempt));
     Console.close();
