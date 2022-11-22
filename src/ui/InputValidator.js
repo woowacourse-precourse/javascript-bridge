@@ -1,47 +1,33 @@
 const BridgeError = require("../BridgeError");
-const {MESSAGE, BRIDGE} = require("../constants/CONSTANT");
+const {BRIDGE} = require("../constants/CONSTANT");
 
 const InputValidator = {
   bridgeSize(size) {
-    if (this.checkNumber(size)) {
-      return BridgeError.size(size);
-    };
-    return true;
+    return this.checkNumber(size) ? BridgeError.size(size) : true;
   },
 
   bridgeMove(moveInput) {
-    if (this.checkMoveInput(moveInput)){
-      return BridgeError.move(moveInput);
-    }
-    return true;
+    return this.checkMoveInput(moveInput) ? BridgeError.move(moveInput) : true;
   },
 
   bridgeCommand(command) {
-    if (this.checkCommand(command)){
-      return BridgeError.command(command);
-    }
-    return true;
+    return this.checkCommand(command) ? BridgeError.command(command) : true;
   },
 
   checkNumber(number) {
-    const isNumber = new RegExp("[^0-9]", "g");
-    if (isNumber.test(number)) return true;
-    if (Number(number) < BRIDGE.LENGTH.MIN || Number(number) > BRIDGE.LENGTH.MAX) return true;
-    return false;
+    const isNumber = new RegExp("[0-9]", "g");
+    const isLength = (Number(number) < BRIDGE.LENGTH.MIN || Number(number) > BRIDGE.LENGTH.MAX);
+    return (!isNumber.test(number) || isLength) ? true : false;
   },
 
   checkMoveInput(moveInput) {
-    if (moveInput.length !== 1) return true;
-    const isMoveInput = new RegExp("U|D", "g")
-    if (!isMoveInput.test(moveInput)) return true;
-    return false
+    const isMoveInput = new RegExp("U|D", "g");
+    return (!isMoveInput.test(moveInput) || moveInput.length !== 1) ? true : false;
   },
 
   checkCommand(command) {
-    if (command.length !== 1) return true;
-    const isCommand = new RegExp("Q|R", "g")
-    if (!isCommand.test(command)) return true;
-    return false
+    const isCommand = new RegExp("Q|R", "g");
+    return (!isCommand.test(command) || command.length !== 1) ? true : false;
   }
 }
 
