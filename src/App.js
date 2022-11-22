@@ -25,7 +25,7 @@ class App {
 
   getMoveInput(move) {
     validateMove(move);
-    this.playGame(move);
+    this.moveUser(move);
   }
 
   getRetry(answer) {
@@ -38,16 +38,24 @@ class App {
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 
-  playGame(move) {
+  endGame() {
+    const { round, gameResult } = this.bridgeGame.getGameResult();
+    printResult(this.bridgeGame.getCurrentBridge(), round, gameResult);
+  }
+
+  moveUser(move) {
     this.bridgeGame.move(move);
     printMap(this.bridgeGame.getCurrentBridge());
+    this.playGame();
+  }
+
+  playGame() {
     if (this.bridgeGame.isFail()) {
       InputView.readGameCommand(this.getRetry.bind(this));
       return;
     }
     if (this.bridgeGame.isEnd()) {
-      const { round, gameResult } = this.bridgeGame.getGameResult();
-      printResult(this.bridgeGame.getCurrentBridge(), round, gameResult);
+      this.endGame();
       return;
     }
     InputView.readMoving(this.getMoveInput.bind(this));
