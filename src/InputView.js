@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Script = require("./Script");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const OutputView = require("./OutputView");
+const Validation = require("./Validation");
 const START = 1;
 
 const InputView = {
@@ -10,6 +10,11 @@ const InputView = {
   readBridgeSize() {
     return new Promise(resolve => {
       MissionUtils.Console.readLine(`${Script.BRIDGELENGTHINPUT}\n`, (answer) => {
+        try {
+          Validation.inputNumber(answer);
+        } catch {
+          this.readBridgeSize();
+        }
         const bridge = BridgeMaker.makeBridge(answer, BridgeRandomNumberGenerator);
         resolve(bridge);
       })
