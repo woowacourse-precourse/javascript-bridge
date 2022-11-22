@@ -57,5 +57,13 @@ class BridgeGame {
 
     return false;
   }
+
+  bridgeGetter() {
+    return this.bridge;
+  }
+
+  tryCountGetter() {
+    return this.tryCount;
+  }
 }
 module.exports = BridgeGame;
