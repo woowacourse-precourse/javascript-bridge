@@ -2,7 +2,7 @@ const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { printStart, printMap, printResult } = require('./OutputView');
 
 const ViewController = {
-  viewName: {
+  VIEW_NAME: {
     bridgeSize: 'bridgeSize',
     moving: 'moving',
     gameCommand: 'gameCommand',

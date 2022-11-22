@@ -39,12 +39,11 @@ const OutputView = {
    */
   printResult(mapRows, isSuccess, tryCount) {
     const map = OutputView.getMap(mapRows);
+    const result = `\n${RESULT}${map}\n${SUCCESS_OR_FAILURE}${
+      isSuccess ? SUCCESS : FAILURE
+    }${TRY_COUNT}${tryCount}`;
 
-    Console.print(
-      `\n${RESULT}${map}\n${SUCCESS_OR_FAILURE}${
-        isSuccess ? SUCCESS : FAILURE
-      }${TRY_COUNT}${tryCount}`,
-    );
+    Console.print(result);
   },
 };
 

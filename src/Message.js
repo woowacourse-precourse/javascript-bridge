@@ -10,6 +10,7 @@ const Message = {
   SUCCESS: '성공',
   FAILURE: '실패',
   TRY_COUNT: '\n총 시도한 횟수: ',
+
   map: {
     BEGINNING: '[ ',
     MIDDLE: ' | ',

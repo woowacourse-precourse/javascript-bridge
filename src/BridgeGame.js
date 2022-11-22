@@ -2,9 +2,9 @@ const { Console } = require('@woowacourse/mission-utils');
 const Bridge = require('./Bridge');
 const Map = require('./Map');
 const { RETRY, QUIT } = require('./Command');
-const { viewName, readInput, printOutput } = require('./ViewController');
+const { VIEW_NAME, readInput, printOutput } = require('./ViewController');
 
-const { bridgeSize, moving, gameCommand, start, map, result } = viewName;
+const { bridgeSize, moving, gameCommand, start, map, result } = VIEW_NAME;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -22,11 +22,13 @@ class BridgeGame {
 
   startGame() {
     printOutput(start);
+
     readInput(bridgeSize, this.setBridge.bind(this));
   }
 
   setBridge(size) {
     this.#bridge.setTargetBridge(Number(size));
+
     readInput(moving, this.move.bind(this));
   }
 
@@ -37,36 +39,25 @@ class BridgeGame {
    */
   move(movingCommand) {
     const { isMovable, isSuccess } = this.#bridge.judgeIsMovable(movingCommand);
-
     const mapRows = this.#map.record(isMovable, movingCommand);
+
     printOutput(map, mapRows);
 
     this.continueOrStop(isMovable, isSuccess);
   }
 
   continueOrStop(isMovable, isSuccess) {
-    if (isSuccess) {
-      this.quit(true);
-      return;
-    }
+    if (isSuccess) return this.quit(true);
 
-    if (isMovable) {
-      readInput(moving, this.move.bind(this));
-      return;
-    }
+    if (isMovable) return readInput(moving, this.move.bind(this));
 
     readInput(gameCommand, this.decideToRetryOrQuit.bind(this));
   }
 
   decideToRetryOrQuit(gameCommand) {
-    if (gameCommand === RETRY) {
-      this.retry();
-      return;
-    }
+    if (gameCommand === RETRY) return this.retry();
 
-    if (gameCommand === QUIT) {
-      this.quit(false);
-    }
+    if (gameCommand === QUIT) return this.quit(false);
   }
 
   /**
@@ -84,6 +75,7 @@ class BridgeGame {
 
   quit(isSuccess) {
     printOutput(result, this.#map.getMapRows(), isSuccess, this.#tryCount);
+
     Console.close();
   }
 }

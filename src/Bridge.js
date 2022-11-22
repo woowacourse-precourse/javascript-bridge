@@ -24,6 +24,7 @@ class Bridge {
 
   judgeIsSuccess(isMovable) {
     const isEnd = this.#currentIndex === this.#targetBridge.length - 1;
+
     return isMovable && isEnd;
   }
 
