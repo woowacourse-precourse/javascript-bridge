@@ -27,7 +27,10 @@ class BridgeGame {
   move(nextDirection, index) {
     this.#jumpHistory.push(nextDirection);
     OutputView.printMap(this.bridgeStatus, this.#jumpHistory);
-    return this.bridgeStatus[index] === nextDirection;
+    if (this.bridgeStatus[index] === nextDirection) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -39,7 +42,7 @@ class BridgeGame {
     this.#jumpHistory = [];
   }
 
-  getJumpHistory() {
+  get getJumpHistory() {
     return this.#jumpHistory;
   }
 }

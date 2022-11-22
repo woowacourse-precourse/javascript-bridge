@@ -34,7 +34,7 @@ class Game {
     for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
 
-      const MOVE_RESULT = this.moveGetResult(DIRECTION, moveCount);
+      const MOVE_RESULT = this.moveTurn(DIRECTION, moveCount);
       if (MOVE[MOVE_RESULT] === "R") {
         moveCount = 0;
       }
@@ -45,7 +45,7 @@ class Game {
     return true;
   }
 
-  moveGetResult(direction, moveCount) {
+  moveTurn(direction, moveCount) {
     const MOVE_RESULT = this.bridgeGame.move(direction, moveCount);
     if (!MOVE_RESULT) {
       const IS_QUIT = this.askQuit();
@@ -66,8 +66,8 @@ class Game {
     return IS_QUIT;
   }
 
-  getPrintResult() {
-    const JUMP_HISTORY = this.bridgeGame.getJumpHistory();
+  gameResult() {
+    const JUMP_HISTORY = this.bridgeGame.getJumpHistory;
     OutputView.printResult(this.#playCount, this.#bridgeStatus, JUMP_HISTORY);
   }
 }
