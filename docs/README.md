@@ -18,7 +18,7 @@
 ​	[ ] printResult 구현
 
 [ ] Constants.js 구현
-​	[ ] MESSAGE 구현
+​	[x] MESSAGE 구현
 
 
 ## 기능 구현 방향
