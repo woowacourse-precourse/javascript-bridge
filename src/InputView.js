@@ -1,9 +1,8 @@
 const { INPUT_MESSAGE, OUTPUT_MESSAGE } = require('./constants/message');
 const { Console } = require('@woowacourse/mission-utils');
-const { MOVING, GAME_COMMANDS, GAME_RESULT } = require('./constants/index');
+const { GAME_COMMANDS, GAME_RESULT } = require('./constants/index');
 const BridgeGame = require('./BridgeGame');
 const Validation = require('./Validation');
-const OutputView = require('./OutputView');
 
 const InputView = {
   readBridgeSize() {
