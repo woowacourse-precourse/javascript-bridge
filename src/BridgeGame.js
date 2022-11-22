@@ -1,20 +1,64 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #try;
+  #bridge;
+  #place;
+  #end;
+
+  constructor(size){
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#try = 1;
+    this.#place = 0;
+    this.#end = {
+      round: false,
+      game: false
+    };
+  }
+  
+  move(next) {
+    if(this.#bridge[this.#place]===next){
+      this.#place += 1;
+    }else{
+      this.#end.round = true;
+    }
+    this.checkGame();
+  }
+
+  checkGame() {
+    if(this.#bridge.length===this.#place){
+      this.#end.round = true;
+      this.#end.game = true;
+    }
+  }
+
+  isEnd(){
+    return this.#end;
+  }
+  
+  retry(input) {
+    if(input==='R'){
+      this.#try += 1;
+      this.#place = 0;
+      this.#end.round = false;
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  getBridge() {
+    return this.#bridge;
+  }
+
+  getPlace() {
+    return this.#place;
+  }
+
+  getTry() {
+    return this.#try;
+  }
 }
 
 module.exports = BridgeGame;
