@@ -25,12 +25,13 @@ class BridgeGame {
 
   insertFailValue({ topBridge, bottomBridge }) {
     if (INPUT_KEYS.DOWN === this.#solutionArr[this.#moveCount]) {
-      topBridge.push(OUTPUT_KEYS.BLANK);
-      bottomBridge.push(OUTPUT_KEYS.FAIL);
+      topBridge.push(OUTPUT_KEYS.FAIL);
+      bottomBridge.push(OUTPUT_KEYS.BLANK);
       return { topBridge, bottomBridge };
     }
-    bottomBridge.push(OUTPUT_KEYS.FAIL);
+
     topBridge.push(OUTPUT_KEYS.BLANK);
+    bottomBridge.push(OUTPUT_KEYS.FAIL);
   }
 
   bridgeResult() {
