@@ -14,7 +14,7 @@ class Bridge {
   }
 
   getBridge() {
-    return this.Bridge;
+    return this.bridge;
   }
 }
 

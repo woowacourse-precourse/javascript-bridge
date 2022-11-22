@@ -17,18 +17,19 @@ const InputView = {
       // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
-      this.readMoving(bridgeGame);
+      this.readMoving(bridge,bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame) {
+  readMoving(bridge,bridgeGame) {
     Console.readLine(COMMAND.MOVE, (space) => {
-      exception.checkSpace(space);
-      const bridgeList = bridgeGame.move(space);
-      OutputView.printMoveBridge(bridgeList);
+      // exception.checkSpace(space);
+      
+      const bridgeList = bridgeGame.move(space,bridge);
+      // OutputView.printMap(bridgeList);
     });
   },
 
