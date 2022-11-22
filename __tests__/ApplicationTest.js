@@ -53,9 +53,11 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-describe('다리 건너기 테스트', () => {
-  test('다리 생성 테스트', () => {
-    const randomNumbers = ['1', '0', '0'];
+
+describe("다리 건너기 테스트", () => {
+  test("다리 생성 테스트", () => {
+    const randomNumbers = [1, 0, 0];
+
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -66,8 +68,10 @@ describe('다리 건너기 테스트', () => {
 
   test('기능 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
-    mockQuestions(['3', 'U', 'D', 'U']);
+
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "D", "U"]);
+
 
     const app = new App();
     app.play();
