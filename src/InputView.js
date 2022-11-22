@@ -8,8 +8,7 @@ const OutputView = require("./OutputView");
 const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (inputBridgeSize) => {
-      const inputError = InputCheck.checkBridgeSize(inputBridgeSize);
-      if (inputError) return this.readBridgeSize();
+      InputCheck.checkBridgeSize(inputBridgeSize);
 
       const bridge = BridgeMaker.makeBridge(
         inputBridgeSize,

@@ -8,25 +8,14 @@ const InputCheck = {
   },
 
   isNumber(inputBridgeSize) {
-    const notNum =isNaN(inputBridgeSize)
-    try {
-      if (notNum) {
-        throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
-      }
-    } catch (e) {
-      Console.print(e.message);
+    if (isNaN(inputBridgeSize)) {
+      throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
     }
-    return !notNum
   },
 
   isCorrectRange(inputBridgeSize) {
-    try {
-      if (inputBridgeSize < 3 || inputBridgeSize > 20) {
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-      }
-    } catch (e) {
-      Console.print(e.message);
-      return true;
+    if (inputBridgeSize < 3 || inputBridgeSize > 20) {
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     }
   },
 
@@ -35,13 +24,8 @@ const InputCheck = {
   },
 
   isCorrectBridge(inputBridgeChoice) {
-    try {
-      if (inputBridgeChoice !== "U" && inputBridgeChoice !== "D") {
-        throw new Error("[ERROR] 이동할 칸은 U 혹은 D입니다.");
-      }
-    } catch (e) {
-      Console.print(e.message);
-      return true;
+    if (inputBridgeChoice !== "U" && inputBridgeChoice !== "D") {
+      throw new Error("[ERROR] 이동할 칸은 U 혹은 D입니다.");
     }
   },
 
@@ -50,13 +34,8 @@ const InputCheck = {
   },
 
   isCorrectChoice(choice) {
-    try {
-      if (choice !== "R" && choice !== "Q") {
-        throw new Error("[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.");
-      }
-    } catch (e) {
-      Console.print(e.message);
-      return true;
+    if (choice !== "R" && choice !== "Q") {
+      throw new Error("[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.");
     }
   },
 };
