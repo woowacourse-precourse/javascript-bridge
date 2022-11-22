@@ -81,6 +81,65 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
+  test("재시작 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "U", "R", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O | X ]",
+      "[   |   ]",
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("재입력 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions([
+      "asdf",
+      "45",
+      "3.4",
+      "3",
+      "UD",
+      "F",
+      "U",
+      "U",
+      "RQ",
+      "F",
+      "Q",
+    ]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ERROR] 다리 길이는 숫자여야 합니다.",
+      "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+      "[ERROR] 다리 길이는 정수여야 합니다.",
+      "[ERROR] 다리를 선택하는 커맨드는 한 글자여야 합니다.",
+      "[ERROR] 다리 선택 커맨드는 U 또는 D 여야 합니다.",
+      "[ERROR] 게임 재시작 및 종료 커맨드는 한 글자여야 합니다.",
+      "[ERROR] 게임 재시작 커맨드는 R 또는 Q 여야 합니다.",
+      "최종 게임 결과",
+      "[ O | X ]",
+      "[   |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
+  });
+
   test("예외 테스트", () => {
     runException(["a"]);
   });
