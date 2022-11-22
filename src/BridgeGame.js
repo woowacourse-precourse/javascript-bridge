@@ -57,7 +57,7 @@ class BridgeGame {
     this.#user.push(moving);
   }
 
-  getscore(){
+  getscore() {
     if(this.#currentUpsidePosition.indexOf(MOVING.UNPASSED) > -1 || this.#currentDownsidePosition.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
     if(this.#user.length !== this.#bridgeInformation.length) return CONTROL.PASS_STEP;
     if(this.#user.length === this.#bridgeInformation.length) {
@@ -68,7 +68,7 @@ class BridgeGame {
   }
 
   getCountReplyNumber() {
-    return this.#count
+    return this.#count;
   }
 
   getSucessValue() {
@@ -88,7 +88,10 @@ class BridgeGame {
 
   getRecordSteps() {
     let recordAllSteps = [];
-    recordAllSteps.push(this.#currentUpsidePosition.join(MOVING.JUMP),this.#currentDownsidePosition.join(MOVING.JUMP));
+    recordAllSteps.push(
+      this.#currentUpsidePosition.join(MOVING.JUMP),
+      this.#currentDownsidePosition.join(MOVING.JUMP)
+    );
     return recordAllSteps;
   }
 
@@ -109,9 +112,9 @@ class BridgeGame {
   }
 
   initialize() {
-    this.#currentUpsidePosition = []
+    this.#currentUpsidePosition = [];
     this.#user = [];
-    this.#currentDownsidePosition = []
+    this.#currentDownsidePosition = [];
     this.addBridgeCondition();
   }
 }
