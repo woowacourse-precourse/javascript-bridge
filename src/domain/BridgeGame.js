@@ -1,6 +1,5 @@
-const { GAME_VALUES } = require("../constants/constant");
-const GameInfo = require("./GameInfo");
-const UseGameInfo = require("./UseGameInfo");
+const OutputView = require("../ui/OutputView");
+const { GameInfo } = require("./GameInfo");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,16 +10,10 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static move() {
-    GameInfo.position += GAME_VALUES.counter;
-    GameInfo.gameStat.push(GameInfo.moving);
-    this.recordCurrentStatus();
-  }
-
-  static recordCurrentStatus() {
-    return (UseGameInfo.isValidMove()) ?
-      UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharO) :
-      UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharX);
+  move(nextMove) {
+    OutputView.printMap(nextMove);
+    GameInfo.position += 1;
+    return GameInfo.gameResult;
   }
 
   /**
@@ -28,8 +21,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static retry(gameCommand) {
-    return (gameCommand === GAME_VALUES.upperCharR);
+  retry(isRetry) {
+    if (isRetry === 'Q') {
+      return OutputView.printResult();
+    }
+    GameInfo.position = 0;
+    GameInfo.numberOfPlayGames += 1;
+    GameInfo.gameResult = true;
   }
 }
 

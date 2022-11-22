@@ -1,41 +1,33 @@
-const { GAME_VALUES, INITIALIZE_VALUES } = require("../constants/constant");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const GameInfo = require("./GameInfo");
+const { MAKE_MAP, MOVE_VALID } = require("../constants/constant");
+const { GameInfo } = require("./GameInfo");
 
-class UseGameInfo {
-  static initializeGameInfo() {
-    GameInfo.gameStat = [];
-    GameInfo.moveBridge = [[], []];
-    GameInfo.position = INITIALIZE_VALUES.initializedPosition;
-    GameInfo.numberOfPlayGames += GAME_VALUES.counter;
-    return true;
-  }
+const UseGameInfo = {
+  makeOutput(upOrDown, nextMove) {
+    const output = [MAKE_MAP.open];
+    for (let i = 0; i < GameInfo.position; i++) {
+      output.push(this.alreadyPass(upOrDown, i));
+    };
+    output.push(this.makeNextMoveOutput(upOrDown, nextMove));
+    return output;
+  },
 
-  static isLastTurn = () => GameInfo.position !== GameInfo.bridgeSize - 1;
+  alreadyPass(upOrDown, i) {
+    if (GameInfo.bridge[i] === MOVE_VALID[upOrDown]) {
+      return MAKE_MAP.pass;
+    };
+    return MAKE_MAP.empty;
+  },
 
-  static isFailure() {
-    return (
-      GameInfo.moveBridge[0]
-        .concat(GameInfo.moveBridge[1])
-        .includes(GAME_VALUES.upperCharX)
-    );
-  }
-
-  static isValidMove() {
-    return GameInfo.bridge[GameInfo.position] === GameInfo.gameStat[GameInfo.position];
-  }
-
-  static pushMoveBridge(input) {
-    GameInfo.moveBridge[
-      GameInfo.indexingArray
-        .indexOf(GameInfo.gameStat[GameInfo.position])
-    ].push(input);
-    GameInfo.moveBridge[
-      (GameInfo.indexingArray
-        .indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2
-    ].push(GAME_VALUES.blank);
-  }
+  makeNextMoveOutput(upOrDown, nextMove) {
+    if (MOVE_VALID[upOrDown] !== nextMove) {
+      return MAKE_MAP.close;
+    }
+    if (GameInfo.bridge[GameInfo.position] !== nextMove) {
+      GameInfo.gameResult = false;
+      return MAKE_MAP.failure;
+    }
+    return MAKE_MAP.success;
+  },
 }
 
 module.exports = UseGameInfo;
