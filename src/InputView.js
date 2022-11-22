@@ -54,16 +54,20 @@ const InputView = {
   },
 
   moveOrFail(userAnswer, bridgeArray) {
+    if (bridgeArray[this.INDEX] === userAnswer) {
+      return this.success(userAnswer, bridgeArray);
+    }
+    return this.fail(userAnswer, bridgeArray);
+  },
+
+  success(userAnswer, bridgeArray) {
     if (bridgeArray.length - 1 === this.INDEX) {
       this.BRIDGE_GAME.move(userAnswer);
       return OutputView.printResult(this.SUCCESS_MESSAGE, this.COUNT);
     }
-    if (bridgeArray[this.INDEX] === userAnswer) {
-      this.INDEX += 1;
-      this.BRIDGE_GAME.move(userAnswer);
-      return this.readMoving(bridgeArray);
-    }
-    return this.fail(userAnswer, bridgeArray);
+    this.INDEX += 1;
+    this.BRIDGE_GAME.move(userAnswer);
+    return this.readMoving(bridgeArray);
   },
 
   fail(userAnswer, bridgeArray) {
@@ -95,14 +99,18 @@ const InputView = {
 
   retryQuit(userInput, bridgeArray) {
     if (userInput === 'R') {
-      this.COUNT += 1;
-      this.INDEX = 0;
-      this.BRIDGE_GAME.retry(userInput, this.COUNT);
-      this.readMoving(bridgeArray);
+      this.inputR(userInput, bridgeArray);
     }
     if (userInput === 'Q') {
       this.BRIDGE_GAME.retry(userInput, this.COUNT);
     }
+  },
+
+  inputR(userInput, bridgeArray) {
+    this.COUNT += 1;
+    this.INDEX = 0;
+    this.BRIDGE_GAME.retry(userInput, this.COUNT);
+    this.readMoving(bridgeArray);
   },
 };
 
