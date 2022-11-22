@@ -1,4 +1,4 @@
-const { CROSSING_RESULT, DIRECTION } = require("./libs/const");
+const { CROSSING_RESULT, DIRECTION } = require("./libs/Const");
 
 class BridgeGame {
   #bridge;

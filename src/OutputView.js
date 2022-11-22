@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { INTRO_MESSAGE } = require("./libs/const");
+const { INTRO_MESSAGE } = require("./libs/Const");
 const OutputView = {
   printMessage(message) {
     Console.print(message);

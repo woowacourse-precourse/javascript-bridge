@@ -5,7 +5,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./libs/Validation");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { COMMAND_OPTION, INTRO_MESSAGE } = require("./libs/const");
+const { COMMAND_OPTION, INTRO_MESSAGE } = require("./libs/Const");
 const { throwException } = require("./libs/Error");
 class Manager {
   #bridgeGame;

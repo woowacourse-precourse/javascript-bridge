@@ -1,4 +1,4 @@
-const { DIRECTION } = require("./libs/const");
+const { DIRECTION } = require("./libs/Const");
 
 const BridgeMaker = {
   /**
