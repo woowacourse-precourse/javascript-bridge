@@ -49,7 +49,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(command) {
+    this.#validateCommand(command);
+
+    return command === 'R';
+  }
+
+  #validateCommand(command) {
+    if (command === 'R' || command === 'Q') {
+      return;
+    }
+
+    throw new Error(
+      '[ERROR] 게임을 다시 시도 하려면 R, 종료하려면 Q를 대문자로 입력해주세요.',
+    );
+  }
 }
 
 module.exports = BridgeGame;

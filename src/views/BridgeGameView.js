@@ -18,8 +18,8 @@ class BridgeGameView {
     this.#input.readMoving(onInput);
   }
 
-  readGameCommand() {
-    this.#input.readGameCommand();
+  readGameCommand(onInput) {
+    this.#input.readGameCommand(onInput);
   }
 
   print(message) {

@@ -39,29 +39,39 @@ class BridgeGameController {
   #handleInputMoveDirection(round, direction) {
     try {
       const { map, movingState } = this.#model.move(round, direction);
-      const progress = movingState
+      const moveNextRound = movingState
         ? this.#requestMoveDirection.bind(this, round + 1)
-        : this.retry.bind(this);
+        : this.#requestGameCommand.bind(this);
 
       this.#view.printMap(map);
-      progress();
+      moveNextRound();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
       this.#requestMoveDirection(round);
     }
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  #requestGameCommand() {
+    this.#view.readGameCommand(this.#handleInputGameCommand.bind(this));
+  }
+
+  #handleInputGameCommand(command) {
+    try {
+      const isRetry = this.#model.retry(command);
+      const retryOrQuit = isRetry
+        ? this.#requestMoveDirection.bind(this)
+        : this.#quit.bind(this);
+      retryOrQuit();
+    } catch (error) {
+      this.#view.print(`\n${error.message}\n`);
+      this.#requestGameCommand();
+    }
+  }
 
   /**
    * 사용자가 게임을 종료할 때 사용하는 메서드
    */
-  quit() {}
+  #quit() {}
 }
 
 module.exports = BridgeGameController;
