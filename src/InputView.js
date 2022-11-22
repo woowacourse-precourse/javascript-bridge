@@ -16,18 +16,18 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해주세요.', (bridgeLen) => {
       console.log(`다리 길이 : ${bridgeLen}`);
 
-      const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate); // 이거 찾아보자.
-      this.readMoving(bridge);
+      const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
+      this.readMoving([[],[]], bridge);
     })
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (index) => {
-      console.log(`이동할 칸 : ${index}`);
-      game.move(bridge, index); // class
+  readMoving(currentBridge, bridge) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+      console.log(`이동할 칸 : ${input}`);
+      currentBridge=game.move(currentBridge, bridge, input); // class
     })
   },
 
