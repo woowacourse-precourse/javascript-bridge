@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { QUESTIONS, ERROR_MSG, RETRY_COMMAND_TYPE } = require('./constants');
+const { QUESTIONS } = require('./constants');
 
 const {
   validateBridgeSize,
@@ -44,20 +44,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(retryCallback, quitCallback) {
+  readGameCommand(callback) {
     Console.readLine(QUESTIONS.retry, command => {
       try {
-        if (!validateRetryCommand(command))
-          throw new Error(ERROR_MSG.invalidRetryCommand);
-        if (command === RETRY_COMMAND_TYPE[0]) {
-          retryCallback();
-        }
-        if (command === RETRY_COMMAND_TYPE[1]) {
-          quitCallback();
-        }
+        validateRetryCommand(command);
+        callback(command);
       } catch (error) {
         Console.print(error.message);
-        this.readGameCommand(retryCallback, quitCallback);
+        this.readGameCommand(callback);
       }
     });
   }

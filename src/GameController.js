@@ -3,6 +3,7 @@ const BridgeGame = require('./BridgeGame');
 const { OUTPUT_MSG } = require('./constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { RETRY_COMMAND_TYPE } = require('./constants');
 
 class GameController {
   #game;
@@ -21,18 +22,28 @@ class GameController {
 
   moveByCommand() {
     InputView.readMoving(position => {
-      const { state, lastPosition, isPossible, tryCount } =
-        this.#game.move(position);
+      const { state, lastPosition, isPossible } = this.#game.move(position);
       OutputView.printMap(state, isPossible);
-      if (isPossible) {
-        if (lastPosition) this.quit(state, isPossible, tryCount);
-        if (!lastPosition) this.moveByCommand();
-      }
-      if (!isPossible)
-        InputView.readGameCommand(this.retry.bind(this), () => {
-          this.quit(state, false, tryCount);
-        });
+      this.judgeNext(state, lastPosition, isPossible);
     });
+  }
+
+  judgeNext(state, lastPosition, isPossible) {
+    if (isPossible) {
+      if (lastPosition) this.quit(state, isPossible);
+      if (!lastPosition) this.moveByCommand();
+    }
+    if (!isPossible)
+      InputView.readGameCommand(this.judgeRestart.bind(this, state));
+  }
+
+  judgeRestart(state, command) {
+    if (command === RETRY_COMMAND_TYPE[0]) {
+      this.retry();
+    }
+    if (command === RETRY_COMMAND_TYPE[1]) {
+      this.quit(state, false);
+    }
   }
 
   retry() {
@@ -40,7 +51,8 @@ class GameController {
     this.moveByCommand();
   }
 
-  quit(state, isSuccess, tryCount) {
+  quit(state, isSuccess) {
+    const { tryCount } = this.#game;
     OutputView.printResult(state, isSuccess, tryCount);
   }
 }
