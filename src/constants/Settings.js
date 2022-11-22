@@ -3,14 +3,19 @@ const BRIDGE_SIZE = Object.freeze({
   max: 20,
 });
 
-const COMMAND_TYPE = Object.freeze({
+const GAME_COMMAND = Object.freeze({
+  retry: 'R',
+  quit: 'Q',
+});
+
+const MOVE_COMMAND = Object.freeze({
   up: 'U',
   down: 'D',
 });
 
 const COMMAND_MATCH_INDEX = Object.freeze({
-  [COMMAND_TYPE['up']]: 0,
-  [COMMAND_TYPE['down']]: 1,
+  [MOVE_COMMAND['up']]: 0,
+  [MOVE_COMMAND['down']]: 1,
 });
 
 const MOVE_TYPE = Object.freeze({
@@ -18,4 +23,4 @@ const MOVE_TYPE = Object.freeze({
   false: 'X',
 });
 
-module.exports = { BRIDGE_SIZE, COMMAND_TYPE, COMMAND_MATCH_INDEX, MOVE_TYPE };
+module.exports = { BRIDGE_SIZE, GAME_COMMAND, MOVE_COMMAND, COMMAND_MATCH_INDEX, MOVE_TYPE };
