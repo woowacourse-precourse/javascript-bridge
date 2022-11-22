@@ -10,11 +10,11 @@ class Controller {
 
   constructor() {
     this.#tryingNum = INITIAL_VALUE.TRY_NUM;
+    printMessage(OUTPUT_MESSAGE.START_GAME);
     this.init();
   }
 
   init() {
-    printMessage(OUTPUT_MESSAGE.START_GAME);
     readBridgeSize((bridgeSize)=>{
       try{
         this.#bridgeGame = new BridgeGame(Number(bridgeSize));
@@ -26,6 +26,8 @@ class Controller {
       }
     });
   }
+  
+
 
   play() {
     readMoving((moving) => {
