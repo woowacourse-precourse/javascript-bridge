@@ -1,18 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const {
+  getLogSpy,
+  getOutput,
+  expectLogContains,
+  mockQuestions,
+  mockRandoms,
+} = require('../src/testFunction');
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const getOutput = logSpy => {
-  return [...logSpy.mock.calls].join('');
-};
-
-const runException = inputs => {
+const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
   const app = new App();
@@ -20,12 +17,6 @@ const runException = inputs => {
   app.play();
 
   expectLogContains(getOutput(logSpy), ['[ERROR]']);
-};
-
-const expectLogContains = (received, logs) => {
-  logs.forEach(log => {
-    expect(received).toEqual(expect.stringContaining(log));
-  });
 };
 
 const expectBridgeOrder = (received, upside, downside) => {
