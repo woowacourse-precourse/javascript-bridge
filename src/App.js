@@ -1,5 +1,10 @@
+const BridgeGame = require('./Model/BridgeGame');
+
 class App {
-  play() {}
+  play() {
+    const bridegame = new BridgeGame();
+    bridegame.start();
+  }
 }
 
 module.exports = App;
