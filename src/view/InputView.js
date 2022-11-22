@@ -36,6 +36,7 @@ const InputView = {
   tryLength() {
     this.count += 1;
     this.moving();
+    this.failMoving();
   },
 
   moving() {
@@ -44,6 +45,15 @@ const InputView = {
       /X/g.test(this.result) === false
     ) {
       this.readMoving();
+    }
+  },
+
+  failMoving() {
+    if (
+      this.count <= this.computerNum.length &&
+      /X/g.test(this.result) === true
+    ) {
+      this.readGameCommand();
     }
   },
 
