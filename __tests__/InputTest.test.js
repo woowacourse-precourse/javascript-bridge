@@ -10,32 +10,23 @@ describe('사용자 입력 예외 테스트', () => {
       validateBridgeLength(2);
     }).toThrow('[ERROR]');
   });
+
+  const moveCommands = ['d', 'u', 'abc', 3];
+  const retryCommands = ['r', 'q', 'abc', 1];
+
   test('라운드마다 요구되는 이동 입력은 대문자 "U", 대문자 "D" 중 하나의 문자여야 한다.', () => {
-    expect(() => {
-      validateMovingValue('d');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateMovingValue('u');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateMovingValue('abc');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateMovingValue(3);
-    }).toThrow('[ERROR]');
+    moveCommands.forEach(cmd => {
+      expect(() => {
+        validateMovingValue(cmd);
+      }).toThrow('[ERROR]');
+    });
   });
+
   test('게임 재시작 및 종료 여부 입력은 대문자 "R"(재시작)과 대문자 "Q"(종료) 중 하나의 문자여야 한다.', () => {
-    expect(() => {
-      validateEndValue('r');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateEndValue('q');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateEndValue('abc');
-    }).toThrow('[ERROR]');
-    expect(() => {
-      validateEndValue(1);
-    }).toThrow('[ERROR]');
+    retryCommands.forEach(cmd => {
+      expect(() => {
+        validateEndValue(cmd);
+      }).toThrow('[ERROR]');
+    });
   });
 });
