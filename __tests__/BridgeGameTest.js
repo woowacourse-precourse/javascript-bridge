@@ -42,6 +42,16 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
+const runException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), ['[ERROR]']);
+};
+
 describe('다리 건너기 테스트', () => {
   test('다리 길이 8 생성 테스트', () => {
     const randomNumbers = [1, 0, 0, 1, 0, 1, 0, 1];
@@ -130,5 +140,29 @@ describe('다리 건너기 테스트', () => {
       '총 시도한 횟수: 1',
     ]);
     expectBridgeOrder(log, '[   | O | O ]', '[ O |   |   ]');
+  });
+
+  test('예외 테스트 1', () => {
+    runException(['0']);
+  });
+
+  test('예외 테스트 2', () => {
+    runException(['3.3']);
+  });
+
+  test('예외 테스트 3', () => {
+    runException(['-1']);
+  });
+
+  test('예외 테스트 4', () => {
+    runException(['3', 'A']);
+  });
+
+  test('예외 테스트 5', () => {
+    runException(['3', 'q']);
+  });
+
+  test('예외 테스트 6', () => {
+    runException(['3', 'u']);
   });
 });
