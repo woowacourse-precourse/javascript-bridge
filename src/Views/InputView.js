@@ -1,14 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../utils/constants');
-const {
-  validateBridgeSize,
-  validateMovingInput,
-  validateContinue,
-} = require('../utils/validations');
 
 const InputView = {
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.SELECT_BRIDGE_SIZE, (userInput) => {
+      Console.print(MESSAGE.BLANK);
       callback(userInput);
     });
   },
@@ -29,6 +25,7 @@ const InputView = {
 
   readGameCommand(callback) {
     Console.readLine(MESSAGE.ASK_CONTINUE, (userInput) => {
+      Console.print(MESSAGE.BLANK);
       callback(userInput);
     });
   },

@@ -1,6 +1,7 @@
-const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
+const BridgeGame = require('../Models/BridgeGame');
+const ProgressMap = require('../Models/ProgressMap');
 const { OPTION } = require('../utils/constants');
 const {
   validateBridgeSize,
@@ -9,19 +10,24 @@ const {
 } = require('../utils/validations');
 
 class GameController {
+  #inputView;
+  #outputView;
+  #bridgeGame;
+  #progressMap;
+
   constructor() {
-    this.inputView = InputView;
-    this.outputView = OutputView;
-    this.bridgeGame = new BridgeGame();
+    this.#inputView = InputView;
+    this.#outputView = OutputView;
+    this.#bridgeGame = new BridgeGame();
   }
 
   startGame() {
-    this.outputView.printStart();
+    this.#outputView.printStart();
     this.inputBridgeSize();
   }
 
   inputBridgeSize() {
-    this.inputView.readBridgeSize((userInput) => {
+    this.#inputView.readBridgeSize((userInput) => {
       this.checkValidSize(userInput);
     });
   }
@@ -31,19 +37,19 @@ class GameController {
       validateBridgeSize(userInput);
       this.makeBridge(userInput);
     } catch (error) {
-      this.outputView.printError(error);
+      this.#outputView.printError(error);
       this.inputBridgeSize();
     }
   }
 
   makeBridge(userInput) {
-    const size = this.inputView.getBridgeSize(userInput);
-    this.bridgeGame.createBridge(size);
+    const size = this.#inputView.getBridgeSize(userInput);
+    this.#bridgeGame.createBridge(size);
     this.selectMoving();
   }
 
   selectMoving() {
-    this.inputView.readMoving((userInput) => {
+    this.#inputView.readMoving((userInput) => {
       this.checkValidMoving(userInput);
     });
   }
@@ -53,40 +59,52 @@ class GameController {
       validateMovingInput(userInput);
       this.moving(userInput);
     } catch (error) {
-      this.outputView.printError(error);
+      this.#outputView.printError(error);
       this.selectMoving();
     }
   }
 
   moving(userInput) {
-    const select = this.inputView.getUserMoving(userInput);
-    this.bridgeGame.move(select);
+    const select = this.#inputView.getUserMoving(userInput);
+    this.#bridgeGame.move(select);
     this.checkResult();
   }
 
   checkResult() {
-    const progressData = this.bridgeGame.getGameProgress();
-    this.outputView.printMap(progressData);
-    this.checkAlive();
-    this.checkWin();
+    const progressData = this.#bridgeGame.getGameProgress();
+    const currentProgressMap = this.makeMap(progressData);
+
+    this.#outputView.printMap(currentProgressMap);
+    this.checkGameBranch();
   }
 
-  checkAlive() {
-    const alive = this.bridgeGame.getAlive();
+  makeMap(progressData) {
+    this.#progressMap = new ProgressMap(progressData);
+    const currentProgressMap = this.#progressMap.createMap(progressData);
+
+    return currentProgressMap;
+  }
+
+  checkGameBranch() {
+    const alive = this.#bridgeGame.getAlive();
     if (!alive) return this.askRetry();
 
-    return this.selectMoving();
-  }
-
-  checkWin() {
-    const end = this.bridgeGame.checkGameEnd();
+    const end = this.#bridgeGame.checkGameEnd();
     if (end) return this.win();
 
     return this.selectMoving();
   }
 
+  win() {
+    const progressData = this.#bridgeGame.getGameProgress();
+    const playCount = this.#bridgeGame.getPlayCount();
+    const gameResult = this.#bridgeGame.getGameResult();
+    const currentProgressMap = this.#progressMap.createMap(progressData);
+    this.#outputView.printResult(currentProgressMap, playCount, gameResult);
+  }
+
   askRetry() {
-    this.inputView.readGameCommand((userInput) => {
+    this.#inputView.readGameCommand((userInput) => {
       this.checkRetryValidation(userInput);
     });
   }
@@ -96,7 +114,7 @@ class GameController {
       validateContinue(userInput);
       this.retryBranch(userInput);
     } catch (error) {
-      this.outputView.printError(error);
+      this.#outputView.printError(error);
       this.askRetry();
     }
   }
@@ -108,23 +126,17 @@ class GameController {
   }
 
   replay() {
-    this.bridgeGame.retry();
+    this.#bridgeGame.retry();
     this.selectMoving();
   }
 
-  win() {
-    const progressData = this.bridgeGame.getGameProgress();
-    const playCount = this.bridgeGame.getPlayCount();
-    const gameResult = this.bridgeGame.getGameResult();
-    this.outputView.printResult(progressData, playCount, gameResult);
-  }
-
   defeat() {
-    this.bridgeGame.defeat();
-    const progressData = this.bridgeGame.getGameProgress();
-    const playCount = this.bridgeGame.getPlayCount();
-    const gameResult = this.bridgeGame.getGameResult();
-    this.outputView.printResult(progressData, playCount, gameResult);
+    this.#bridgeGame.defeat();
+    const progressData = this.#bridgeGame.getGameProgress();
+    const playCount = this.#bridgeGame.getPlayCount();
+    const gameResult = this.#bridgeGame.getGameResult();
+    const currentProgressMap = this.#progressMap.createMap(progressData);
+    this.#outputView.printResult(currentProgressMap, playCount, gameResult);
   }
 }
 
