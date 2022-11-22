@@ -9,7 +9,7 @@ class GameStatus {
     /** @type {boolean} 현재 게임 상태를 나타냅니다.*/
     this.playing = true;
     /**@type {number} 현재까지 몇번의 게임을 시도했는지 횟수를 나타냅니다.*/
-    this.trial = 0;
+    this.trial = 1;
   }
 }
 
