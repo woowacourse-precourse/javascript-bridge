@@ -1,9 +1,10 @@
-const { INPUT_VIEW } = require('../Constants');
-const BridgeSize = require('../inputCheck/BridgeSize');
-const { Console } = require('@woowacourse/mission-utils');
 const GameController = require('./GameController');
+// inputCheck
+const BridgeSize = require('../inputCheck/BridgeSize');
 const Moving = require('../inputCheck/Moving');
 const GameCommand = require('../inputCheck/GameCommand');
+// constants
+const { INPUT_VIEW } = require('../Constants');
 
 const BridgeController = class extends GameController {
   constructor(inputView, outputView, bridgeGame) {
