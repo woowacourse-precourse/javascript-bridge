@@ -16,6 +16,7 @@ class App {
 
   #handleBridgeSize(input) {
     try {
+      Validator.checkNumber(input);
       Validator.checkBridgeSize(input);
       this.#initModel(Number(input));
     } catch (e) {
