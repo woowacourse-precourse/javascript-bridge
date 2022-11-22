@@ -25,15 +25,17 @@ class BridgeGame {
     if (this.state) this.drawBridge(movingStep, BRIDGE_SHAPE.SUCCESS);
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
-    this.currentStep++;
-
     if (!this.state) return InputView.readGameCommand(this);
-    if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try);
+    if (this.reachEndOfBridge()) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try);
     return InputView.readMoving(this);
   }
 
   canMove(movingStep) {
     return this.correctBridge[this.currentStep] === movingStep;
+  }
+
+  reachEndOfBridge() {
+    return ++this.currentStep === this.bridgeSize;
   }
 
   drawBridge(movingStep, bridgeShape) {
