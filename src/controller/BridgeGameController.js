@@ -8,11 +8,6 @@ const { OUTPUT_MESSAGE, GAME_RULE, COMMAND } = require('../utils/Constant');
 
 class BridgeGameController {
   #bridgeGame;
-  #attempts;
-
-  constructor() {
-    this.#attempts = 1;
-  }
 
   start() {
     OutputView.printStartGame();
@@ -21,7 +16,7 @@ class BridgeGameController {
 
   makeGame(length) {
     const bridge = BridgeMaker.makeBridge(Number(length), BridgeRandomNumberGenerator.generate);
-    this.#bridgeGame = new BridgeGame(bridge, 0);
+    this.#bridgeGame = new BridgeGame(bridge, 0, 1);
   }
 
   makeBridge() {
@@ -71,7 +66,6 @@ class BridgeGameController {
   }
 
   replay() {
-    this.#attempts += 1;
     this.#bridgeGame.retry();
     this.startMove();
   }
@@ -79,7 +73,7 @@ class BridgeGameController {
   resultGame(result) {
     Console.print(OUTPUT_MESSAGE.RESULT);
     this.renderBridge(result);
-    OutputView.printResult(result, this.#attempts);
+    OutputView.printResult(result, this.#bridgeGame.getRetryCount());
     this.end();
   }
 

@@ -3,10 +3,12 @@ const { GAME_RULE, COMMAND } = require('../utils/Constant');
 class BridgeGame {
   #bridge;
   #moveCount;
+  #retryCount;
 
-  constructor(bridge, moveCount) {
+  constructor(bridge, moveCount, retryCount) {
     this.#bridge = bridge;
     this.#moveCount = moveCount;
+    this.#retryCount = retryCount;
   }
 
   isMove(direction) {
@@ -22,6 +24,7 @@ class BridgeGame {
   }
 
   retry() {
+    this.#retryCount += 1;
     this.#moveCount = 0;
   }
 
@@ -57,6 +60,10 @@ class BridgeGame {
 
   getMoveCount() {
     return this.#moveCount;
+  }
+
+  getRetryCount() {
+    return this.#retryCount;
   }
 }
 
