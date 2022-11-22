@@ -1,0 +1,7 @@
+const DOWN_BRIDGE_SYMBOL = "D";
+const UP_BRIDGE_SYMBOL = "U";
+
+module.exports={
+  DOWN_BRIDGE_SYMBOL,
+  UP_BRIDGE_SYMBOL,
+}
