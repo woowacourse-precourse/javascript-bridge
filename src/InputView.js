@@ -6,12 +6,17 @@ const {
   REQUEST_FOR_RETRY,
 } = require('./constants/requests');
 const { FINAL_COMMAND_GROUP } = require('./enums');
+const { handleInputError } = require('./utils');
 
 const InputView = {
   readBridgeSize(build) {
     Console.readLine(REQUEST_FOR_BRIDGE_LENGTH, (size) => {
-      Validator.validateBridgeSizeInput(size);
-      build.call(this, size);
+      try {
+        Validator.validateBridgeSizeInput(size);
+        build.call(this, size);
+      } catch (e) {
+        handleInputError(e.message, InputView.readBridgeSize, build);
+      }
     });
   },
 
