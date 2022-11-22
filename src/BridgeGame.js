@@ -50,7 +50,7 @@ class BridgeGame extends BridgeGameCore {
       this.#moveSuccess(command);
       return true;
     }
-    this.#moveFail(command, failCallback);
+    this.#moveFail(command);
     return false;
   }
 
