@@ -11,11 +11,11 @@ const OutputView = {
     print(currentBridgeGameMap);
   },
 
-  printResult({ userGameMap, isSuccess, userTryCount }) {
+  printResult({ userGameMap, isGameOver, userTryCount }) {
     const { gameResult, tryCount, successOrFailure } = OUTPUT_MESSAGES;
     print(gameResult);
     print(userGameMap);
-    print(successOrFailure(isSuccess));
+    print(successOrFailure(isGameOver));
     print(tryCount(userTryCount));
   },
 
