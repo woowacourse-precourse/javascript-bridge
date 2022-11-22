@@ -1,5 +1,4 @@
 const { BRIDGE_RULE, ERROR_MESSAGE } = require('../../constants');
-const InputValidator = require('../../utils/InputValidator');
 
 const Command = require('./Command');
 
@@ -14,6 +13,7 @@ class SizeCommand extends Command {
    * @throws {string} 커맨드 값이 3이상 20이하가 아니라면 예외 처리
    */
   constructor(command) {
+    Command.validate(command);
     SizeCommand.#validate(command);
     super(command);
   }
@@ -23,13 +23,17 @@ class SizeCommand extends Command {
    * @param {string} command
    */
   static #validate(command) {
-    InputValidator.validateEmpty(command);
-    InputValidator.validateSpace(command);
-    InputValidator.validateNumber(command);
+    if (SizeCommand.#isIncludeLetter(command)) {
+      throw ERROR_MESSAGE.NOT_NUMBER;
+    }
 
     if (!SizeCommand.#isValid(command)) {
       throw ERROR_MESSAGE.RULE_SIZE;
     }
+  }
+
+  static #isIncludeLetter(command) {
+    return command.split('').find((letter) => Number.isNaN(parseInt(letter, 10)));
   }
 
   /**

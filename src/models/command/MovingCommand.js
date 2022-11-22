@@ -13,6 +13,7 @@ class MovingCommand extends Command {
    * @throws {string} 커맨드 값이 U나 D가 아니면 예외 처리
    */
   constructor(command) {
+    Command.validate(command);
     MovingCommand.#validate(command);
     super(command);
   }

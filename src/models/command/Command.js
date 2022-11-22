@@ -1,3 +1,5 @@
+const { ERROR_MESSAGE } = require('../../constants');
+
 class Command {
   #command;
 
@@ -15,6 +17,20 @@ class Command {
    */
   getCommand() {
     return this.#command;
+  }
+
+  static validate(command) {
+    if (command === '') {
+      throw ERROR_MESSAGE.EMPTY;
+    }
+
+    if (Command.#isSpaceBeforeOrAfter(command)) {
+      throw ERROR_MESSAGE.SPACE;
+    }
+  }
+
+  static #isSpaceBeforeOrAfter(command) {
+    return command.length !== command.trim().length;
   }
 }
 

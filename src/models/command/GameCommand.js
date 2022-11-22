@@ -13,6 +13,7 @@ class GameCommand extends Command {
    * @throws {string} 커맨드 값이 R이나 Q가 아니면 예외 처리
    */
   constructor(command) {
+    Command.validate(command);
     GameCommand.#validate(command);
     super(command);
   }
