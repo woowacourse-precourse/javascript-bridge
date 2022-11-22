@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "rules": {
+    "no-console": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}
