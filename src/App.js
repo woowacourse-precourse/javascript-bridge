@@ -1,5 +1,5 @@
-const InputView = require('./InputView')
-const OutputView = require('./OutputView')
+const InputView = require('./UI/InputView')
+const OutputView = require('./UI/OutputView')
 
 class App {
   #generatedBridge;

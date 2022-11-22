@@ -1,5 +1,5 @@
-const { ERROR } = require('./constants/messages');
-const { SETTING } = require('./constants/setting');
+const { ERROR } = require('../constants/messages');
+const { SETTING } = require('../constants/setting');
 const { Console } = require('@woowacourse/mission-utils');
 
 class Validation {

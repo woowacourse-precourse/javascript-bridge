@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils')
-const BridgeGame = require('../src/BridgeGame')
-const OutputView = require('../src/OutputView')
+const BridgeGame = require('../src/domain/BridgeGame')
+const OutputView = require('../src/UI/OutputView')
 const App = require('../src/App')
 
 const getLogSpy = () => {

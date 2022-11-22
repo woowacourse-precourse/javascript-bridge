@@ -1,11 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { Random } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { QUESTION } = require('./constants/messages');
-const Validation = require('./Validation');
-const BridgeGame = require('./BridgeGame');
-const OutputView = require('./OutputView');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { QUESTION } = require('../constants/messages');
+const Validation = require('../validation/Validation');
+const BridgeGame = require('../domain/BridgeGame');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

@@ -1,4 +1,3 @@
-const PlayerMove = require('./CalcForDrawingBridgeStatus')
 const CalcForDrawingBridgeStatus = require('./CalcForDrawingBridgeStatus')
 
 /**
