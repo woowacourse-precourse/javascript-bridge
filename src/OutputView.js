@@ -49,6 +49,10 @@ const OutputView = {
     MissionUtils.Console.print(`게임 성공 여부: ${resultStatus ? '성공' : '실패'}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${retryCount}`)
   },
+
+  errorMessage() {
+    MissionUtils.Console.print(`[ERROR] 유효하지 않은 입력값입니다.`);
+  }
 };
 
 module.exports = OutputView;
