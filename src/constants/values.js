@@ -7,6 +7,7 @@ const REPRESENTATION = Object.freeze({
     abbreviatedForm: "D",
     numericalForm: 0,
   },
+  SEPERATOR: "|",
 });
 
 const VALID_BRIDGE_LENGTH = Object.freeze({
