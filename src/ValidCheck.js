@@ -12,22 +12,22 @@ const ValidCheck = {
   bridgeSizeValidCheck(bridgeSize){
     let flag1 = this.sizeIsNumber(bridgeSize);
     let flag2 = this.isInRange(bridgeSize);
-    //return false;
-    return (flag1 || flag2);
+    return false;
+    //return (flag1 || flag2);
   },
 
   movingValidCheck(moving){
     let flag1 = this.isCorrectUpDown(moving);
     let flag2 = this.isOneLetter(moving);
-    //return false;
-    return (flag1 || flag2);
+    return false;
+    //return (flag1 || flag2);
   },
 
   gameCommandValidCheck(gameCommand){
     let flag1 = this.isCorrectRetryQuit(gameCommand);
     let flag2 = this.isOneLetter(gameCommand);
-    //return false;
-    return (flag1 || flag2);  
+    return false;
+    //return (flag1 || flag2);  
   },
 
   isInRange(bridgeSize){
