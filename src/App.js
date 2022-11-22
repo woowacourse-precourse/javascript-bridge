@@ -1,6 +1,7 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
+const Validation = require("./utils/Validation");
 
 class App {
   #userGame;
@@ -12,8 +13,14 @@ class App {
 
   createBridge() {
     InputView.readBridgeSize((size) => {
-      this.#userGame = new BridgeGame(size);
-      this.moveUserBridge();
+      try {
+        Validation.validateBridgeSize(size);
+        this.#userGame = new BridgeGame(size);
+        this.moveUserBridge();
+      } catch (e) {
+        Console.print(e);
+        this.createBridge();
+      }
     });
   }
 
