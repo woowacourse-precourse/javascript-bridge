@@ -23,6 +23,16 @@ const CheckError = {
     }
     return true;
   },
+
+  checkGameConnand(input) {
+    try {
+      if (input !== "R" && input !== "Q") throw new Error("[ERROR] R 또는 Q만 입력하세요.");
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return false;
+    }
+    return true;
+  },
 };
 
 module.exports = CheckError;

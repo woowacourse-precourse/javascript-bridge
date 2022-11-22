@@ -25,11 +25,14 @@ class App {
 
   inputUserMove(userChoice) {
     const bridgeGame = new BridgeGame(this.bridgeArray);
+
     bridgeGame.move(this, userChoice);
   }
 
-  printBridge(upBridge, downBridge) {
+  printBridge(ox, upBridge, downBridge) {
     OutputView.printMap(upBridge, downBridge);
+    if (ox == "X") InputView.readGameCommand(this);
+    else MissionUtils.Console.print("O");
   }
 }
 

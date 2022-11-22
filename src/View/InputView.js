@@ -39,7 +39,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(app) {
+    MissionUtils.Console.readLine(Message.RETRY_OR_QUIT, (userChoice) => {
+      checkBoolean = CheckError.checkGameConnand(userChoice);
+      if (!checkBoolean) return this.readGameCommand(app);
+    });
+  },
 };
 
 module.exports = InputView;

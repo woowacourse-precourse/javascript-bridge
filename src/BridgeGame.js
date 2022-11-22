@@ -31,7 +31,7 @@ class BridgeGame {
       this.upBridge += ` `;
       this.downBridge += `${this.ox}`;
     }
-    app.printBridge(this.upBridge, this.downBridge);
+    app.printBridge(this.ox, this.upBridge, this.downBridge);
   }
   // ContinueGame.gameContinueCheck(this.upBridge, this.downBridge, bridgeArray);
   // OutputView.printMap(this.upBridge, this.downBridge, bridgeArray);
