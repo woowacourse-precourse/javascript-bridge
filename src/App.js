@@ -2,7 +2,8 @@ const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const { printStartMessage } = require("./OutputView");
-const { validateBridgeNumber, validateBridgeMove } = require("./Validation");
+const { validateBridgeNumber } = require("./Validation");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -17,12 +18,17 @@ class App {
   }
 
   handleBridgeSize(length) {
-    validateBridgeNumber(length);
-    this.game = new BridgeGame(this.inputView, this.outputView, +length);
-    this.game.move();
+    try {
+      validateBridgeNumber(length);
+      this.game = new BridgeGame(this.inputView, this.outputView, +length);
+      this.game.move();
+    } catch (error) {
+      Console.print(error);
+      this.inputView.readBridgeSize(this.handleBridgeSize.bind(this));
+    }
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 module.exports = App;
