@@ -19,14 +19,13 @@ const InputView = {
     Console.readLine(GAME_MESSAGE.GET_BRIDGE_SIZE, (bridgeSize) => {
       try {
         checkBridgeSize(bridgeSize);
+
+        bridgeGame.bridge = makeBridge(bridgeSize, generate);
+        this.readMoving();
       } catch (e) {
         Console.print(e);
         this.readBridgeSize();
       }
-
-      bridgeGame.bridge = makeBridge(bridgeSize, generate);
-      bridgeGame.bridgeSize = parseInt(bridgeSize);
-      this.readMoving();
     });
   },
 
@@ -42,7 +41,7 @@ const InputView = {
       
         printMap(bridgeGame);
         
-        if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.bridgeSize - 1)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
+        if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.getBridgeSize() - 1)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
         else if (tf) this.readMoving();
         else this.readGameCommand();
       } catch(e) {

@@ -6,7 +6,6 @@ const { UP_OR_DOWN, PRINT_MAP } = require('./Constant.js');
 class BridgeGame {
   constructor() {
     this.bridge;
-    this.bridgeSize;
     this.roundCount = 0;
     this.totalCount = 1;
     this.nowMap = {
@@ -21,6 +20,11 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    * 
    */
+
+  getBridgeSize() {
+    return this.bridge.length;
+  }
+
   move(movingInfo) {
     const compareIndex = this.roundCount;
     const other = movingInfo === 'U' ? UP_OR_DOWN.DOWN : UP_OR_DOWN.UP;
