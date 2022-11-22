@@ -1,6 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Utils/Validator');
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 const OutputView = require('./Views/OutputView');
 const InputView = require('./Views/InputView');
 const { USER_INPUT_CODE, MESSAGES } = require('./constants');
