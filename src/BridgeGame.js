@@ -3,6 +3,7 @@ const { MARKING_PASS, MARKING_FAIL } = require("./Utils");
 class BridgeGame {
   #bridge;
   #position;
+
   constructor() {
     this.#bridge = null;
     this.#position = 0;

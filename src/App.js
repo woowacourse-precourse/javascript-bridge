@@ -14,6 +14,7 @@ const { Console } = require("@woowacourse/mission-utils");
 class App {
   #bridgeGame;
   #playCount;
+
   constructor() {
     this.#bridgeGame = new BridgeGame();
     this.#playCount = 0;
