@@ -8,14 +8,10 @@ class BridgeGame {
   #tryCount;
   #map;
   constructor(size) {
-    this.validate(size);
+    Validator.validateBridgeSize(size);
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#tryCount = 1;
     this.#map = [[], []];
-  }
-
-  validate(size) {
-    Validator.validateBridgeSize(size);
   }
 
   getTryCount() {
