@@ -2,7 +2,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { validateReadBridgeSize, validateReadMoving } = require('./Validate');
+const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = require('./Validate');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { printMap, printResult } = require('./OutputView');
@@ -30,14 +30,18 @@ class App {
     validateReadMoving(moving);
     const isCorrect = this.#bridgeGame.move(moving);
     printMap(this.#bridgeGame.getMoveHistory(), isCorrect);
+    if (!isCorrect) InputView.readGameCommand(this.onReadGameCommand.bind(this));
     if (this.#bridgeGame.isFinished()) {
-      printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), isCorrect);
+      //다리 모두 건넘
+      if (isCorrect) printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), isCorrect);
       return;
     }
     if (isCorrect) InputView.readMoving(this.onReadMoving.bind(this));
   }
+  onReadGameCommand(command) {
+    validateReadGameCommand(command);
+    this.#bridgeGame.retry();
+  }
 }
 
-const app = new App();
-app.play();
 module.exports = App;

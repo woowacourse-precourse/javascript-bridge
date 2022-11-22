@@ -15,6 +15,11 @@ const isUOrD = input => {
   if (input === 'U' || input === 'D') return true;
   return false;
 };
+
+const isROrQ = input => {
+  if (input === 'R' || input === 'Q') return true;
+  return false;
+};
 const Validate = {
   validateReadBridgeSize(input) {
     if (!isNum(input)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
@@ -22,6 +27,9 @@ const Validate = {
   },
   validateReadMoving(input) {
     if (!isUOrD(input)) throw new Error(ERROR_MESSAGE.MOVING);
+  },
+  validateReadGameCommand(input) {
+    if (!isROrQ(input)) throw new Error(ERROR_MESSAGE.COMMAND);
   },
 };
 
