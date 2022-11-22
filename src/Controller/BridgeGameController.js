@@ -56,6 +56,14 @@ class BridgeGameController {
     const isSuccess = this.#BridgeGame.move(moveCmd); //
     this.#currentMap = this.#BridgeGame.getCurrentMap();
     OutputView.printMap(this.#currentMap[0], this.#currentMap[1]);
+    this.isSuccessCase(isSuccess);
+  }
+
+  /**
+   *
+   * @param {boolean} isSuccess 이동 실패 or 성공
+   */
+  isSuccessCase(isSuccess) {
     if (!isSuccess) {
       //이동 실패하면 게임 재시작 or 끝내기
       this.inputGameCommand();
