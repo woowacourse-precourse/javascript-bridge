@@ -30,7 +30,6 @@ const InputView = {
   readMoving(){
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userInput) => {
       if(Validation.validateUserChoice(userInput)) { this.readMoving(); }
-      console.log(bridgeGame.BridgeStatus, userInput);
       const data = bridgeGame.move(userInput);
       OutputView.printMap(bridgeGame.BridgeResultArray);
       if(data === "종료") {
