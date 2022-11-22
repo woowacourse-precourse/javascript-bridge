@@ -1,4 +1,4 @@
-const { errorMessage } = require("./constant/message.js");
+const { errorMessage, resultMessage } = require("./constant/message.js");
 
 const Validation = {
   /**
@@ -47,9 +47,9 @@ const Validation = {
   },
   validateSucess(answer, inputs) {
     for (let i = 0; i < answer.length; i++) {
-      if (answer[i] !== inputs[i]) return "실패";
+      if (answer[i] !== inputs[i]) return resultMessage.FAIL;
     }
-    return "성공";
+    return resultMessage.SUCCESS;
   },
 };
 

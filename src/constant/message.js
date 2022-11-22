@@ -1,6 +1,10 @@
 const START_NUMBER = 2;
 const END_NUMBER = 20;
 
+const resultMessage = {
+  SUCCESS: "성공",
+  FAIL: "실패",
+};
 const gameMessage = {
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
   MOVE: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
@@ -14,4 +18,4 @@ const errorMessage = {
   NOT_ALLOWED: "[ERROR] 허용되지 않은 문자열입니다.",
 };
 
-module.exports = { gameMessage, errorMessage };
+module.exports = { gameMessage, errorMessage, resultMessage };
