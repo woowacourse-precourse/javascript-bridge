@@ -54,11 +54,12 @@ class App {
   }
 
   retryCallback(command) {
-    this.#bridgeGame.retry(
-      command,
-      () => this.routeReadMoving(),
-      () => this.showResult(false),
-    );
+    if (this.#bridgeGame.isCommandRetry(command)) {
+      this.#bridgeGame.retry(command);
+      this.routeReadMoving();
+      return;
+    }
+    this.showResult(false);
   }
 
   showReadGameCommand() {
