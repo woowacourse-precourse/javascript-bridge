@@ -9,6 +9,8 @@ const UTIL = Object.freeze({
   FAIL: '실패',
   FIRST: 1,
   INIT: 0,
+  MIN: 3,
+  MAX: 20,
 });
 
 const INPUT = Object.freeze({
@@ -34,9 +36,18 @@ const BRIDGE = Object.freeze({
   NOT_CHOOSE_AFTER_FIRST_BLOCK: '|   ',
 });
 
+const ERROR = Object.freeze({
+  SIZE_NUMBER: '[ERROR] 다리 사이즈는 숫자로만 입력할 수 있습니다.',
+  SIZE_INTEGER: '[ERROR] 다리 사이즈는 정수로만 입력할 수 있습니다.',
+  SIZE_RANGE: '[ERROR] 다리 사이즈는 3과 20 사이의 숫자만 입력할 수 있습니다.',
+  MOVE: '[ERROR] 이동은 U 또는 D 키만 사용할 수 있습니다.',
+  REGAME: '[ERROR] R 키로 재시작 또는 Q 키로 게임 종료만 할 수 있습니다.',
+});
+
 module.exports = {
   UTIL,
   INPUT,
   OUTPUT,
   BRIDGE,
+  ERROR,
 };
