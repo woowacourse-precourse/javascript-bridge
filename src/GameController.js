@@ -1,10 +1,10 @@
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const errorController = require("./ErrorController");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const Validation = require("./Validation");
+const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
+const errorController = require("./utils/ErrorController");
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
+const Validation = require("./utils/Validation");
 
 class GameController {
   constructor() {
@@ -19,27 +19,18 @@ class GameController {
   }
   inputBridgeSize() {
     InputView.readBridgeSize((input) => {
-      errorController(
-        this.createBridge.bind(this, input),
-        this.inputBridgeSize.bind(this)
-      );
+      errorController(this.createBridge.bind(this, input), this.inputBridgeSize.bind(this));
     });
   }
   createBridge(input) {
     Validation.bridgeInput(Number(input));
-    const bridge = BridgeMaker.makeBridge(
-      input,
-      BridgeRandomNumberGenerator.generate
-    );
+    const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
     this.inputStep();
   }
   inputStep() {
     InputView.readMoving((input) => {
-      errorController(
-        this.compareStep.bind(this, input),
-        this.inputStep.bind(this)
-      );
+      errorController(this.compareStep.bind(this, input), this.inputStep.bind(this));
     });
   }
   compareStep(input) {
@@ -70,10 +61,7 @@ class GameController {
   }
   askStopGame() {
     InputView.readGameCommand((input) => {
-      errorController(
-        this.chooseRetryGame.bind(this, input),
-        this.askStopGame.bind(this)
-      );
+      errorController(this.chooseRetryGame.bind(this, input), this.askStopGame.bind(this));
     });
   }
   chooseRetryGame(input) {

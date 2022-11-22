@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require("./constants/messages");
+const { ERROR_MESSAGE } = require("../constants/messages");
 
 const Validation = {
   bridgeInput: (input) => {

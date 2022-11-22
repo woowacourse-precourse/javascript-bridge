@@ -1,4 +1,4 @@
-const OutputView = require("./OutputView");
+const OutputView = require("../view/OutputView");
 
 const errorController = (callbalck, errorCallback) => {
   try {

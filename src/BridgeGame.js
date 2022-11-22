@@ -18,14 +18,8 @@ class BridgeGame {
     return this.#nowIndex;
   }
   getBridgeString() {
-    const upString =
-      BRIDGE_DRAWER.START +
-      this.#up.join(BRIDGE_DRAWER.BAR) +
-      BRIDGE_DRAWER.END;
-    const downString =
-      BRIDGE_DRAWER.START +
-      this.#down.join(BRIDGE_DRAWER.BAR) +
-      BRIDGE_DRAWER.END;
+    const upString = BRIDGE_DRAWER.START + this.#up.join(BRIDGE_DRAWER.BAR) + BRIDGE_DRAWER.END;
+    const downString = BRIDGE_DRAWER.START + this.#down.join(BRIDGE_DRAWER.BAR) + BRIDGE_DRAWER.END;
     return [upString, downString];
   }
   getTryCount() {
