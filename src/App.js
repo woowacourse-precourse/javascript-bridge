@@ -1,16 +1,14 @@
-// const MissionUtils = require("@woowacourse/mission-utils");
-// const { Console, Random } = MissionUtils;
-import { INPUT } from "./InputView";
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = MissionUtils;
 
 class App {
   play() {
-    // Console.print(this.gameResultMessagePrint().gameCount);
     
   }
 
   gameResultMessagePrint() { 
     const gameStartMessage = "다리 건너기 게임을 시작합니다.";
-    const gameBridgeLengthInputMessage = "다리의 길이를 입력해주세요.";
+    const gameBridgeLengthInputMessage = "다리의 길이 를 입력해주세요.";
     const gameBridgeMoveSpaceChoiceMessage = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
     const gameRetryMessage = "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
     const gameResultMessage = "최종 게임 결과";
@@ -24,11 +22,9 @@ class App {
       4 : "[ERROR] 대소문자를 구분해주세요.",
       5 : "[ERROR] R 또는 Q만 입력해주세요.",
     }
-    
-    return gameStartMessage;
   }
 }
 const app = new App();
-console.log(app.gameResultMessagePrint());
+app.play();
 
-// module.exports = App;
+module.exports = App;
