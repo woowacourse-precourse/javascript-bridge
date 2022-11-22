@@ -3,11 +3,15 @@
  */
 
 const BridgeMaker = require('./BridgeMaker');
+const { GAME_STATUS } = require('./Message');
 class BridgeGame {
   #bridgeList;
+  #firstRow;
+  #secondRow;
   constructor() {
     this.bridgeList = [];
-    this.bri;
+    this.firstRow = [];
+    this.#secondRow = [];
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -26,6 +30,45 @@ class BridgeGame {
   setBridge() {
     const bridgeMaker = new BridgeMaker();
     this.#bridgeList = bridgeMaker.makeBridge();
+  }
+
+  setMoveInput(input) {
+    const bridge = this.selectUpDown(input);
+    bridge.push(this.selectPattern(input, this.getRowLength()));
+    this.insertSpace(bridge);
+  }
+
+  getBridgeMap() {
+    return [this.#firstRow, this.#secondRow];
+  }
+
+  selectUpDown(input) {
+    const { UP } = GAME_STATUS;
+
+    if (input === UP) return this.#firstRow;
+
+    return this.#secondRow;
+  }
+
+  selectPattern(data, index) {
+    const { POSSIBLE, IMPOSSIBLE } = GAME_STATUS;
+
+    if (data === bridgeList[index]) return POSSIBLE;
+    return IMPOSSIBLE;
+  }
+
+  insertSpace(bridge) {
+    const { SPACE } = GAME_STATUS;
+    if (bridge === this.#firstRow) {
+      this.#secondRow.push(SPACE);
+      return;
+    }
+
+    this.#firstRow.push(SPACE);
+  }
+
+  getRowLength() {
+    return this.#firstRow.length;
   }
 }
 

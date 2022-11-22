@@ -12,13 +12,22 @@ class bridgeController {
 
   run() {
     OutputView.printInit();
+    this.getSizeInput();
+  }
+
+  getSizeInput() {
     InputView.readBridgeSize(this.inputSize.bind(this));
   }
 
   inputSize(input) {
-    Validate.isNumber(input);
-    this.#bridge.setBridge();
-    this.getMoveInput();
+    try {
+      Validate.isNumber(input);
+      this.#bridge.setBridge();
+      this.getMoveInput();
+    } catch (error) {
+      OutputView.printError(error);
+      this.getSizeInput();
+    }
   }
 
   getMoveInput() {
@@ -26,7 +35,14 @@ class bridgeController {
   }
 
   inputMoveSpace(input) {
-    Validate.isMoveInput(input);
+    try {
+      Validate.isMoveInput(input);
+      this.#bridge.setMoveInput(input);
+      OutputView.printMap(this.#bridge.getBridgeMap());
+    } catch (error) {
+      OutputView.printError(error);
+      this.getMoveInput();
+    }
   }
 }
 

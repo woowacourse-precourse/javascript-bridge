@@ -2,7 +2,7 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const MESSAGE = require('./Message');
+const { MESSAGE, GAME_STATUS } = require('./Message');
 
 const OutputView = {
   /**
@@ -17,7 +17,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap([first, second]) {
+    const firstRow = `${GAME_STATUS.START}${first.join(GAME_STATUS.LINE)}${
+      GAME_STATUS.END
+    }`;
+    const secondRow = `${GAME_STATUS.START}${second.join(GAME_STATUS.LINE)}${
+      GAME_STATUS.END
+    }`;
+
+    Console.print(firstRow);
+    Console.print(secondRow);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -25,6 +35,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {},
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
