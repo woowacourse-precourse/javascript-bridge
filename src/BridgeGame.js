@@ -49,6 +49,26 @@ class BridgeGame {
         this.#currentBridge.upPath.push("   "));
   }
 
+  getUserPath() {
+    return this.#userPath;
+  }
+
+  getBridge() {
+    return this.#bridge;
+  }
+
+  getFinish() {
+    return this.#userPath.length === this.#bridge.length;
+  }
+
+  getCurrentBridge() {
+    return this.#currentBridge;
+  }
+
+  getCount() {
+    return this.#totalCount;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
