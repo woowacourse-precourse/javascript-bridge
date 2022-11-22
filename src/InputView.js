@@ -69,6 +69,28 @@ const InputView = {
     }
     return input;
   },
+
+  //움직임 체크 U,D
+  exceptionMovingCheck(answer) {
+    const input = this.splitInput(answer);
+    const movingChar = this.characterCorrectLengthCheck(input);
+    return movingChar;
+  },
+
+  exceptionCommandCheck(answer) {
+    const input = this.splitInput(answer);
+    const movingChar = this.characterCorrectLengthCheck(input);
+    return movingChar;
+  },
+
+  characterCorrectLengthCheck(input) {
+    //입력된 값 한자리인지 확인
+    if (input.length != term.INPUT_CHAR_LENGTH) {
+      MissionUtils.Console.close();
+      throw new Error(message.NOT_ONE_CHAR_MESSAGE);
+    }
+    return input.join("");
+  },
 };
 
 module.exports = InputView;
