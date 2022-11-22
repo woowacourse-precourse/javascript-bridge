@@ -20,8 +20,8 @@ const InputView = {
   },
 
   getBridgeSize(size) {
-    try {
-      if (Number(size) < 3 || Number(size) > 20 || isNaN(size)) {
+    try { 
+      if (Controller.isSizeError(size)) {
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.inputRange));
       }
     } catch (err) {

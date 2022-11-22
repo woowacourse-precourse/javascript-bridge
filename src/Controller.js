@@ -14,6 +14,17 @@ const Controller = {
     this.size += size;
   },
 
+  isSizeError(size) {
+    if (
+      Number(size) < 3 ||
+      Number(size) > 20 ||
+      isNaN(size) ||
+      !Number.isInteger(size)
+    ) {
+      return true
+    }
+  },
+
   addRound() {
     this.round += 1;
   },

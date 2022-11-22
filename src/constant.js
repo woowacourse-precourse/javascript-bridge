@@ -32,10 +32,9 @@ const MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-  isNumber: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   inputRange: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  choose_UorD: "[ERROR] U과 D중 하나를 입력해 주세요.",
-  choose_RorQ: "[ERROR] R과 Q중 하나를 입력해 주세요.",
+  choose_UorD: "[ERROR] U과 D중 하나를 입력해 주세요.\n",
+  choose_RorQ: "[ERROR] R과 Q중 하나를 입력해 주세요.\n",
 };
 
 module.exports = { GO, COMMAND, SIGN, IS_SUCCESS, MESSAGE, ERROR_MESSAGE };
