@@ -18,7 +18,6 @@ const BridgeMaker = {
       string.push(randomNum===1 ? 'U' : 'D');
     }
 
-    console.log(string);
     return string;
   },
 };

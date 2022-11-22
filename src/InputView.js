@@ -16,7 +16,6 @@ const InputView = {
   readBridgeSize() {
     try{
       Console.readLine('다리의 길이를 입력해주세요.', (bridgeLen) => {
-        console.log(`다리 길이 : ${bridgeLen}`);
         if(!(3<=bridgeLen && bridgeLen<=20)) throw "[ERROR] 다리 길이는 3~20 사이의 숫자만 입력 가능합니다.";
         if(isNaN(bridgeLen)) throw "[ERROR] 숫자만 입력하세요.";
         const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
@@ -35,7 +34,6 @@ const InputView = {
   readMoving(currentBridge, bridge, count) {
     try{
       Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
-        console.log(`이동할 칸 : ${input}`);
         if(input!=="U" && input!=="D") throw "[ERROR] U와 D중 하나만 입력 가능합니다.";
         currentBridge=game.move(currentBridge, bridge, input); // class
         this.stillMoving(currentBridge, bridge, count);
@@ -53,18 +51,14 @@ const InputView = {
    */
   stillMoving(currentBridge, bridge, count) {
     // 게임 종료되었는지 확인
-    console.log(currentBridge[0].length, bridge.length);
-    console.log(`count: ${count}`);
     if(currentBridge[0].length === bridge.length) {
       // 게임 종료 -> 출력
       OutputView.printResult(currentBridge, count, 1);
-      console.log('게임 종료');
     }
 
     // 틀렸는지 확인
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
       // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
-      console.log('틀림. 재시작? 종료?');
       OutputView.printMap(currentBridge);
       this.readGameCommand(currentBridge, bridge, count);
     }
@@ -72,7 +66,6 @@ const InputView = {
     // 게임 진행가능한지 확인
     else {
       // 게임 다시 진행
-      console.log('겜 진행');
       this.readMoving(currentBridge, bridge, count);
       OutputView.printMap(currentBridge);
     }
@@ -84,14 +77,11 @@ const InputView = {
   readGameCommand(currentBridge, bridge, count) {
     try{
       Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
-        console.log(`재시작 여부 : ${input}, count: ${count}`);
         if(input==='R') {
           count += 1;
-          console.log('재시작 O');
           this.readMoving(game.retry(currentBridge), bridge, count);
         }
         else if(input==='Q') {
-          console.log('재시작 X');
           OutputView.printResult(currentBridge, count, 0);
         }
         else{
