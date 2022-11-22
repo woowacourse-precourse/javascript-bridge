@@ -14,6 +14,8 @@ const RETRY = Object.freeze(['R', 'Q']);
 const KEY = {
   BRIDGE: 'bridge',
   CURRENT: 'current',
+  RESULT: 'result',
+  LAST: 'last',
 };
 
 module.exports = {
