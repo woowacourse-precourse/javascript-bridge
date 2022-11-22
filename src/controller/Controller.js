@@ -1,14 +1,9 @@
-const { PHASE } = require('../constant/Constant');
+const { COMMAND, PHASE } = require('../constant/Constant');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class Controller {
-  #COMMAND = Object.freeze({
-    RETRY: 'R',
-    QUIT: 'Q',
-  });
-
   #methods = {
     [PHASE.START]: InputView.readBridgeSize,
     [PHASE.MOVE]: InputView.readMoving,
@@ -51,7 +46,7 @@ class Controller {
   }
 
   #triggerEvent(command) {
-    if (command === this.#COMMAND.RETRY) {
+    if (command === COMMAND.RETRY) {
       this.#bridgeGame.retry(this.goTo.bind(this));
       return;
     }

@@ -1,3 +1,13 @@
+const COMMAND = Object.freeze({
+  RETRY: 'R',
+  QUIT: 'Q',
+});
+
+const DIRECTION = Object.freeze({
+  0: 'D',
+  1: 'U',
+});
+
 const PHASE = Object.freeze({
   START: 0,
   MOVE: 1,
@@ -6,5 +16,7 @@ const PHASE = Object.freeze({
 });
 
 module.exports = {
+  COMMAND,
+  DIRECTION,
   PHASE,
 };

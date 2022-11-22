@@ -1,4 +1,4 @@
-const { PHASE } = require('../constant/Constant');
+const { DIRECTION, PHASE } = require('../constant/Constant');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
@@ -33,8 +33,8 @@ class BridgeGame {
     this.try += 1;
     this.result = RESULT.SUCCESS;
     this.moveMap = {
-      U: [],
-      D: [],
+      [DIRECTION[0]]: [],
+      [DIRECTION[1]]: [],
     };
   }
 
@@ -59,7 +59,7 @@ class BridgeGame {
 
   drawMap(moving) {
     const { moveMap, result } = this;
-    const unchosen = 'UD'.replace(moving, '');
+    const unchosen = Object.values(DIRECTION).join('').replace(moving, '');
 
     moveMap[moving].push(this.#OBJECT[result]);
     moveMap[unchosen].push(this.#OBJECT.BLANK);
