@@ -2,7 +2,7 @@ const Validator = require('./Validator');
 const {INPUT_ERROR, BRIDGE, GAME} = require('./Constant');
 
 class InputValidator extends Validator {
-  static isValidBridgeSize(size) {
+  static isValidBridgeSize(size){
     const isValidBridgeSize =
       InputValidator.isNumericInput(size) &&
       !InputValidator.isZeroStartInput(size) &&
@@ -11,13 +11,13 @@ class InputValidator extends Validator {
     throw new Error(INPUT_ERROR.bridgeSize);
   }
 
-  static isValidMoving(moving) {
+  static isValidMoving(moving){
     const isValidMoving = moving === BRIDGE.up || moving === BRIDGE.down;
     if (isValidMoving) return true;
     throw new Error(INPUT_ERROR.moving);
   }
 
-  static isValidGameCommand(gameCommand) {
+  static isValidGameCommand(gameCommand){
     const isValidGameCommand = gameCommand === GAME.retry || gameCommand === GAME.quit;
     if (isValidGameCommand) return true;
     throw new Error(INPUT_ERROR.gameCommand);
