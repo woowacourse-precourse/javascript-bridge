@@ -1,14 +1,14 @@
 const { BRIDGE_RULE } = require('./utils/constants');
 
-const REGEX_LAST_VERTICAL_LINE = /\|$/;
-const FORMAT = {
+const REGEX_LAST_VERTICAL_LINE = Object.freeze(/\|$/);
+const FORMAT = Object.freeze({
   FIRST: '[',
   VERTICAL_LINE: '|',
   SAME: ' O ',
   DIFFERENT: ' X ',
   NOTHING: '   ',
   LAST: ']',
-};
+});
 
 const Map = {
   makeMap(bridgeInfo) {

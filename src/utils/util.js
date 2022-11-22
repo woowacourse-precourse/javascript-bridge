@@ -1,4 +1,3 @@
-const Console = require('@woowacourse/mission-utils');
 const { ERROR_MESSAGE, BRIDGE_RULE } = require('./constants');
 
 const REGEX_NUM = Object.freeze(/^[0-9]+$/);
