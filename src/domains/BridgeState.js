@@ -56,6 +56,7 @@ const BridgeState = {
   getAnswerBridge() {
     return answerBridge;
   },
+
   /** @param {Array<string>} inputAnswerBridge 정답 다리 데이터 */
   setAnswerBridge(inputAnswerBridge) {
     answerBridge = inputAnswerBridge;
