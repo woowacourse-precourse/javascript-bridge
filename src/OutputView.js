@@ -12,8 +12,8 @@ const OutputView = {
   },
 
   printMap(upRow, downRow) {
-    Console.print(upRow.join(PRINT_MESSAGE.blank));
-    Console.print(downRow.join(PRINT_MESSAGE.blank));
+    Console.print(upRow.join(''));
+    Console.print(downRow.join(''));
     this.printBlankLine();
   },
 
