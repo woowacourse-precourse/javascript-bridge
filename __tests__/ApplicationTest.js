@@ -59,7 +59,6 @@ describe("다리 건너기 테스트", () => {
     }, jest.fn());
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    console.log("다리가 어떻게생겻는데[?", bridge);
     expect(bridge).toEqual(["D", "D", "D"]);
   });
 

@@ -39,7 +39,6 @@ class BridgeGame {
       size,
       BridgeRandomNumberGenerator.generate
     );
-    console.log(bridge);
     this.bridge = new Bridge(bridge);
     this.move();
   }
@@ -68,9 +67,8 @@ class BridgeGame {
       moveCommand,
       this.#stage++
     );
-    const upDownBridge = [upBridge, downBridge];
     OutputView.printMap(upBridge, downBridge);
-    return this.isOver(upDownBridge, gameLife);
+    return this.isOver(gameLife);
   }
 
   validatePlayerMove(input) {
