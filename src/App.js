@@ -2,15 +2,15 @@ const {
   readBridgeSize,
   readMoving,
   readGameCommand,
-} = require("./View/InputView.js");
-const OutputView = require("./View/OutputView.js");
+} = require("./InputView.js");
+const OutputView = require("./OutputView.js");
 
 const {
   bridgeLength,
   bridgeDirection,
   gameContinue,
 } = require("./utils/validate.js");
-const { DEFAULT } = require("./utils/constant.js");
+const { DEFAULT } = require("./constant.js");
 const { getBridgeMake } = require("./utils/utilityFuncions.js");
 
 const BridgeGame = require("./BridgeGame.js");
