@@ -60,6 +60,11 @@ class BridgeGame {
     this.checkBridgeNumber(input);
     this.checkInputSpace(input);
   }
+  vaildateMoveCommand(input){
+    this.checkMoveCommand(input);
+    this.checkInputSpace(input);
+  }
+
 
 }
 
