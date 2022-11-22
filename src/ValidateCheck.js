@@ -21,7 +21,7 @@ const ValidateCheck = {
      */
      movingValidate(move){
         if(move !== "U" && move !== "D"){
-            Consolee.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+            Consolee.print("[ERROR] 이동은 U, D로만 입력해 주세요.");
             throw new Error("[ERROR] 이동은 U, D로만 입력해 주세요.");
         }
     },
@@ -30,10 +30,9 @@ const ValidateCheck = {
      */
      gameCommandValidate(game){
         if(game !== "R" && game !== "Q"){
-            Consolee.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+            Consolee.print("[ERROR] 종료/재시작은 R, Q로만 입력해 주세요.");
             throw new Error("[ERROR] 종료/재시작은 R, Q로만 입력해 주세요.");
         }
-        return game;
     },
 
 }

@@ -16,9 +16,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(i, user) {
-    if(this.mainBridges[i] === user) this.result = true;
-    if(this.mainBridges[i] !== user) this.settingXBridge(user);
-    switch(this.result){
+    if(this.mainBridges[i] === user){
+      this.result = true;
+      this.settingOBridge(user);
+    }
+    if(this.mainBridges[i] !== user) {
+      this.result = false;
+      this.settingXBridge(user);
+    }
+    return this.result;
+  }
+  settingOBridge(user){
+    switch(true){
       case user == "U":
         this.makeUpDownBridge('O', ' ');
         break;
@@ -26,7 +35,6 @@ class BridgeGame {
         this.makeUpDownBridge(' ', 'O');
         break;
     }
-    return this.result;
   }
   settingXBridge(user){
     switch(true){

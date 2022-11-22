@@ -45,7 +45,6 @@ class App {
     let choice = readGameCommand();
     switch(true){
       case choice == "R":
-        BridgeGame.retry();
         this.restart();
         break;
       case choice == "Q":
@@ -54,6 +53,8 @@ class App {
     }
   }
   restart(){
+    const bridgeGame = new BridgeGame(this.bridges);
+    bridgeGame.retry();
     this.userBridges = [];
     this.state = true;
     this.count += 1;
