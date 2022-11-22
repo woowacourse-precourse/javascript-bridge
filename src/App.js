@@ -3,7 +3,6 @@ const InputView = require('./View/InputView');
 const BridgeGame = require('./BridgeGame');
 const { makeMapArray } = require('./util/MapMaker');
 const { MOVEMENT_RESULT, COMMAND } = require('./Constants');
-const Validator = require('./Validator');
 
 class App {
   #brideGame;
@@ -14,32 +13,18 @@ class App {
   }
 
   #readBridgeSizeStage() {
-    InputView.readBridgeSize(this.#readBridgeSizeCallback.bind(this));
-  }
-
-  #readBridgeSizeCallback(size) {
-    try {
+    InputView.readBridgeSize((size) => {
       this.#brideGame = new BridgeGame(size);
       this.#readMovingStage();
-    } catch (error) {
-      OutputView.print(error.message);
-      this.#readBridgeSizeStage();
-    }
+    });
   }
 
   #readMovingStage() {
-    InputView.readMoving(this.#readMovingCallback.bind(this));
-  }
-
-  #readMovingCallback(movement) {
-    try {
+    InputView.readMoving((movement) => {
       this.#brideGame.move(movement);
       this.#printMap();
       this.#gotoNextStageAfterMoving();
-    } catch (error) {
-      OutputView.print(error.message);
-      this.#readMovingStage();
-    }
+    });
   }
 
   #printMap() {
@@ -56,25 +41,13 @@ class App {
   }
 
   #selectRetryStage() {
-    InputView.readGameCommand(this.#readGameCommandCallback.bind(this));
-  }
-
-  #readGameCommandCallback(command) {
-    try {
-      this.#selectRetry(command);
-    } catch (error) {
-      OutputView.print(error.message);
-      this.#selectRetryStage();
-    }
-  }
-
-  #selectRetry(command) {
-    Validator.commandValidate(command);
-    if (command === COMMAND.QUIT) this.#quitGame();
-    if (command === COMMAND.RETRY) {
-      this.#brideGame.retry();
-      this.#readMovingStage();
-    }
+    InputView.readGameCommand((command) => {
+      if (command === COMMAND.QUIT) this.#quitGame();
+      if (command === COMMAND.RETRY) {
+        this.#brideGame.retry();
+        this.#readMovingStage();
+      }
+    });
   }
 
   #quitGame() {

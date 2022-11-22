@@ -1,6 +1,5 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const Validator = require('./Validator');
 const { MOVEMENT_RESULT } = require('./Constants');
 
 const { generate } = BridgeRandomNumberGenerator;
@@ -11,12 +10,10 @@ class BridgeGame {
   #numOfAttempts = 1;
 
   constructor(size) {
-    Validator.bridgeSizeValidate(size);
     this.#bridge = BridgeMaker.makeBridge(+size, generate);
   }
 
   move(movement) {
-    Validator.movingValidate(movement);
     this.#userPath.push(movement);
   }
 
