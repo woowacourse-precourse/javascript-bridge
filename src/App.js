@@ -4,6 +4,7 @@ class App {
   constructor() {
     this.game = new GameController();
   }
+
   play() {
     this.game.start();
   }

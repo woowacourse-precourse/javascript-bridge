@@ -36,7 +36,8 @@ class GameController {
       this.game.setMoving(next);
       const isSuccess = this.game.move(next);
       OutputView.printMap(this.game.getMap(), isSuccess);
-      if (isSuccess) this.game.isEnd() ? this.end(true) : this.askMoving();
+      if (isSuccess && this.game.isEnd()) this.end(true);
+      if (isSuccess && !this.game.isEnd()) this.askMoving();
       if (!isSuccess) this.askGameCommand();
     } catch (err) {
       OutputView.printMessage(err);
