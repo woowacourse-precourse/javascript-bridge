@@ -2,27 +2,19 @@
 
 ## 🚀 기능 구현 목록
 [ ] BridgeGame.js 구현
-
 ​	[ ] move 구현
-
 ​	[ ] retry 구현
 
 [ ] BridgeMaker.js 구현
-
 ​	[ ] makeBridge 구현
 
-[ ] InputView.js 구현
-
-​	[ ] readBridgeSize 구현
-
-​	[ ] readMoving 구현
-
-​	[ ] readGameCommand 구현
+[X] InputView.js 구현
+​	[X] readBridgeSize 구현
+​	[X] readMoving 구현
+​	[X] readGameCommand 구현
 
 [ ] OutputView.js 구현
-
 ​	[ ] printMap 구현
-
 ​	[ ] printResult 구현
 
 
