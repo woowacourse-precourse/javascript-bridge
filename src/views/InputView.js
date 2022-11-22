@@ -37,28 +37,28 @@ const InputView = {
   },
 
   checkMovingResult(result) {
-    if (result === 'movingUp' || result === 'movingDown') this.successMoving(result);
-    if (result === 'movingUpFailed' || result === 'movingDownFailed') this.failMoving(result);
+    if (result === gameOutputMessage.MOVING_UP_SUCCESS || result === gameOutputMessage.MOVING_DOWN_SUCCESS) this.successMoving(result);
+    if (result === gameOutputMessage.MOVING_UP_FAILED || result === gameOutputMessage.MOVING_DOWN_FAILED) this.failMoving(result);
   },
 
   successMoving(result) {
     OutputView.sucessOrFailed(true);
-    if (result === 'movingUp') {
-      OutputView.printMap('O', ' ');
+    if (result === gameOutputMessage.MOVING_UP_SUCCESS) {
+      OutputView.printMap(gameOutputMessage.CIRCLE_MARK, gameOutputMessage.BLANK);
     }
-    if (result === 'movingDown') {
-      OutputView.printMap(' ', 'O');
+    if (result === gameOutputMessage.MOVING_DOWN_SUCCESS) {
+      OutputView.printMap(gameOutputMessage.BLANK, gameOutputMessage.CIRCLE_MARK);
     }
   },
 
   failMoving(result) {
     OutputView.sucessOrFailed(false);
-    if (result === 'movingUpFailed') {
-      OutputView.printMap('X', ' ');
+    if (result === gameOutputMessage.MOVING_UP_FAILED) {
+      OutputView.printMap(gameOutputMessage.X_MARK, gameOutputMessage.BLANK);
       this.readGameCommand();
     }
-    if (result === 'movingDownFailed') {
-      OutputView.printMap(' ', 'X');
+    if (result === gameOutputMessage.MOVING_DOWN_FAILED) {
+      OutputView.printMap(gameOutputMessage.BLANK, gameOutputMessage.X_MARK);
       this.readGameCommand();
     }
   },
@@ -72,7 +72,7 @@ const InputView = {
         this.validateMovingDirection(movingDirection);
         const result = Game.move(this.bridge, movingDirection, this.gameRound);
         this.checkMovingResult(result);
-        if (result != 'movingDownFailed' && result != 'movingUpFailed') this.gameRound++;
+        if (result != gameOutputMessage.MOVING_UP_FAILED && result != gameOutputMessage.MOVING_DOWN_FAILED) this.gameRound++;
         this.endGame();
         if (!this.end) this.readMoving();
       } catch (e) {
@@ -91,7 +91,7 @@ const InputView = {
   },
 
   validateMovingDirection(movingDirection) {
-    if (movingDirection !== 'U' && movingDirection !== 'D')
+    if (movingDirection !== userInputMessage.UPSIDE && movingDirection !== userInputMessage.DOWNSIDE)
       throw new Error(errorMessage.MOVE_DIRECTION);
   },
 
@@ -123,7 +123,8 @@ const InputView = {
   },
 
   validateGameCommand(restartOrEnd) {
-    if (restartOrEnd !== 'R' && restartOrEnd !== 'Q') throw new Error(errorMessage.RESTART);
+    if (restartOrEnd !== userInputMessage.RETRY && restartOrEnd !== userInputMessage.QUIT) 
+      throw new Error(errorMessage.RESTART);
   },
 };
 
