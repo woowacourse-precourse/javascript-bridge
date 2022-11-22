@@ -12,7 +12,7 @@ describe("Bridge 클래스 테스트", () => {
     expect(bridge).toBeDefined();
   });
 
-  test("다리의 길이가 3보다 작다면 예외를 던져야 한다.", () => {
+  test("다리의 길이가 3보다 작다면 예외를 발생시켜야 한다.", () => {
     // given
     const directionArray = [["U", "D"], []];
 
@@ -25,9 +25,20 @@ describe("Bridge 클래스 테스트", () => {
     });
   });
 
-  test("다리의 길이가 20보다 크다면 예외를 던져야 한다.", () => {
+  test("다리의 길이가 20보다 크다면 예외를 발생시켜야 한다.", () => {
     // given
     const directions = new Array(21).fill("U");
+
+    // when
+    const makeBridge = () => new Bridge(directions);
+
+    // then
+    expect(makeBridge).toThrow("[ERROR]");
+  });
+
+  test("입력받은 다리의 방향이 올바르지 않으면 예외를 발생시켜야 한다.", () => {
+    // given
+    const directions = ["A", 2, 3];
 
     // when
     const makeBridge = () => new Bridge(directions);
