@@ -24,12 +24,12 @@ class BridgeGame {
 
   move(movement) {
     const result =
-      this.#bridge[this.#process] === movement ? Constants.Result.success : Constants.Result.fail;
+      this.#bridge[this.#process] === movement ? Constants.Result.SUCCESS : Constants.Result.FAIL;
     this.addMap(movement, result);
     this.#process++;
 
     if (this.#process === this.#bridge.length) {
-      return result === Constants.Result.fail ? result : Constants.Result.done;
+      return result === Constants.Result.FAIL ? result : Constants.Result.DONE;
     }
     return result;
   }
@@ -44,7 +44,7 @@ class BridgeGame {
   }
 
   addMap(movement, result) {
-    const sign = result === Constants.Result.success ? 'O' : 'X';
+    const sign = result === Constants.Result.SUCCESS ? 'O' : 'X';
     if (movement === 'U') {
       this.#map['U'].push(sign);
       this.#map['D'].push(' ');

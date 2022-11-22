@@ -21,7 +21,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(Constants.Input.bridgeSize, (size) => {
+    MissionUtils.Console.readLine(Constants.Input.BRIDGE_SIZE, (size) => {
       catchError(Validate.bridge, size);
 
       const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
@@ -34,7 +34,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    MissionUtils.Console.readLine(Constants.Input.move, (movement) => {
+    MissionUtils.Console.readLine(Constants.Input.MOVE, (movement) => {
       catchError(Validate.upOrDown, movement);
 
       const moveResult = game.move(movement);
@@ -47,11 +47,11 @@ const InputView = {
    */
   readMoveResult(moveResult) {
     switch (moveResult) {
-      case Constants.Result.success:
+      case Constants.Result.SUCCESS:
         return InputView.readMoving();
-      case Constants.Result.fail:
+      case Constants.Result.FAIL:
         return InputView.readGameCommand();
-      case Constants.Result.done:
+      case Constants.Result.DONE:
         return OutputView.printResult(game.getMap(), game.getTry(), '성공');
     }
   },
@@ -60,7 +60,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    MissionUtils.Console.readLine(Constants.Input.gameCommand, (command) => {
+    MissionUtils.Console.readLine(Constants.Input.GAME_COMMAND, (command) => {
       try {
         Validate.gameCommand(command);
       } catch (error) {
