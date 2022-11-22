@@ -26,8 +26,14 @@ const BRIDGE = {
   WRONG: "X",
 };
 
+const NUMBERS = {
+  MOVENUM_START: 0,
+  ATTEMPTNUM_START: 1,
+};
+
 module.exports = {
   MESSAGES,
   ERROR_MESSAGES,
   BRIDGE,
+  NUMBERS,
 };
