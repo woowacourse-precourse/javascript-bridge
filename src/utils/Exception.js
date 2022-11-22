@@ -4,9 +4,9 @@ const Exception = {
   isThrow(validatorMethod, inputData) {
     try {
       validatorMethod(inputData);
-      return true;
-    } catch (error) {
       return false;
+    } catch (error) {
+      return true;
     }
   },
 

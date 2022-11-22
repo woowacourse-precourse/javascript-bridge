@@ -40,13 +40,13 @@ describe('사용자 입력 형식 예외 테스트', () => {
     const bridgeLength = 'a';
     const result = Exception.isThrow(Validator.bridgeSize, bridgeLength);
 
-    expect(result).toBeFalsy();
+    expect(result).toBeTruthy();
   });
 
   test('예외가 발생하지 않으면 true를 반환한다.', () => {
     const bridgeLength = '4';
     const result = Exception.isThrow(Validator.bridgeSize, bridgeLength);
 
-    expect(result).toBeTruthy();
+    expect(result).toBeFalsy();
   });
 });
