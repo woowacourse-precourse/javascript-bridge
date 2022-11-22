@@ -2,19 +2,61 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
+  #upsideDown;
+  #count;
+
+  constructor(bridge) {
+    this.#bridge = bridge;
+    this.#upsideDown = [];
+    this.#count = 1;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(upsideDown) {
+    this.#upsideDown.push([upsideDown, upsideDown === "U" ? 0 : 1]);
+  }
+
+  getBridgeResult() {
+    let result = [[], []];
+
+    this.#upsideDown.forEach(([upsideDown, number], index) => {
+      const isUpsideDown = upsideDown === this.#bridge[index];
+
+      result[number].push(isUpsideDown ? "O" : "X");
+      result[Math.abs(number - 1)].push(" ");
+    });
+
+    return result;
+  }
+
+  isFail() {
+    const index = this.#upsideDown.length - 1;
+    return this.#bridge[index] !== this.#upsideDown[index][0];
+  }
+
+  isSuccess() {
+    return this.#bridge.length === this.#upsideDown.length;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#count++;
+    this.#upsideDown = [];
+  }
+
+  getResult() {
+    const isSuccess = !this.isFail() && this.isSuccess();
+    return { isSuccess, count: this.#count };
+  }
 }
 
 module.exports = BridgeGame;
