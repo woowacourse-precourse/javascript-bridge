@@ -36,8 +36,6 @@ const Excute = {
   },
 
   checkBridge(bridge, tmpBridge, movingDirection, bridgeArr, cnt) {
-    console.log(tmpBridge, '진행 다리 길이');
-    console.log(bridge, "본 다리");
     const bridgeDirection = tmpBridge.shift();
     bridgeArr = OutputView.printMap(bridgeDirection, movingDirection, bridgeArr);
     let bool = bridgeDirection === movingDirection;
