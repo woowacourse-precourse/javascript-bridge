@@ -16,11 +16,11 @@ const FINAL = Object.freeze({
 const BRIDGE = Object.freeze({
   UP: "U",
   DOWN: "D",
-  LEFT: "[",
-  RIGHT: "]",
-  DIVISION: "|",
+  LEFT: "[ ",
+  RIGHT: " ]",
+  DIVISION: " | ",
   PASS: "O",
-  NOT_PASS: "X",
+  NOT_PASS: "X ",
 });
 
 const ERROR = Object.freeze({});

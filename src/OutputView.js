@@ -17,8 +17,8 @@ const OutputView = {
   printMap(bridgeGame) {
     const upBridge = bridgeGame.getUpBridgeList();
     const downBridge = bridgeGame.getDownBridgeList();
-    Console.print(`${BRIDGE.LEFT} ${upBridge.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
-    Console.print(`${BRIDGE.LEFT} ${downBridge.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
+    Console.print(`${BRIDGE.LEFT}${upBridge.join(`${BRIDGE.DIVISION}`)}${BRIDGE.RIGHT}`);
+    Console.print(`${BRIDGE.LEFT}${downBridge.join(`${BRIDGE.DIVISION}`)}${BRIDGE.RIGHT}`);
     Console.print("");
   },
 
