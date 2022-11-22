@@ -25,7 +25,6 @@ describe('다리 지도 만들기 테스트', () => {
       const move = moveGenerator();
       userMoves.push(move);
       const map = BridgeMap.generate(answer, userMoves);
-      console.log(map);
       expect(map).toEqual(expectedResult[i]);
     }
   });
