@@ -36,7 +36,7 @@ class BridgeGame {
     const currentPosition = Path.positionOf(moveCount);
     const moveResult = Move.calculateMoveResult(currentPosition, direction);
 
-    Move.updateCurrentMove(moveResult);
+    Move.updateCurrentMoveResult(moveResult);
     Bridge.setMoveResult(direction, moveResult, moveCount);
   }
 

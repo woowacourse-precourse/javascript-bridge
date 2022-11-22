@@ -3,9 +3,9 @@ const NUMBER = require('../constants/number');
 const STRING = require('../constants/string');
 
 class Move {
-  static #moveCount = NUMBER.ZERO;
+  static #moveCount;
 
-  static #currentMove = STRING.X;
+  static #currentMoveResult;
 
   static getCount() {
     return this.#moveCount;
@@ -13,19 +13,19 @@ class Move {
 
   static init() {
     this.#moveCount = NUMBER.ZERO;
-    this.#currentMove = STRING.X;
+    this.#currentMoveResult = STRING.X;
   }
 
   static countMove() {
     this.#moveCount += NUMBER.ONE;
   }
 
-  static updateCurrentMove(result) {
-    this.#currentMove = result;
+  static updateCurrentMoveResult(result) {
+    this.#currentMoveResult = result;
   }
 
   static canMove() {
-    return this.#currentMove === STRING.O;
+    return this.#currentMoveResult === STRING.O;
   }
 
   static compareUp(direction) {

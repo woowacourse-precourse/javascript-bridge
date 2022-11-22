@@ -4,7 +4,6 @@ const BridgeGame = require('../Model/BridgeGame');
 const Move = require('../Model/Move');
 const Bridge = require('../Model/Bridge');
 const Validate = require('../components/Validate');
-const Path = require('../Model/Path');
 
 class GameController {
   #bridgeGame;
