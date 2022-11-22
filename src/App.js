@@ -30,6 +30,7 @@ class App {
     if (flag) {
       this.#game.getGameResult();
     }
+    InputView.endCommand();
   }
 }
 
