@@ -101,6 +101,14 @@ class MainController {
     this.readUserMovingInput();
   }
 
+  /**
+   * 에러 로그 출력 연결 메서드
+   * @param errorLog {object} [Error 객체]
+   */
+  printError(errorLog) {
+    OutputView.printError(errorLog);
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
