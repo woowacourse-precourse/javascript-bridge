@@ -45,7 +45,8 @@ class BridgeGame {
   }
 
   isSuccess() {
-    if (this.#upperTrack.length === this.#bridge.length) {
+    const path = [...this.#lowerTrack, ...this.#upperTrack];
+    if (this.#upperTrack.length === this.#bridge.length && !path.includes(PATH.WRONG)) {
       this.#success = true;
     }
     return this.#success;
@@ -55,10 +56,6 @@ class BridgeGame {
     this.#trial += 1;
     this.#upperTrack = [];
     this.#lowerTrack = [];
-  }
-
-  getBridge() {
-    return this.#bridge;
   }
 
   getUpperTrack() {
