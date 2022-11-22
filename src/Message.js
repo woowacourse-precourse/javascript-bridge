@@ -19,3 +19,8 @@ const RESULT = {
   BRIDGE_END: ' ]',
 };
 
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
