@@ -58,10 +58,11 @@ class GameController {
   #stopGame() {
     if (this.#instance.bridgeGame.checkState() === GAME_STATE.FAIL_STOP) {
       InputView.readGameCommand(this.#restartOrQuit.bind(this));
-      return;
     }
 
-    this.#quitGame();
+    if (this.#instance.bridgeGame.checkState() === GAME_STATE.SUCCESS_STOP) {
+      this.#quitGame();
+    }
   }
 
   #restartOrQuit(select) {
