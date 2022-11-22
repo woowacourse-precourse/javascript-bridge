@@ -1,4 +1,3 @@
-const OutputView = require("../Bridge.UI/OutputView");
 const BridgeCreator = require("./BridgeCreator");
 const { GAME } = require("../lib/Const");
 /**
