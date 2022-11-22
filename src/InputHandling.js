@@ -42,7 +42,9 @@ class InputHandling {
     if (gameOutcome === GAME_OUTCOME.SUCCESS) InputView.readMoving(this.handleMovingValue.bind(this));
   }
 
-  handleGameCommand(command) {}
+  handleGameCommand(command) {
+    Validation.checkRestartOrDone(command);
+  }
 }
 
 module.exports = InputHandling;

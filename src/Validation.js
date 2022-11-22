@@ -11,6 +11,14 @@ const Validation = {
       throw new Error(ERROR.NOT_UPPERCASE)
     if (/[^UD]/g.test(direction) || direction.length !== 1) 
       throw new Error(ERROR.NOT_U_OR_D);
+  },
+
+  checkRestartOrDone(command) {
+    if (command === 'r' || command === 'd') {
+      throw new Error(ERROR.NOT_UPPERCASE);
+    }
+    if (/[^RQ]/g.test(command) || command.length !== 1) 
+      throw new Error(ERROR.NOT_R_OR_Q);
   }
 };
 
