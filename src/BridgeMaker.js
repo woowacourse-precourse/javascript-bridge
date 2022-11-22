@@ -4,8 +4,8 @@
 const BridgeMaker = {
   BRIDGE_DIRECTION_UP: "U",
   BRIDGE_DIRECTION_DOWN: "D",
-  NUMBER_TO_UP: 0,
-  NUMBER_TO_DOWN: 1,
+  NUMBER_TO_UP: 1,
+  NUMBER_TO_DOWN: 0,
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -15,16 +15,16 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
-      BridgeMaker.pushConvertedNumberToBridge(randomNumber, bridge);
+      BridgeMaker.pushNumberToBridge(randomNumber, bridge);
     }
     return bridge;
   },
   /**
    * 무작위 값을 생성해주는 함수를 통해 생성된 무작위 값의 문자열을 다리 모양으로 변환한다.
-   * @param {string} randomNumberByString 무작위 값을 생성해주는 함수를 통해 생성된 무작위 값의 문자열
+   * @param {number} randomNumber 무작위 값을 생성해주는 함수를 통해 생성된 무작위 숫자
    * @param {string[]} bridge 다리 모양을 저장할 배열
    */
-  pushConvertedNumberToBridge(randomNumber, bridge) {
+  pushNumberToBridge(randomNumber, bridge) {
     if (randomNumber === BridgeMaker.NUMBER_TO_UP) {
       bridge.push(BridgeMaker.BRIDGE_DIRECTION_UP);
     }
