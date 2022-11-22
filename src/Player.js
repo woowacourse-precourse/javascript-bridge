@@ -17,16 +17,19 @@ class Player {
     return this.#currentLocation;
   }
 
-  updatePath(direction, mark) {
+  updatePath(direction, markOX) {
     if (direction === CONDITION.UP) {
-      this.#path.upside.push(mark);
-      this.#path.downside.push(MARK.BLANK);
+      this.#addPath(markOX, MARK.BLANK);
     } else {
-      this.#path.upside.push(MARK.BLANK);
-      this.#path.downside.push(mark);
+      this.#addPath(MARK.BLANK, markOX);
     }
 
     this.#currentLocation += 1;
+  }
+
+  #addPath(upsideMark, downsideMark) {
+    this.#path.upside.push(upsideMark);
+    this.#path.downside.push(downsideMark);
   }
 
   resetPath() {
