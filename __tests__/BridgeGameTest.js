@@ -1,8 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/App');
+const { isCommandRetry } = require('../src/BridgeGame');
 const BridgeGame = require('../src/BridgeGame');
-const { createTokens, isCommandRetry } = require('../src/BridgeGame');
-const { generate } = require('../src/BridgeRandomNumberGenerator');
 const { ERROR_MESSAGE } = require('../src/Constants/message');
 
 describe('BridgeGame 클래스 테스트', () => {
@@ -22,7 +19,7 @@ describe('BridgeGame 클래스 테스트', () => {
 
   test('move - 잘못된 방향을 입력받을 경우 예외처리', () => {
     // Given
-    const directionList = ['Z', '!', 3, 'UU', 'DU', 'UD', 'DD']; // test.each 써 보는것도 좋을듯?
+    const directionList = ['Z', '!', 3, 'UU', 'DU', 'UD', 'DD'];
 
     // When
     const game = new BridgeGame();
