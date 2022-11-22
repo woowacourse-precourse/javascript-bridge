@@ -10,7 +10,6 @@ const { ERROR_MESSAGE } = require('./constants/constants');
 
 class App {
   #myBridge;
-  #myBridgeLength;
 
   play() {
     try {
@@ -27,8 +26,8 @@ class App {
       try {
         if (!validCheck.bridgeLength(input))
           throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
-        this.#myBridgeLength = input;
-        return this.makeMyBridge();
+
+        return this.makeMyBridge(input);
       } catch (err) {
         OutputView.lengthInputError();
         this.getBridgeLength();
@@ -36,11 +35,11 @@ class App {
     });
   }
 
-  makeMyBridge() {
+  makeMyBridge(bridgelength) {
     this.#myBridge = new BridgeGame(
       BridgeRandomNumberGenerator.generate,
       BridgeMaker.makeBridge,
-      Number(this.#myBridgeLength)
+      Number(bridgelength)
     );
     return this.moveLocation();
   }
