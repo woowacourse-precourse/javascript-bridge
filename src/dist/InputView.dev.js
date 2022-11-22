@@ -35,6 +35,7 @@ var InputView = {
   readMoving: function readMoving(info) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래 : D)\n', function (input) {
       if (input !== 'D' && input !== 'U') throw new Error('[Error] 입력 값이 잘못 되었습니다.');
+      info.inputList.push(input === 'U' ? 1 : 0);
 
       if (info.bridgeGameManager.answerCheck(info, input)) {
         info.bridgeGameManager.move(info);
