@@ -1,10 +1,14 @@
+const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const OutputView = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  
+  bridgeGame: new BridgeGame(),
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -32,8 +36,18 @@ const InputView = {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", (moving) => {
       this.checkMove(moving);
       Console.print(moving);
+      const count = this.bridgeGame.counting();
+      this.gameManager(bridge, count, moving);
     });
   },
+
+  gameManager(bridge, count, moving) {
+    const [up, down, hasCorrect] = this.bridgeGame.move(bridge[count-1], moving);
+    OutputView.printMap(up,down);
+    if (count === bridge.length && hasCorrect) { }
+    else this.readMoving(bridge);
+  },
+
 
   checkMove(moving){
     if (moving !== 'U' && moving !== 'D') throw new Error('[ERROR] 이동할 칸은 "U"와 "D" 두 값중 하나여야합니다.');
