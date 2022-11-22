@@ -6,9 +6,10 @@ const {
   Check,
   checkBridgeLength,
   checkMoveFormat,
-  checkSelectFormat,
+  checkCommandFormat,
 } = require("../Utils/Check");
 const BridgeRandomNumberGenerator = require("../Utils/BridgeRandomNumberGenerator");
+const { KEY } = require("../Constants/Token");
 
 class GameController {
   constructor() {
@@ -44,12 +45,41 @@ class GameController {
     this.view.input.readMoving((moveInput) => {
       const step = Check(moveInput, checkMoveFormat, this.playRound.bind(this));
       this.model.move(step);
+
+      const { isAlive, currentIndex, bridge, currentMap } = this.model.state;
+      const isEnd = currentIndex === bridge.length;
+
+      this.view.output.printMap(currentMap);
+      this.proceedNextStep(isAlive, isEnd);
     });
   }
 
-  selectNextStep() {}
+  proceedNextStep(isAlive, isEnd) {
+    if (!isAlive) {
+      this.retryOrFinish();
+    } else if (isEnd) {
+      this.finishGame();
+    } else {
+      this.playRound();
+    }
+  }
 
-  retryOrFinish() {}
+  retryOrFinish() {
+    this.view.input.readGameCommand((commandInput) => {
+      const command = Check(
+        commandInput,
+        checkCommandFormat,
+        this.retryOrFinish.bind(this)
+      );
+
+      if (command === KEY.COMMAND_RESTART) {
+        this.model.retry();
+        this.playRound();
+      } else if (command === KEY.COMMAND_QUIT) {
+        this.finishGame();
+      }
+    });
+  }
 
   finishGame() {
     this.view.output.printMessage("finish");

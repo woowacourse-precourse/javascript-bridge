@@ -46,19 +46,19 @@ const checkMoveFormat = (string) => {
   return step;
 };
 
-const checkSelectFormat = (string) => {
-  const select = string.replace(/\s/g, "").toUpperCase();
+const checkCommandFormat = (string) => {
+  const command = string.replace(/\s/g, "").toUpperCase();
 
-  if (select !== KEY.SELECT_RESTART && select !== KEY.SELECT_QUIT) {
-    throw new Error(ABOUT.SELECT_ELEMENT);
+  if (command !== KEY.COMMAND_RESTART && command !== KEY.COMMAND_RESTART) {
+    throw new Error(ABOUT.COMMAND_RESTART);
   }
 
-  return select;
+  return command;
 };
 
 module.exports = {
   Check,
   checkBridgeLength,
   checkMoveFormat,
-  checkSelectFormat,
+  checkCommandFormat,
 };
