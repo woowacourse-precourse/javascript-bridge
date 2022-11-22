@@ -20,7 +20,7 @@ const BRIDGE = Object.freeze({
   RIGHT: " ]",
   DIVISION: " | ",
   PASS: "O",
-  NOT_PASS: "X ",
+  NOT_PASS: "X",
 });
 
 const ERROR = Object.freeze({});
