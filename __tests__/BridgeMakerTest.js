@@ -5,7 +5,7 @@ const App = require("../src/App");
 describe("다리 건너기 테스트", () => {
     test("다리 길이 입력 받기 예외 처리", () => {
         expect(() => {
-            new BridgeMaker(30);
-        }).toThrow("[ERROR]");
+            BridgeMaker(30);
+        }).toThrowError("");
     });
 });

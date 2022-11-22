@@ -2,7 +2,7 @@ const BridgeMaker = require("./BridgeMaker");
 
 class App {
   play() {
-    BridgeMaker();
+    this.makeBridge();
   }
 }
 
