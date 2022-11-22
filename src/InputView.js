@@ -31,6 +31,7 @@ const InputView = {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
       console.log(`이동할 칸 : ${input}`);
       currentBridge=game.move(currentBridge, bridge, input); // class
+      this.stillMoving(currentBridge, bridge);
     })
     return currentBridge;
   },
@@ -40,6 +41,7 @@ const InputView = {
    */
   stillMoving(currentBridge, bridge) {
     // 게임 종료되었는지 확인
+    console.log(currentBridge[0].length, bridge.length);
     if(currentBridge[0].length === bridge.length) {
       // 게임 종료 -> 출력
       console.log('게임 종료');
@@ -47,7 +49,7 @@ const InputView = {
     }
 
     // 틀렸는지 확인
-    if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
+    else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
       // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
       console.log('틀림. 재시작? 종료?');
     }
