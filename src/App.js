@@ -19,6 +19,7 @@ class App {
         const choosen = await InputView.readMoving();
 
         const bridgeGame = new BridgeGame(bridge);
+        bridgeGame.move(choosen);
 
         MissionUtils.Console.close();
     }
