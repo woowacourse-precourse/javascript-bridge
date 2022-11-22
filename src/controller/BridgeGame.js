@@ -23,8 +23,7 @@ class BridgeGame {
   matchResult(movingCommand) {
     const currentStage = this.#map.getMap()[this.#currentPosition];
     currentStage.setMovingCommand(movingCommand);
-    // Console.print(currentStage.getStage()[movingCommand]);
-    // Console.print(currentStage.getStage());
+    return currentStage.getStage()[movingCommand] === 'O';
   }
 
   /**

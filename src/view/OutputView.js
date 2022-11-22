@@ -32,8 +32,6 @@ const OutputView = {
     //   }
     // });
 
-    Console.print(this.getUpMap(map, currentPosition));
-    Console.print(this.getDownMap(map, currentPosition));
     Console.print(`[ ${this.getUpMap(map, currentPosition).join(' | ')} ]\n[ ${this.getDownMap(map, currentPosition).join(' | ')} ]`);
     // Console.print(this.map.getMap()[currentPosition].getStage()[movingCommand]);
     // Console.print(this.map.getMap()[currentPosition].getStage());

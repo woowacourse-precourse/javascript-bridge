@@ -17,9 +17,11 @@ class BridgeGameControl {
 
   #bridgeGame;
 
-  #entireMap;
+  #canMovingCommands;
 
   #map;
+
+  #survive;
 
   constructor() {
     const inputView = Object.create(InputView);
@@ -30,22 +32,22 @@ class BridgeGameControl {
     this.#bridgeGame = bridgeGame;
   }
 
-  recoverMap() {
-    const upMap = this.#entireMap
-      .split('\n')[0]
-      .replace(/\[|\]|\s/g, '')
-      .split('|');
-    this.#map.setRecoverMap(upMap);
+  makeRandomNumber(bridgeSize) {
+    const bridgeMaker = Object.create(BridgeMaker);
+    const bridgeRandomNumberGenerator = Object.create(BridgeRandomNumberGenerator);
+    this.#canMovingCommands = bridgeMaker.makeBridge(bridgeSize.getBridgeSize(), bridgeRandomNumberGenerator.generate);
+  }
+
+  makeMap(bridgeSize) {
+    const map = new Map(bridgeSize.getBridgeSize());
+    this.#map = map;
+    this.#map.setMap(this.#canMovingCommands);
   }
 
   bridgeSizeCallback(input) {
     const bridgeSize = new BridgeSize(input);
-    const bridgeMaker = Object.create(BridgeMaker);
-    this.#entireMap = bridgeMaker.makeBridge(bridgeSize.getBridgeSize(), BridgeRandomNumberGenerator);
-
-    const map = new Map(bridgeSize.getBridgeSize());
-    this.#map = map;
-    this.recoverMap();
+    this.makeRandomNumber(bridgeSize);
+    this.makeMap(bridgeSize);
     this.move();
   }
 
@@ -61,13 +63,11 @@ class BridgeGameControl {
   movingCallback(input) {
     const moving = new Moving(input);
     this.#bridgeGame.importMap(this.#map);
-
     this.#bridgeGame.move();
-    this.#bridgeGame.matchResult(moving.getMoving());
-
+    this.#survive = this.#bridgeGame.matchResult(moving.getMoving());
     this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
-    // this.#outputView.printMap(moving.getMoving(), this.#bridgeGame.getCurrentPosition());
-    this.retry();
+    // eslint-disable-next-line no-unused-expressions
+    this.#survive ? this.move() : this.retry();
   }
 
   move() {
