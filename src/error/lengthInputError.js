@@ -7,7 +7,7 @@ const validate = (length) => {
 
 const notNumber = (input) => {
     try {
-        if (parseInt(input) === NaN) {
+        if (isNaN(input)) {
             throw new Error('[ERROR] 숫자만 입력해주세요.');
         }
     } catch (e) {
