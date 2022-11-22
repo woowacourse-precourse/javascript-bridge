@@ -51,7 +51,7 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_MESSAGE.RESTART_QUIT, (answer) => {
       input = answer;
     });
-    // this.validreadGameCommand(input);
+    this.validreadGameCommand(input);
     return input;
   },
   validreadGameCommand(command) {
