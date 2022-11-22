@@ -26,11 +26,7 @@ class BridgeGame {
   move(direction) {
     try {
       console.log(PLAY_COMMAND, GAME_COMMAND);
-      Validation.validateCommand(
-        [PLAY_COMMAND.up, PLAY_COMMAND.down],
-        ERROR.notPlayCommand,
-        direction,
-      );
+      Validation.validateCommand([PLAY_COMMAND.up, PLAY_COMMAND.down], ERROR.notPlayCommand, direction);
       this.decideSuccess(direction);
     } catch (error) {
       this.#bridgeController.printError(error, this.#bridgeController.moveBlock, this);
@@ -62,21 +58,13 @@ class BridgeGame {
   }
 
   faildRound(direction) {
-    this.#bridgeController.moveFailedRound(
-      this.#attempt,
-      this.#bridgeBoard.getClearedBridge(),
-      direction,
-    );
+    this.#bridgeController.moveFailedRound(this.#attempt, this.#bridgeBoard.getClearedBridge(), direction);
     this.#bridgeController.readGameCommand(this);
   }
 
   setGameCommand(command) {
     try {
-      Validation.validateCommand(
-        [GAME_COMMAND.restart, GAME_COMMAND.quit],
-        ERROR.notGameCommand,
-        command,
-      );
+      Validation.validateCommand([GAME_COMMAND.restart, GAME_COMMAND.quit], ERROR.notGameCommand, command);
       if (command === GAME_COMMAND.quit) {
         this.#bridgeController.close();
       } else {
