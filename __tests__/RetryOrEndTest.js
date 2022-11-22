@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const BridgeMaker = require("../src/BridgeMaker");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -26,16 +25,6 @@ const getLogSpy = () => {
 
 const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join("");
-};
-
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
 const expectLogContains = (received, logs) => {
