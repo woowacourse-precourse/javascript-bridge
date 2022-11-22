@@ -11,7 +11,8 @@ class App {
     Console.print(GAME_MESSAGES.START);
     const bridgeSize = await InputView.readBridgeSize();
     const bridge = makeBridge(Number(bridgeSize), generate);
-    this.startCrossing(Number(bridgeSize), bridge);
+    const gameResult = await this.startCrossing(Number(bridgeSize), bridge);
+    OutputView.printResult(gameResult);
   }
 
   async startCrossing(bridgeSize, bridge) {
@@ -23,9 +24,10 @@ class App {
       const matchOrNot = this.processCrossing(moving, moveResult, gameResult);
       if(!matchOrNot) {
         this.restartOrNot(bridgeSize, bridge);
-        return
+        return gameResult
       }
     }
+    return gameResult
   }
 
   processCrossing(moving, moveResult, gameResult) {
