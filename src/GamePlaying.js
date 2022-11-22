@@ -1,8 +1,9 @@
 const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
+const OUTPUT_MESSAGE = require("./constans/OutputMessage");
 
 const GamePlaying = {
   gameMap: [],
@@ -12,31 +13,33 @@ const GamePlaying = {
   },
 
   gameResultPrint(count, winOrLose) {
-    if (winOrLose) {
-      OutputView.printResult("성공", count, this.gameMap);
-    } else {
-      OutputView.printResult("실패", count, this.gameMap);
-    }
-    // const result = winOrLose
-    //   ? OUTPUT_MESSAGE.SUCCESS_RESULT
-    //   : OUTPUT_MESSAGE.FAILURE_RESULT;
-    // OutputView.printResult(result, count, this.gameMap);
+    const result = winOrLose
+      ? OUTPUT_MESSAGE.SUCCESS_RESULT
+      : OUTPUT_MESSAGE.FAILURE_RESULT;
+    OutputView.printResult(result, count, this.gameMap);
   },
+
+  gameMapCrate(movePoint, bridgeGame, bool) {
+    this.gameMap = bridgeGame.bridgeDrawing(movePoint, bool);
+    OutputView.printMap(this.gameMap);
+    if (bool === false) {
+      return false;
+    }
+  },
+
   matchOneStep(obstacle, bridgeGame) {
     try {
       const movePoint = InputView.readMoving();
       if (!bridgeGame.move(movePoint, obstacle)) {
-        this.gameMap = bridgeGame.bridgeDrawing(movePoint, false);
-        OutputView.printMap(this.gameMap);
-        return false;
+        return this.gameMapCrate(movePoint, bridgeGame, false);
       }
-      this.gameMap = bridgeGame.bridgeDrawing(movePoint, true);
-      OutputView.printMap(this.gameMap);
+      this.gameMapCrate(movePoint, bridgeGame, true);
     } catch (error) {
       OutputView.printException(error);
     }
     return true;
   },
+
   BridgeMove(bridge) {
     const bridgeGame = new BridgeGame();
     for (let i = 0; i < bridge.length; i++) {
@@ -46,6 +49,7 @@ const GamePlaying = {
     }
     return true;
   },
+
   requestGame(result) {
     let retry;
     if (result) return false;
@@ -58,14 +62,12 @@ const GamePlaying = {
     }
     return retry;
   },
+
   BridgeMaker() {
     let bridge;
     try {
       const bridgeSize = InputView.readBridgeSize();
-      bridge = BridgeMaker.makeBridge(
-        bridgeSize,
-        BridgeRandomNumberGenerator.generate
-      );
+      bridge = BridgeMaker.makeBridge(bridgeSize, BridgeGenerator.generate);
     } catch (error) {
       OutputView.printException(error);
     }
