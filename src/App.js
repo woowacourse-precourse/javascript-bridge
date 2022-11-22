@@ -1,10 +1,10 @@
-const InputView = require('./InputView');
+const InputView = require('./View/InputView');
 const BridgeMaker = require('./BridgeMaker');
-const OutputView = require('./OutputView');
-const Validator = require('./Validator');
-const BridgeGame = require('./BridgeGame');
-const BridgeMap = require('./BridgeMap');
-const Utils = require('./Utils');
+const OutputView = require('./View/OutputView');
+const Validator = require('./Utils/Validator');
+const BridgeGame = require('./Bridge/BridgeGame');
+const BridgeMap = require('./Bridge/BridgeMap');
+const Utils = require('./Utils/Utils');
 
 class App {
   #APP_STATUS = {

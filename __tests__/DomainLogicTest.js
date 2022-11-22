@@ -1,6 +1,6 @@
-const BridgeGame = require('../src/BridgeGame');
-const BridgeMap = require('../src/BridgeMap');
-const Validator = require('../src/Validator');
+const BridgeGame = require('../src/Bridge/BridgeGame');
+const BridgeMap = require('../src/Bridge/BridgeMap');
+const Validator = require('../src/Utils/Validator');
 
 describe('도메인 로직 테스트 Validator 객체', () => {
   test('입력 값 사이의 공백이 있으면 에러를 throw한다', () => {

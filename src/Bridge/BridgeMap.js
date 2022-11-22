@@ -1,4 +1,4 @@
-const MapMaker = require('./MapMaker');
+const MapMaker = require('../MapMaker');
 
 class BridgeMap {
   #FIRST_MAP_SOURCE = { CORRECT: ' O ', INCORRECT: ' X ', EMPTY: '   ' };

@@ -1,4 +1,4 @@
-const BridgeMap = require('../src/BridgeMap');
+const BridgeMap = require('../src/Bridge/BridgeMap');
 
 describe('BridgeMap class 유닛 테스트', () => {
   const bridgeMap = new BridgeMap();
