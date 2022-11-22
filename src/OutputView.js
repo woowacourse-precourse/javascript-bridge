@@ -6,8 +6,6 @@ const Message = require("./utils/Message");
  */
 const OutputView = {
   printGameStart() {
-    console.log(1);
-
     MissionUtils.Console.print(Message.ALERT.GAME_START);
   },
 
@@ -23,7 +21,18 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridge, isSuccess, tryCnt) {
+    MissionUtils.Console.print(`최종 게임 결과\n${bridge}\n`);
+    this.printResultStatics(isSuccess, tryCnt);
+  },
+
+  printResultStatics(isSuccess, tryCnt) {
+    MissionUtils.Console.print(
+      `게임 성공 여부: ${
+        isSuccess ? "성공" : "실패"
+      }\n총 시도한 횟수: ${tryCnt}`
+    );
+  },
 };
 
 module.exports = OutputView;
