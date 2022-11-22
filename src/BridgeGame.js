@@ -8,6 +8,7 @@ class BridgeGame {
   #BRIDGE = [];
   #CUR_IDX = -1;
   #MOVING = [];
+  #COUNT = 1;
 
   constructor(bridge) {
     this.#BRIDGE = bridge;
@@ -29,7 +30,7 @@ class BridgeGame {
 
     this.changeToMap();
 
-    if (this.#BRIDGE.length === this.#MOVING.length) 
+    if (this.#BRIDGE.length === this.#MOVING.length)
       OutputView.printResult();
 
     return moving === this.#BRIDGE[this.#CUR_IDX] ? true : false;
@@ -53,7 +54,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-
+    this.#COUNT++;
+    InputView.readMoving();
   }
 }
 
