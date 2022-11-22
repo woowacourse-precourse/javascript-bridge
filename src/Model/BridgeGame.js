@@ -83,19 +83,16 @@ class BridgeGame {
   }
 
   isSameDirection(direction) {
-    if (direction === this.#bridge[this.getCurrentDistance()]) return true;
-    return false;
+    return direction === this.#bridge[this.getCurrentDistance()];
   }
 
   static isWrongDirection(game, direction) {
-    if (!game.isSameDirection(direction)) return true;
-    return false;
+    return !game.isSameDirection(direction);
   }
 
   static isCommandRetry(command) {
     checkCorrectCommand(command);
-    if (command === COMMAND.retry) return true;
-    return false;
+    return command === COMMAND.retry;
   }
 }
 
