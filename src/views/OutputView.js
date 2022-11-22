@@ -1,6 +1,6 @@
-const Io = require('./utils/io');
-const { OUTPUT } = require('./constants/views');
-const { CONTAINER } = require('./constants/bridge');
+const Io = require('../utils/io');
+const { OUTPUT } = require('../constants/views');
+const { CONTAINER } = require('../constants/bridge');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
