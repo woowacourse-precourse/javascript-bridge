@@ -18,4 +18,9 @@ const RESULT_STRING = {
   FAIL: '실패',
 }
 
-module.exports = {MOVE_STRING, INPUT_RETRY, INITIAL_VALUE, RESULT_STRING};
+const MOVE_RESULT = {
+  SUCCESS: 'O',
+  FAIL: 'X',
+}
+
+module.exports = {MOVE_STRING, INPUT_RETRY, INITIAL_VALUE, RESULT_STRING, MOVE_RESULT};

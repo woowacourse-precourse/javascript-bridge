@@ -1,4 +1,4 @@
-const { MOVE_STRING } = require("../constants");
+const { MOVE_STRING, MOVE_RESULT } = require("../constants");
 
 class BridgeMap {
   #bridgeMap;
@@ -8,7 +8,7 @@ class BridgeMap {
   }
 
   buildMap(moving, isMatch) {
-    const result = isMatch? 'O' : 'X';
+    const result = isMatch? MOVE_RESULT.SUCCESS : MOVE_RESULT.FAIL;
     this.buildUpMap(moving, result);
     this.buildDownMap(moving, result);
   }
