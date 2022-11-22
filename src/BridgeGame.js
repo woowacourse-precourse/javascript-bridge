@@ -27,6 +27,12 @@ class BridgeGame {
     userMove === "U" ? this.updateUpPath() : this.updateDownPath();
   }
 
+  checkUserPath() {
+    const current = this.#userPath.length - 1;
+    if (this.#userPath[current] === this.#bridge[current]) return true;
+    return false;
+  }
+
   updateUpPath() {
     this.checkUserPath()
       ? (this.#currentBridge.upPath.push(" O "),
