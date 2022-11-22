@@ -1,5 +1,5 @@
-const Bridge = require("./Bridge");
-const BridgeGame = require("./BridgeGame");
+const Bridge = require("./domain/Bridge");
+const BridgeGame = require("./domain/BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 
 class BridgeGameService {

@@ -1,4 +1,4 @@
-const { GAME_RESULT, GAME_CONDITION } = require("./utils/Constants");
+const { GAME_RESULT, GAME_CONDITION } = require("../utils/Constants");
 
 const BridgeGameResult = {
   isSuccess(isEnd) {
