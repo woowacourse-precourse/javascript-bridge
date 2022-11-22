@@ -7,6 +7,5 @@ class App {
     InputView.readBridgeSize();
   }
 }
-const a = new App();
-a.play();
+
 module.exports = App;
