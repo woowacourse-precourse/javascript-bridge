@@ -6,10 +6,15 @@ const { MARKING_PASS, MARKING_FAIL } = require("./Utils");
 class BridgeGame {
   #bridge;
   #position;
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor() {
+    this.#bridge = null;
     this.#position = 0;
   }
+
+  setBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
