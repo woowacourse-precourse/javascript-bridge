@@ -1,27 +1,13 @@
-const { BRIDGE } = require('./utils/const');
-const Validator = require('./utils/Validator');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const MoveStatusGenerator = require('./MoveStatusGenerator');
 
 class Bridge {
   #bridge;
 
   /**
-   * @param {string} bridgeSize
+   * @param {string[]} bridge
    */
-  constructor(bridgeSize) {
-    this.validate(bridgeSize);
-    const generate = BridgeRandomNumberGenerator.generate;
-    this.#bridge = BridgeMaker.makeBridge(Number(bridgeSize), generate);
-  }
-
-  /**
-   * @param {string} bridgeSize
-   */
-  validate(bridgeSize) {
-    Validator.validateNaN(bridgeSize);
-    Validator.validateNumberBound(Number(bridgeSize), BRIDGE.MIN, BRIDGE.MAX);
+  constructor(bridge) {
+    this.#bridge = bridge;
   }
 
   /**

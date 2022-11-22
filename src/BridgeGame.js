@@ -3,7 +3,9 @@
 const Bridge = require('./Bridge');
 const Path = require('./Path');
 const Validator = require('./utils/Validator');
-const { COMMAND, COMMAND_TYPE, STATUS } = require('./utils/const');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { COMMAND, COMMAND_TYPE, STATUS, BRIDGE } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,12 +16,24 @@ class BridgeGame {
   #count;
 
   /**
-   * @param {string} bridgeSize
+   * @param {string} size
    */
-  constructor(bridgeSize) {
-    this.#bridge = new Bridge(bridgeSize);
+  constructor(size) {
+    this.validateBridgeSize(size);
+    const generateRandomNumber = BridgeRandomNumberGenerator.generate;
+    const bridge = BridgeMaker.makeBridge(Number(size), generateRandomNumber);
+
+    this.#bridge = new Bridge(bridge);
     this.#path = new Path();
     this.#count = 1;
+  }
+
+  /**
+   * @param {string} bridgeSize
+   */
+  validateBridgeSize(bridgeSize) {
+    Validator.validateNaN(bridgeSize);
+    Validator.validateNumberBound(Number(bridgeSize), BRIDGE.MIN, BRIDGE.MAX);
   }
 
   /**
