@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGES } = require("../constraints/constarints");
 const { generate } = require("../utils/random/BridgeRandomNumberGenerator");
-const { makeBridge } = require("../models/BridgeMaker");
+const { makeBridge } = require("../BridgeMaker");
 const { printResult, printMap } = require("./OutputView");
 const {
   validateBridgeSizeInput,
