@@ -29,8 +29,8 @@ const OutputView = {
   printResult(maps, IS_SUCCESS, numberOfAttempts) {
     Console.print(GAME_MESSAGES.result);
     this.printMap(maps);
-    const successOrFailure = IS_SUCCESS ? '성공' : '실패';
-    Console.print(GAME_MESSAGES.successOrFailure + successOrFailure);
+    const finalGameResult = IS_SUCCESS ? GAME_MESSAGES.success : GAME_MESSAGES.failure;
+    Console.print(finalGameResult);
     Console.print(GAME_MESSAGES.totalAttempts + numberOfAttempts);
   },
 };
