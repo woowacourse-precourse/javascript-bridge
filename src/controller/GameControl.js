@@ -1,7 +1,7 @@
 const VALID_VALUE = require('../constant/ValidValue');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const BridgeGame = require('./BridgeGame');
+const BridgeGame = require('../model/BridgeGame');
 
 class GameControl {
   constructor() {
