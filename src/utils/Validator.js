@@ -7,7 +7,7 @@ const Validator = {
   checkNumber(input) {
     const isNumber = (character) => '0123456789'.includes(character);
     if (input.split('').every(isNumber) === false) {
-      throw new Error('다리 길이는 정수만 입력해야 합니다.');
+      throw new Error('정수만 입력해야 합니다.');
     }
   },
 
@@ -22,13 +22,17 @@ const Validator = {
 
   checkMoving(input) {
     if ((input === BRIDGE_STRING.up || input === BRIDGE_STRING.down) === false) {
-      throw new Error('U(위 칸)와 D(아래 칸) 중 하나의 문자만 입력할 수 있습니다.');
+      throw new Error(
+        `${BRIDGE_STRING.up}(위 칸)와 ${BRIDGE_STRING.down}(아래 칸) 중 하나의 문자만 입력할 수 있습니다.`
+      );
     }
   },
 
   checkGameCommand(input) {
     if ((input === GAME_COMMAND_STRING.retry || input === GAME_COMMAND_STRING.quit) === false) {
-      throw new Error('R(재시작)과 Q(종료) 중 하나의 문자만 입력할 수 있습니다.');
+      throw new Error(
+        `${BRIDGE_STRING.up}(재시작)과 ${BRIDGE_STRING.down}(종료) 중 하나의 문자만 입력할 수 있습니다.`
+      );
     }
   },
 };
