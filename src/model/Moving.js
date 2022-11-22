@@ -1,4 +1,4 @@
-const { validateNext } = require('../errorHandling');
+const { validateNext } = require('../utils/errorHadling');
 
 const Moving = (function () {
   let next;

@@ -1,4 +1,4 @@
-const { validateGameCommand } = require('../errorHandling');
+const { validateGameCommand } = require('../utils/errorHadling');
 
 const GameCommand = (function () {
   let gameCommand;

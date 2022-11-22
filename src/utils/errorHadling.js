@@ -1,4 +1,4 @@
-const { GAME, NUMBER, ERROR } = require('./utils/constant');
+const { GAME, NUMBER, ERROR } = require('./constant');
 
 const validateBridgeSize = {
   validate(number) {
