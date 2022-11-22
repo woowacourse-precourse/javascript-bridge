@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 const { makeBridge } = require('./BridgeMaker.js');
 const { printMap, printResult } = require('./OutputView.js');
+const { checkBridgeSizeRange, checkBridgeSizeNumber, checkMovingInfo, checkRestartOrFail } = require('./ValidityCheck.js');
 
 const BridgeGame = require('./BridgeGame.js');
 const bridgeGame = new BridgeGame();
@@ -19,9 +20,16 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(GET_BRIDGE_SIZE_SENTENCE, (bridgeSize) => {
+      try {
+        checkBridgeSizeNumber(bridgeSize);
+        checkBridgeSizeRange(bridgeSize);
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize();
+      }
+
       bridgeGame.bridge = makeBridge(bridgeSize, generate);
       bridgeGame.bridgeSize = parseInt(bridgeSize);
-
       this.readMoving();
     });
   },
@@ -31,16 +39,19 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GET_MOVIING_INFO_SENTENCE, (movingInfo) => {
-      const tf = bridgeGame.move(movingInfo);
+      try {
+        checkMovingInfo(movingInfo);
+
+        const tf = bridgeGame.move(movingInfo);
       
-      printMap(bridgeGame);
-      
-      if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.bridgeSize - 1)) {
-        printResult(bridgeGame, 'success');
-      } else if (tf) {
+        printMap(bridgeGame);
+        
+        if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.bridgeSize - 1)) printResult(bridgeGame, 'success');
+        else if (tf) this.readMoving();
+        else this.readGameCommand();
+      } catch(e) {
+        Console.print(e);
         this.readMoving();
-      } else {
-        this.readGameCommand();
       }
     });
   },
@@ -50,11 +61,18 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(ASK_RESTART_OR_END_SENTENCE, (answer) => {
-      if (answer === 'R') {
-        bridgeGame.retry();
-        this.readMoving();
-      } else if (answer === 'Q') {
-        printResult(bridgeGame, 'fail');
+      try {
+        checkRestartOrFail(answer);
+      
+        if (answer === 'R') {
+          bridgeGame.retry();
+          this.readMoving();
+        } else if (answer === 'Q') {
+          printResult(bridgeGame, 'fail');
+        }
+      } catch (e) {
+        Console.print(e);
+        this.readGameCommand();
       }
     })
   },
