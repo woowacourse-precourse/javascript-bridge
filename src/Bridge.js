@@ -22,7 +22,7 @@ class Bridge {
       size,
       BridgeRandomNumberGenerator.generate
     );
-    this.map.makeOrginBridgeMap(this.#bridge);
+    this.map.makeOriginBridgeMap(this.#bridge);
   }
 
   validate(size) {}
