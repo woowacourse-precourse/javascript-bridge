@@ -2,13 +2,10 @@ const { GAME_SIGNATURE } = require('./utils/constant');
 
 class BridgeGame {
   #bridge;
-  #trials;
-  #trialCount;
-  #status;
+  trials = [];
   constructor() {
     this.trialCount = 1;
     this.status = GAME_SIGNATURE.gameOn;
-    this.trials = [];
   }
 
   setBridge(bridge) {
