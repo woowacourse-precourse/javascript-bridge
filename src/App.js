@@ -3,8 +3,6 @@ const OutputView = require("./view/OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const Validator = require("./Validator");
-const GameConfig = require("./util/GameConfig");
 
 class App {
   #bridge;
@@ -46,7 +44,6 @@ class App {
       );
       this.inputView.close();
     }
-
     this.inputView.readMoving(
       this.upDownCallback.bind(this),
       "이동할 칸을 선택해주세요. (위: U, 아래: D)"
