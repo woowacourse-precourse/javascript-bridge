@@ -10,7 +10,7 @@ const BridgeMaker = {
     let correctBridge = [];
     for (let i = 0; i < size; i++) {
       const step = generateRandomNumber();
-      parseInt(step) ? correctBridge.push(VALID_CHAR.UP) : correctBridge.push(VALID_CHAR.DOWN);
+      step ? correctBridge.push(VALID_CHAR.UP) : correctBridge.push(VALID_CHAR.DOWN);
     }
     return correctBridge;
   },
