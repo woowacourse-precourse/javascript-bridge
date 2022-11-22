@@ -1,7 +1,5 @@
 const BridgeGameStatus = require('./BridgeGameStatus');
-const BridgeMaker = require('../BridgeMaker');
 const BridgeMap = require('./BridgeMap');
-const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
 const { MARK } = require('../utils/Constants');
 
 class BridgeGame {
@@ -11,16 +9,10 @@ class BridgeGame {
 
   #status;
 
-  constructor() {
+  constructor(bridge) {
+    this.#bridgeAnswer = bridge;
     this.#bridgeMap = new BridgeMap();
     this.#status = new BridgeGameStatus();
-  }
-
-  setBridge(bridgeSize) {
-    this.#bridgeAnswer = BridgeMaker.makeBridge(
-      bridgeSize,
-      BridgeRandomNumberGenerator.generate
-    );
   }
 
   move(direction) {

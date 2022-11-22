@@ -1,20 +1,20 @@
 /* eslint max-lines-per-function: 0 */
 const BridgeGame = require('../src/Game/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
+const BridgeGameController = require('../src/Game/BridgeGameController');
 
 describe('setBridge 함수 호출 검사', () => {
   test('Bridgemaker 객체의 makeBridge 함수를 호출하여 다리를 만든다.', () => {
     const spyGet = jest.spyOn(BridgeMaker, 'makeBridge');
-    const bridgeGame = new BridgeGame();
-    bridgeGame.setBridge(3);
+    const bridgeGameController = new BridgeGameController();
+    bridgeGameController.setBridge(3);
     expect(spyGet).toBeCalledTimes(1);
   });
 });
 
 describe('updateStatus 함수 호출 검사', () => {
-  const bridgeGame = new BridgeGame();
+  const bridgeGame = new BridgeGame(['U', 'D', 'D']);
   const spyGet = jest.spyOn(bridgeGame, 'checkSuccess');
-  bridgeGame.setBridge(3);
 
   test('사용자가 선택한 칸이 correct하지 않다면 checkSuccess() 함수를 호출하지 않는다.', () => {
     const correct = false;
