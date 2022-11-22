@@ -3,6 +3,7 @@ const { makeBridge } = require("../BridgeMaker");
 const BridgeMap = require("./BridgeMap");
 const { generate } = require("../BridgeRandomNumberGenerator");
 const BridgeGameValidator = require("../validator/BridgeGameValidator");
+const { INPUT_RETRY, INITIAL_VALUE } = require("../constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,7 +16,7 @@ class BridgeGame {
     new BridgeGameValidator().bridgeSizeValidate(bridgeSize);
     this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
     this.#bridgeMap = new BridgeMap();
-    this.#step = -1;
+    this.#step = INITIAL_VALUE.STEP;
   }
 
   move(moving) {
@@ -36,9 +37,9 @@ class BridgeGame {
 
   retry(retry) {
     new BridgeGameValidator().retryValidate(retry);
-    if(retry === 'R'){
+    if(retry === INPUT_RETRY.RETRY){
       this.#bridgeMap = new BridgeMap();
-      this.#step = -1;
+      this.#step = INITIAL_VALUE.STEP;
       return true;
     }
     return false;

@@ -1,3 +1,5 @@
+const { MOVE_STRING } = require("../constants");
+
 class BridgeMap {
   #bridgeMap;
 
@@ -12,13 +14,13 @@ class BridgeMap {
   }
 
   buildUpMap(moving, result){
-    const isUp =  moving === 'U';
-    this.#bridgeMap['U'] = [...this.#bridgeMap['U'], isUp? result : ' '];
+    const isUp =  moving === MOVE_STRING.UP;
+    this.#bridgeMap[MOVE_STRING.UP] = [...this.#bridgeMap[MOVE_STRING.UP], isUp? result : ' '];
   }
 
   buildDownMap(moving, result){
-    const isDown =  moving === 'D';
-    this.#bridgeMap['D'] = [...this.#bridgeMap['D'], isDown? result : ' '];
+    const isDown =  moving === MOVE_STRING.DOWN;
+    this.#bridgeMap[MOVE_STRING.DOWN] = [...this.#bridgeMap[MOVE_STRING.DOWN], isDown? result : ' '];
   }
 
   getMap(){

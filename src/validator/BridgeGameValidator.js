@@ -1,3 +1,4 @@
+const { MOVE_STRING, INPUT_RETRY } = require("../constants");
 const ERROR_MESSAGE = require("../constants/ErrorMessage");
 
 class BridgeGameValidator {
@@ -7,13 +8,13 @@ class BridgeGameValidator {
   }
 
   movingValidate(moving){
-    if(moving !== 'U' && moving !== 'D'){
+    if(moving !== MOVE_STRING.UP && moving !== MOVE_STRING.DOWN){
       throw ERROR_MESSAGE.INPUT_MOVING;
     }
   }
 
   retryValidate(retry){
-    if(retry !== 'R' && retry !== 'Q'){
+    if(retry !== INPUT_RETRY.RETRY && retry !== INPUT_RETRY.QUIT){
       throw ERROR_MESSAGE.INPUT_RETRY;
     }
   }

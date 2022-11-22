@@ -1,3 +1,4 @@
+const { INITIAL_VALUE } = require("./constants");
 const BridgeGame = require("./model/BridgeGame");
 const { readBridgeSize, readMoving, readGameCommand } = require("./view/InputView");
 const { printMap, printResult, printResultMap, printError } = require("./view/OutputView");
@@ -7,7 +8,7 @@ class Controller {
   #tryingNum;
 
   constructor() {
-    this.#tryingNum = 1;
+    this.#tryingNum = INITIAL_VALUE.TRY_NUM;
     this.init();
   }
 
