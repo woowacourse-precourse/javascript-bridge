@@ -8,6 +8,7 @@ const WORD = {
   DOWN: "D",
   SUCCESS: "O",
   FAILURE: "X",
+  BLANK: " ",
 };
 
 const MESSAGE = {

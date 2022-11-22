@@ -20,6 +20,13 @@ class BridgeGame {
     return this.#movements;
   }
 
+  isEnd() {
+    if (this.#bridges.length === this.#movements.length) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
