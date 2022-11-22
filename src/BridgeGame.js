@@ -71,7 +71,7 @@ class BridgeGame {
     this.#try++;
     this.#round=0;
     this.#bridgeBoard.resetBoard();
-    this.#bridgeController.moveBlock();
+    this.#bridgeController.moveBlock(this);
   }
 
   play(size) {
