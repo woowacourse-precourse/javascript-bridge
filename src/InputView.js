@@ -30,7 +30,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     MissionUtils.Console.readLine(
-      MESSAGE.RETRY,
+      MESSAGE.COMMAND,
       Validator.command(callback, { onError: this.readGameCommand.bind(this) })
     );
   },
