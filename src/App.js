@@ -48,9 +48,10 @@ class App {
       if (await this.isSuccessFulMovement()) {
         return await this.handleSuccess();
       }
+      // return await this.handleCommand();
     }
 
-    // return this.handleFinish('success');
+    return this.handleSuccessFulFinish();
   };
 
   getCurrentPosition = () => {
@@ -70,6 +71,23 @@ class App {
 
   handleSuccess = async () => {
     return await this.handleMovement();
+  };
+
+  isRetryCommand = async () => {
+    const command = await this.getGameCommand();
+    return command === INPUT_FORMAT.RETRY;
+  };
+
+  handleSuccessFulFinish = () => {
+    this.handleFinish('success');
+  };
+
+  handleFailedFinish = () => {
+    this.handleFinish('fail');
+  };
+
+  handleFinish = (type) => {
+    // OutputView.printResult(type, this.game.resultMap);
   };
 }
 
