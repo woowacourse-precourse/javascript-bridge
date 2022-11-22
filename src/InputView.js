@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 const Validation = require('./modules/Validation');
+const { MESSAGE, COMMAND } = require('./modules/Constants');
 
 const bridgeGame = new BridgeGame();
 
@@ -13,7 +14,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
+    Console.readLine(MESSAGE.ASK_SIZE, (length) => {
       try {
         Validation.validateSize(length);
         bridgeGame.setBridge(length);
@@ -29,7 +30,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
+    Console.readLine(MESSAGE.ASK_MOVE, (moving) => {
       try {
         Validation.validateMoving(moving);
         bridgeGame.move(moving);
@@ -52,13 +53,13 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (command) => {
+    Console.readLine(MESSAGE.ASK_RETRY, (command) => {
       try {
         Validation.validateCommand(command);
-        if (command === 'R') {
+        if (command === COMMAND.RETRY) {
           bridgeGame.retry();
           this.readMoving();
-        } else if (command === 'Q') {
+        } else if (command === COMMAND.QUIT) {
           OutputView.printResult(bridgeGame);
         }
       } catch (error) {
