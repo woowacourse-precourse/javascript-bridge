@@ -11,6 +11,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요", (bridgesize) => {
       this.checkBridgeSize(bridgesize);
+      Console.print(bridgesize);
       this.readMoving(this.makeBridge(bridgesize));
     });
   },
@@ -29,7 +30,13 @@ const InputView = {
    */
   readMoving(bridge) {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", (moving) => {
+      this.checkMove(moving);
+      Console.print(moving);
     });
+  },
+
+  checkMove(moving){
+    if (moving !== 'U' && moving !== 'D') throw new Error('[ERROR] 이동할 칸은 "U"와 "D" 두 값중 하나여야합니다.');
   },
 
   /**
