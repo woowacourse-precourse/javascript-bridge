@@ -73,7 +73,7 @@ class App {
   }
 
   showResult() {
-    const [map, isClear, tryCount] = this.#bridgeGame.getResult();
+    const { map, isClear, tryCount } = this.#bridgeGame.getResult();
     OutputView.printResult(map, isClear, tryCount);
     MissionUtils.Console.close();
   }

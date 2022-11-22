@@ -55,7 +55,7 @@ class BridgeGame {
   }
 
   getResult() {
-    return [this.getMap(), this.isClear(), this.#tryCount];
+    return { map: this.getMap(), isClear: this.isClear(), tryCount: this.#tryCount };
   }
 }
 

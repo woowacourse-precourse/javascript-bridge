@@ -70,7 +70,7 @@ describe("BridgeGame 클래스 테스트", () => {
     runRetry(bridgeGame, retryCount);
     runMove(bridgeGame, playerRoute);
 
-    const [map, isClear, tryCount] = bridgeGame.getResult();
+    const { map, isClear, tryCount } = bridgeGame.getResult();
 
     expect(map.upperBridgeMap).toEqual("[ O | X ]");
     expect(map.lowerBridgeMap).toEqual("[   |   ]");
@@ -86,7 +86,7 @@ describe("BridgeGame 클래스 테스트", () => {
     runRetry(bridgeGame, retryCount);
     runMove(bridgeGame, playerRoute);
 
-    const [map, isClear, tryCount] = bridgeGame.getResult();
+    const { map, isClear, tryCount } = bridgeGame.getResult();
 
     expect(map.upperBridgeMap).toEqual("[ O |   | O ]");
     expect(map.lowerBridgeMap).toEqual("[   | O |   ]");
