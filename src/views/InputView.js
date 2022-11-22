@@ -34,9 +34,9 @@ const InputView = {
   },
 
   onReadMoving(value, bridgeGame) {
-    const direction = value;
     try {
-      bridgeGame.move(direction);
+      const map = bridgeGame.move(value);
+      OutputView.printMap(map);
     } catch (error) {
       OutputView.print(error.message);
       this.readMoving(bridgeGame);

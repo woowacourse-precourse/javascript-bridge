@@ -1,4 +1,3 @@
-const OutputView = require("../views/OutputView");
 const Validator = require("../utils/Validator");
 const GameStates = require("../utils/GameStates");
 
@@ -48,7 +47,7 @@ class BridgeGame {
     const block = this.#bridge[this.#distance++];
     const isPlaceToPass = this.isPlaceToPass(block, direction);
     this.pass(isPlaceToPass, block, direction);
-    this.afterMove(direction, isPlaceToPass, this.#distance);
+    return this.afterMove(direction, isPlaceToPass, this.#distance);
   }
 
   isPlaceToPass(block, direction) {
@@ -67,7 +66,7 @@ class BridgeGame {
       isPlaceToPass,
       distance
     );
-    OutputView.printMap(map);
+    return map;
   }
 
   onGameEnded(onSuccess, onFail) {
