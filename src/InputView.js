@@ -9,38 +9,27 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(
-        Message.ALERT.INPUT_BRIDGESIZE,
-        (answer) => {
-          resolve(answer);
-        }
-      );
+  readBridgeSize(callback) {
+    MissionUtils.Console.readLine(Message.ALERT.INPUT_BRIDGESIZE, (answer) => {
+      callback(answer);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(Message.ALERT.INPUT_MOVE, (answer) => {
-        resolve(answer);
-      });
+  readMoving(callback) {
+    MissionUtils.Console.readLine(Message.ALERT.INPUT_MOVE, (answer) => {
+      callback(answer);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(Message.ALERT.GAME_OVER, (answer) => {
-        Validate.resumeGameValidate(answer);
-
-        resolve(answer);
-      });
+  readGameCommand(callback) {
+    MissionUtils.Console.readLine(Message.ALERT.GAME_OVER, (answer) => {
+      callback(answer);
     });
   },
 };

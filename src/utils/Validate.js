@@ -1,4 +1,5 @@
 const Message = require("./Message");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const readBridgeSizeValidate = (number) => {
   //1e1와 같은 숫자를 방지하기 위한 validation

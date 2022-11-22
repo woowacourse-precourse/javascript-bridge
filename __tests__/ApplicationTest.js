@@ -31,9 +31,13 @@ const getOutput = (logSpy) => {
 const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
-  const app = new App();
+  console.log(`testCode1:${getOutput(logSpy)}`);
 
+  const app = new App();
   app.play();
+
+  const log = getOutput(logSpy);
+  console.log(`testCode:${log}`);
 
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };

@@ -1,6 +1,8 @@
 const Validate = require("./utils/Validate");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const MissionUtils = require("@woowacourse/mission-utils");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -19,25 +21,29 @@ class BridgeGame {
   }
 
   gameController() {
+    this.currentIdx++;
+
     if (this.isPlaying) {
       this.move();
     }
     if (!this.isPlaying) {
       this.gameOver();
     }
-    this.currentIdx++;
   }
 
   move() {
-    return new Promise((resolve, reject) => {
-      const direction = InputView.readMoving().then((result) => {
+    InputView.readMoving((result) => {
+      try {
         Validate.moveInputValidate(result);
         this.gameCheck(result);
-      });
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        this.move();
+      }
     });
   }
 
-  async retry() {
+  retry() {
     this.tryCnt++;
     this.currentIdx -= 2;
     this.isPlaying = true;
@@ -47,18 +53,36 @@ class BridgeGame {
     this.gameController();
   }
 
-  async gameOver() {
-    if (this.isClear && !this.isPlaying) return this.gameClear();
-    const goGame = await InputView.readGameCommand();
-    if (goGame === "R") {
+  gameOver() {
+    if (this.isClear === true && this.isPlaying === false) {
+      OutputView.printResult(this.bridgeStatics, true, this.tryCnt);
+      return;
+    }
+
+    this.inputGameResume();
+  }
+  inputGameResume() {
+    InputView.readGameCommand((answer) => {
+      try {
+        Validate.resumeGameValidate(answer);
+        this.resumeCheck(answer);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        this.inputGameResume();
+      }
+    });
+  }
+
+  resumeCheck(answer) {
+    if (answer === "R") {
       this.retry();
     }
-    if (goGame === "Q") {
+    if (answer === "Q") {
       OutputView.printResult(this.bridgeStatics, false, this.tryCnt);
     }
   }
 
-  async gameCheck(direction) {
+  gameCheck(direction) {
     if (direction === this.bridge[this.currentIdx]) {
       this.correctAnswer(direction);
     } else {
@@ -79,10 +103,6 @@ class BridgeGame {
   wrongAnswer(direction) {
     this.makeGameStatus(direction, false);
     this.isPlaying = false;
-  }
-
-  gameClear() {
-    OutputView.printResult(this.bridgeStatics, true, this.tryCnt);
   }
 
   makeGameStatus(direction, isCorrect) {
