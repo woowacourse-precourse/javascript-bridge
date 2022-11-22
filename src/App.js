@@ -30,9 +30,18 @@ class App {
     while(this.size > i){
       this.userBridges.push(readMoving());
       this.state = bridgeGame.move(i,this.userBridges[i]);
+      printMap(bridgeGame.setBridge);
+      if(this.state == false) break;
       i += 1;
     }
+    this.output(bridgeGame.setBridge);
   }
+  output(setBridge){
+    if(this.state == false) //재시도 여부 시작
+    //OutputView - > printResult();
+    printResult(setBridge, this.count, this.state);
+  }
+
 }
 
 module.exports = App;

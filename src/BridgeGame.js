@@ -36,7 +36,6 @@ class BridgeGame {
       case user == "D":
         this.makeUpDownBridge(' ', 'X');
         break;
-
     }
   }
   makeUpDownBridge(check1, check2){
