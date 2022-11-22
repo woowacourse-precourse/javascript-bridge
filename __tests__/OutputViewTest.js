@@ -22,13 +22,13 @@ describe("OutputView 객체 테스트", () => {
 
   test("현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.", () => {
     OutputView.printMap("U", "O");
-    expect(logSpy).toHaveBeenCalledWith(`[ O ]\n[   ]`);
+    expect(logSpy).toHaveBeenCalledWith(`[ O ]\n[   ]\n`);
 
     OutputView.printMap("U", "O");
-    expect(logSpy).toHaveBeenCalledWith(`[ O | O ]\n[   |   ]`);
+    expect(logSpy).toHaveBeenCalledWith(`[ O | O ]\n[   |   ]\n`);
 
     OutputView.printMap("D", "X");
-    expect(logSpy).toHaveBeenCalledWith(`[ O | O |   ]\n[   |   | X ]`);
+    expect(logSpy).toHaveBeenCalledWith(`[ O | O |   ]\n[   |   | X ]\n`);
   });
 
   test("게임 결과를 출력한다.", () => {
