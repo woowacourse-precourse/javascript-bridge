@@ -31,7 +31,8 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(count, i, bridge, bridgeMap, tryCount) {
-    MISSIONUTILS.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
+    MISSIONUTILS.Console.print("")
+    MISSIONUTILS.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
       try {
         checkMoveError(input)
       } catch (err) {
