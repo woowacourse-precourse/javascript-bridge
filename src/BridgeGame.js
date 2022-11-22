@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { printGameCount } = require("./OutputView");
 const OutputView = require("./OutputView");
-
+const{ MOVE_RESULT, GAME_RESULT, BRIDGE_SIZE, BRIDGE_MOVING, GAME_COMMAND } = require("./constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,21 +15,21 @@ class BridgeGame {
     this.downList = [];  //아래 칸 리스트(O, X 저장)
     this.answerCnt = 0; //정답 맞춘 횟수
   }
-  generateUpDownList(upDown, answerOrNot) {
-    if(upDown == 'U') {
-      if(answerOrNot) {
-        this.upList.push('O');
+  generateUpDownList(upDown, isAnswer) {
+    if(upDown == BRIDGE_MOVING.UP) {
+      if(isAnswer) {
+        this.upList.push(MOVE_RESULT.CORRECT);
         this.answerCnt += 1;
       }
-      else this.upList.push('X');
+      else this.upList.push(MOVE_RESULT.WRONG);
       this.downList.push(' ');
 
     } else{ 
-      if(answerOrNot) {
-        this.downList.push('O');
+      if(isAnswer) {
+        this.downList.push(MOVE_RESULT.CORRECT);
         this.answerCnt += 1;
       }
-      else this.downList.push('X');
+      else this.downList.push(MOVE_RESULT.WRONG);
       this.upList.push(' ');
     }
   }
@@ -57,10 +57,10 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(upDown) {
-    const answerOrNot = upDown == this.gameAnswer[this.readCnt++];
-    this.generateUpDownList(upDown, answerOrNot);
+    const isAnswer = upDown == this.gameAnswer[this.readCnt++];
+    this.generateUpDownList(upDown,isAnswer);
     
-    return answerOrNot;
+    return isAnswer;
   }
 
   /**

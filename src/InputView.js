@@ -5,11 +5,6 @@ const OutputView = require("./OutputView");
 const RandomNumGenerator = require("./BridgeRandomNumberGenerator");
 const InputValidation = require("./InputValidation");
 
-const BRIDGE_MOVE = Object.freeze({
-  UP: 'U',
-  DOWN: 'D'
-});
-
 const GAME_CONTROL = Object.freeze({
   RESTART: 'R',
   QUIT: 'Q'
