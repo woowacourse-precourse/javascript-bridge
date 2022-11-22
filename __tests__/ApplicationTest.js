@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const { checkSideInput } = require("../src/Validation");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -104,4 +105,17 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+
+  test('이동할 칸 입력 예외 테스트', () => {
+    expect(() => {
+      checkSideInput("Q");
+    }).toThrow("[ERROR] U 또는 D를 입력해주세요.");
+  });
+
+  test('이동할 칸 입력 예외 테스트', () => {
+    expect(() => {
+      checkSideInput("3");
+    }).toThrow("[ERROR] U 또는 D를 입력해주세요.");
+  });
+
 });

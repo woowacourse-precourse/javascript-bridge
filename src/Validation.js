@@ -8,13 +8,16 @@ const checkBridgeSize = (size) => {
 
 const checkSideInput = (side) => {
   const isMove = side === 'U' || side === 'D';
+  const isNumber = !isNaN(side);
 
   if(isMove === false) throw new Error("[ERROR] U 또는 D를 입력해주세요.");
+  if(isNumber === true) throw new Error("[ERROR] U 또는 D를 입력해주세요.");
+
 };
 
 const checkRetryKey = (key) => {
   const toRetry = key === 'R' || key === 'Q';
-  
+
   if(toRetry === false) throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
 }
 
