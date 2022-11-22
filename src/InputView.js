@@ -8,7 +8,7 @@ const InputView = {
    */
   readBridgeSize() {
     return new Promise((resolve)=>{
-      MissionUtils.Console.readLine('',(input)=>{
+      MissionUtils.Console.readLine('다리의 길이를 입력해주세요.',(input)=>{
         this.bridgeSizeInputCheck(input)
 
         const parsedInput = parseInt(input, 10)
@@ -32,7 +32,7 @@ const InputView = {
    */
   readMoving() {
     return new Promise((resolve)=>{
-      MissionUtils.Console.readLine('',(input)=>{
+      MissionUtils.Console.readLine('이동할 칸을 선택해주세요.',(input)=>{
         this.movingInputCheck(input)
 
         resolve(input)
@@ -51,7 +51,7 @@ const InputView = {
    */
   readGameCommand() {
     return new Promise((resolve)=>{
-      MissionUtils.Console.readLine('',(input)=>{
+      MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',(input)=>{
         this.gameCommandInputCheck(input)
 
         resolve(input)
