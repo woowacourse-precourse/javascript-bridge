@@ -1,8 +1,6 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 const InputView = require('../src/InputView');
-const OutputView = require('../src/OutputView');
 const BridgeGame = require('../src/BridgeGame');
 
 describe('입력값 예외 테스트', () => {

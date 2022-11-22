@@ -14,7 +14,6 @@ const BridgeMaker = {
       if (Answer == 0) this.answerArr.push('D');
       if (Answer == 1) this.answerArr.push('U');
     }
-    console.log(this.answerArr); // 제출 시 삭제
     return this.answerArr;
   },
 };
