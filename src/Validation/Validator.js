@@ -23,6 +23,18 @@ const Validator = {
       return true;
     }
   },
+
+  checkRetryOrQuit(request) {
+    try {
+      if (request !== "R" && request !== "Q")
+        throw new Error(
+          "[Error] 재시작/종료는 'R' 또는 'Q'만 입력 가능합니다."
+        );
+    } catch (err) {
+      Console.print(err);
+      return true;
+    }
+  },
 };
 
 module.exports = Validator;
