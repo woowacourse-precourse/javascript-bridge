@@ -34,7 +34,7 @@ class MapMaker {
 
   makeFinalSuccess(direction) {
     this.selectRightBridge(direction);
-    OutputView.printResult();
+    OutputView.printResult(this.#upperMapArray, this.#lowerMapArray);
   }
 }
 
