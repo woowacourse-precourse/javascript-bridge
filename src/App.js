@@ -20,12 +20,14 @@ class App {
 
   moveBridge() {
     this.currentBridge.push(InputView.readMoving());
-    if (this.#bridgeGame.move(this.currentBridge)) OutputView.printMap(this.currentBridge, "correct");
+    if (this.#bridgeGame.move(this.currentBridge)) {
+      OutputView.printMap(this.currentBridge, "correct");
+      this.checkFinish();
+    }
     if (!this.#bridgeGame.move(this.currentBridge)) {
       OutputView.printMap(this.currentBridge, "wrong");
       this.checkRetry();
     }
-    this.checkFinish();
   }
 
   checkRetry() {

@@ -13,7 +13,7 @@ const OutputView = {
     let upBridge = [];
     let downBridge = [];
     upBridge, downBridge = this.pushBridge(currentBridge, upBridge, downBridge);
-    this.lastCheck(upBridge, downBridge, isCorrect);
+    upBridge, downBridge = this.lastCheck(upBridge, downBridge, isCorrect);
     Console.print(`[ ${upBridge.join(" | ")} ]`);
     Console.print(`[ ${downBridge.join(" | ")} ]`);
   },
@@ -41,6 +41,7 @@ const OutputView = {
       downBridge.pop();
       downBridge.push("X");
     }
+    return upBridge, downBridge;
   },
 
   /**
