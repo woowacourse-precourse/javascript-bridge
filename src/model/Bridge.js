@@ -1,10 +1,7 @@
-const BridgeValidator = require("../validator/BridgeValidator");
-
 class Bridge {
   #bridge
 
   constructor(bridge) {
-    new BridgeValidator().validate(bridge);
     this.#bridge = bridge;
   }
 
