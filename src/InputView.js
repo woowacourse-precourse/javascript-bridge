@@ -32,25 +32,21 @@ const InputView = {
       
     })
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(length, bridgeGame) {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (upDown) => {
-      if(InputValidation.validateMoving(upDown)) {
+      if(InputValidation.validateMove(upDown)) {
         this.readMoving(length,bridgeGame);
       } else {
-        const answerOrNot = bridgeGame.move(upDown);
+        const isAnswer = bridgeGame.move(upDown);
         const [upList, downList] = bridgeGame.getUpDownList();
         OutputView.printMap(upList, downList);
-        
-        if(bridgeGame.getAnswerCnt() == length) { //다리를 끝까지 건넌 경우
-          const gameCount = bridgeGame.increaseGameCount();
-          this.quitGame(bridgeGame, 'P', gameCount); //게임 종료
-          return Console.close(); 
-        }
-        if(answerOrNot) return this.readMoving(length, bridgeGame); //정답을 맞히면 다음 칸 선택하기
+
+        if(this.guessAllAnswers(bridgeGame, length)) return Console.close();
+
+        if(isAnswer) return this.readMoving(length, bridgeGame); //정답을 맞히면 다음 칸 선택하기
   
         return this.readGameCommand(bridgeGame); 
       }
@@ -76,7 +72,17 @@ const InputView = {
      
     })
   },
-
+   /**
+   * 사용자가 정답을 다 맞혔는지 확인하는 메서드
+   */
+  guessAllAnswers(bridgeGame, length) {
+    if(bridgeGame.getAnswerCnt() == length) { //다리를 끝까지 건넌 경우
+      const gameCount = bridgeGame.increaseGameCount();
+      this.quitGame(bridgeGame, 'P', gameCount); //게임 종료
+      return true; 
+    }
+    return false;
+  },
   /**
    * 사용자가 게임을 종료할 때 사용하는 메서드
    */
