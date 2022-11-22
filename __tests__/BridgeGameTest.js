@@ -12,27 +12,30 @@ describe('다리 건너기 게임 테스트', () => {
   const bridgeGame = new BridgeGame(new Bridge(3));
 
   test('다리 건너기 테스트', () => {
-    const resultMap = bridgeGame.move('U');
-    expect(resultMap).toEqual({
-      moveResult: '[ O ]\n[   ]',
-      gameStatus: 0,
-    });
+    bridgeGame.move('U');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O ]\n[   ]');
+    expect(gameStatus).toEqual(0);
   });
 
   test('다리 건너기 테스트', () => {
-    const resultMap = bridgeGame.move('D');
-    expect(resultMap).toEqual({
-      moveResult: '[ O |   ]\n[   | O ]',
-      gameStatus: 0,
-    });
+    bridgeGame.move('D');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O |   ]\n[   | O ]');
+    expect(gameStatus).toEqual(0);
   });
 
   test('다리 건너기 테스트', () => {
-    const resultMap = bridgeGame.move('D');
-    expect(resultMap).toEqual({
-      moveResult: '[ O |   |   ]\n[   | O | X ]',
-      gameStatus: 1,
-    });
+    bridgeGame.move('D');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O |   |   ]\n[   | O | X ]');
+    expect(gameStatus).toEqual(1);
   });
 });
 
@@ -41,27 +44,30 @@ describe('다리 건너기 게임 테스트', () => {
   const bridgeGame = new BridgeGame(new Bridge(3));
 
   test('다리 건너기 테스트', () => {
-    const resultMap = bridgeGame.move('U');
-    expect(resultMap).toEqual({
-      moveResult: '[ O ]\n[   ]',
-      gameStatus: 0,
-    });
+    bridgeGame.move('U');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O ]\n[   ]');
+    expect(gameStatus).toEqual(0);
   });
 
   test('다리 건너기 테스트', () => {
-    const resultMap = bridgeGame.move('U');
-    expect(resultMap).toEqual({
-      moveResult: '[ O | X ]\n[   |   ]',
-      gameStatus: 1,
-    });
+    bridgeGame.move('U');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O | X ]\n[   |   ]');
+    expect(gameStatus).toEqual(1);
   });
 
   test('게임 재시작 테스트', () => {
     bridgeGame.retry();
-    const resultMap = bridgeGame.move('U');
-    expect(resultMap).toEqual({
-      moveResult: '[ O ]\n[   ]',
-      gameStatus: 0,
-    });
+    bridgeGame.move('U');
+    const moveResult = bridgeGame.getMoveResult();
+    const gameStatus = bridgeGame.getGameStatus();
+
+    expect(moveResult).toEqual('[ O ]\n[   ]');
+    expect(gameStatus).toEqual(0);
   });
 });
