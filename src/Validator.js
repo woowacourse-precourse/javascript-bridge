@@ -18,7 +18,7 @@ class Validator {
     GAME_COMMAND: `게임 명령어는 ${this.#commands.join(', ')} 중 하나의 문자여야 합니다.`,
   });
 
-  REG_EXP = Object.freeze({
+  #REG_EXP = Object.freeze({
     NUMBER_ONLY: /^\d+$/,
     ONE_UPPERCASE: /^[A-Z]{1}$/,
   });
@@ -42,7 +42,7 @@ class Validator {
   }
 
   bridgeSize(input) {
-    const regExp = this.REG_EXP.NUMBER_ONLY;
+    const regExp = this.#REG_EXP.NUMBER_ONLY;
 
     this.#format(regExp, input);
     if (input < 3 || input > 20) {
@@ -51,7 +51,7 @@ class Validator {
   }
 
   moving(input) {
-    const regExp = this.REG_EXP.ONE_UPPERCASE;
+    const regExp = this.#REG_EXP.ONE_UPPERCASE;
     const directions = new Set(this.#directions);
 
     this.#format(regExp, input);
@@ -61,7 +61,7 @@ class Validator {
   }
 
   gameCommand(input) {
-    const regExp = this.REG_EXP.ONE_UPPERCASE;
+    const regExp = this.#REG_EXP.ONE_UPPERCASE;
     const commands = new Set(this.#commands);
 
     this.#format(regExp, input);
