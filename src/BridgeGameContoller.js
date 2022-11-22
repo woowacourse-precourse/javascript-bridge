@@ -22,15 +22,32 @@ class BridgeGameContoller {
     }
 
     move(){
-        let lastInput = null;
         try{
-            lastInput = input.readMoving();
+            this.setGame(Const.KEY.LAST, input.readMoving());
         }
         catch(e){
             this.move();
         }
-        output.printMap(this.#game[Const.KEY.BRIDGE], this.#game[Const.KEY.CURRENT] + 1, lastInput);
-        this.setGame(Const.KEY.CURRENT, this.#game[Const.KEY.CURRENT]++);
+        this.setMap();
+        this.setGame(Const.KEY.CURRENT, this.#game[Const.KEY.CURRENT]+1);
+        output.printMap(this.#map);
+    }
+
+    parseMap(bridge, last, flag){
+        const result = [];
+        for(let i = 0 ; i < bridge.length -1 ; i++){
+            if(bridge[i] === flag) result.push(' O ');
+            else result.push('   ');
+        }
+        if(bridge[bridge.length-1] === last && last === flag) result.push(' O ');
+        else if(bridge[bridge.length-1] === last && last !== flag) result.push('   ');
+        else result.push(' X ');
+        return result;
+    }
+
+    setMap(){
+        this.#map[0] = this.parseMap(this.#game[Const.KEY.BRIDGE].slice(0,this.#game[Const.KEY.CURRENT]+1), this.getGame(Const.KEY.LAST), 'U');
+        this.#map[1] = this.parseMap(this.#game[Const.KEY.BRIDGE].slice(0,this.#game[Const.KEY.CURRENT]+1), this.getGame(Const.KEY.LAST), 'D');
     }
 
     retry(){
@@ -44,7 +61,7 @@ class BridgeGameContoller {
     }
 
     end(){
-        // output.printResult(this.#game[Const.KEY.BRIDGE], this.#lastInput, this.#bridge[this.#bridge.length-1] === this.#lastInput, this.#totalTry);
+        output.printResult(this.getMap(), this.getSuccess(), this.#totalTry);
     }
 
     /**
@@ -54,7 +71,8 @@ class BridgeGameContoller {
      */
     #initBridgeLength(){
         try{
-            return input.readBridgeSize();
+            const len = input.readBridgeSize();
+            return len !== undefined ? len : null;
         }
         catch(e){
             output.printMessage(e);
@@ -67,12 +85,35 @@ class BridgeGameContoller {
         this.setGame(keyValue[0][0],keyValue[0][1]);
     }
 
+    resetGame(){
+        this.#game = {
+            current:0,
+        };
+        this.#map = [];
+        this.#totalTry += 1;
+    }
+
+    getSuccess(){
+        if(this.getGame(Const.KEY.BRIDGE)[this.getGame(Const.KEY.BRIDGE).length-1] === this.getGame(Const.KEY.LAST)) {
+            return true;
+        }
+        return false;
+    }
+
+    getMap(){
+        return this.#map;
+    }
+
     setGame(key, value){
         this.#game[key] = value;
     }
 
     getGame(key){
         return this.#game[key];
+    }
+
+    getTry(){
+        return this.#totalTry;
     }
 }
 

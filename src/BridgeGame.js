@@ -1,5 +1,3 @@
-const input = require('./View/InputView');
-const output = require('./View/OutputView');
 const Controller = require("./BridgeGameContoller");
 const Const = require('./constant/constant');
 
@@ -9,18 +7,33 @@ const Const = require('./constant/constant');
 class BridgeGame {
   #bridge; // 건너야 할 다리
   #current; // 현재까지 사용자가 건넌 다리 갯수
-  #totalTry; // 총 게임 시도 횟수
-  #lastInput; // 마지막 입
-  #gameResult; // 게임 결과 ( true or false )
   #controller;
 
   constructor() {
     this.#controller = new Controller();
+    this.#controller.init();
     this.#bridge = this.#controller.getGame(Const.KEY.BRIDGE);
     this.#current = this.#controller.getGame(Const.KEY.CURRENT);
-    this.#totalTry = 0;
-    this.#lastInput = '';
-    this.#gameResult = false;
+  }
+
+  start(){
+    while(this.#bridge.length >= this.#controller.getGame(Const.KEY.CURRENT)){
+      if(this.#bridge.length === this.#controller.getGame(Const.KEY.CURRENT)){
+        if(this.#controller.getSuccess()) break;
+        if(this.retry() === "Q") break;
+        this.reset();
+      }
+      this.move();
+    }
+    this.end();
+  }
+
+  end(){
+    this.#controller.end();
+  }
+
+  reset(){
+    this.#controller.resetGame();
   }
 
   /**
@@ -30,15 +43,6 @@ class BridgeGame {
    */
   move() {
     this.#controller.move();
-    // try{
-    //   this.#controller.move();
-    //   // this.#lastInput = input.readMoving();
-    //   // output.printMap(this.#bridge, this.#current + 1, this.#lastInput);
-    //   // this.#current += 1;
-    // }
-    // catch(e){
-    //   this.move();
-    // }
   }
 
 
@@ -49,28 +53,6 @@ class BridgeGame {
    */
   retry() {
       return this.#controller.retry();
-  }
-
-  start(){
-    while(this.#controller.getGame(Const.KEY.BRIDGE).length >= this.#controller.getGame(Const.KEY.CURRENT)){
-      if(this.#controller.getGame(Const.KEY.BRIDGE).length === this.#controller.getGame(Const.KEY.CURRENT)){
-        if(this.#bridge[this.#bridge.length-1] === this.#lastInput) break;
-        if(this.retry() === "Q") break;
-        this.reset();
-      }
-      this.move();
-    }
-    this.end();
-  }
-
-  end(){
-    this.#totalTry ++;
-    this.#controller.end();
-  }
-
-  reset(){
-    this.#current = 0;
-    this.#totalTry ++;
   }
 }
 
