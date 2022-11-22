@@ -8,7 +8,12 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(userMove, bridge) {}
+  move(userMove, bridge) {
+    return {
+      upBridge: this.upDownMap(userMove, term.UP, bridge),
+      downBridge: this.upDownMap(userMove, term.DOWN, bridge),
+    };
+  }
 
   resultChar(target, character, index) {
     if (character === index) {
