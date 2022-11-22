@@ -4,44 +4,38 @@ const OutputView = require("../src/OutputView");
 const BridgeGame = require("./BridgeGame");
 
 class App {
-  gameCnt = 1;
+  size;
   movingCount = 0;
 
   constructor() {
     OutputView.printStart();
+    this.size = this.makeSize();
+    this.bridgeGame = new BridgeGame(this.size);
   }
 
   play() {
-    let size = this.makeSize();
-    if (size == "err") return;
-    MissionUtils.Console.print(size);
-    const bridgeGame = new BridgeGame(size);
-    MissionUtils.Console.print(bridgeGame.bridge);
-    let command;
-    do {
-      let moving = this.makeMoving();
-      MissionUtils.Console.print(moving);
-      MissionUtils.Console.print(bridgeGame.location);
-      bridgeGame.move(moving);
-      MissionUtils.Console.print(bridgeGame.bridge);
-      OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
-      command = true;
-      if (this.checkFail(bridgeGame.bridge, bridgeGame.location)) {
-        if (InputView.readGameCommand() == "Q") command = false;
-        else {
-          this.gameCnt++;
-          this.movingCount = 0;
-          bridgeGame.retry();
-        }
-      }
-      if (this.movingCount == size) command = false;
-    } while (command);
-
+    if (this.size == "err") return;
+    while (this.ask());
     OutputView.printResult(
-      bridgeGame.bridge,
-      bridgeGame.location,
-      this.gameCnt
+      this.bridgeGame.bridge,
+      this.bridgeGame.location,
+      this.bridgeGame.gameCnt
     );
+  }
+
+  ask() {
+    this.bridgeGame.move(this.makeMoving());
+    OutputView.printMap(this.bridgeGame.bridge, this.bridgeGame.location);
+    if (this.checkFail(this.bridgeGame.bridge, this.bridgeGame.location)) {
+      if (InputView.readGameCommand() == "Q") return false;
+      else {
+        this.gameCnt++;
+        this.movingCount = 0;
+        this.bridgeGame.retry();
+      }
+    }
+    if (this.movingCount == this.size) return false;
+    return true;
   }
 
   checkFail(bridge, location) {
