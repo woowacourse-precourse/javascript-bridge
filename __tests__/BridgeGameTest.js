@@ -65,21 +65,21 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
       expect(bridgeGame.checkingUserMoveLogs(checkedMap)).toEqual(result);
     }
   );
-  test('bridgeToString() 메서드가 원하는 모양의 string으로 변환되는지 확인', () => {
+  test('mapToString() 메서드가 원하는 모양의 string으로 변환되는지 확인', () => {
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
     const map = bridgeGame.makeUserMoveMap(moveLogs, bridge);
     const result = ['[ O |   | X ]', '[   | O |   ]'];
-    expect(bridgeGame.bridgeToString(map)).toEqual(result);
+    expect(bridgeGame.mapToString(map)).toEqual(result);
   });
-  test.failing('bridgeToString() 메서드가 잘못된 모양으로 변환되어 실패하는지 확인', () => {
+  test.failing('mapToString() 메서드가 잘못된 모양으로 변환되어 실패하는지 확인', () => {
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
     const map = bridgeGame.makeUserMoveMap(moveLogs, bridge);
     const result = ['[ O |   | X ]', '[   | X |   ]'];
-    expect(bridgeGame.bridgeToString(map)).toEqual(result);
+    expect(bridgeGame.mapToString(map)).toEqual(result);
   });
 });
 

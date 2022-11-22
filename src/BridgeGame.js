@@ -22,7 +22,7 @@ class BridgeGame {
 
   currentUserMoveMap() {
     const notConvertMap = this.makeUserMoveMap(this.moveLogs, this.#bridge);
-    const convert = this.bridgeToString(notConvertMap);
+    const convert = this.mapToString(notConvertMap);
     return convert;
   }
 
@@ -39,7 +39,7 @@ class BridgeGame {
     return [upperBridge, lowerBridge];
   }
 
-  bridgeToString(bridge) {
+  mapToString(bridge) {
     const notConvertBridge = bridge.map((bridgeSide) => {
       return '[ ' + bridgeSide.join(' | ') + ' ]';
     });
