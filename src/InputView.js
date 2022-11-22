@@ -36,7 +36,7 @@ const InputView = {
       if(BridgeCompare.isCompleteBridge(SIZE, NextBridgeSize)) {
         OutputView.printResult(BridgeResultArray, CompareResult, 10);      
       }
-      if(CompareResult){
+      if(!CompareResult){
         this.readGameCommand(BridgeResultArray, CompareResult);
       } 
       this.readMoving(SIZE, BridgeStatus, NextBridgeSize, BridgeResultArray);
@@ -49,10 +49,10 @@ const InputView = {
   readGameCommand(BridgeResultArray, CompareResult) {
     Io.input('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
       if(userInput === 'R'){
-
       }
       if(userInput == 'Q'){
-        
+        console.log('Q');
+        OutputView.printResult(BridgeResultArray, CompareResult, 10);
       }
     })
   },

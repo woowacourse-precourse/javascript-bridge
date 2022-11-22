@@ -30,6 +30,7 @@ const OutputView = {
     this.printMap(BridgeResultArray);
     Io.output(`게임 성공 여부: ${SUCCESS[successResult]}`);
     Io.output(`총 시도한 횟수: ${count}`);
+    Io.close();
   },
 };
 

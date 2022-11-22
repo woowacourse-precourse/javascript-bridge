@@ -8,6 +8,10 @@ class Io {
     static output(message) {
         Console.print(message);
     }
+    
+    static close() {
+        Console.close();
+    }
 }
 
 module.exports = Io;
