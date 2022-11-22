@@ -1,6 +1,6 @@
 const { GAME_COMMAND } = require('../utils/constants/GameSystem');
 const { getMakeBridge } = require('../utils/services/map');
-const BridgeMap = require('./BridgeMap');
+const BridgeMapFormatter = require('./BridgeMapFormatter');
 const UserInput = require('./UserInput');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -17,7 +17,7 @@ class BridgeGame {
   constructor(model, view) {
     this.#model = model;
     this.#view = view;
-    this.#map = new BridgeMap(model, view);
+    this.#map = new BridgeMapFormatter(model, view);
     this.#userInput = new UserInput(model, view, this);
   }
 
