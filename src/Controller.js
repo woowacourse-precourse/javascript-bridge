@@ -22,7 +22,6 @@ class Controller {
       }
       catch(error){
         printMessage(error);
-        this.init();
       }
     });
   }
@@ -35,7 +34,6 @@ class Controller {
         this.handleBridgeGame(isMatch);
       }catch(error){
         printMessage(error);
-        this.play();
       }
     });
   }
@@ -69,7 +67,6 @@ class Controller {
         this.end();
       }catch(error){
         printMessage(error);
-        this.askReplay();
       }
     });
   }
