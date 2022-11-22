@@ -17,6 +17,10 @@ class BridgeGame {
     this.#tryCount = 1;
   }
 
+  get tryCount() {
+    return this.#tryCount;
+  }
+
   makeBridge(len) {
     this.#bridges = BridgeMaker.makeBridge(
       len,
@@ -31,13 +35,10 @@ class BridgeGame {
    */
   move(position) {
     this.#state.push(position);
-    let isPossible = false;
-    if (this.#bridges[this.#state.length - 1] === position) isPossible = true;
     return {
       state: this.#state,
       lastPosition: this.#state.length === this.#bridges.length,
-      isPossible,
-      tryCount: this.#tryCount
+      isPossible: this.#bridges[this.#state.length - 1] === position
     };
   }
 
