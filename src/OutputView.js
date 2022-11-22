@@ -22,8 +22,8 @@ const OutputView = {
   printResult({ topBridge, bottomBridge }, numberOfAttempts, successOrFailure) {
     Console.print(`${OutputView.RESULT_MESSAGE_HEADER}`);
     this.printMap({ topBridge, bottomBridge });
-    Console.print(`${OutputView.RESULT_MESSAGE_IS_SUCCESS}`);
-    Console.print(`${OutputView.RESULT_MESSAGE_TOTAL_ATTEMPTS}`);
+    Console.print(`${OutputView.RESULT_MESSAGE_IS_SUCCESS(successOrFailure)}`);
+    Console.print(`${OutputView.RESULT_MESSAGE_TOTAL_ATTEMPTS(numberOfAttempts)}`);
   },
 
   printStartMessage() {
