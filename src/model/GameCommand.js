@@ -22,6 +22,10 @@ class GameCommand {
     }
   }
 
+  getClose() {
+    return this.#close;
+  }
+
   getGameCommand() {
     return this.#gameCommand;
   }
