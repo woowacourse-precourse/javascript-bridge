@@ -25,9 +25,9 @@ class BridgeGame {
     if (this.state) this.drawBridge(movingStep, BRIDGE_SHAPE.SUCCESS);
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
-    if (!this.state) return InputView.readGameCommand(this);
-    if (this.reachEndOfBridge()) return OutputView.printResult([this.upLineOfBridge, this.downLineOfBridge], SUCCESS_WORD, this.try);
-    return InputView.readMoving(this);
+    if (!this.state) return this.getNextRead("readGameCommand");
+    if (this.reachEndOfBridge()) return this.getPrintResult(SUCCESS_WORD);
+    return this.getNextRead("readMoving");
   }
 
   canMove(movingStep) {
@@ -36,6 +36,23 @@ class BridgeGame {
 
   reachEndOfBridge() {
     return ++this.currentStep === this.bridgeSize;
+  }
+
+  getPrintResult(successOrfailure) {
+    return {
+      flag: "printResult",
+      upLineOfBridge: this.upLineOfBridge,
+      downLineOfBridge: this.downLineOfBridge,
+      successOrfailure: successOrfailure,
+      tryCount: this.try,
+    }
+  }
+
+  getNextRead(flag) {
+    return {
+      flag: flag,
+      bridgeGame: this
+    }
   }
 
   drawBridge(movingStep, bridgeShape) {
@@ -63,11 +80,11 @@ class BridgeGame {
     this.upLineOfBridge = BRIDGE_SHAPE.START;
     this.downLineOfBridge = BRIDGE_SHAPE.START;
     this.try++;
-    return InputView.readMoving(this);
+    return this.getNextRead("readMoving");
   }
 
   quit() {
-    return OutputView.printResult([this.upLineOfBridge, this.downLineOfBridge], FAILURE_WORD, this.try);
+    return this.getPrintResult(FAILURE_WORD);
   }
 }
 
