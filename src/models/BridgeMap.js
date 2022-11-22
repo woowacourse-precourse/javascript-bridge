@@ -19,7 +19,6 @@ class BridgeMap {
     const otherSide = DIRECTION[(DIRECTION[direction] + 1) % 2];
     this.#map[direction].push(elem);
     this.#map[otherSide].push(OTHERSIDE_ELEMENT);
-
     return Object.values(this.#map);
   }
 }

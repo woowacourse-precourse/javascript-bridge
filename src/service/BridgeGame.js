@@ -9,7 +9,6 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    console.log(this.#bridge);
     this.#curTargetCell = 0;
     this.#numberOfAttempts = 1;
     this.#bridgeMap = new BridgeMap();
