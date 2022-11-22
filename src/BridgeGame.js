@@ -7,6 +7,7 @@ class BridgeGame {
     this.upBridgeList = [];
     this.downBridgeList = [];
     this.count = 0;
+    this.retryCount = 1;
   }
 
   setCount(){
@@ -76,7 +77,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  setCountRetry(){
+    this.retryCount += 1;
+    this.count = 0;
+  }
+
+  getCountRetry(){
+    return this.retryCount;
+  }
+
+  retry(bridge) {
+    Console.print("재시작")
+    this.setCountRetry();
+    this.upBridgeList = [];
+    this.downBridgeList = [];
+  }
 }
 
 module.exports = BridgeGame;
