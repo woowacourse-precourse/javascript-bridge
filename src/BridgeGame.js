@@ -47,18 +47,23 @@ class BridgeGame {
     const upside = this.#makeAnswerCorssedBridgeMap(COMMAND.MOVING.UP);
     const downside = this.#makeAnswerCorssedBridgeMap(COMMAND.MOVING.DOWN);
     if (!this.isAnswerMovingCommand()) {
-      upside[getArrayLastIndex(upside)] = this.#markNotAnswerBridgeMap(
-        COMMAND.MOVING.UP
-      );
-      downside[getArrayLastIndex(downside)] = this.#markNotAnswerBridgeMap(
-        COMMAND.MOVING.DOWN
-      );
+      return this.#getNotAnswerBridgeMap(upside, downside);
     }
     return { upside, downside };
   }
 
   getTotalTryCount() {
     return this.#totalTryCount;
+  }
+
+  #getNotAnswerBridgeMap(upside, downside) {
+    upside[getArrayLastIndex(upside)] = this.#markNotAnswerBridgeMap(
+      COMMAND.MOVING.UP
+    );
+    downside[getArrayLastIndex(downside)] = this.#markNotAnswerBridgeMap(
+      COMMAND.MOVING.DOWN
+    );
+    return { upside, downside };
   }
 
   #makeAnswerCorssedBridgeMap(direction) {
