@@ -39,6 +39,26 @@ class BridgeGame {
     };
     this.downFalsePush();
   };
+  upTruePush() {
+    this.up.push("[ O ]");
+    this.down.push("[   ]");
+    this.check = true;
+  };
+  downTruePush() {
+    this.up.push("[   ]");
+    this.down.push("[ O ]");
+    this.check = true;
+  };
+  upFalsePush() {
+    this.up.push("[ X ]");
+    this.down.push("[   ]");
+    this.check = false;
+  };
+  downFalsePush() {
+    this.up.push("[   ]");
+    this.down.push("[ X ]");
+    this.check = false;
+  };
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
