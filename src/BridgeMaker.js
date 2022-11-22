@@ -1,4 +1,4 @@
-const USER_INPUT = require("./utils/Constants");
+const USER_INPUT = require("./utils/Constant");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
