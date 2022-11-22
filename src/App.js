@@ -51,7 +51,6 @@ class App {
   }
 
   controlRetry() {
-    console.log("controlRetry");
     InputView.readGameCommand((gameCommand) => {
       if (gameCommand === WORD.RETRY) {
         this.mapMaker.resetMap();
