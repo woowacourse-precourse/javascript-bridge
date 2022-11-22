@@ -50,6 +50,10 @@ const OutputView = {
     Console.print(`총 시도한 횟수: ${bridgeGame.tryCount}`);
     Console.close();
   },
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
