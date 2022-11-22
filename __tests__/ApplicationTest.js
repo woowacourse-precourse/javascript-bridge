@@ -5,14 +5,14 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 
-export const mockQuestions = (answers) => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => acc.mockImplementationOnce((__, callback) => {
     callback(input);
   }), MissionUtils.Console.readLine);
 };
 
-export const mockRandoms = (numbers) => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce(
     (acc, number) => acc.mockReturnValueOnce(number),
@@ -20,7 +20,7 @@ export const mockRandoms = (numbers) => {
   );
 };
 
-export const getLogSpy = () => {
+const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
