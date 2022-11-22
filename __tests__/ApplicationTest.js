@@ -99,7 +99,22 @@ describe("다리 건너기 테스트", () => {
     [3, "가나다"],
     [3, "\n"],
     [3, " "],
-  ])("이동할 칸이 U 또는 D가 아닌 경우에 대한 예외 처리", (size, command) => {
-    runException([size, command]);
+  ])("이동할 칸이 U 또는 D가 아닌 경우에 대한 예외 처리", (size, move) => {
+    runException([size, move]);
   });
+
+  test.each([
+    [3, "D", "a"],
+    [3, "D", "."],
+    [3, "D", 12],
+    [3, "D", "가나다"],
+    [3, "D", "\n"],
+    [3, "D", " "],
+  ])(
+    "재시도 여부가 R 또는 Q가 아닌 경우에 대한 예외 처리",
+    (size, move, command) => {
+      mockRandoms([1, 0, 1]);
+      runException([size, move, command]);
+    }
+  );
 });
