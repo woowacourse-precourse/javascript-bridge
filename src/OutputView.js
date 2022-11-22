@@ -35,11 +35,11 @@ const OutputView = {
   printResult(tryNum, moveHistory, isCorrect) {
     MissionUtils.Console.print(RESULT_MESSAGE.GAME_RESULT);
     OutputView.printMap(moveHistory, isCorrect);
-    if (isCorrect) {
-      MissionUtils.Console.print(`${RESULT_MESSAGE.IS_SUCCESS}성공`);
-      MissionUtils.Console.print(`\n${RESULT_MESSAGE.TOTAL_TRY}${tryNum}`);
-      MissionUtils.Console.close();
-    }
+    const result = isCorrect ? '성공' : '실패';
+
+    MissionUtils.Console.print(`${RESULT_MESSAGE.IS_SUCCESS}${result}`);
+    MissionUtils.Console.print(`\n${RESULT_MESSAGE.TOTAL_TRY}${tryNum}`);
+    MissionUtils.Console.close();
   },
 };
 
