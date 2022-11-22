@@ -2,12 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 
 const GameController = require("../controller/GameController");
-const OutputView = require("./OutputView");
+const InputMessage = require("../static/InputMessage");
 
 const InputView = {
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
-      if(!GameController.exceptionHandling(size, 'size')){
+    Console.readLine(`${InputMessage.size}\n`, (size) => {
+      if(!GameController.exceptionHandling(size, 'size')) {
         this.readBridgeSize();
         return;
       }
@@ -16,33 +16,27 @@ const InputView = {
   },
 
   readMoving() {
-    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
-      if(Exception.movingException(moving)) {
-        const result = bridgeGame.move(moving);
-        OutputView.printMap(bridgeGame.movingState);
-        this.determineNext(result);
+    Console.readLine(`\n${InputMessage.moving}\n`, (moving) => {
+      const moveResult = GameController.exceptionHandling(moving, 'moving')
+      if(!moveResult) {
+        this.readMoving();
+        return;
       }
-      else this.readMoving();
+      this.determineNext(moveResult);
     })
   },
 
-  determineNext(result) {
-    if(result) {
-      if(bridgeGame.bridge.length === bridgeGame.movingState.currentLocation) {
-        OutputView.printResult(bridgeGame.movingState, true);
-      }
-      else this.readMoving();
-      return;
-    }
-    this.readGameCommand();
+  determineNext(moveResult) {
+    const next = GameController.determineNext(moveResult);
+    if(next === 'readMoving') this.readMoving();
+    if(next === 'readGameCommand') this.readGameCommand();
   },
 
   readGameCommand() {
-    Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
-      if(Exception.retryingException(answer)) {
-        bridgeGame.retry(answer) ? this.readMoving() : OutputView.printResult(bridgeGame.movingState, false);
-      }
-      else this.readGameCommand();
+    Console.readLine(`\n${InputMessage.retry}\n`, (retry) => {
+      const retryResult = GameController.exceptionHandling(retry, 'retry')
+      if(!retryResult) this.readGameCommand();
+      else if(GameController.determineRetry(retryResult)) this.readMoving();
     })
   },
 };
