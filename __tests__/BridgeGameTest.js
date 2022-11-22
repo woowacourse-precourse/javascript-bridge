@@ -1,38 +1,33 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/BridgeGame');
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 describe('BridgeGame 클래스 테스트', () => {
-  test('checkMovement, setBridgeForm 메서드 테스트', () => {
-    const bridgeGame = new BridgeGame(3);
-    const testBridge = ['U', 'D', 'U'];
+  mockRandoms([1, 0, 1]);
+  const bridgeGame = new BridgeGame(3);
+
+  test('move 메서드 및 하위 기능 테스트', () => {
     const testInput = 'U';
-    const testPlayerAt = 0;
-    bridgeGame.checkMovement(testInput, testBridge, testPlayerAt);
-    bridgeGame.setBridgeForm(testInput);
-    bridgeGame.setGameStatus();
-    const testBridgeUpper = bridgeGame.getBridgeUpper();
-    const testBridgeLower = bridgeGame.getBridgeLower();
+    const testMoveResult = bridgeGame.move(testInput);
+    const testBridgeUpper = testMoveResult[0];
+    const testBridgeLower = testMoveResult[1];
     expect(testBridgeUpper[0]).toEqual(' O ');
     expect(testBridgeLower[0]).toEqual('   ');
   });
 
-  test('checkSuccessFail, retry 메서드 테스트', () => {
-    const bridgeGame2 = new BridgeGame(3);
-    const testBridge = ['U', 'D', 'U'];
+  test('retry 메서드 테스트', () => {
     const testInput = 'D';
-    const testPlayerAt = 0;
-    bridgeGame2.checkMovement(testInput, testBridge, testPlayerAt);
-    bridgeGame2.setGameStatus();
-    const testWinStatus = bridgeGame2.getGameWin();
-    expect(testWinStatus).toBeFalsy();
-
-    bridgeGame2.retry();
-    const resetBridgeUpper = bridgeGame2.getBridgeUpper();
-    const resetBridgeLower = bridgeGame2.getBridgeLower();
-    const testTrialCount = bridgeGame2.getTrialCount();
-    const resetWinStatus = bridgeGame2.getGameWin();
-    expect(testTrialCount).toEqual(2);
-    expect(resetBridgeUpper).toEqual([]);
-    expect(resetBridgeLower).toEqual([]);
-    expect(resetWinStatus).toEqual(undefined);
+    bridgeGame.move(testInput);
+    bridgeGame.retry();
+    expect(bridgeGame.getTrialCount()).toEqual(2);
+    expect(bridgeGame.getBridgeUpper()).toEqual([]);
+    expect(bridgeGame.getBridgeLower()).toEqual([]);
+    expect(bridgeGame.getGameWin()).toEqual(undefined);
   });
 });
