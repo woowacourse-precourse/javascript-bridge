@@ -84,4 +84,75 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+
+  test.each([["a"], ["."], ["가나다"], ["\n"], [" "]])(
+    "다리 길이가 숫자가 아닐 경우에 대한 예외 처리",
+    (input) => {
+      runException([input]);
+    }
+  );
+
+  test.each([
+    [3, "r"],
+    [3, "."],
+    [3, 12],
+    [3, "가나다"],
+    [3, "\n"],
+    [3, " "],
+  ])("이동할 칸이 U 또는 D가 아닌 경우에 대한 예외 처리", (size, move) => {
+    runException([size, move]);
+  });
+
+  test.each([
+    [3, "D", "a"],
+    [3, "D", "."],
+    [3, "D", 12],
+    [3, "D", "가나다"],
+    [3, "D", "\n"],
+    [3, "D", " "],
+  ])(
+    "재시도 여부가 R 또는 Q가 아닌 경우에 대한 예외 처리",
+    (size, move, command) => {
+      mockRandoms([1, 0, 1]);
+      runException([size, move, command]);
+    }
+  );
+
+  test("재시도 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions([3, "U", "U", "R", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("실패 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions([3, "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O | X ]",
+      "[   |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
+  });
 });
