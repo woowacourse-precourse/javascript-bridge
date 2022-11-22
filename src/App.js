@@ -17,17 +17,6 @@ class App {
     InputView.readBridgeSize(this.tryValidateBridge.bind(this));
   }
 
-  tryValidateBridge(bridgeSize) {
-    try {
-      Validator.validateBridgeSize(bridgeSize);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      this.buildBridge();
-      return;
-    }
-    this.manageBridge(bridgeSize);
-  }
-
   manageBridge(bridgeSize) {
     this.bridgeGame.setBridge(bridgeSize);
     this.mainRound();
@@ -35,17 +24,6 @@ class App {
 
   mainRound() {
     InputView.readMoving(this.tryValidateMove.bind(this));
-  }
-
-  tryValidateMove(direction) {
-    try {
-      Validator.validateDirection(direction);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      this.mainRound();
-      return;
-    }
-    this.manageMove(direction);
   }
 
   manageMove(direction) {
@@ -74,17 +52,6 @@ class App {
     this.mainRound();
   }
 
-  tryValidateRetry(command) {
-    try {
-      Validator.validateRetryCommand(command);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      this.askRetry();
-      return;
-    }
-    this.manageRetry(command);
-  }
-
   managePassCase() {
     this.bridgeGame.move();
     OutputView.printMap(this.bridgeGame.getBridgeMap());
@@ -95,6 +62,38 @@ class App {
     this.mainRound();
   }
 
+  tryValidateBridge(bridgeSize) {
+    try {
+      Validator.validateBridgeSize(bridgeSize);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.buildBridge();
+      return;
+    }
+    this.manageBridge(bridgeSize);
+  }
+
+  tryValidateMove(direction) {
+    try {
+      Validator.validateDirection(direction);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.mainRound();
+      return;
+    }
+    this.manageMove(direction);
+  }
+
+  tryValidateRetry(command) {
+    try {
+      Validator.validateRetryCommand(command);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.askRetry();
+      return;
+    }
+    this.manageRetry(command);
+  }
 }
 
 module.exports = App;
