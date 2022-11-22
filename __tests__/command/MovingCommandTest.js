@@ -9,10 +9,10 @@ describe('이동 커맨드 클래스 테스트', () => {
     }).toThrow('[ERROR] 빈 값을 입력하였습니다.');
   });
 
-  test.each([[' U'], ['D ']])('공백 포함 유효성 검증', (command) => {
+  test.each([[' U'], ['D ']])('앞 또는 뒤 공백 포함 유효성 검증', (command) => {
     expect(() => {
       new MovingCommand(command);
-    }).toThrow('[ERROR] 공백을 포함해 입력하였습니다.');
+    }).toThrow('[ERROR] 앞 또는 뒤에 공백을 포함해 입력하였습니다.');
   });
 
   test.each([['a'], ['2']])('이동 값이 U 또는 D가 아닌 경우 예외 처리', (command) => {

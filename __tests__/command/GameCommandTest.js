@@ -9,10 +9,10 @@ describe('커맨드 클래스 테스트', () => {
     }).toThrow('[ERROR] 빈 값을 입력하였습니다.');
   });
 
-  test.each([[' R'], ['Q ']])('공백 포함 유효성 검증', (command) => {
+  test.each([[' R'], ['Q ']])('앞 또는 뒤 공백 포함 유효성 검증', (command) => {
     expect(() => {
       new GameCommand(command);
-    }).toThrow('[ERROR] 공백을 포함해 입력하였습니다.');
+    }).toThrow('[ERROR] 앞 또는 뒤에 공백을 포함해 입력하였습니다.');
   });
 
   test.each([['a'], ['2']])('게임 커맨드 값이 R 또는 Q가 아닌 경우 예외 처리', (command) => {

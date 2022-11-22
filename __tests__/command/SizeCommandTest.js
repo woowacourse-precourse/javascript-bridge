@@ -9,10 +9,10 @@ describe('사이즈 커맨드 클래스 테스트', () => {
     }).toThrow('[ERROR] 빈 값을 입력하였습니다.');
   });
 
-  test.each([[' 3'], ['20 ']])('공백 포함 유효성 검증', (command) => {
+  test.each([[' 3'], ['20 ']])('앞 또는 뒤 공백 포함 유효성 검증', (command) => {
     expect(() => {
       new SizeCommand(command);
-    }).toThrow('[ERROR] 공백을 포함해 입력하였습니다.');
+    }).toThrow('[ERROR] 앞 또는 뒤에 공백을 포함해 입력하였습니다.');
   });
 
   test.each([['a'], ['1 7'], ['1e3']])('다리 길이 값이 숫자가 아닌 경우 예외 처리', (size) => {
