@@ -1,10 +1,11 @@
-const { USER_INPUT, RETRY, END_GAME, ERROR } = require("./Messages");
+const { USER_INPUT, RETRY, END_GAME } = require("./Messages");
 const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const { printResult } = require("./OutputView");
+const Validation = require("./Validation");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -19,49 +20,27 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(USER_INPUT.ENTER_LENGTH, (size) => {
       try {
-        this.validateBridgeSize(size);
+        Validation.validateBridgeSize(size);
         const bridgeList = makeBridge(size, generate);
         InputView.readMoving(bridgeList);
       } 
       catch (error) { this.printError(error); }
       });
   },
-  
-  validateBridgeSize(size) {
-    if(size < 3 || size > 20) {
-      throw new Error(ERROR.BRIDGE_SIZE_LENGTH_ERROR);
-    };
-    if(isNaN(size)) {
-      throw new Error(ERROR.BRIDGE_TYPE_ERROR);
-    };
-  },
 
-  printError(error) {
-    Console.print(error);
-    Console.close();
-  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeList) {
     Console.readLine(USER_INPUT.ENTER_MOVEMENT, (upOrDown) => {
       try { 
-        this.validateUserMove(upOrDown);
+        Validation.validateUserMove(upOrDown);
         const isInputRight = this.bridgeGame.isUserInputRightOrWrong(bridgeList, upOrDown);
         const result = this.bridgeGame.move(bridgeList, upOrDown);
         this.repeatMovingOrNot(bridgeList, result, isInputRight);
       } 
       catch(error) { this.printError(error); }
     })
-  },
-
-  validateUserMove(upOrDown) {
-    if(!['U', 'D'].includes(upOrDown)) {
-      throw new Error(ERROR.BRIDGE_MOVE_INPUT_ERROR);
-    }
-    if(upOrDown.length !== 1) {
-      throw new Error(ERROR.BRIDGE_MOVE_INPUT_LENGTH_ERROR);
-    }
   },
 
   repeatMovingOrNot(bridgeList, result, isInputRight) {
@@ -94,7 +73,7 @@ const InputView = {
   readGameCommand(upAndDownList, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
       try {
-        this.validateGameCommand(retryOrQuit);
+        Validation.validateGameCommand(retryOrQuit);
         if(retryOrQuit === 'R') {
           this.retryGame(bridgeList);
         } if(retryOrQuit === 'Q') {
@@ -102,15 +81,6 @@ const InputView = {
         }
       } catch(error) { this.printError(error); }
     })
-  },
-
-  validateGameCommand(retryOrQuit) {
-    if(retryOrQuit.length !== 1) {
-      throw new Error(ERROR.GAME_COMMAND_INPUT_LENGTH_ERROR);
-    }
-    if(!['R', 'Q'].includes(retryOrQuit)) {
-      throw new Error(ERROR.GAME_COMMAND_INPUT_ERROR);
-    }
   },
 
   retryGame(bridgeList) {
@@ -122,8 +92,12 @@ const InputView = {
   quitGame(upAndDownList) {
     this.isSuccess = END_GAME.FAILED;
     printResult(upAndDownList, this.retryNum, this.isSuccess);
-  }
+  },
 
+  printError(error) {
+    Console.print(error);
+    Console.close();
+  },
 };
 
 module.exports = InputView;
