@@ -27,10 +27,26 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    var restart;
+    MissionUtils.Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
+      (reset) => {
+        this.isRestartChar(reset);
+        restart = reset;
+      }
+    );
+    return restart;
+  },
   isMoveChar(upDown) {
     if (upDown !== "U" && upDown !== "D") {
       throw new Error("[ERROR] U와 D 중 하나의 문자를 입력하세요.");
+    }
+  },
+
+  isRestartChar(restartQuit) {
+    if (restartQuit !== "R" && restartQuit !== "Q") {
+      throw new Error("[ERROR] R와 Q 중 하나의 문자를 입력하세요.");
     }
   },
 };
