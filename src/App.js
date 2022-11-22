@@ -4,17 +4,21 @@ class App {
   playing(bridge) {
     let result = false;
     let count = 0;
-    while (1) {
+    while (true) {
       result = GamePlaying.BridgeMove(bridge);
       count++;
-      if (!GamePlaying.requestGame(result)) break;
+      if (!GamePlaying.requestGame(result)) {
+        break;
+      }
     }
     return [result, count];
   }
+
   bridgeCrate() {
     const bridge = GamePlaying.BridgeMaker();
     return bridge;
   }
+
   play() {
     GamePlaying.gameStartPrint();
     const bridge = this.bridgeCrate();
