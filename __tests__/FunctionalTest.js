@@ -34,3 +34,14 @@ describe("해당 이동칸이 이동가능한지 불가능한지 이동이 완�
     expect(moveResult).toEqual(MOVE_END);
   });
 });
+
+describe("게임 재시도시 기존 다리정보를 유지하면서, 횟수만 1회 증가시킵니다. ", () => {
+  test("일치하는 경우", () => {
+    const gameManager = new BridgeGame();
+    gameManager.setBridge(["U", "D", "U"]);
+    gameManager.move("D");
+    gameManager.retry();
+    expect(gameManager.getTrial()).toEqual(2);
+    expect(gameManager.getBridge()).toEqual(["U", "D", "U"]);
+  });
+});
