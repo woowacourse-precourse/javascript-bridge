@@ -23,6 +23,10 @@ class App {
 
   play() {
     printGameStart();
+    this.askBridgeSize();
+  }
+
+  askBridgeSize() {
     readBridgeSize(this.actWithBridgeSize.bind(this));
   }
 
@@ -30,23 +34,26 @@ class App {
     try {
       validateBridgeNumber(Number(input));
       this.#bridgeGame.setBridge(Number(input));
-      readMoving(this.actWithUserMoveInput.bind(this));
+      this.askMoveInput();
     } catch (e) {
-      printErrorMessage(e);
-      readBridgeSize(this.actWithBridgeSize.bind(this));
+      this.askAgain(e, this.askBridgeSize);
     }
   }
 
+  askMoveInput() {
+    readMoving(this.actWithUserMoveInput.bind(this));
+  }
+
   actWithUserMoveInput(input) {
+    const letter = input.toUpperCase();
     try {
-      validateMoveInput(input.toUpperCase());
-      this.#bridgeGame.move(input.toUpperCase());
+      validateMoveInput(letter);
+      this.#bridgeGame.move(letter);
       const { map, isCorrect, isGameOver } = this.#bridgeGame.getResult();
       printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
-      printErrorMessage(e);
-      readMoving(this.actWithUserMoveInput.bind(this));
+      this.askAgain(e, this.askMoveInput);
     }
   }
 
@@ -57,33 +64,40 @@ class App {
     }
 
     if (isCorrect) {
-      readMoving(this.actWithUserMoveInput.bind(this));
+      this.askMoveInput();
     } else {
-      readGameCommand(this.actWithUserCommandInput.bind(this));
+      this.askCommandInput();
     }
+  }
+
+  askCommandInput() {
+    readGameCommand(this.actWithUserCommandInput.bind(this));
   }
 
   actWithUserCommandInput(input) {
     const letter = input.toUpperCase();
-
     try {
       validateCommandInput(letter);
       this.actWithCommand(letter);
     } catch (e) {
-      printErrorMessage(e);
-      readGameCommand(this.actWithUserCommandInput.bind(this));
+      this.askAgain(e, this.askCommandInput);
     }
   }
 
   actWithCommand(letter) {
     if (letter === LETTER.retry) {
       this.#bridgeGame.retry();
-      readMoving(this.actWithUserMoveInput.bind(this));
+      this.askMoveInput();
     }
 
     if (letter === LETTER.quit) {
       this.endGame(MESSAGE.lose);
     }
+  }
+
+  askAgain(e, itself) {
+    printErrorMessage(e);
+    itself();
   }
 
   endGame(result) {
