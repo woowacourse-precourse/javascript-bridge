@@ -33,6 +33,7 @@ const InputView = {
       try {
         const movement = userInput;
         this.validateMovement(movement);
+        nextStep(movement);
       } catch (error) {
         OutputView.printError(error);
         this.readMoving(nextStep);

@@ -6,9 +6,9 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 const { makeBridge } = require('../BridgeMaker');
 
 class Bridge {
-  bridge;
+  condition;
   constructor() {
-    this.bridge = [];
+    this.condition = [];
   }
 
   /**
@@ -16,7 +16,7 @@ class Bridge {
    * @param {number} bridgeSize 다리 길이
    */
   setBridge(bridgeSize) {
-    this.bridge = makeBridge(bridgeSize, generate);
+    this.condition = makeBridge(bridgeSize, generate);
   }
 }
 

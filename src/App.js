@@ -4,20 +4,18 @@ const Bridge = require('./model/Bridge');
 const BridgeGame = require('./controller/BridgeGame');
 
 class App {
-  count;
   bridge;
   bridgeGame;
   constructor() {
-    this.count = 0;
     this.bridge = new Bridge();
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame = new BridgeGame(this.bridge);
   }
   play() {
     OutputView.printStart();
     this.startGame();
   }
   startGame() {
-    this.bridgeGame.addCount();
+    this.bridgeGame.addGameCount();
     this.buildBridge();
   }
   buildBridge() {
@@ -27,8 +25,11 @@ class App {
     });
   }
   moveOnBridge() {
-    InputView.readMoving();
+    InputView.readMoving((movement) => {
+      this.bridgeGame.move(movement);
+    });
   }
+  // showPlayer;
 }
 
 const app = new App();
