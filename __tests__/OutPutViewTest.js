@@ -4,6 +4,12 @@ const OutputView = require('../src/View/OutputView');
 
 const printSpy = jest.spyOn(Console, 'print');
 
+const expectLogs = (spy, callNums, logs) => {
+  callNums.forEach((num, idx) => {
+    expect(spy).toHaveBeenNthCalledWith(num, logs[idx]);
+  });
+};
+
 describe('printMap 메서드 테스트', () => {
   test('Console.print가 총 2번 호출된다.', () => {
     OutputView.printMap([
@@ -54,8 +60,7 @@ describe('printMap 메서드 테스트', () => {
       [' ', 'O', 'O'],
     ]);
 
-    expect(printSpy).toHaveBeenNthCalledWith(1, '[ O |   |   ]');
-    expect(printSpy).toHaveBeenNthCalledWith(2, '[   | O | O ]');
+    expectLogs(printSpy, [1, 2], ['[ O |   |   ]', '[   | O | O ]']);
 
     printSpy.mockClear();
   });
@@ -105,13 +110,13 @@ describe('printResult 메서드 테스트', () => {
   ])('결과 전체 출력 테스트', (result, isSuccess) => {
     OutputView.printResult(result);
 
-    expect(printSpy).toHaveBeenNthCalledWith(
-      1,
-      `\n게임 성공 여부: ${isSuccess}`
-    );
-    expect(printSpy).toHaveBeenNthCalledWith(
-      2,
-      `총 시도한 횟수: ${result.attempCount}`
+    expectLogs(
+      printSpy,
+      [1, 2],
+      [
+        `\n게임 성공 여부: ${isSuccess}`,
+        `총 시도한 횟수: ${result.attempCount}`,
+      ]
     );
 
     printSpy.mockClear();

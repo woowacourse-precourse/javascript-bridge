@@ -7,9 +7,9 @@ const printSpy = jest.spyOn(Console, 'print');
 
 const setNumber = () => {
   Random.pickNumberInRange = jest.fn();
-  Random.pickNumberInRange.mockReturnValueOnce(1);
-  Random.pickNumberInRange.mockReturnValueOnce(1);
-  Random.pickNumberInRange.mockReturnValueOnce(0);
+  [1, 1, 0].reduce((acc, cur) => {
+    return acc.mockReturnValueOnce(cur);
+  }, Random.pickNumberInRange);
 };
 
 const mockQuestions = (answers) => {
@@ -19,6 +19,12 @@ const mockQuestions = (answers) => {
       callback(input);
     });
   }, Console.readLine);
+};
+
+const expectLogs = (spy, callNums, logs) => {
+  callNums.forEach((num, idx) => {
+    expect(spy).toHaveBeenNthCalledWith(num, logs[idx]);
+  });
 };
 
 describe('전체적인 게임 흐름 테스트', () => {
@@ -65,10 +71,11 @@ describe('전체적인 게임 흐름 테스트', () => {
     const bridgeGameManager = new BridgeGameManager();
     bridgeGameManager.start();
 
-    expect(printSpy).toHaveBeenNthCalledWith(2, '[ O ]');
-    expect(printSpy).toHaveBeenNthCalledWith(3, '[   ]');
-    expect(printSpy).toHaveBeenNthCalledWith(4, '[ O | O ]');
-    expect(printSpy).toHaveBeenNthCalledWith(5, '[   |   ]');
+    expectLogs(
+      printSpy,
+      [2, 3, 4, 5],
+      ['[ O ]', '[   ]', '[ O | O ]', '[   |   ]']
+    );
 
     printSpy.mockClear();
   });
@@ -132,9 +139,11 @@ describe('전체적인 게임 흐름 테스트', () => {
     const bridgeGameManager = new BridgeGameManager();
     bridgeGameManager.start();
 
-    expect(printSpy).toHaveBeenNthCalledWith(8, '\n최종 게임 결과');
-    expect(printSpy).toHaveBeenNthCalledWith(9, '[ O | O |   ]');
-    expect(printSpy).toHaveBeenNthCalledWith(10, '[   |   | O ]');
+    expectLogs(
+      printSpy,
+      [8, 9, 10],
+      ['\n최종 게임 결과', '[ O | O |   ]', '[   |   | O ]']
+    );
 
     printSpy.mockClear();
   });

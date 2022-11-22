@@ -262,3 +262,4 @@ const number = generateRandomNumber();
   - 유효성 검사 함수에서 각 항목을 검사하는 부분을 함수로 만들어 분리한다.
 - [ ] refactor: 같은 기능을 하는 함수(또는 메서드)는 하나로 만들기
   - 시작 메시지와 오류 메시지를 출력하는 함수를 하나로 만든다.
+- [x] refactor: test코드 리팩터링
