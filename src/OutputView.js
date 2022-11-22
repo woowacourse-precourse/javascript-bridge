@@ -18,7 +18,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(game) {
+    this.printMessage(MESSAGE.FINAL_RESULT);
+    this.printMap(game.map);
+    this.printMessage(
+      `${MESSAGE.GAME_RESULT} ${
+        game.isArrived ? MESSAGE.SUCCESS : MESSAGE.FAIL
+      }`
+    );
+    this.printMessage(`${MESSAGE.TRY_COUNT} ${game.tried}`);
+  },
 
   printIntro() {
     this.printMessage(MESSAGE.INTRO);

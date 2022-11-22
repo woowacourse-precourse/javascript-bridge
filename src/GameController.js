@@ -29,7 +29,7 @@ class GameController {
   crossBridge() {
     InputView.readMoving((direction) => {
       const moved = this.game.move(direction);
-      const arrived = this.game.bridge.length === this.game.step;
+      const arrived = this.game.isArrived();
 
       OutputView.printMap(formatMap(this.game.map));
 
@@ -46,6 +46,7 @@ class GameController {
   }
 
   quit() {
+    OutputView.printResult(this.game);
     MissionUtils.Console.close();
   }
 }
