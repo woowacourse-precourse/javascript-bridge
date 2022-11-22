@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { BRIDGE } = require("./Constants/Constants");
+const { BRIDGE, NUMBERS } = require("./Constants/Constants");
 const BridgeGameToView = require("./BridgeGameToView");
 
 class BridgeGame {
@@ -16,7 +16,7 @@ class BridgeGame {
 
   move(gameRec) {
     // 두 번째 move 이상일 때만 실행: 이전 bridge값 불러온 것에서 마지막 ] 빼고 "| " 추가
-    if (gameRec.moveNum !== 0) {
+    if (gameRec.moveNum !== NUMBERS.MOVENUM_START) {
       gameRec.bridgeOutput.firstBridge = `${gameRec.bridgeOutput.firstBridge.slice(0, -1)}${BRIDGE.BAR}`;
       gameRec.bridgeOutput.secondBridge = `${gameRec.bridgeOutput.secondBridge.slice(0, -1)}${BRIDGE.BAR}`;
     }
@@ -49,7 +49,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(gameRec) {
-    gameRec.moveNum = 0; // 재시도 시 moveNum 초기화
+    gameRec.moveNum = NUMBERS.MOVENUM_START; // 재시도 시 moveNum 초기화
     gameRec.attemptNum += 1; // 재시도 시 attemptNum 1 증가
     this.bridgeGameToView.bridgeGameToInputView(gameRec);
   }
