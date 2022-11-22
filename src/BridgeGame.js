@@ -14,7 +14,7 @@ class BridgeGame {
     this.length = length;
     this.BridgeRandomNumberGenerator = BridgeRandomNumberGenerator;
     // this.move(this.length,this.BridgeRandomNumberGenerator);
-    this.calctext(this.)
+    // this.calctext(this.)
    }
   move(length,inputValue) {
     if( inputValue === "U"){
