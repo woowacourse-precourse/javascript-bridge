@@ -21,7 +21,7 @@ class BridgeGame {
   }
 
   move(movingStep) {
-    this.state = this.correctBridge[this.currentStep] === movingStep;
+    this.state = this.canMove(movingStep);
     if (this.state) this.drawBridge(movingStep, BRIDGE_SHAPE.SUCCESS);
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
@@ -31,6 +31,10 @@ class BridgeGame {
     if (!this.state) return InputView.readGameCommand(this);
     if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try);
     return InputView.readMoving(this);
+  }
+
+  canMove(movingStep) {
+    return this.correctBridge[this.currentStep] === movingStep;
   }
 
   drawBridge(movingStep, bridgeShape) {
