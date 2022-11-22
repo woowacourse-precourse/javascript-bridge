@@ -1,5 +1,6 @@
 const ERROR_MESSAGE = require('../constant/ErrorMessage');
 const VALID_VALUE = require('../constant/ValidValue');
+const UserError = require('../util/UserError');
 
 class Direction {
   #direction;
@@ -20,7 +21,7 @@ class Direction {
     ) {
       return;
     }
-    throw new Error(ERROR_MESSAGE.DIRECTION);
+    throw new UserError(ERROR_MESSAGE.DIRECTION);
   }
 }
 

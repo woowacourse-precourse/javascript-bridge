@@ -1,5 +1,6 @@
 const VALID_VALUE = require('../constant/ValidValue');
 const ERROR_MESSAGE = require('../constant/ErrorMessage');
+const UserError = require('../util/UserError');
 
 class BridgeSize {
   #size;
@@ -20,13 +21,13 @@ class BridgeSize {
       this.#size < VALID_VALUE.SIZE.LOWER ||
       this.#size > VALID_VALUE.SIZE.UPPER
     ) {
-      throw new Error(ERROR_MESSAGE.RANGE);
+      throw new UserError(ERROR_MESSAGE.RANGE);
     }
   }
 
   isInteger() {
     if (this.#size % 1 !== 0) {
-      throw new Error(ERROR_MESSAGE.INTEGER);
+      throw new UserError(ERROR_MESSAGE.INTEGER);
     }
   }
 
@@ -34,7 +35,7 @@ class BridgeSize {
     if (this.#size) {
       return;
     }
-    throw new Error(ERROR_MESSAGE.NUMBER);
+    throw new UserError(ERROR_MESSAGE.NUMBER);
   }
 }
 

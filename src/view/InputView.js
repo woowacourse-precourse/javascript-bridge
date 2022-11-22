@@ -3,6 +3,7 @@ const Message = require('../constant/PrintMessage');
 const BridgeSize = require('../model/BridgeSize');
 const Direction = require('../model/Direction');
 const Retry = require('../model/Retry');
+const UserError = require('../util/UserError');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -24,6 +25,7 @@ const InputView = {
     try {
       const bridgeSize = new BridgeSize(Number(answer));
     } catch (error) {
+      this.checkErrorType(error);
       Console.print(error.message);
       this.readBridgeSize();
     }
@@ -45,6 +47,7 @@ const InputView = {
     try {
       const orderDirection = new Direction(answer);
     } catch (error) {
+      this.checkErrorType(error);
       Console.print(error.message);
       this.readMoving();
     }
@@ -66,8 +69,17 @@ const InputView = {
     try {
       const retryAnswer = new Retry(answer);
     } catch (error) {
+      this.checkErrorType(error);
+      Console.print(error.message);
       this.readGameCommand();
     }
+  },
+
+  checkErrorType(error) {
+    if (error instanceof UserError) {
+      return;
+    }
+    throw error;
   },
 };
 

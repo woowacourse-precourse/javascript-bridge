@@ -1,5 +1,6 @@
 const ERROR_MESSAGE = require('../constant/ErrorMessage');
 const VALID_VALUE = require('../constant/ValidValue');
+const UserError = require('../util/UserError');
 
 class Retry {
   #retry;
@@ -20,7 +21,7 @@ class Retry {
     ) {
       return;
     }
-    throw new Error(ERROR_MESSAGE.RETRY);
+    throw new UserError(ERROR_MESSAGE.RETRY);
   }
 }
 
