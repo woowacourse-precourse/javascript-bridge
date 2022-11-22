@@ -1,3 +1,14 @@
+const BRIDGE = {
+  START: '[ ',
+  END: ' ]',
+  SPLIT: ' | ',
+  ROOM: ' ',
+  CROSS: 'O',
+  UN_CROSS: 'X',
+  MIN_SIZE: 3,
+  MAX_SIZE: 20,
+};
+
 const MAP = {
   UP_SIDE_STR: 'U',
   UP_SIDE_NUM: 1,

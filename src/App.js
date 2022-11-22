@@ -26,9 +26,13 @@ class App {
   }
 
   movePlayer(moving) {
-    this.bridgeGame.move(moving);
+    this.printMap();
   }
 
+  printMap() {
+    const map = this.bridgeGame.getMap();
+    OutputView.printMap(map);
+  }
 }
 
 module.exports = App;
