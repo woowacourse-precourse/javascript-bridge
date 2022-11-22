@@ -26,7 +26,6 @@ class App {
       try {
         if (!validCheck.bridgeLength(input))
           throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
-
         return this.makeMyBridge(input);
       } catch (err) {
         OutputView.lengthInputError();
@@ -63,7 +62,7 @@ class App {
     const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
     OutputView.printMap(resultBridge);
     if (this.#myBridge.isFinishedGame()) {
-      return this.gameWin();
+      return this.quitGame();
     }
     return this.moveLocation();
   }
@@ -85,7 +84,7 @@ class App {
           this.#myBridge.gameStateChangeSuccess();
           return this.moveLocation();
         }
-        return this.quieGame();
+        return this.quitGame();
       } catch (err) {
         OutputView.quitInputError();
         return this.getRetryInput();
@@ -93,15 +92,7 @@ class App {
     });
   }
 
-  gameWin() {
-    OutputView.gameResult();
-    const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
-    OutputView.printMap(resultBridge);
-    this.#myBridge.printResultGame(OutputView.printResult);
-    Console.close();
-  }
-
-  quieGame() {
+  quitGame() {
     OutputView.gameResult();
     const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
     OutputView.printMap(resultBridge);
