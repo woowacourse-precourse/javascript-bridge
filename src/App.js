@@ -48,7 +48,7 @@ class App {
       this.showResult();
       return;
     }
-    this.#bridgeGame.isFailure() ? this.requsetRetryCommand() : this.requestMovingDirection();
+    this.#bridgeGame.isFallen() ? this.requsetRetryCommand() : this.requestMovingDirection();
   }
 
   requsetRetryCommand() {

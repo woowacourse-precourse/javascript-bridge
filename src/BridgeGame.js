@@ -41,7 +41,7 @@ class BridgeGame {
     return this.#bridge.getNextDirection(this.#player) === direction;
   }
 
-  isFailure() {
+  isFallen() {
     return this.#player.isFallen();
   }
 
