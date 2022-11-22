@@ -12,25 +12,35 @@ class App {
   }
 
   play() {
-    OutputView.printStart();
     this.#bridgeGame = new BridgeGame();
     this.#controller();
   }
 
   #controller() {
-    switch (this.#bridgeGame.getStatus()) {
-      case "start":
-        InputView.readBridgeSize(this.#readBridgeSizeCallback);
-        break;
-      case "move":
-        InputView.readMoving(this.#readMovingCallback);
-        break;
-      case "retry":
-        InputView.readGameCommand(this.#readGameCommandCallback);
-        break;
-      case "end":
-        OutputView.printResult(this.#bridgeGame);
-    }
+    if (this.#bridgeGame.getStatus() == "start") this.#start();
+
+    if (this.#bridgeGame.getStatus() == "move") this.#move();
+
+    if (this.#bridgeGame.getStatus() == "retry") this.#retry();
+
+    if (this.#bridgeGame.getStatus() == "end") this.#end();
+  }
+
+  #start() {
+    OutputView.printStart();
+    InputView.readBridgeSize(this.#readBridgeSizeCallback);
+  }
+
+  #move() {
+    InputView.readMoving(this.#readMovingCallback);
+  }
+
+  #retry() {
+    InputView.readGameCommand(this.#readGameCommandCallback);
+  }
+
+  #end() {
+    OutputView.printResult(this.#bridgeGame);
   }
 
   #readBridgeSizeCallback = (size) => {
