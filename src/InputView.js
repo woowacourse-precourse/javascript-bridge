@@ -5,6 +5,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
 const Constants = require('./Constants');
+const catchError = require('./CatchError');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -21,11 +22,8 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(Constants.Input.bridgeSize, (size) => {
-      try {
-        Validate.bridge(size);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-      }
+      catchError(Validate.bridge, size);
+
       const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       game = new BridgeGame(bridge);
       InputView.readMoving();
@@ -37,11 +35,8 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(Constants.Input.move, (movement) => {
-      try {
-        Validate.upOrDown(movement);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-      }
+      catchError(Validate.upOrDown, movement);
+
       const moveResult = game.move(movement);
       OutputView.printMap(game.getMap());
       InputView.readMoveResult(moveResult);
