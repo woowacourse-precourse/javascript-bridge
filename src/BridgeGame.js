@@ -11,8 +11,8 @@ class BridgeGame {
     this.#curBridge = Array.from({ length: init.CURBRIDGE_LENGTH }, () => []);
   }
 
-  move(moveInput, brigeIndex) {
-    if (this.canMove(moveInput, brigeIndex)) {
+  move(moveInput, bridgeIndex) {
+    if (this.canMove(moveInput, bridgeIndex)) {
       moveInput === UP_CHAR ? this.moveUpSuccess() : this.moveDownSuccess();
       return this.#curBridge;
     }
@@ -26,8 +26,8 @@ class BridgeGame {
     return this.#curBridge;
   }
 
-  canMove(moveInput, brigeIndex) {
-    return moveInput === this.#bridge[brigeIndex];
+  canMove(moveInput, bridgeIndex) {
+    return moveInput === this.#bridge[bridgeIndex];
   }
 
   moveUpSuccess() {
