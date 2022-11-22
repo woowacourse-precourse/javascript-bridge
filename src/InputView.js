@@ -33,11 +33,11 @@ const InputView = {
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
 
       if (gameReult[0].includes('X') || gameReult[1].includes('X')) {
-        return this.readGameCommand(bridge, UserTryCount);
+        return this.readGameCommand(bridge, UserTryCount, movingRoute);
       }
       if (gameReult[0].length === bridge.length) {
         const GAME_SUCCESS = '성공';
-        return OutputView.printResult(GAME_SUCCESS, UserTryCount);
+        return OutputView.printResult(GAME_SUCCESS, UserTryCount, movingRoute);
       }
       return this.readMoving(bridge, gameReult, UserTryCount);
     });
@@ -46,7 +46,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, UserTryCount) {
+  readGameCommand(bridge, UserTryCount, movingRoute) {
     Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {
       const RESTART_COMMAND = 'R';
       const END_COMMAND = 'Q';
@@ -61,7 +61,7 @@ const InputView = {
       }
       if (gameCommand === END_COMMAND) {
         const GAME_FAIL = '실패';
-        OutputView.printResult(GAME_FAIL, UserTryCount);
+        OutputView.printResult(GAME_FAIL, UserTryCount, movingRoute);
       }
     });
   },
