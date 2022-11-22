@@ -30,7 +30,7 @@ class BridgeGameHandler {
     try {
       this.tryReadBridgeSize(size);
     } catch (errorMessage) {
-      this.catchError(errorMessage, this.requestBridgeSize);
+      this.catchError(errorMessage, this.requestBridgeSize.bind(this));
     }
   }
 
@@ -55,7 +55,7 @@ class BridgeGameHandler {
     try {
       this.tryReadMoving(direction);
     } catch (errorMessage) {
-      this.catchError(errorMessage, this.requestMoveDirection);
+      this.catchError(errorMessage, this.requestMoveDirection.bind(this));
     }
   }
 
@@ -82,7 +82,7 @@ class BridgeGameHandler {
     try {
       this.tryGameCommand(command);
     } catch (errorMessage) {
-      this.catchError(errorMessage, this.requestGameCommand);
+      this.catchError(errorMessage, this.requestGameCommand.bind(this));
     }
   }
 
