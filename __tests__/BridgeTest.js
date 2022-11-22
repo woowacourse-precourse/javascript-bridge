@@ -49,4 +49,21 @@ describe("다리 관련 테스트", () => {
     expect(bridgeController.getIsFinished(["U", "D"])).toEqual(false);
     expect(bridgeController.getIsFinished(["U", "D", "U"])).toEqual(true);
   });
+
+  test("다리별 움직임 성공여부 테스트", () => {
+    bridgeController.setBridge(["U", "D", "D"]);
+
+    expect(bridgeController.getMovingStatus(["U"])).toEqual({
+      up: ["O"],
+      down: [" "],
+    });
+    expect(bridgeController.getMovingStatus(["U", "D"])).toEqual({
+      up: ["O", " "],
+      down: [" ", "O"],
+    });
+    expect(bridgeController.getMovingStatus(["U", "D", "U"])).toEqual({
+      up: ["O", " ", "X"],
+      down: [" ", "O", " "],
+    });
+  });
 });
