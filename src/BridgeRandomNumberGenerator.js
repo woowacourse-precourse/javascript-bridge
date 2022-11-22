@@ -1,5 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+/*
+** 0,1 숫자 중 랜덤으로 return
+*/
 const BridgeRandomNumberGenerator = {
   RANDOM_LOWER_INCLUSIVE: 0,
   RANDOM_UPPER_INCLUSIVE: 1,
