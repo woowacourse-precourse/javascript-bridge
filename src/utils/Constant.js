@@ -1,7 +1,14 @@
 const ERROR = "[ERROR]";
 const NEW_LINE = "\n";
-const BAR = " | ";
-const BLANK = " ";
+
+const MAP = Object.freeze({
+  leftWall: "[ ",
+  rightWall: " ]",
+  divider: " | ",
+  blank: " ",
+  correct: "O",
+  wrong: "X",
+});
 
 const MESSAGE = Object.freeze({
   gameStart: "다리 건너기 게임을 시작합니다.",
@@ -35,8 +42,6 @@ const LETTER = Object.freeze({
   down: "D",
   retry: "R",
   quit: "Q",
-  correct: "O",
-  wrong: "X",
 });
 
 const BRIDGE_MAP = Object.freeze({
@@ -52,6 +57,5 @@ module.exports = {
   BRIDGE_MAP,
   NUMBER_RANGE,
   NEW_LINE,
-  BAR,
-  BLANK,
+  MAP,
 };
