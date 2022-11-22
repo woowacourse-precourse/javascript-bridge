@@ -1,9 +1,9 @@
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 const { mockQuestions, mockRandoms, getLogSpy, getOutput, expectLogContains,
-  expectBridgeOrder,runException,}  = require("..//util/TestUtil");
+  expectBridgeOrder, runException, } = require("..//util/TestUtil");
 
-  
+
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
     const randomNumbers = [1, 0, 0];

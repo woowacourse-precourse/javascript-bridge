@@ -14,11 +14,11 @@ class BridgeResult {
         this.#downerResult.length = 0;
     }
 
-    getUpper(){
+    getUpper() {
         return this.#upperResult;
     }
 
-    getDowner(){
+    getDowner() {
         return this.#downerResult;
     }
 

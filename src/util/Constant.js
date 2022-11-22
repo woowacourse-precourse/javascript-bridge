@@ -16,22 +16,22 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 const RESULT = {
-    SUCCESS : "성공",
-    FAIL : "실패",
+    SUCCESS: "성공",
+    FAIL: "실패",
 }
 
 const BRIDGE = Object.freeze({
     MIN_LENGTH: 3,
     MAX_LENGTH: 20,
     CAN_MOVE: "O",
-    CANNOT_MOVE : "X",
-    BLANK : " ",
+    CANNOT_MOVE: "X",
+    BLANK: " ",
 });
 
 const JOINER = Object.freeze({
     START: "[ ",
-    SEPARATOR : " | ",
-    END : " ]",
+    SEPARATOR: " | ",
+    END: " ]",
 })
 
 const DIRECTION = Object.freeze({
@@ -40,8 +40,8 @@ const DIRECTION = Object.freeze({
 });
 
 const COMMAND = Object.freeze({
-    RESTART : "R",
-    QUIT : "Q",
+    RESTART: "R",
+    QUIT: "Q",
 })
 
 

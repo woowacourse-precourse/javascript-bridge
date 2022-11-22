@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
-const {ERROR_MESSAGE, BRIDGE, DIRECTION, COMMAND} = require("./Constant");
+const { ERROR_MESSAGE, BRIDGE, DIRECTION, COMMAND } = require("./Constant");
 
 const validateBridge = (bridgeInput) => {
     try {
@@ -30,4 +30,4 @@ const validateCommand = (command) => {
     }
 }
 
-module.exports = {validateBridge, validateMove, validateCommand};
+module.exports = { validateBridge, validateMove, validateCommand };

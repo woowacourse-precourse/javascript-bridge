@@ -1,11 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
-const {GAME_MESSAGE, RESULT} = require("../util/Constant");
+const { GAME_MESSAGE, RESULT } = require("../util/Constant");
 
 const OutputView = {
 
   printMap(bridgeGame) {
-    const {upperString, downerString} = bridgeGame.gameResult();
+    const { upperString, downerString } = bridgeGame.gameResult();
     Console.print(upperString);
     Console.print(downerString);
   },
