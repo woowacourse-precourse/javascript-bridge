@@ -16,7 +16,7 @@ class BridgeGame {
   }
 
   canMove(position) {
-    return this.#bridge.canMove(position, this.#bridgeMap[1].length);
+    return this.#bridge.canMove(position, this.#bridgeMap[GAME_CONDITION.UP_INDEX].length);
   }
 
   #countAttempt() {
@@ -36,38 +36,33 @@ class BridgeGame {
     }
 
     this.#makeMap(position, GAME_CONDITION.STATUS_FAIL);
-    return GAME_CONDITION.STATUS_FAIL;
-  }
 
-  getMap() {
-    return this.#bridgeMap
-      .map(
-        (stage) =>
-          `${GAME_CONDITION.BRIDGE_OPEN_BRACKET} ${stage.join(
-            GAME_CONDITION.BRIDGE_SEPERATOR
-          )} ${GAME_CONDITION.BRIDGE_CLOSE_BRACKET}`
-      )
-      .join("\n");
+    return GAME_CONDITION.STATUS_FAIL;
   }
 
   #makeMap(position, state) {
     const movePosition = this.#checkUpOrDown(position);
     const blankPosition = 1 - movePosition;
+    const positionState = state ? GAME_CONDITION.CAN_MOVE : GAME_CONDITION.CAN_NOT_MOVE;
 
-    this.#bridgeMap[movePosition].push(
-      state ? GAME_CONDITION.CAN_MOVE : GAME_CONDITION.CAN_NOT_MOVE
-    );
-    this.#bridgeMap[blankPosition].push(GAME_CONDITION.NONE_MOVE);
+    this.#bridgeMap[movePosition].push(positionState);
+    this.#bridgeMap[blankPosition].push(GAME_CONDITION.BLANK_MOVE);
   }
 
   #checkUpOrDown(position) {
-    return position === GAME_CONDITION.MOVE_UP
-      ? GAME_CONDITION.BRIDGE_UP_INDEX
-      : GAME_CONDITION.BRIDGE_DOWN_INDEX;
+    return position === GAME_CONDITION.MOVE_UP ? GAME_CONDITION.UP_INDEX : GAME_CONDITION.DOWN_INDEX;
+  }
+
+  getMap() {
+    return this.#bridgeMap.map(stage => this.#getMapTemplate(stage)).join("\n");
+  }
+
+  #getMapTemplate(stage) {
+    return `${GAME_CONDITION.OPEN_BRACKET} ${stage.join(GAME_CONDITION.BRIDGE_SEPERATOR)} ${GAME_CONDITION.CLOSE_BRACKET}`
   }
 
   checkGameEnd() {
-    return this.#bridgeMap[0].length === this.#bridge.size();
+    return this.#bridgeMap[GAME_CONDITION.UP_INDEX].length === this.#bridge.size();
   }
 
   /**
@@ -76,8 +71,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#bridgeMap[0].pop();
-    this.#bridgeMap[1].pop();
+    this.#bridgeMap[GAME_CONDITION.UP_INDEX].pop();
+    this.#bridgeMap[GAME_CONDITION.DOWN_INDEX].pop();
     this.#attempts += 1;
   }
 
