@@ -25,8 +25,8 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange)
 }
 
-describe('다리 이동 테스트', () => {
-  test('모든 경로가 정답일 경우', () => {
+describe('다리 현황 출력 테스트', () => {
+  test('모든 경로가 정답일 경우의 다리를 그려낸다', () => {
     const logSpy = getLogSpy()
 
     let gameStatus = {
@@ -47,11 +47,11 @@ describe('다리 이동 테스트', () => {
     expect(logSpy.mock.calls[1].shift()).toEqual('[   | O ]')
   })
 
-  test('중간에 틀린 곳을 갔을 경우 재시도 하지 않고 종료한 경우', () => {
+  test('중간에 틀린 곳을 갔을 경우 재시도 하지 않고 종료한 경우의 다리를 그려낸다', () => {
     const logSpy = getLogSpy()
 
     mockRandoms(['1', '0', '1'])
-    mockQuestions(['3', 'U', 'D', 'D', 'Q']) //마지막에 오답
+    mockQuestions(['3', 'U', 'D', 'D', 'Q']) //마지막에 오답, 게임종료 선택
     new App().play()
 
     let lastTwoIndex = [
@@ -59,19 +59,18 @@ describe('다리 이동 테스트', () => {
       logSpy.mock.calls.length - 1,
     ]
 
-    //최종 게임 결과
     expect(logSpy.mock.calls[lastTwoIndex[0]].shift()).toEqual('[ O |   |   ]')
     expect(logSpy.mock.calls[lastTwoIndex[1]].shift()).toEqual('[   | O | X ]')
 
-    //나중에 게임종료 메세지 테스트도 추가
+    
   })
 
-  test('중간에 틀린 곳을 갔을 경우 재시도를 선택한 경우', () => {
+  test('중간에 틀린 곳을 갔을 경우 재시도를 선택한 경우의 다리를 그려낸다', () => {
     const logSpy = getLogSpy()
 
     mockRandoms(['1', '0', '1'])
-    mockQuestions(['3', 'U', 'D', 'D', 'R', 'U', 'D', 'U'])
-    let app = new App().play()
+    mockQuestions(['3', 'U', 'D', 'D', 'R', 'U', 'D', 'U']) //마지막에 오답, 재시도 선택
+    new App().play()
 
     console.log(logSpy.mock.calls)
     let lastTwoIndex = [
@@ -79,10 +78,10 @@ describe('다리 이동 테스트', () => {
       logSpy.mock.calls.length - 1,
     ]
 
-    //최종 게임 결과
     expect(logSpy.mock.calls[lastTwoIndex[0]].shift()).toEqual('[ O |   | O ]')
     expect(logSpy.mock.calls[lastTwoIndex[1]].shift()).toEqual('[   | O |   ]')
-
-    //나중에 게임종료 메세지 테스트도 추가해서 최종 진행 횟수까지 테스트
   })
+
+  //최종 결과를 테스트
+  //test('최종 결과를 테스트한다',()=>{})
 })
