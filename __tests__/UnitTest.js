@@ -55,8 +55,14 @@ describe('BridgeGame테스트', () => {
       expect(bridgeGame.move('U')).toBeTruthy();
     });
 
-    test('올바르지 않은 입력으로 이동 실패', () => {
+    test('올바르지 않은 입력(잘못된 칸 선택)으로 이동 실패', () => {
       expect(bridgeGame.move('D')).toBeFalsy();
+    });
+
+    test.each(['', ' ', '1', 'Y', '다시'])('올바르지 않은 입력 발생시 에러 throw', (input) => {
+      expect(
+        () => bridgeGame.move(input),
+      ).toThrow('[ERROR]');
     });
   });
 });
