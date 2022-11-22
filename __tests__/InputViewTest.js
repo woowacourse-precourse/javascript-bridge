@@ -42,6 +42,14 @@ const runExceptionMoving = (inputs) => {
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
+const runExceptionCommand = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  InputView.readGameCommand();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
 describe("InputView 테스트", () => {
   test("다리 길이 입력값 유효 테스트", () => {
     runException(["a"]);
