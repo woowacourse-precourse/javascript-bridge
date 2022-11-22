@@ -7,10 +7,9 @@ class BridgeGame {
     this.gameCount = 0;
     this.upList = [];
     this.downList = [];
-    this.GO = "O";
-    this.STOP = "X";
-
-
+    this.RIGHT = "O";
+    this.WRONH = "X";
+    
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -19,21 +18,17 @@ class BridgeGame {
    */
 
   move(moveInput,answer) {
-    if(this.gameCount === answer.length-1){
-      this.ingMove(this.GO,moveInput);
-      return false;
-    }
     if(moveInput === answer[this.gameCount]){
-      this.ingMove(this.GO,moveInput);
-      this.gameCount++;
+      this.ingMove(this.RIGHT,moveInput);
+      this.gameCount++
+      if(this.gameCount === answer.length) {return "END"}
       return true;
-    } 
+    }
     if(moveInput !== answer[this.gameCount]){
-      this.ingMove(this.STOP,moveInput)
+      this.ingMove(this.WRONH,moveInput)
       return false
-    } 
+    }
   }
-  
   ingMove(goOrStop,moveInput){
     if(moveInput === "U"){
       this.upList.push(` ${goOrStop} `);
@@ -43,6 +38,7 @@ class BridgeGame {
       this.downList.push(` ${goOrStop} `);
       this.upList.push('   ')
     }
+    
   }
   
 
@@ -51,7 +47,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.gameCount = 0;
+    this.upList = [];
+    this.downList = [];
+  }
 }
 
 module.exports = BridgeGame;
