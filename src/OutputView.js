@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT } = require('./Constants');
+const { OUTPUT, GAME_OUTCOME, LETTER_SIGN } = require('./Constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -22,9 +22,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(upperMapArray, lowerMapArray, attemptNumber) {
+    const totalMapArray = [...upperMapArray, ...lowerMapArray];
+    const outcome = totalMapArray.includes(LETTER_SIGN.WRONG) ? GAME_OUTCOME.FAIL : GAME_OUTCOME.SUCCESS;
     Console.print(OUTPUT.FINAL_GAME_RESULT);
     this.printMap(upperMapArray, lowerMapArray);
-    Console.print(OUTPUT.GAME_SUCCESS_OR_NOT());
+    Console.print(OUTPUT.GAME_SUCCESS_OR_NOT(outcome));
     Console.print(OUTPUT.TOTAL_ATTEMPT_NUMBER(attemptNumber));
   }
 };
