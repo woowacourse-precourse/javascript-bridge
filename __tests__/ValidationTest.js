@@ -1,6 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-undef */
 const CheckBridgeSize = require('../src/Model/CheckBridgeSize');
 const CheckInputUpDown = require('../src/Model/CheckInputUpDown');
 const CheckInputReplayQuit = require('../src/Model/CheckInputReplayQuit');
