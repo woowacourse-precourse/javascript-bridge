@@ -2,9 +2,9 @@ const ExceptionCheck = {
   LOWER_INCLUSIVE: 3,
   UPPER_INCLUSIVE: 20,
 
-  checkBridgeSize(size) {
-    this.number(size);
-    this.range(size);
+  checkBridgeSize(bridgeSize) {
+    this.number(bridgeSize);
+    this.range(bridgeSize);
   },
 
   number(size) {

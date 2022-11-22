@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const InputView = require("./view/InputView");
+const InputView = require("./InputView");
 
 class BridgeGame {
   UP = [];
@@ -35,12 +35,12 @@ class BridgeGame {
       if (bridge[idx] === playerMove)
         return { up: "O", down: " ", compareResult: "O" };
 
-      return { up: "X", down: " ", compareResult: "X" };
+      return { up: " ", down: "X", compareResult: "X" };
     } else {
       if (bridge[idx] === playerMove)
         return { up: " ", down: "O", compareResult: "O" };
 
-      return { up: " ", down: "X", compareResult: "X" };
+      return { up: "X", down: " ", compareResult: "X" };
     }
   }
   isCorrect(up, down) {

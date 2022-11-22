@@ -23,7 +23,7 @@ const BridgeMaker = {
     return bridge;
   },
   changeBridgeShape(bridge) {
-    return bridge.map((x) => (x === "0" ? "D" : "U"));
+    return bridge.map((x) => (x === 0 ? "D" : "U"));
   },
 };
 

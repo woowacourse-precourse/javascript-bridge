@@ -1,23 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const OutputView = require("./OutputView");
 const ExceptionCheck = require("./ExceptionCheck");
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   BRIDGE_GAME: new BridgeGame(),
-  LOWER_INCLUSIVE: 3,
-  UPPER_INCLUSIVE: 20,
-  UP: [],
-  DOWN: [],
   IDX: 0,
   TRY: 1,
-  /**
-   * 다리의 길이를 입력받는다.
-   */
+
   readBridgeSize() {
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요.",
@@ -37,7 +28,6 @@ const InputView = {
       }
     );
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -47,53 +37,28 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveSpace) => {
         try {
-          this.checkMove(moveSpace);
+          ExceptionCheck.checkMove(moveSpace);
           OutputView.printSpace(moveSpace);
-
-          // const { up, down, result } = BRIDGE_GAME.move(
-          //   bridge,
-          //   moveSpace,
-          //   this.IDX
-          // );
           const { up, down, compareResult, idx } = this.BRIDGE_GAME.move(
             bridge,
             moveSpace
           );
           this.IDX = idx;
           OutputView.printMap(up, down);
+          this.compareResult = compareResult;
           if (compareResult === "O") {
             this.readMoving(bridge);
             if (idx === bridge.length)
               OutputView.printResult({ up, down }, this.TRY, compareResult);
           } else {
-            this.readGameCommand(bridge, [up], [down]);
+            this.readGameCommand(bridge, up, down);
           }
-          // if (result === "O") {
-          //   this.UP.push(up);
-          //   this.DOWN.push(down);
-          //   OutputView.printMap(this.UP, this.DOWN);
-          //   this.IDX = this.IDX + 1;
-          //   this.readMoving(bridge);
-          //   if (this.IDX === bridge.length)
-          //     OutputView.printResult(this.UP, this.DOWN, this.TRY);
-          // } else {
-          //   OutputView.printMap([...this.UP, up], [...this.DOWN, down]);
-          //   this.readGameCommand(
-          //     bridge,
-          //     [...this.UP, up],
-          //     [...this.DOWN, down]
-          //   );
-          // }
         } catch (err) {
           console.log(err);
           this.readMoving(bridge);
         }
       }
     );
-  },
-  checkMove(playerMove) {
-    if (playerMove === "U" || playerMove === "D") return;
-    else throw new Error("player이동은 U 또는 D만 입력해야 합니다.");
   },
 
   /**
@@ -105,9 +70,10 @@ const InputView = {
       (string) => {
         if (string === "R") {
           this.TRY = this.TRY + 1;
+
           this.readMoving(bridge);
         } else {
-          OutputView.printResult({ up, down }, this.TRY, compareResult);
+          OutputView.printResult({ up, down }, this.TRY, this.compareResult);
         }
       }
     );
