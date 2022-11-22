@@ -1,16 +1,13 @@
 const ValidityCheck = {
   
-  checkBridgeSizeRange(bridgeSize) {
-    if (3 > bridgeSize || bridgeSize > 20) {
-      throw '[ERROR] 다리 길이는 3에서 20 사이입니다.\n';
-    }
-  },
-
-  checkBridgeSizeNumber(bridgeSize) {
+  checkBridgeSize(bridgeSize) {
     const regex = /^[0-9]+$/;
     
     if (!regex.test(bridgeSize)) {
       throw '[ERROR] 다리 길이는 숫자여야 합니다.\n';
+    }
+    if (3 > bridgeSize || bridgeSize > 20) {
+      throw '[ERROR] 다리 길이는 3에서 20 사이입니다.\n';
     }
   },
 
