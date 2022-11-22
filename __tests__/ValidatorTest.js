@@ -100,10 +100,21 @@ describe('Validator 테스트', () => {
   });
   test('만약 현재 다리 건너는 길이와, 마지막 다리가 같다면 게임이 끝난다.', () => {
     const isFinish = BridgeValidator.checkFinish(10, 10);
-    expect(isFinish).toEqual(true);;
+    expect(isFinish).toEqual(true);
   });
   test('만약 현재 다리 건너는 길이와, 마지막 다리가 같다면 게임이 끝난다.', () => {
     const isFinish = BridgeValidator.checkFinish(9, 10);
-    expect(isFinish).toEqual(false);;
+    expect(isFinish).toEqual(false);
+  });
+
+  test('현재 위치가 끝 위치보다 적다.', () => {
+    expect(() => {
+      BridgeValidator.checkPosition(11, 10);
+    }).toThrow();
+  });
+  test('현재 위치가 끝 위치보다 적다.', () => {
+    expect(() => {
+      BridgeValidator.checkPosition(9, 10);
+    }).not.toThrow();
   });
 });
