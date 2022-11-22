@@ -1,21 +1,55 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_MSG } = require("./constants/Message");
+const Vaild = require("./Vaild");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
   /**
-   * 다리의 길이를 입력받는다.
+   * Console.readLine의 사용을 관리하는 메서드
+   * @param {string} message 화면에 출력할 메시지
+   * @param {function()} callback 입력이 종료된 후 호출될 함수
+   * @param {function():boolean} vaild 입력받은 값이 옳은 값인히 판별할 함수
    */
-  readBridgeSize() {},
+  inputMethod(message, callback, vaild) {
+    Console.readLine(message, (input) => {
+      if (vaild(input)) return callback(input);
+      this.inputMethod(message, callback, vaild);
+    });
+  },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * 다리의 길이를 입력받는 메서드
+   * @param {function()} callback 입력이 종료된 후 호출될 함수
    */
-  readMoving() {},
+  readBridgeSize(callback) {
+    return this.inputMethod(
+      INPUT_MSG.BRIDGE_SIZE,
+      callback,
+      Vaild.checkBridgeSize
+    );
+  },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * 사용자가 이동할 칸을 입력받는 메서드
+   * @param {function()} callback 입력이 종료된 후 호출될 함수
    */
-  readGameCommand() {},
+  readMoving(callback) {
+    return this.inputMethod(INPUT_MSG.MOVING, callback, Vaild.checkMoving);
+  },
+
+  /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는 메서드
+   * @param {function()} callback 입력이 종료된 후 호출될 함수
+   */
+  readGameCommand(callback) {
+    return this.inputMethod(
+      INPUT_MSG.GAME_COMMAND,
+      callback,
+      Vaild.checkGameCommand
+    );
+  },
 };
 
 module.exports = InputView;
