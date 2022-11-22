@@ -22,7 +22,7 @@ const GAME_MESSAGE = {
 
 const ERROR_MESSAGE = {
   RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
-  U_OR_R: '[ERROR] "U"와 "R"만 입력할 수 있습니다.',
+  U_OR_D: '[ERROR] "U"와 "D"만 입력할 수 있습니다.',
   R_OR_Q: '[ERROR] "R"과 "Q"만 입력할 수 있습니다.',
 };
 
