@@ -30,9 +30,14 @@ class UserController {
    * @param userMovingInput {string} [유저 이동 입력]
    */
   onUserMovingInput(userMovingInput) {
-    validate(userMovingInput);
-    this.userModel.appendUserMoving(userMovingInput);
-    this.mainController.tryMove(this.userModel.getUserMoving());
+    try {
+      validate(userMovingInput);
+      this.userModel.appendUserMoving(userMovingInput);
+      this.mainController.tryMove(this.userModel.getUserMoving());
+    } catch (errorLog) {
+      this.mainController.printError(errorLog);
+      this.mainController.readUserMovingInput();
+    }
   }
 }
 
