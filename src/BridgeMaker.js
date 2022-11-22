@@ -1,6 +1,6 @@
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    return new Array(size).fill(nul).map(() => {
+    return new Array(size).fill(null).map(() => {
       const number = generateRandomNumber();
 
       let direction = "D";
