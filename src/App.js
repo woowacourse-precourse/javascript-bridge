@@ -1,5 +1,16 @@
+const BridgeController = require('./BridgeController');
+
 class App {
-  play() {}
+  constructor() {
+    this.bridgeController = new BridgeController();
+  }
+
+  play() {
+    this.bridgeController.progressSize();
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
