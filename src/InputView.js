@@ -1,9 +1,13 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { Console } = require("@woowacourse/mission-utils");
 const { COMMAND } = require("./Constant");
-const Exception = require("./Exception");
+const {
+  checkBridgeSize,
+  checkSpace,
+  checkRestart
+ } = require("./Exception");
 const OutputView = require("./OutputView");
-let exception = new Exception();
+
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,7 +18,7 @@ const InputView = {
    */
   readBridgeSize(bridge, bridgeGame) {
     Console.readLine(`${COMMAND.INPUT}\n`, (bridgeSize) => {
-      if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
+      if(checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
 
       bridge.setBridge(Number(bridgeSize));
       // Console.print(bridge.getBridge());
@@ -27,7 +31,7 @@ const InputView = {
    */
   readMoving(bridge, bridgeGame) {
     Console.readLine(`${COMMAND.MOVE}\n`, (space) => {
-      if(exception.checkSpace(space)) return this.readMoving(bridge,bridgeGame);
+      if(checkSpace(space)) return this.readMoving(bridge,bridgeGame);
 
       bridgeGame.move(space, bridge);
       OutputView.printMap(bridgeGame);
@@ -44,7 +48,7 @@ const InputView = {
    */
   readGameCommand(bridge, bridgeGame) {
     Console.readLine(COMMAND.RESTART, (restart) => {
-      if(exception.checkRestart(restart)) return this.readGameCommand(bridge,bridgeGame);
+      if(checkRestart(restart)) return this.readGameCommand(bridge,bridgeGame);
       if (restart === "R") {
         bridgeGame.retry(bridge);
         return this.readMoving(bridge, bridgeGame);

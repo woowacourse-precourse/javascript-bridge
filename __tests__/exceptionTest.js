@@ -1,7 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { run } = require('jest');
 const App = require("../src/App");
-const Exception = require("../src/Exception");
+const {
+    checkBridgeSize,
+    checkSpace,
+    checkRestart
+  } = require("../src/Exception");
 
 const mockQuestions = (answers) => {
     MissionUtils.Console.readLine = jest.fn();
@@ -62,21 +66,12 @@ describe("다리 길이 유효성 테스트", () => {
   });
 });
 
-// describe("재시작 입력값 유효성 테스트", () => {
-//     test("입력값이 R과 Q가 아닐 경우 예외발생", () => {
-//       expect(()=>{
-//         Exception.checkRestart("d")
-//       }
-//       ).toThrow("[ERROR] R 또는 Q를 입력해주세요.")
-//     });
+describe("사용자 이동 입력값 유효성 테스트", () => {
+    test("입력값이 U 또는 D가 아니면 예외발생", () => {
+        const logSpy = getLogSpy();
+        checkSpace("E");
 
-// });
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR] U 또는 D를 입력해주세요."));
+    });
+});
 
-// describe("사용자 이동 입력값 유효성 테스트", () => {
-//     test("입력값이 U과 D가 아닐 경우 예외발생", () => {
-//       expect(
-//         Exception.checkSpace("E")
-//       ).toThrow("[ERROR] U 또는 D를 입력해주세요.")
-//     });
-
-// });
