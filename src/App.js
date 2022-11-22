@@ -3,13 +3,15 @@ const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  #bridgeGame;
+  #bridge;
+  #userState;
+  #countTry;
+
   constructor() {
     this.handleBridgeSize = this.handleBridgeSize.bind(this);
     this.handleBridgeMoveing = this.handleBridgeMoveing.bind(this);
     this.handleGameCommand = this.handleGameCommand.bind(this);
-    this.bridge;
-    this.userState;
-    this.countTry;
   }
 
   play() {
@@ -18,12 +20,12 @@ class App {
   }
 
   handleBridgeSize(size) {
-    this.bridgeGame = new BridgeGame(size);
+    this.#bridgeGame = new BridgeGame(size);
     InputView.readMoving(this.handleBridgeMoveing);
   }
 
   handleBridgeMoveing(und) {
-    const [condition, bridge, userState, countTry] = this.bridgeGame.move(und);
+    const [condition, bridge, userState, countTry] = this.#bridgeGame.move(und);
 
     OutputView.printMap(bridge, userState);
 
@@ -36,17 +38,22 @@ class App {
       InputView.readGameCommand(this.handleGameCommand);
     }
 
-    this.bridge = bridge;
-    this.userState = userState;
-    this.countTry = countTry;
+    this.#bridge = bridge;
+    this.#userState = userState;
+    this.#countTry = countTry;
   }
 
   handleGameCommand(rnq) {
     if (rnq === 'R') {
-      this.bridgeGame.retry();
+      this.#bridgeGame.retry();
       InputView.readMoving(this.handleBridgeMoveing);
     } else if (rnq === 'Q') {
-      OutputView.printResult(this.bridge, this.userState, this.countTry, false);
+      OutputView.printResult(
+        this.#bridge,
+        this.#userState,
+        this.#countTry,
+        false
+      );
       InputView.close();
     } else {
       throw Error('[ERROR] 대문자 R , Q 둘 중 하나만 입력해주세요.');
