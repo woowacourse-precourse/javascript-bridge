@@ -32,7 +32,6 @@ class Controller {
   orderMake(size) {
     this.#BridgeGame.create(size);
     this.orderInputMoving();
-    OutputView.printBlank();
   }
 
   orderInputMoving() {

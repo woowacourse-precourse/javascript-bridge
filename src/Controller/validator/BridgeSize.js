@@ -1,5 +1,5 @@
 const OutputView = require("../../View/OutputView");
-
+const { Console } = require("@woowacourse/mission-utils");
 const { SIZE, ISALLOW } = require("../../utils/constants");
 const { ERROR } = require("../../utils/gameMessage");
 
