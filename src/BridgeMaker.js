@@ -17,7 +17,6 @@ const BridgeMaker = {
       if (randomNum == 0) bridgeString.push("D");
       else bridgeString.push("U");
     }
-    MissionUtils.Console.print(bridgeString);
     return bridgeString;
   },
 };
