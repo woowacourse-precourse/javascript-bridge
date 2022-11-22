@@ -43,7 +43,7 @@ describe('BridgeGame 클래스 테스트', () => {
     });
   });
 
-  test('다리를 전부 건넜는지 확인한다. case1', () => {
+  test('다리를 전부 건넜는지 확인한다. case: 전부 건넌다.', () => {
     mockRandoms([BRIDGE.UPPER, BRIDGE.LOWER, BRIDGE.LOWER]);
 
     const inputs = [BRIDGE.UP, BRIDGE.DOWN, BRIDGE.DOWN];
@@ -59,7 +59,7 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(output).toEqual(expectedOutput);
   });
 
-  test('다리를 전부 건넜는지 확인한다. case2', () => {
+  test('다리를 전부 건넜는지 확인한다. case: 마지막 칸을 건너다 실패한다.', () => {
     mockRandoms([BRIDGE.UPPER, BRIDGE.LOWER, BRIDGE.LOWER]);
 
     const inputs = [BRIDGE.UP, BRIDGE.DOWN, BRIDGE.UP];
@@ -75,7 +75,7 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(output).toEqual(expectedOutput);
   });
 
-  test('다리를 전부 건넜는지 확인한다. case3', () => {
+  test('다리를 전부 건넜는지 확인한다. case: 마지막 칸이 아닌 부분을 건너다 실패한다.', () => {
     mockRandoms([BRIDGE.UPPER, BRIDGE.LOWER, BRIDGE.LOWER]);
 
     const inputs = [BRIDGE.UP, BRIDGE.DOWN];
