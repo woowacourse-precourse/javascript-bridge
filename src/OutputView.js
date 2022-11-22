@@ -1,11 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { OUTPUT } = require('../src/const/Text');
+const { MOVING_INPUT, PRINT } = require('../src/const/Bridge');
 
 const OutputView = {
   UPPER: [],
   LOWER: [],
 
   printStart() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(OUTPUT.start);
   },
 
   printError(err) {
@@ -17,12 +19,12 @@ const OutputView = {
   },
 
   processMap(move) {
-    const printFlag = move.success ? 'O':'X';
-    if(move.moving === 'U') {
+    const printFlag = move.success ? PRINT.O:PRINT.X;
+    if(move.moving === MOVING_INPUT.up) {
       OutputView.UPPER.push(printFlag);
-      OutputView.LOWER.push(' ');
-    } else if(move.moving === 'D') {
-      OutputView.UPPER.push(' ');
+      OutputView.LOWER.push(PRINT.space);
+    } else if(move.moving === MOVING_INPUT.down) {
+      OutputView.UPPER.push(PRINT.space);
       OutputView.LOWER.push(printFlag);
     }
   },
@@ -33,15 +35,15 @@ const OutputView = {
     moveInfo.forEach((move) => {
       this.processMap(move);
     })
-    Console.print(`[ ${OutputView.UPPER.join(' | ')} ]`);
-    Console.print(`[ ${OutputView.LOWER.join(' | ')} ]\n`);
+    Console.print(`[ ${OutputView.UPPER.join(PRINT.bar)} ]`);
+    Console.print(`[ ${OutputView.LOWER.join(PRINT.bar)} ]\n`);
   },
 
   printResult(moveInfo, tryCnt, successFlag) {
-    Console.print('최종 게임 결과');
+    Console.print(OUTPUT.resultText);
     this.printMap(moveInfo);
-    Console.print(`게임 성공 여부: ${successFlag? '성공':'실패'}`);
-    Console.print(`총 시도한 횟수: ${tryCnt}`);
+    Console.print(OUTPUT.resultSuccess(successFlag));
+    Console.print(OUTPUT.resultTryCount(tryCnt));
     Console.close();
   },
 };

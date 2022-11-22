@@ -1,3 +1,5 @@
+const { MOVING_RESULT, RETRY_INPUT, RETRY_RESULT } = require('../src/const/Bridge');
+
 class BridgeGame {
   #bridgeInfo;
   #moveCnt;
@@ -25,21 +27,21 @@ class BridgeGame {
 
   move(moving) {
     if(this.#bridgeInfo[this.#moveCnt] !== moving) {
-      this.#moveInfo.push({'moving': moving, 'success': false}); return 'fail';
+      this.#moveInfo.push({'moving': moving, 'success': false}); return MOVING_RESULT.fail;
     } else if(this.#moveCnt + 1 === this.#bridgeInfo.length) {
-      this.#moveInfo.push({'moving': moving, 'success': true}); return 'success';
+      this.#moveInfo.push({'moving': moving, 'success': true}); return MOVING_RESULT.success;
     } else if(this.#bridgeInfo[this.#moveCnt] === moving) {
       this.#moveInfo.push({'moving': moving, 'success': true});
-      this.#moveCnt += 1; return 'next';
+      this.#moveCnt += 1; return MOVING_RESULT.next;
     }
   }
 
   retry(command) {
-    if(command === 'R') {
+    if(command === RETRY_INPUT.retry) {
       this.retrySetting();
-      return 'retry';
-    } else if(command === 'Q') {
-      return 'quit';
+      return RETRY_RESULT.retry;
+    } else if(command === RETRY_INPUT.quit) {
+      return RETRY_RESULT.quit;
     }
   }
 

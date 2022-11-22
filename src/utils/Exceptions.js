@@ -1,12 +1,14 @@
+const { ERROR_TEXT, REGEXP } = require('../const/Error');
+
 const Exception = {
   isInvalidBridgeSize(input) {
     if(this.isNotNumber(input) || this.bridgeSizeOutofIndex(input)) {
-      throw'[ERROR] 다리 길이는 3이상 20이하의 숫자로 입력해야 합니다.'; 
+      throw ERROR_TEXT.bridgeSize; 
     }
   },
 
   isNotNumber(input) {
-    if(isNaN(input) || input.match(/\s/g)) {
+    if(isNaN(input) || input.match(REGEXP.space)) {
       return true;
     }
   },
@@ -18,14 +20,14 @@ const Exception = {
   },
 
   isInvalidMoving(input) {
-    if(!input.match(/^[UD]$/)) {
-      throw '[ERROR] 이동할 칸에 대한 입력은 U 또는 D만 입력 가능합니다.';
+    if(!input.match(REGEXP.moving)) {
+      throw ERROR_TEXT.moving;
     }
   },
 
   isInvalidCommand(input) {
-    if(!input.match(/^[RQ]$/)) {
-      throw '[ERROR] 재시작/종료 여부 입력은 R 또는 Q만 입력 가능합니다.';
+    if(!input.match(REGEXP.retry)) {
+      throw ERROR_TEXT.retry;
     }
   }
 }

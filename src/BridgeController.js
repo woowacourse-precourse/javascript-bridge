@@ -2,13 +2,14 @@ const Exception = require('./utils/Exceptions');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const { MOVING_RESULT, RETRY_RESULT, SUCCESS_FLAG } = require('../src/const/Bridge');
 
 class BridgeController {
   constructor(views) {
     this.bridgeGame = new BridgeGame();
-    this.inputView = views.inputView,
-    this.outputView = views.outputView
-    this.start()
+    this.inputView = views.inputView;
+    this.outputView = views.outputView;
+    this.start();
   }
 
   start() {
@@ -57,10 +58,10 @@ class BridgeController {
   handleMovingResult(result) {
     this.outputView.printMap(this.bridgeGame.getMoveInfo());
     switch (result) {
-      case 'next': this.requestMoving(); break;
-      case 'fail': this.requestRetry(); break;
-      case 'success': 
-        this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), true);
+      case MOVING_RESULT.next: this.requestMoving(); break;
+      case MOVING_RESULT.fail: this.requestRetry(); break;
+      case MOVING_RESULT.success: 
+        this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), SUCCESS_FLAG.true);
         break;
     }
   }
@@ -75,10 +76,10 @@ class BridgeController {
   }
 
   handleRetryResult(result) {
-    if(result === 'retry') {
+    if(result === RETRY_RESULT.retry) {
       this.requestMoving();
-    } else if(result === 'quit') {
-      this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), false);
+    } else if(result === RETRY_RESULT.quit) {
+      this.outputView.printResult(this.bridgeGame.getMoveInfo(), this.bridgeGame.getTryCnt(), SUCCESS_FLAG.false);
     }
   }
   
