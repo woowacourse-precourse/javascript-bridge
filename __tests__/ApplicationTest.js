@@ -168,16 +168,6 @@ describe('플레이어 입력값의 유효성 검사', () => {
     });
   });
 
-  test('사용자가 게임을 진행할 수 있는지 위치값 확인', () => {
-    mockRandoms([1, 0, 1]);
-    mockQuestions(['3', 'U', 'D', 'U']);
-    const app = new App();
-
-    app.play().then(() => {
-      expect(app.isContinue()).toEqual(true);
-    });
-  });
-
   test('사용자의 이동한 칸이 이동할 수 있는 칸인지 확인', () => {
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
@@ -187,6 +177,21 @@ describe('플레이어 입력값의 유효성 검사', () => {
       app.isSuccessFulMovement().then((res) => {
         expect(res).toEqual(true);
       });
+    });
+  });
+
+  test('플레이어는 자신이 선택한 방향으로 이동한다.', () => {
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'D', 'U']);
+
+    const app = new App();
+
+    app.play().then(() => {
+      expect([...app.game.result.getAsArray()]).toEqual([
+        [0, { machine: 'U', player: 'U' }],
+        [1, { machine: 'D', player: 'D' }],
+        [2, { machine: 'U', player: 'U' }],
+      ]);
     });
   });
 
@@ -212,5 +217,13 @@ describe('플레이어 입력값의 유효성 검사', () => {
         expect(res).toEqual(false);
       });
     });
+  });
+
+  test('사용자가 게임 재시도한다.', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'U', 'R']);
+    const app = new App();
+
+    app.game.result.getAsArray().forEach((v) => expect(v[1].player).toEqaul(null));
   });
 });
