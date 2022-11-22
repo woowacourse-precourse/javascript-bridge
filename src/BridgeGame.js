@@ -1,5 +1,6 @@
-const input = require('./InputView');
-const output = require('./OutputView');
+const input = require('./View/InputView');
+const output = require('./View/OutputView');
+const Controller = require("./Controller");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,13 +9,17 @@ class BridgeGame {
   #bridge; // 건너야 할 다리
   #current; // 현재까지 사용자가 건넌 다리 갯수
   #totalTry; // 총 게임 시도 횟수
-  #lastInput; // 마지막 입력 값
+  #lastInput; // 마지막 입
+  #gameResult; // 게임 결과 ( true or false )
+  #controller;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#current = 0;
     this.#totalTry = 0;
     this.#lastInput = '';
+    this.#gameResult = false;
+    this.#controller = new Controller();
   }
 
   /**
