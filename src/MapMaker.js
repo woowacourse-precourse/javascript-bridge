@@ -1,32 +1,32 @@
 const { OX, INPUT_VALUE } = require('./util/Constant');
 
 const MapMaker = {
-  upfloor: [],
-  downfloor: [],
+  upFloor: [],
+  downFloor: [],
 
-  fillPrintMap(userUd, inputOx) {
-    for (let i = 0; i < userUd.length - 1; i++) {
-      MapMaker.upfloor.push(userUd[i] === INPUT_VALUE.UP ? OX.CORRECT : ' ');
-      MapMaker.downfloor.push(userUd[i] === INPUT_VALUE.DOWN ? OX.CORRECT : ' ');
+  fillPrintMap(userUpdown, inputUpDown) {
+    for (let i = 0; i < userUpdown.length - 1; i++) {
+      MapMaker.upFloor.push(userUpdown[i] === INPUT_VALUE.UP ? OX.CORRECT : ' ');
+      MapMaker.downFloor.push(userUpdown[i] === INPUT_VALUE.DOWN ? OX.CORRECT : ' ');
     }
-    MapMaker.fillMapLastUd(userUd[userUd.length - 1], inputOx);
+    MapMaker.fillMapLastInput(userUpdown[userUpdown.length - 1], inputUpDown);
   },
 
-  fillMapLastUd(recentUd, inputOx) {
-    MapMaker.upfloor.push(recentUd === INPUT_VALUE.UP ? inputOx : ' ');
-    MapMaker.downfloor.push(recentUd === INPUT_VALUE.DOWN ? inputOx : ' ');
+  fillMapLastInput(recentUpdown, inputUpDown) {
+    MapMaker.upFloor.push(recentUpdown === INPUT_VALUE.UP ? inputUpDown : ' ');
+    MapMaker.downFloor.push(recentUpdown === INPUT_VALUE.DOWN ? inputUpDown : ' ');
   },
 
   fillEndMap() {
-    let outputMap = `[ ${MapMaker.upfloor.join(' | ')} ]\n`;
-    outputMap += `[ ${MapMaker.downfloor.join(' | ')} ]\n`;
+    let resultMap = `[ ${MapMaker.upFloor.join(' | ')} ]\n`;
+    resultMap += `[ ${MapMaker.downFloor.join(' | ')} ]\n`;
     MapMaker.printPlayingMap();
-    return outputMap;
+    return resultMap;
   },
 
   printPlayingMap() {
-    MapMaker.upfloor = [];
-    MapMaker.downfloor = [];
+    MapMaker.upFloor = [];
+    MapMaker.downFloor = [];
   },
 };
 

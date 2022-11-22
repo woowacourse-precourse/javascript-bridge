@@ -1,11 +1,10 @@
-/* eslint-disable class-methods-use-this */
 const { ERROR } = require('../util/Constant');
 const OutputView = require('../view/OutputView');
 
 class CheckBridgeSize {
   validate(size) {
     try {
-      this.checkNotNumberAndRange(size);
+      this.checkError(size);
       return true;
     } catch (error) {
       OutputView.printError(error);
@@ -13,7 +12,7 @@ class CheckBridgeSize {
     }
   }
 
-  checkNotNumberAndRange(size) {
+  checkError(size) {
     this.checkNotNumber(size);
     this.checkNotRange(size);
   }

@@ -3,9 +3,9 @@ const { ERROR } = require('../util/Constant');
 const OutputView = require('../view/OutputView');
 
 class CheckInputRq {
-  validate(inputRq) {
+  validate(inputReplayQuit) {
     try {
-      this.checkRqAndOneCharacter(inputRq);
+      this.checkError(inputReplayQuit);
       return true;
     } catch (error) {
       OutputView.printError(error);
@@ -13,19 +13,19 @@ class CheckInputRq {
     }
   }
 
-  checkRqAndOneCharacter(inputRq) {
-    this.checkRq(inputRq);
-    this.checkOneCharactor(inputRq);
+  checkError(inputReplayQuit) {
+    this.checkReplayQuit(inputReplayQuit);
+    this.checkOneCharactor(inputReplayQuit);
   }
 
-  checkRq(inputRq) {
-    if (!String(inputRq).match(/[RQ]/g)) {
+  checkReplayQuit(inputReplayQuit) {
+    if (!String(inputReplayQuit).match(/[RQ]/g)) {
       throw new Error(ERROR.REPLAY_WRONG);
     }
   }
 
-  checkOneCharactor(inputRq) {
-    if (inputRq.length > 1) {
+  checkOneCharactor(inputReplayQuit) {
+    if (inputReplayQuit.length > 1) {
       throw new Error(ERROR.REPLAY_WRONG);
     }
   }

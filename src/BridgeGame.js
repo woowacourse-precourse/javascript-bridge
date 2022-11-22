@@ -7,10 +7,10 @@ class BridgeGame {
     this.#randomBridge = randomBridge;
   }
 
-  move(userUd) {
-    let recentUd = userUd.length - 1;
-    if (this.#randomBridge[recentUd] === userUd[recentUd]) {
-      return this.lenghtCheck(userUd.length);
+  move(userUpDown) {
+    let recentUpDown = userUpDown.length - 1;
+    if (this.#randomBridge[recentUpDown] === userUpDown[recentUpDown]) {
+      return this.lenghtCheck(userUpDown.length);
     }
     return 0;
   }
@@ -22,10 +22,10 @@ class BridgeGame {
     return 1;
   }
 
-  retry(inputRq) {
-    if (inputRq === INPUT_VALUE.REPLAY)
+  retry(inputReplayQuit) {
+    if (inputReplayQuit === INPUT_VALUE.REPLAY)
       return 1;
-    if (inputRq === INPUT_VALUE.QUIT)
+    if (inputReplayQuit === INPUT_VALUE.QUIT)
       return 0;
   }
 }

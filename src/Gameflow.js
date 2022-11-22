@@ -10,7 +10,7 @@ const { RESULT, OX } = require('./util/Constant');
 
 class Gameflow {
     size
-    userUd = []
+    userUpDown = []
     count = 1
     middleResult
 
@@ -19,7 +19,8 @@ class Gameflow {
       this.CheckInputUd = new CheckInputUd();
       this.CheckInputRq = new CheckInputRq();
     }
-  
+
+
     start() {
       InputView.readBridgeSize((size) => {
         this.isValidBridgeSize(this.CheckBridgeSize .validate(size),size)
@@ -41,22 +42,22 @@ class Gameflow {
 
 
     userMoving(){
-        InputView.readMoving((inputUd) => {
-            this.isValidUpdown(this.CheckInputUd.validate(inputUd), inputUd);
+        InputView.readMoving((inputUpDown) => {
+            this.isValidUpdown(this.CheckInputUd.validate(inputUpDown), inputUpDown);
         })
     }
 
-    isValidUpdown(valitation, inputUd) {
+    isValidUpdown(valitation, inputUpDown) {
       if (!valitation) {
         return this.userMoving();
       };
-      this.userUd.push(inputUd);
+      this.userUpDown.push(inputUpDown);
       return this.endCheck();
     }
 
 
     endCheck() {
-      switch (this.bridgeGame.move(this.userUd)) {
+      switch (this.bridgeGame.move(this.userUpDown)) {
         case 0:
           return this.wrongInputMove();
         case 1:
@@ -68,43 +69,43 @@ class Gameflow {
     
     wrongInputMove() {
       this.middleResult = RESULT.FAIL
-      OutputView.printMap(this.userUd, OX.WRONG);
+      OutputView.printMap(this.userUpDown, OX.WRONG);
       this.askReplay();
     }
 
     continueMove() {
-      OutputView.printMap(this.userUd, OX.CORRECT);
+      OutputView.printMap(this.userUpDown, OX.CORRECT);
       this.userMoving();
     }
 
     endGame() {
       this.middleResult = RESULT.SUCCESS
-      OutputView.printMap(this.userUd, OX.CORRECT);
-      OutputView.printResult(this.userUd, OX.CORRECT);
+      OutputView.printMap(this.userUpDown, OX.CORRECT);
+      OutputView.printResult(this.userUpDown, OX.CORRECT);
       OutputView.printFinalResult(this.count, this.middleResult);
     }
 
 
     askReplay() {
-      InputView.readGameCommand((inputRq) => {
-        this.isValidRepalyQuit(this.CheckInputRq.validate(inputRq), inputRq);
+      InputView.readGameCommand((inputReplayQuit) => {
+        this.isValidRepalyQuit(this.CheckInputRq.validate(inputReplayQuit), inputReplayQuit);
       });
     }
 
-    isValidRepalyQuit(valitation, inputRq) {
+    isValidRepalyQuit(valitation, inputReplayQuit) {
       if (!valitation) {
         return this.askReplay();
       };
-      return this.checkingAskReplay(this.bridgeGame.retry(inputRq));
+      return this.checkingAskReplay(this.bridgeGame.retry(inputReplayQuit));
     }
 
-    checkingAskReplay(inputRq) {
-      if(inputRq) {
+    checkingAskReplay(inputReplayQuit) {
+      if(inputReplayQuit) {
         this.count += 1;
-        this.userUd = [];
+        this.userUpDown = [];
         return this.userMoving();
       };
-      OutputView.printResult(this.userUd, this.middleResult);
+      OutputView.printResult(this.userUpDown, this.middleResult);
       OutputView.printFinalResult(this.count, this.middleResult);
     }
 }
