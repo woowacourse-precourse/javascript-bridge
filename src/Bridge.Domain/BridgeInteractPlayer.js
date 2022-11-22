@@ -1,10 +1,10 @@
 const InputView = require("../Bridge.Input/InputView");
 const OutputView = require("../Bridge.UI/OutputView");
+const { BRIDGE, GAME } = require("../lib/Const");
+const InputException = require("./InputException");
 const BridgeGame = require("./BridgeGame");
 const BridgeGameShape = require("./BridgeGameShape");
 const Player = require("./Player");
-const { BRIDGE, GAME } = require("../lib/Const");
-const InputException = require("./InputException");
 
 class BridgeInteractPlayer {
   #player;
@@ -35,17 +35,13 @@ class BridgeInteractPlayer {
     } catch (error) {
       OutputView.printError(error);
     }
-    this.playerGoResultOutput(
-      direction,
-      this.#bridgeGame.move(this.#player, direction)
-    );
-    return;
+    this.playerGoResultOutput(this.#bridgeGame.move(this.#player, direction));
   }
 
-  playerGoResultOutput(direction, [resultBridgeArr, status]) {
+  playerGoResultOutput([resultBridgeArr, status]) {
     OutputView.printResult(
       this.#bridgeGameShape
-        .getCurrentBridgeGameShape(resultBridgeArr, status, direction)
+        .getCurrentBridgeGameShape(resultBridgeArr, status)
         .getCurrentShape()
     );
     this.playerGoBridgeNext(status);
@@ -56,33 +52,34 @@ class BridgeInteractPlayer {
     switch (status) {
       case GAME.STATUS.PLAY:
         InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-        break;
       case GAME.STATUS.FAIL:
-        InputView.readGameCommand(
-          this.playerInputCommandBridgeRetry.bind(this)
-        );
-        break;
+        InputView.readGameCommand(this.playerInputCommand.bind(this));
       case GAME.STATUS.END:
         this.playerEndThisGame(GAME.RESULT.WIN);
-        break;
     }
   }
 
   //BridgeGame 에 분리
-  playerInputCommandBridgeRetry(command) {
-    InputException.playerCommandValidate(command);
+  playerInputCommand(command) {
+    try {
+      InputException.playerCommandValidate(command);
+    } catch (error) {
+      OutputView.printError(error);
+    }
+    this.playerDicisionRetry(command);
+  }
+
+  playerDicisionRetry(command) {
     if (command === BRIDGE.GAME.RETRY) {
       this.#player.bridgeGameRetry();
       this.#bridgeGame.retry();
       InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-      return;
     }
     if (command === BRIDGE.GAME.END) {
       this.playerEndThisGame(
         this.#bridgeGameShape.getCurrentShape(),
         GAME.RESULT.FAIL
       );
-      return;
     }
   }
 
