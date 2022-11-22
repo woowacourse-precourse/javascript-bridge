@@ -17,6 +17,7 @@ class App {
 
   play() {
     this.startGame();
+    Console.close();
   }
 
   startGame() {
