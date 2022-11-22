@@ -21,7 +21,7 @@ const Validator = {
 
   /**
    * @param {string[]} allowedSet // 입력이 허용되는 문자의 집합
-   * @param {string} input // 입력된 숫자
+   * @param {string} input // 입력된 문자열
    */
   validateIncludes(allowedSet, input) {
     if (!allowedSet.includes(input)) {
