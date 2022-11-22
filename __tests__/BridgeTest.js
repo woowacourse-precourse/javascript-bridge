@@ -2,6 +2,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const Bridge = require('../src/model/Bridge');
+const OutputView = require('../src/view/OutputView');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -86,5 +88,23 @@ describe('브릿지 테스트', () => {
       '총 시도한 횟수: 2',
     ]);
     expectBridgeOrder(log, '[   |   | O | O | X ]', '[ O | O |   |   |   ]');
+  });
+  test('브릿지의 길이 테스트', () => {
+    const bridge = new Bridge(15);
+    expect(bridge.getLength()).toEqual(15);
+  });
+  test('브릿지 출력 테스트 : 현재 탐색중인 index 3일 때', () => {
+    const logSpy = getLogSpy();
+    OutputView.printMap(3, {
+      // eslint-disable-next-line comma-spacing
+      up: [' ',' ',' ',' ',' '],
+      // eslint-disable-next-line comma-spacing
+      down: [' ',' ',' ',' ',' '],
+    });
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[   |   |   |   ]',
+      '[   |   |   |   ]',
+    ]);
   });
 });
