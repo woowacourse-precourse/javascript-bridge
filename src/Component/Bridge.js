@@ -6,12 +6,8 @@ class Bridge {
   #bridgeStatus;
 
   constructor(bridgeLength) {
-    this.setBridgeLength(bridgeLength);
-    this.#bridgeStatus = this.buildBridge();
-  }
-
-  setBridgeLength(bridgeLength) {
     this.#bridgeLength = bridgeLength;
+    this.#bridgeStatus = this.buildBridge();
   }
 
   buildBridge() {

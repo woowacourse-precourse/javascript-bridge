@@ -19,7 +19,7 @@ class App {
   processingGame() {
     for (let playCounter = 0; playCounter < this.#playCount; playCounter++) {
       this.game.increasePlayCount();
-      const PLAY_RESULT = this.game.playAlgorithms(); //여기서 물어보는 작업까지 끝내야함
+      const PLAY_RESULT = this.game.playAlgorithms(this.#bridgeLength); //여기서 물어보는 작업까지 끝내야함
 
       if (PLAY_RESULT) {
         playCounter = 0;

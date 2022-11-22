@@ -14,13 +14,10 @@ const Validator = {
 
   isBridgeLength(callback, bridgeLength) {
     const BRIDGE_LENGTH = parseInt(bridgeLength);
+    const NATURAL_VALIDATED = this.isNaturalNumber(bridgeLength);
 
-    if (this.isNaturalNumber(bridgeLength) === false) {
-      ErrorHandler.errorGenerate("bridge");
-      return false;
-    }
-    if (BRIDGE_LENGTH > 20 || BRIDGE_LENGTH < 3) {
-      ErrorHandler.tryCatch(callback, "bridge");
+    if (BRIDGE_LENGTH > 20 || BRIDGE_LENGTH < 3 || !NATURAL_VALIDATED) {
+      ErrorHandler.tryCatch(false, callback, "bridge");
       return false;
     }
     return true;
@@ -30,13 +27,13 @@ const Validator = {
     if (moveDirection === "U" || moveDirection === "D") {
       return true;
     }
-    ErrorHandler.tryCatch(callback, "jump");
+    ErrorHandler.tryCatch(false, callback, "jump");
     return false;
   },
 
   isBoolNumber(callback, number) {
     if (number !== 0 && number !== 1) {
-      ErrorHandler.tryCatch(callback, "compute");
+      ErrorHandler.tryCatch(false, callback, "compute");
     }
   },
 
@@ -44,7 +41,7 @@ const Validator = {
     if (rq === "R" || rq === "Q") {
       return true;
     }
-    ErrorHandler.tryCatch(callback, "quit");
+    ErrorHandler.tryCatch(false, callback, "quit");
     return false;
   },
 };

@@ -7,7 +7,6 @@
  */
 
 const MissionUtils = require("@woowacourse/mission-utils");
-
 const Validator = require("../Library/Validator.js");
 
 const InputView = {
@@ -21,9 +20,6 @@ const InputView = {
 
       if (VALIDATED) {
         bridgeLength = parseInt(input);
-      }
-      if (!VALIDATED) {
-        this.readBridgeSize();
       }
     });
     return bridgeLength;
@@ -41,9 +37,6 @@ const InputView = {
         if (VALIDATED) {
           moveDirection = input;
         }
-        if (!VALIDATED) {
-          this.readMoving();
-        }
       }
     );
     return moveDirection;
@@ -60,9 +53,6 @@ const InputView = {
         const VALIDATED = Validator.isQuit(input);
         if (VALIDATED) {
           rq = input;
-        }
-        if (!VALIDATED) {
-          this.readGameCommand();
         }
       }
     );

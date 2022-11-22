@@ -46,7 +46,7 @@ const OutputView = {
   },
 
   calculateResult(bridgeStatus, jumpHistory) {
-    if (bridgeStatus.length > jumpHistory.length) {
+    if (bridgeStatus.length > jumpHistory.length || jumpHistory.length === 0) {
       return 0;
     }
     for (let index = 0; index < bridgeStatus.length; index++) {

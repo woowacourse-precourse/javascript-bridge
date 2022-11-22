@@ -25,10 +25,10 @@ class Game {
     this.#playCount += 1;
   }
 
-  playAlgorithms() {
+  playAlgorithms(bridgeLength) {
     let quitResult = true;
 
-    for (let moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
+    for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
       const MOVE_RESULT = this.bridgeGame.move(DIRECTION, moveCount);
 
