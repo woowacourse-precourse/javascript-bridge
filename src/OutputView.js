@@ -32,7 +32,6 @@ const OutputView = {
     Console.print(
       `${OutputView.RESULT_MESSAGE_TOTAL_ATTEMPTS(numberOfAttempts)}`
     );
-    Console.close();
   },
 
   /**
@@ -40,6 +39,14 @@ const OutputView = {
    */
   printStartMessage() {
     Console.print(`${OutputView.MESSAGE_START_BRIDGE_GAME}\n`);
+  },
+
+  /**
+   * 예외사항이 발생했을 때 출력할 메시지를 출력한다.
+   * @param {String} message - 출력할 메시지
+   */
+  printErrorMessage(message) {
+    Console.print(message);
   },
 };
 
