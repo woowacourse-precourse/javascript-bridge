@@ -24,6 +24,7 @@ const OutputView = {
 
   printSuccess() {
     GameInfo.gameResult = this.changeSuccess;
+    Console.print('');
     this.printResult();
   },
 
