@@ -51,6 +51,30 @@ class BridgeGame {
 		if (this.bridge[this.trace.length - 1] === this.recentMove) this.isCorrect = true;
 		else this.isCorrect = false;
 		ViewManager.map(this.recentMove, this.isCorrect);
+		this.goToNextStep();
+	}
+
+	goToNextStep() {
+		if (!this.isCorrect) {
+			this.retry();
+			return;
+		}
+		if (this.trace.length === this.bridge.length) {
+			this.finish();
+			return;
+		}
+		this.move();
+	}
+
+	/**
+	 * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+	 * <p>
+	 * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+	 */
+	retry() {
+	}
+
+	finish() {
 	}
 }
 
