@@ -20,7 +20,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(inputRestart) {
-    if(inputRestart=='R'){
+    if(inputRestart == 'R'){
       return true;
     }
   }
@@ -38,13 +38,13 @@ class BridgeGame {
 }
 
   checkGameCommand(input){
-    if(!(input =='R' || input == 'Q')){
+    if(!(input == 'R' || input == 'Q')){
       Console.print("[ERROR] 재시작 여부는 R이나 Q 여야 합니다."); 
     }
   }
 
   checkMoveCommand(input){
-    if(!(input =='U' || input == 'D')){
+    if(!(input == 'U' || input == 'D')){
       Console.print("[ERROR] 이동할 칸은 U이나 D 여야 합니다."); 
     }
   }

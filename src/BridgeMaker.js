@@ -11,16 +11,13 @@ const BridgeMaker = {
   
   makeBridge(size, generateRandomNumber) {
     let bridge=[];
-    let successNumber = generateRandomNumber();
     for(let index=0; index < size; index++){
+      let successNumber = generateRandomNumber();
       if(successNumber == 0 ) {
         bridge.push("D");
       }
       if (successNumber == 1) {
         bridge.push("U");
-      }
-      if(bridge.length != size){
-        successNumber = generateRandomNumber();
       }
     }
     return bridge;

@@ -12,7 +12,8 @@ const InputView = {
     let bridgeSize;
     Console.readLine('다리의 길이를 입력해주세요.', number => {
       bg.vaildateBridge(number);
-      return bridgeSize=number})
+      return bridgeSize = number
+    })
     return bridgeSize;
   },
   /**
@@ -22,7 +23,7 @@ const InputView = {
     let moving;
     Console.readLine('이동할 칸을 선택해주세요..', string => {
       bg.vaildateMoveCommand(string);
-      return moving=string
+      return moving = string
     })
     return moving;
   },
@@ -35,7 +36,7 @@ const InputView = {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', string => {
       bg.vaildateGameCommand(string);
       if(bg.retry(string)){
-        return command=string;
+        return command = string;
       }
     })
     return command;

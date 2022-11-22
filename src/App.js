@@ -16,7 +16,7 @@ class App {
   }
 
   checkRestart() {
-    if(readGameCommand()=='R') {
+    if(readGameCommand() == 'R') {
       resetBridge();
       this.bridgeTransfer();
     } 
@@ -39,11 +39,11 @@ class App {
 
   successPlace(inputMove, count){
     if(inputMove == 'U'){
-      let upMessage=[MESSAGE.bridge.bridgeOkay,MESSAGE.bridge.bridgeNone]
+      let upMessage = [MESSAGE.bridge.bridgeOkay,MESSAGE.bridge.bridgeNone]
       printBridgeMap(upMessage, count, bridgeSize);
     }
-    else if(inputMove=='D') {
-      let downMessage=[MESSAGE.bridge.bridgeNone, MESSAGE.bridge.bridgeOkay]
+    else if(inputMove =='D') {
+      let downMessage = [MESSAGE.bridge.bridgeNone, MESSAGE.bridge.bridgeOkay]
       printBridgeMap(downMessage, count, bridgeSize);
     }
   }
@@ -54,21 +54,21 @@ class App {
   }
 
   makeBridgeBase() {
-    bridgeSize=readBridgeSize()
-    bridgeBase=makeBridge(bridgeSize,generate);
+    bridgeSize = readBridgeSize()
+    bridgeBase = makeBridge(bridgeSize, generate);
     this.bridgeTransfer();
   }
 
   bridgeTransfer(){
-    this.compareInputScore(bridgeSize,bridgeBase);
+    this.compareInputScore(bridgeSize, bridgeBase);
   }
 
-  compareInputScore(bridgeSize,bridgeBase) {
-    let count=0;
-    for(let index=0; index<bridgeSize; index++){
+  compareInputScore(bridgeSize, bridgeBase) {
+    let count = 0;
+    for(let index = 0; index < bridgeSize; index++){
       count++;
       if(this.checkRightPlace(bridgeBase[index])) {
-        this.successPlace(bridgeBase[index],count)}
+        this.successPlace(bridgeBase[index], count)}
       else {
         return this.failPlace(bridgeBase[index]);
       }
@@ -77,8 +77,8 @@ class App {
   }
 
   checkRightPlace(bridge){
-    const bg=new BridgeGame();
-    if(bg.move(bridge,readMoving())){
+    const bg = new BridgeGame();
+    if(bg.move(bridge, readMoving())){
       return true;
     }
   }
