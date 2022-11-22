@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
 const Moving = require('./Moving');
 const GameCommand = require('./GameCommand');
-const { SYMBOL } = require('../utils/constant');
+const { GAME, SYMBOL } = require('../utils/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -71,8 +71,8 @@ class BridgeGame {
   move(next) {
     const isSuccess = next === this.#bridge[this.#currentIndex] ? 1 : 0;
 
-    if (next === 'U') this.setTopSide(isSuccess);
-    if (next === 'D') this.setDownSide(isSuccess);
+    if (next === GAME.UP) this.setTopSide(isSuccess);
+    if (next === GAME.DOWN) this.setDownSide(isSuccess);
 
     this.#currentIndex += 1;
 
