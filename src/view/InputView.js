@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
-const Validator = require('../utils/Validator');
+const Validator = require('../utils/validator');
 const { GAME_MESSAGE } = require('../utils/constants');
 
 /**
