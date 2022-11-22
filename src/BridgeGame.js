@@ -25,16 +25,16 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving U 혹은 D
-   * @return {{status: number, pathMap: string[][]}}
+   * @return {{moveStatus: number, pathMap: string[][]}}
    */
   move(moving) {
     const currentPath = this.#path.push(moving);
     const isCorrect = this.#bridge.isCorrect(currentPath);
 
-    const status = this.#bridge.compare(currentPath);
+    const moveStatus = this.#bridge.compare(currentPath);
     const pathMap = this.#path.markOX(isCorrect);
 
-    return { status, pathMap };
+    return { moveStatus, pathMap };
   }
 
   /**
