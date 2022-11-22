@@ -1,6 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
+const { MESSAGE, GAME_STATUS } = require('./Message');
 const { printResult } = require('./OutputView');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
@@ -48,10 +49,9 @@ class bridgeController {
   }
 
   checkGame() {
-    this.#bridge.move();
-
-    if (this.#bridge.isWin()) {
-      return printResult();
+    if (this.#bridge.move()) {
+      const { WIN } = GAME_STATUS;
+      return printResult(WIN);
     }
     if (this.#bridge.isFail()) {
       return isRetry();
@@ -59,9 +59,38 @@ class bridgeController {
     this.getMoveInput();
   }
 
-  printResult() {}
+  printResult(status) {
+    OutputView.printResult(
+      this.#bridge.getBridgeMap(),
+      this.#bridge.getCount,
+      status
+    );
+  }
 
-  isRetry() {}
+  getRetry() {
+    InputView.readGameCommand(this.isRetry.bind(this));
+  }
+
+  isRetry(input) {
+    try {
+      Validate.isRetryInput(input);
+      this.checkRetry(input);
+    } catch (error) {
+      OutputView.printError(error);
+      this.getRetry();
+    }
+  }
+
+  checkRetry(input) {
+    const { RETRY, QUIT, LOSE } = GAME_STATUS;
+
+    if (input === RETRY) {
+      this.#bridge.retry();
+      this.getMoveInput();
+    }
+
+    if (input === QUIT) this.printResult(LOSE);
+  }
 }
 
 module.exports = bridgeController;

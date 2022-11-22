@@ -11,6 +11,8 @@ const MESSAGE = {
 const GAME_STATUS = {
   UP: 'U',
   DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
   MIN_BOUND: 3,
   MAX_BOUND: 20,
   START: ' [',
@@ -19,12 +21,15 @@ const GAME_STATUS = {
   POSSIBLE: 'O',
   IMPOSSIBLE: 'X',
   SPACE: ' ',
+  WIN: '성공',
+  LOSE: '실패',
 };
 
 const ERROR = {
   NOT_NUMBER: '[ERROR] 숫자만 입력 가능합니다.',
   NOT_BOUND: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
   NOT_MOVE_DATA: '[ERROR] U와 D 중 하나의 문자만 입력해야 됩니다.',
+  NOT_RETRY_DATA: '[ERROR] R와 Q중 하나의 문자만 입력해야 됩니다.',
 };
 
 module.exports = { MESSAGE, GAME_STATUS, ERROR };

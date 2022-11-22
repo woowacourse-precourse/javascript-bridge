@@ -3,21 +3,34 @@ const { ERROR, GAME_STATUS } = require('./Message');
 class Validate {
   static isNumber(inputData) {
     const data = Number(inputData);
-    if (Number.isNaN(data)) throw new Error(ERROR.NOT_NUMBER);
+    const { NOT_NUMBER, NOT_BOUND } = ERROR;
+    const { MIN_BOUND, MAX_BOUND } = GAME_STATUS;
 
-    if (data < GAME_STATUS.MIN_BOUND && data > GAME_STATUS.MAX_BOUND) {
-      throw new ERROR(ERROR.NOT_BOUND);
+    if (Number.isNaN(data)) throw new Error(NOT_NUMBER);
+    if (data < MIN_BOUND && data > MAX_BOUND) {
+      throw new ERROR(NOT_BOUND);
+    }
+    return true;
+  }
+
+  static isMoveInput(inputData) {
+    const { UP, DOWN } = GAME_STATUS;
+    const { NOT_MOVE_DATA } = ERROR;
+
+    if (!inputData === UP || !inputData === DOWN) {
+      throw new ERROR(NOT_MOVE_DATA);
     }
 
     return true;
   }
 
-  static isMoveInput(inputData) {
-    if (!inputData === GAME_STATUS.UP || !inputData === GAME_STATUS.DOWN) {
-      throw new ERROR(ERROR.NOT_MOVE_DATA);
-    }
+  static isRetryInput(inputData) {
+    const { RETRY, QUIT } = GAME_STATUS;
+    const { NOT_RETRY_DATA } = ERROR;
 
-    return true;
+    if (!inputData === RETRY || !inputData === QUIT) {
+      throw new ERROR(NOT_RETRY_DATA);
+    }
   }
 }
 
