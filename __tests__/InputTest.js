@@ -1,5 +1,5 @@
 const { BRIDGE_INPUT_ERROR } = require('../src/MESSAGES/InputMessage');
-const InputError = require('../src/InputErrorView');
+const InputError = require('../src/InputView');
 
 test('다리 입력 오류 테스트', () => {
   const inputlog = [

@@ -10,11 +10,11 @@ const {
   UPDOWN_MESSAGE,
   DOWNDOWN_MESSAGE,
   DOWNUP_MESSAGE,
-} = require('../../MESSAGES/BridgeMessage');
+} = require('./MESSAGES/BridgeMessage');
 
-const { readGameCommand } = require('../../view/InputView');
-const { printWinResult } = require('../../view/OutputView');
-const { catchRetryError } = require('../CatchError');
+const { readGameCommand } = require('./InputView');
+const { printWinResult } = require('./OutputView');
+const { catchRetryError } = require('./model/CatchError');
 
 class BridgeGame {
   /**

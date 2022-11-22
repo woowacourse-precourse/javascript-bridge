@@ -1,5 +1,5 @@
 const MoveValidControl = require('./MoveisValid');
-const { printMap } = require('../../view/OutputView');
+const { printMap } = require('../../OutputView');
 const { catchResultError } = require('../../model/CatchError');
 
 const gameProcess = (gameobj, userindex, bridge) => {

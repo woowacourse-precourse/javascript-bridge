@@ -2,8 +2,8 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_INPUT } = require('../MESSAGES/InputMessage');
-const { RE_START_MESSAGE, MOVE_MESSAGE } = require('../MESSAGES/GameMessage');
+const { BRIDGE_INPUT } = require('./MESSAGES/InputMessage');
+const { RE_START_MESSAGE, MOVE_MESSAGE } = require('./MESSAGES/GameMessage');
 
 const InputView = {
   /**

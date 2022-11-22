@@ -1,4 +1,4 @@
-const { printGameStart, printBridgeInput } = require('../../view/OutputView');
+const { printGameStart, printBridgeInput } = require('../../OutputView');
 
 const printinitMessage = () => {
   printGameStart();

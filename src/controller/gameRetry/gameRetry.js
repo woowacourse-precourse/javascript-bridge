@@ -1,5 +1,5 @@
 const { closeConsole } = require('../../view/InputErrorView');
-const { printLoseResult, printMap } = require('../../view/OutputView');
+const { printLoseResult, printMap } = require('../../OutputView');
 
 const End = (curgameobj, curindex) => {
   printMap(curgameobj, curindex);

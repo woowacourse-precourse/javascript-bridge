@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/model/domainmodel/BridgeGame');
+const BridgeGame = require('../src/BridgeGame');
 const BridgeMessage = require('../src/MESSAGES/BridgeMessage');
 
 const bridgegame = new BridgeGame();

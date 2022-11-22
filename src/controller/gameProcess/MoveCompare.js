@@ -1,4 +1,4 @@
-const moveCaseAction = require('../../model/domainmodel/BridgeGame');
+const moveCaseAction = require('../../BridgeGame');
 
 const moveCompare = (gameobj, usermove, eachbridge) =>
   gameobj.moveCaseAction(usermove, eachbridge);

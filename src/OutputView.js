@@ -11,11 +11,8 @@ const {
   GAME_COUNT_MESSAGE,
   MOVE_INPUT_ERROR,
   RE_START_MESSAGE,
-} = require('../MESSAGES/GameMessage');
-const {
-  BRIDGE_INPUT,
-  BRIDGE_INPUT_ERROR,
-} = require('../MESSAGES/InputMessage');
+} = require('./MESSAGES/GameMessage');
+const { BRIDGE_INPUT, BRIDGE_INPUT_ERROR } = require('./MESSAGES/InputMessage');
 
 const OutputView = {
   printGameStart() {

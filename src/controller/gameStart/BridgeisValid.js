@@ -1,4 +1,4 @@
-const { readBridgeSize } = require('../../view/InputView');
+const { readBridgeSize } = require('../../InputView');
 const { catchSizeError } = require('../../model/CatchError');
 
 const BridgeSizeControll = () => {

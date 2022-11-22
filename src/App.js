@@ -1,11 +1,11 @@
-const BridgeGame = require('./model/domainmodel/BridgeGame');
+const BridgeGame = require('./BridgeGame');
 const GameCount = require('./model/domainmodel/GameCount');
 const getSize = require('./controller/gameStart/gameStart');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const gameProcess = require('./controller/gameProcess/gameProcess');
 const ifRetryorEnd = require('./controller/gameRetry/gameRetry');
-const { printWinResult, printLoseResult } = require('./view/OutputView');
+const { printWinResult, printLoseResult } = require('./OutputView');
 
 class App {
   constructor() {

@@ -1,4 +1,4 @@
-const { readMoving } = require('../../view/InputView');
+const { readMoving } = require('../../InputView');
 const { catchMoveError } = require('../../model/CatchError');
 
 const MoveValidControl = () => {

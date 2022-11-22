@@ -9,7 +9,7 @@ const {
   printUserMove,
   printUserMoveErr,
   printRestart,
-} = require('../view/OutputView');
+} = require('../OutputView');
 
 const catchError = {
   catchSizeError(size) {
