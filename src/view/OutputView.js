@@ -15,10 +15,12 @@ const OutputView = {
 
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {string[]} userBridge 사용자가 이동한 다리 현황 배열
+   * @param {string[]} up 사용자가 이동한 다리 현황 중 윗쪽 다리 배열
+   * @param {string[]} up 사용자가 이동한 다리 현황 중 아랫쪽 다리 배열
    */
-  printMap(userBridge) {
-    Console.print(userBridge);
+  printMap(up, down) {
+    Console.print(`[ ${up.join(' | ')} ]`);
+    Console.print(`[ ${down.join(' | ')} ]`);
   },
 
   /**
