@@ -1,7 +1,4 @@
-//@ts-check
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
-const BridgeMaker = require("../BridgeMaker");
-const PositionFactory = require("../model/PositionFactory/TwoPositionFactory");
+const ModeStrategy = require("./Mode/ModeStrategy");
 const Bridge = require("../model/Bridge");
 const IngState = require("./State/IngState");
 const StartState = require("./State/StartState");
@@ -12,15 +9,19 @@ const State = require("./State/State");
 class BridgeGame {
   /** @type {Bridge} */
   #bridge;
-  /** @type {number} */
-  #tryCount;
-  /** @type {PositionFactory} */
-  #positionFactory;
   /** @type {State} */
   #state;
-  constructor(positionFactory) {
-    this.#tryCount = 1;
-    this.#positionFactory = positionFactory;
+  /** @type {ModeStrategy} */
+  #mode;
+  #result;
+  constructor(mode) {
+    this.#result = {
+      tryCount: 1,
+      bridgeWidth: mode.getBridgeWidth(),
+      isWin: false,
+      data: [[]]
+    };
+    this.#mode = mode;
     this.#state = new StartState(this.start.bind(this), this.next.bind(this));
   }
 	
@@ -33,30 +34,32 @@ class BridgeGame {
   }
 
   start(size) {
-    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.#bridge = new Bridge(bridge.map(position =>
-        this.#positionFactory.createPosition(position)));
+    this.#bridge = this.#mode.createBridge(size);
     this.#setState(new IngState(this.move.bind(this), this.next.bind(this)));
   }
 
-  move(position) {
-    this.#bridge.movePosition(this.#positionFactory.createPosition(position));
+  move(positionSign) {
+    this.#bridge.movePosition(this.#mode.createPosition(positionSign));
     const curResult = this.#bridge.currentResult();
 		if (curResult.isFailed())
       this.#setState(new RetryState(this.retry.bind(this), this.next.bind(this)));
-    if (curResult.isCompelete()) 
-      this.#setState(new EndState(true, this.#tryCount, curResult.stringify()));
-    return curResult.stringify();
+    if (curResult.isCompelete()) {
+      this.#result.isWin = true;
+      this.#setState(new EndState(this.#result));
+    }
+    this.#result.data = curResult.stringify();
+    return this.#result;
   }
 
   retry(retryCommand) {
     const isRetry = retryCommand === "R" ? true : false;
 		if (!isRetry) {
-      this.#setState(new EndState(false, this.#tryCount, this.#bridge.currentResult().stringify()));
+      this.#setState(new EndState(this.#result));
 			return;
     }
-    this.#tryCount += 1;
+    this.#result.tryCount += 1;
 		this.#bridge.emptyPositions();
+    this.#result.data = [[]];
     this.#setState(new IngState(this.move.bind(this), this.next.bind(this)));
   }
 }

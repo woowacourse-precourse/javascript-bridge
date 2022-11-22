@@ -8,23 +8,21 @@ const OutputView = {
     Console.print("다리 건너기 게임을 시작합니다.");
   },
   
-  printMap(data) {
-    const result = [];
-    result.push("[ " +
-      data.map((position) => 
-        position[0] === 1 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
-      + " ]");
-    result.push("[ " +
-      data.map((position) => 
-        position[0] === 0 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
-      + " ]");
-    Console.print(result.join("\n"));
+  printMap(data, width) {
+    if (data.length === 0)
+      throw new Error("[ERROR] 잘못된 값 출력");
+    const result = Array.from({length: width}, () => []);
+    data.forEach((level) =>
+      result.forEach((line, j) =>
+        line.push(level[0] === j ? (level[0] === level[1] ? "O" : "X") : " ")
+    ));
+    Console.print(result.reverse().map((line) => "[ " + line.join(" | ") + " ]").join("\n"));
   },
 
   
-  printResult(data, isWin, tryCount) {
+  printResult({data, bridgeWidth, isWin, tryCount}) {
     Console.print(`최종 게임 결과`);
-    this.printMap(data);
+    this.printMap(data, bridgeWidth);
     Console.print(`\n게임 성공 여부: ${isWin ? "성공" : "실패"}`);
     Console.print(`총 시도한 횟수: ${tryCount}`);
   },

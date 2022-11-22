@@ -3,4 +3,10 @@ const POSITION_TWO = Object.freeze({
 	"D": 0,
 });
 
-module.exports = { POSITION_TWO };
+const POSITION_THREE = Object.freeze({
+	"U": 2,
+	"M": 1,
+	"D": 0
+})
+
+module.exports = { POSITION_TWO, POSITION_THREE };

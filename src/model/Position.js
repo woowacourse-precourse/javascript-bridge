@@ -8,6 +8,12 @@ class Position {
 	constructor(index) {
 		this.#index = index;
 	}
+
+	static createPosition(dictionary, sign) {
+		if (!dictionary.hasOwnProperty(sign))
+			throw new Error("[ERROR] 지정된 커맨드를 입력해주세요.");
+		return new Position(dictionary[sign]);
+	}
 	
 	/** @returns {number} */
 	getIndex() {

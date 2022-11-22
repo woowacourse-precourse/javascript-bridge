@@ -13,7 +13,7 @@ class IngState extends State {
 	run() {
 		InputView.readMoving((command) => {
 			const result = this.#curHandler(command);
-			OutputView.printMap(result);
+			OutputView.printMap(result.data, result.bridgeWidth);
 			this.#nextHandler();
 		});
 	}
