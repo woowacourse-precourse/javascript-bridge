@@ -1,6 +1,9 @@
+/* eslint-disable max-len */
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 const Stage = require('./Stage');
+const { MOVE_COMMAND_UP, MOVE_COMMAND_DOWN, INDEX_OFFSET_MAP_AND_MOVING_COMMANDS } = require('../Constant');
 
 class Map {
   #map;
@@ -10,22 +13,18 @@ class Map {
     this.#map = Object.fromEntries(
       Array(stageCount)
         .fill()
-        .map((_, index) => [index + 1, new Stage()]),
+        .map((_, index) => [index + INDEX_OFFSET_MAP_AND_MOVING_COMMANDS, new Stage()]),
     );
   }
 
   validate() {}
 
   setMap(canMovingCommands) {
+    const isCommandUp = (key) => canMovingCommands[key - INDEX_OFFSET_MAP_AND_MOVING_COMMANDS] === MOVE_COMMAND_UP;
+    const isCommandDown = (key) => canMovingCommands[key - INDEX_OFFSET_MAP_AND_MOVING_COMMANDS] === MOVE_COMMAND_DOWN;
     Object.entries(this.#map).forEach(([key, stage]) => {
-      if (canMovingCommands[key - 1] === 'U') {
-        stage.setUpStage('O');
-        stage.setDownStage('X');
-      }
-      if (canMovingCommands[key - 1] === 'D') {
-        stage.setUpStage('X');
-        stage.setDownStage('O');
-      }
+      if (isCommandUp(key)) stage.setMovingUpStage();
+      if (isCommandDown(key)) stage.setMovingDownStage();
     });
   }
 

@@ -1,4 +1,6 @@
 /* eslint-disable class-methods-use-this */
+const { MOVE_COMMAND_UP, MOVE_COMMAND_DOWN, SAFE_BRIDGE, DANGER_BRIDGE } = require('../Constant');
+
 class Stage {
   #stage;
 
@@ -6,7 +8,7 @@ class Stage {
 
   constructor() {
     this.validate();
-    this.#stage = { U: 'U', D: 'D' };
+    this.#stage = { U: '', D: '' };
     this.#movingCommand = '';
   }
 
@@ -24,13 +26,13 @@ class Stage {
   }
 
   setMovingUpStage() {
-    this.setUpStage('O');
-    this.setDownStage('X');
+    this.setUpStage(SAFE_BRIDGE);
+    this.setDownStage(DANGER_BRIDGE);
   }
 
   setMovingDownStage() {
-    this.setUpStage('X');
-    this.setDownStage('O');
+    this.setUpStage(DANGER_BRIDGE);
+    this.setDownStage(SAFE_BRIDGE);
   }
 
   getStage() {
@@ -38,19 +40,19 @@ class Stage {
   }
 
   setUpStage(canMoving) {
-    this.#stage.U = canMoving;
+    this.#stage[MOVE_COMMAND_UP] = canMoving;
   }
 
   getUpStage() {
-    return this.#stage.U;
+    return this.#stage[MOVE_COMMAND_UP];
   }
 
   setDownStage(canMoving) {
-    this.#stage.D = canMoving;
+    this.#stage[MOVE_COMMAND_DOWN] = canMoving;
   }
 
   getDownStage() {
-    return this.#stage.D;
+    return this.#stage[MOVE_COMMAND_DOWN];
   }
 
   setMovingCommand(movingCommand) {

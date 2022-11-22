@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 const { OutputView } = require('../view');
+const { BRIDGE_SIZE_RANGE_START, BRIDGE_SIZE_RANGE_END, DECIMAL_NUMBER } = require('../Constant');
 
 class BridgeSize {
   #bridgeSize;
@@ -21,7 +22,7 @@ class BridgeSize {
       this.#close = true;
       this.#outputView.printError('[ERROR] 숫자를 입력하시길 바랍니다.');
     }
-    if (bridgeSize < 3 || bridgeSize > 20) {
+    if (bridgeSize < BRIDGE_SIZE_RANGE_START || bridgeSize > BRIDGE_SIZE_RANGE_END) {
       this.#close = true;
       this.#outputView.printError('[ERROR] 다리 길이는 3이상 20이하 숫자를 입력하시길 바랍니다.');
     }
@@ -32,7 +33,7 @@ class BridgeSize {
   }
 
   getBridgeSize() {
-    return parseInt(this.#bridgeSize, 10);
+    return parseInt(this.#bridgeSize, DECIMAL_NUMBER);
   }
 }
 
