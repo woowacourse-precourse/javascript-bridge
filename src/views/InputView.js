@@ -15,6 +15,7 @@ const Game = new BridgeGame();
 const InputView = {
   gameRound: 0,
   bridge: [],
+  gameTrial: 1,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -83,7 +84,7 @@ const InputView = {
   processEnd() {
     if (this.gameRound >= this.bridge.length) {
       Console.close();
-      OutputView.printResult();
+      OutputView.printResult(this.gameTrial);
       this.end = true;
     }
   },
@@ -95,6 +96,7 @@ const InputView = {
 
   checkRetry(restartOrEnd) {
     if (restartOrEnd === true) {
+      this.gameTrial++;
       this.readMoving();
       OutputView.retryMap();
     }
