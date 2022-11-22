@@ -32,14 +32,11 @@ const InputView = {
    */
   readMoving(size) {
     let upOrDown = [];
-    let count = 0;
-    while (count < size) {
+    for (let count = 0; count < size; count += 1) {
       MissionUtils.Console.readLine(messageObject.SELECT_UORD, (UpDown) => {
         Error.inputMovingErrorCheck(UpDown);
         upOrDown.push(UpDown);
       });
-      MissionUtils.Console.close();
-      count += 1;
     }
     return upOrDown;
   },
@@ -53,7 +50,6 @@ const InputView = {
       Error.inputRestartErrorCheck(reOrNot);
       restart = reOrNot;
     });
-    MissionUtils.Console.close();
     return restart === "R" ? true : false;
   },
 };

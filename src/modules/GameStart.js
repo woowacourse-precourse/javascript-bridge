@@ -4,7 +4,7 @@ const InputView = require("../InputView");
 class GameStart {
   #brigeArr = [];
   #BRIDGEGAME;
-  #answer = false;
+  #inputR = false;
   constructor(upOrDown, arrUp, arrDown) {
     this.#BRIDGEGAME = new BridgeGame();
     this.changeOX(upOrDown, arrUp, arrDown);
@@ -17,7 +17,7 @@ class GameStart {
   }
   // 재시작 유무 반환
   getAnswer() {
-    return this.#answer;
+    return this.#inputR;
   }
   // 다리 U/D 값 -> O/X 값으로 변경
   changeOX(upOrDown, arrUp, arrDown) {
@@ -27,13 +27,14 @@ class GameStart {
         ? this.#BRIDGEGAME.move(arrUp, toWalkCount, move)
         : this.#BRIDGEGAME.move(arrDown, toWalkCount, move);
       toWalkCount += 1;
-      // "X" 값 유무로 게임 중지
-      const includeX = this.#BRIDGEGAME.retry(arrUp, arrDown);
-      if (includeX) {
-        this.#answer = InputView.readGameCommand();
-        return true;
-      }
+      return this.checkX(arrUp, arrDown);
     });
+  }
+  // X 유무 확인
+  checkX(arrUp, arrDown) {
+    const includeX = this.#BRIDGEGAME.retry(arrUp, arrDown);
+    if (includeX) this.#inputR = InputView.readGameCommand();
+    return includeX;
   }
 }
 

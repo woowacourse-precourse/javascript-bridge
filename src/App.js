@@ -18,21 +18,22 @@ class App {
     );
   }
   play() {
-    // 이동할 칸(U,D)을 입력한다.
     const upOrDown = InputView.readMoving(this.size);
     // 다리 배열 생성
     const ARRAY = new ArraySize();
     const [arrUp, arrDown] = ARRAY.changeRandomArray(this.#randomArr);
     // 게임 시작
+    const bridgeArr = this.gameStart(upOrDown, arrUp, arrDown);
+    OutputView.printResult(bridgeArr, this.tryGame);
+  }
+  gameStart(upOrDown, arrUp, arrDown) {
     const GAMESTART = new GameStart(upOrDown, arrUp, arrDown);
     const answer = GAMESTART.getAnswer();
     const bridgeArr = GAMESTART.getBrigeArr();
     //게임 재시작
     this.restart(answer);
-    //출력
-    OutputView.printResult(bridgeArr, this.tryGame);
+    return bridgeArr;
   }
-
   restart(answer) {
     if (answer) {
       this.play();
