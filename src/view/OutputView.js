@@ -4,6 +4,15 @@ const { UP, DOWN } = require('../contants/Options');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  gameStart() {
+    const GAME_START = '다리 건너기 게임을 시작합니다.\n';
+    MissionUtils.Console.print(GAME_START);
+  },
+
+  printEmptyLine() {
+    const EMPTY = '';
+    MissionUtils.Console.print(EMPTY);
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {boolean[]} selections 여태까지의 움직임 점보를 받는다.
@@ -35,7 +44,7 @@ const OutputView = {
     )}\n${this.makeOneLinefBridgeView(
       moveStatus.map((elem) => elem === DOWN),
       movesPossible
-    )}`;
+    )}\n`;
   },
 
   /**

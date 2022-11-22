@@ -9,6 +9,7 @@ class BridgeCtrl {
   #game;
 
   start() {
+    OutputView.gameStart();
     this.#game = new BridgeGame();
     this.initalize();
   }
@@ -16,6 +17,7 @@ class BridgeCtrl {
   onReadBridgeSize(input) {
     try {
       this.#game.initalize(Number(input));
+      OutputView.printEmptyLine();
       this.play();
     } catch (error) {
       ErrorView.print(error);
