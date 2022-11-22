@@ -35,6 +35,21 @@ class Validator {
       }
     };
   }
+
+  static command(callback, { onError: errorCallback }) {
+    return (command) => {
+      try {
+        if (command !== "R" && command !== "Q") {
+          throw new CustomError(ERROR_CODE.WRONG_COMMAND);
+        }
+
+        callback(command);
+      } catch (error) {
+        OutputView.printMessage(error.message);
+        errorCallback(callback);
+      }
+    };
+  }
 }
 
 module.exports = Validator;

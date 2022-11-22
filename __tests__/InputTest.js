@@ -10,6 +10,13 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 const expectLogContains = (received, logs) => {
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
@@ -49,7 +56,7 @@ describe("유저 입력 테스트", () => {
     runException(["3", "K"]);
   });
 
-  test("잘못된 방향 입력하면 재입력 받는다", () => {
+  test("잘못된 방향을 입력하면 재입력 받는다", () => {
     const logSpy = jest.spyOn(MissionUtils.Console, "readLine");
     mockQuestions(["3", "K"]);
 
@@ -57,5 +64,22 @@ describe("유저 입력 테스트", () => {
     app.play();
 
     expect(logSpy).toHaveBeenCalledTimes(3);
+  });
+
+  test("재입력 명령어가 'R' 또는 'Q'가 아니라면 예외가 발생한다", () => {
+    mockRandoms([1, 0, 1]);
+
+    runException(["3", "D", "d"]);
+  });
+
+  test("잘못된 명령어를 입력하면 재입력 받는다", () => {
+    const logSpy = jest.spyOn(MissionUtils.Console, "readLine");
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "D", "K"]);
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledTimes(4);
   });
 });

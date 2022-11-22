@@ -18,7 +18,7 @@ class GameController {
   setUpBridge() {
     InputView.readBridgeSize((size) => {
       const bridge = makeBridge(size, generate);
-      console.log(bridge);
+
       this.game.setBridge(bridge);
       this.crossBridge();
     });
