@@ -14,7 +14,6 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 const getOutput = (logSpy) => {
-  console.log(logSpy.mock.calls, "getOutput");
   return [...logSpy.mock.calls].join("");
 };
 
@@ -61,7 +60,7 @@ describe("유효성 검사", () => {
   });
 
   test("문자열로 다리길이 입력", () => {
-    runExceptionBridgeLength(["27"]);
+    runExceptionBridgeLength(["가나다라"]);
   });
 
   test("범위 밖의 다리길이 입력", () => {
