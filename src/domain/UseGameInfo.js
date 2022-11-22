@@ -36,11 +36,6 @@ class UseGameInfo {
         .indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2
     ].push(GAME_VALUES.blank);
   }
-
-  static createBridge() {
-    GameInfo.bridge = BridgeMaker
-      .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
-  }
 }
 
 module.exports = UseGameInfo;

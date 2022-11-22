@@ -9,6 +9,9 @@ const ValidateBridgeSize = require("../utils/ValidateBridgeSize");
 const ValidateMoving = require("../utils/ValidateMoving");
 const ValidateGameCommand = require("../utils/ValidateGameCommand");
 const UseGameInfo = require("../domain/UseGameInfo");
+const GameInfo = require("../domain/GameInfo");
+const BridgeMaker = require("../domain/BridgeMaker");
+const BridgeRandomNumberGenerator = require("../domain/BridgeRandomNumberGenerator");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -29,7 +32,9 @@ const InputView = {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
       if (!this.inputErrorProcess.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize"))
         return this.readBridgeSize();
-      UseGameInfo.createBridge();
+      // UseGameInfo.createBridge();
+      GameInfo.bridge = BridgeMaker
+        .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
       UseGameInfo.initializeGameInfo();
 
       return this.readMoving();
