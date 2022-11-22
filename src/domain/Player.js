@@ -34,7 +34,7 @@ class Player {
     const upperBridgeString = `[ ${upperBridge.join(" | ")} ]`;
     const lowerBridgeString = `[ ${lowerBridge.join(" | ")} ]`;
 
-    return [upperBridgeString, lowerBridgeString];
+    return { upperBridgeMap: upperBridgeString, lowerBridgeMap: lowerBridgeString };
   }
 
   getMap() {

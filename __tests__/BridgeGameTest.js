@@ -46,7 +46,9 @@ describe("BridgeGame 클래스 테스트", () => {
 
     runMove(bridgeGame, playerRoute);
 
-    expect(bridgeGame.getMap()).toEqual(["[ O |   ]", "[   | O ]"]);
+    const map = bridgeGame.getMap();
+    expect(map.upperBridgeMap).toEqual("[ O |   ]");
+    expect(map.lowerBridgeMap).toEqual("[   | O ]");
   });
 
   test("getMap(): 플레이어가 이동 한 경로 가져오기(잘못된 길)", () => {
@@ -55,7 +57,9 @@ describe("BridgeGame 클래스 테스트", () => {
 
     runMove(bridgeGame, playerRoute);
 
-    expect(bridgeGame.getMap()).toEqual(["[ O | X ]", "[   |   ]"]);
+    const map = bridgeGame.getMap();
+    expect(map.upperBridgeMap).toEqual("[ O | X ]");
+    expect(map.lowerBridgeMap).toEqual("[   |   ]");
   });
 
   test("getResult(): 재시도 두 번, 둘째 칸에서 실패", () => {
@@ -68,7 +72,8 @@ describe("BridgeGame 클래스 테스트", () => {
 
     const [map, isClear, tryCount] = bridgeGame.getResult();
 
-    expect(map).toEqual(["[ O | X ]", "[   |   ]"]);
+    expect(map.upperBridgeMap).toEqual("[ O | X ]");
+    expect(map.lowerBridgeMap).toEqual("[   |   ]");
     expect(isClear).toBeFalsy();
     expect(tryCount).toEqual(3);
   });
@@ -83,7 +88,8 @@ describe("BridgeGame 클래스 테스트", () => {
 
     const [map, isClear, tryCount] = bridgeGame.getResult();
 
-    expect(map).toEqual(["[ O |   | O ]", "[   | O |   ]"]);
+    expect(map.upperBridgeMap).toEqual("[ O |   | O ]");
+    expect(map.lowerBridgeMap).toEqual("[   | O |   ]");
     expect(isClear).toBeTruthy();
     expect(tryCount).toEqual(2);
   });
