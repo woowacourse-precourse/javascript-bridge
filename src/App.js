@@ -5,6 +5,8 @@ const { MESSAGE } = require('./constants');
 class App {
   play = async () => {
     OutputView.printMessage(MESSAGE.ENTRY);
+    const size = await this.getBridgeSize();
+    await this.game.makeBridge(size);
   };
 
   getBridgeSize = async () => {
