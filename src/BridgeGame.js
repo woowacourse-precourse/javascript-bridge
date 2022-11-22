@@ -47,7 +47,7 @@ class BridgeGame {
   isRight() {
     const upValues = Object.values(this.#map.upStair);
     const downValues = Object.values(this.#map.downStair);
-    if (upValues.includes(" X ") || downValues.includes(" X ")) {
+    if (upValues.includes("X") || downValues.includes("X")) {
       this.#phase = 1;
       return false;
     }
