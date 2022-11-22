@@ -31,6 +31,10 @@ class GameManager {
     })
   }
 
+  printStart() {
+    OutputView.printStartMessage();
+  }
+
   printRow(upRow, downRow) {
     OutputView.printMap(upRow, downRow);
   }
@@ -41,6 +45,10 @@ class GameManager {
 
   printInfo(count, result) {
     OutputView.printInfo(count, result);
+  }
+
+  printBlankLine() {
+    OutputView.printBlankLine();
   }
 }
 

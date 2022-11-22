@@ -38,6 +38,11 @@ class BridgeGame {
     this.#bridges = bridges;
     this.#originBridges = bridges;
     this.openBridgeRow();
+    this.setLine();
+  }
+
+  setLine() {
+    this.gameManager.printBlankLine();
     this.inputSpace();
   }
   
@@ -69,6 +74,7 @@ class BridgeGame {
     }
 
     if (bridge.length === 0) {
+      this.gameManager.printRow(this.#upRow, this.#downRow);
       return this.finish();  
     }
 

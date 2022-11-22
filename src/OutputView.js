@@ -3,6 +3,10 @@ const { PRINT_MESSAGE } = require("./utils/Constants");
 
 const OutputView = {
 
+  printBlankLine() {
+    Console.print(PRINT_MESSAGE.blank);
+  },
+
   printStartMessage() {
     Console.print(PRINT_MESSAGE.start);
   },
@@ -10,7 +14,7 @@ const OutputView = {
   printMap(upRow, downRow) {
     Console.print(upRow.join(PRINT_MESSAGE.blank));
     Console.print(downRow.join(PRINT_MESSAGE.blank));
-    Console.print(PRINT_MESSAGE.blank);
+    this.printBlankLine();
   },
 
   printResult(upRow, downRow) {
@@ -19,6 +23,7 @@ const OutputView = {
   },
 
   printInfo(count, result) {
+    this.printBlankLine();
     Console.print(PRINT_MESSAGE.result(result));
     Console.print(PRINT_MESSAGE.count(count));
     Console.close();
