@@ -51,26 +51,20 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
-    const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
-    }, jest.fn());
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(["U", "D", "D"]);
-  });
-  test("기능 테스트", () => {
+describe("다리 건너기 테스트2", () => {
+  test("길이 5 다리", () => {
     const logSpy = getLogSpy();
-    mockRandoms([1, 0, 1]);
-    mockQuestions(["3", "U", "D", "U"]);
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "U", "D", "U", "U", "D"]);
+
     const app = new App();
     app.play();
+
     const log = getOutput(logSpy);
     expectLogContains(log, [
       "최종 게임 결과",
-      "[ O |   | O ]",
-      "[   | O |   ]",
+      "[ O |   | O | O |   ]",
+      "[   | O |   |   | O ]",
       "게임 성공 여부: 성공",
       "총 시도한 횟수: 1",
     ]);
@@ -79,5 +73,59 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("재 게임", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "R", "U", "D", "U", "U", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "최종 게임 결과",
+      "[ O |   | O | O |   ]",
+      "[   | O |   |   | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("게임 종료 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O ]", "[   ]");
+  });
+
+  test("재 게임 잘못된 입력 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "A"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ["[ERROR]"]);
+    expectBridgeOrder(log, "[ O ]", "[   ]");
   });
 });
