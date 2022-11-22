@@ -1,4 +1,5 @@
 const { BRIDGE_LENGTH, NEXT_STEP, RETRY, IS_NUMBER_EMPTY, ONE_VALUE } = require('./constants/Message');
+const { VALIDATION } = require('./constants/settings');
 
 class Validation {
   static bridgeLength(number) {
@@ -42,11 +43,11 @@ class Validation {
   }
 
   static isNumberEmpty(value) {
-    return value.length === 0;
+    return !value;
   }
 
   static isEmpty(number) {
-    return number.toString().length === 0;
+    return !number;
   }
 
   static numberNet(number) {
