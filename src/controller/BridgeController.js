@@ -1,23 +1,12 @@
 const BridgeModel = require("../model/BridgeModel");
-const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
-const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
+const { validate } = require("../validation/BridgeSizeValidation");
 
 class BridgeController {
   constructor(mainController) {
     this.mainController = mainController;
     this.bridgeModel = new BridgeModel();
-  }
-
-  /**
-   * 다리 길이에 대한 input 을 검증한다.
-   * @param bridgeLengthInput {string} [다리 길이 input]
-   */
-  validateBridgeLengthInput(bridgeLengthInput) {
-    if (!GENERAL_CONSTANTS.BRIDGE_LENGTH_REGEX.test(bridgeLengthInput)) {
-      throw new Error(BRIDGE_INPUT_MESSAGES.INPUT_ERROR);
-    }
   }
 
   /**
@@ -55,7 +44,7 @@ class BridgeController {
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
   onBridgeSizeInput(bridgeLengthInput) {
-    this.validateBridgeLengthInput(bridgeLengthInput);
+    validate(bridgeLengthInput);
     this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
     this.mainController.readUserMovingInput();
   }

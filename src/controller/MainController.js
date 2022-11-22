@@ -3,8 +3,7 @@ const UserController = require("./UserController");
 const BridgeGame = require("../BridgeGame");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
-const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
-const { USER_RESTART_MESSAGES } = require("../constants/Messages");
+const { validate } = require("../validation/RestartInputValidation");
 
 class MainController {
   constructor() {
@@ -69,23 +68,13 @@ class MainController {
   }
 
   /**
-   * 유저 재시작 여부 입력을 검증한다.
-   * @param userRestartInput {string} [유저 재시작 여부 입력]
-   */
-  validateUserRestart(userRestartInput) {
-    if (!GENERAL_CONSTANTS.USER_RESTART_REGEX.test(userRestartInput)) {
-      throw new Error(USER_RESTART_MESSAGES.INPUT_ERROR);
-    }
-  }
-
-  /**
    * 유저 재시작 여부를 입력받은 후 입력에 따라 다음 프로세스를 진행한다.
    * @param userRestartInput {string} [유저 재시작 여부 입력]
    * @param mainController {object} [컨트롤러]
    * @param userMoving {string[]} [유저 이동기록]
    */
   onUserRestartInput(userRestartInput, mainController, userMoving) {
-    mainController.validateUserRestart(userRestartInput);
+    validate(userRestartInput);
     mainController.bridgeGame.processUserRestartInput(
       userRestartInput,
       userMoving

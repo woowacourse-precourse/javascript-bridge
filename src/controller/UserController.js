@@ -1,4 +1,5 @@
 const UserModel = require("../model/UserModel");
+const { validate } = require("../validation/MovingInputValidation");
 
 class UserController {
   constructor(mainController) {
@@ -29,7 +30,7 @@ class UserController {
    * @param userMovingInput {string} [유저 이동 입력]
    */
   onUserMovingInput(userMovingInput) {
-    this.userModel.validateUserMoving(userMovingInput);
+    validate(userMovingInput);
     this.userModel.appendUserMoving(userMovingInput);
     this.mainController.tryMove(this.userModel.getUserMoving());
   }

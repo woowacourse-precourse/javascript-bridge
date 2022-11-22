@@ -1,6 +1,3 @@
-const { USER_MOVE_MESSAGES } = require("../constants/Messages");
-const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
-
 class UserModel {
   #tryCount;
   #userMoving;
@@ -42,16 +39,6 @@ class UserModel {
   // 유저 이동경로를 초기화한다.
   resetUserMoving() {
     this.#userMoving = [];
-  }
-
-  /**
-   * 유저의 이동 input 을 검증한다.
-   * @param userMovingInput {string} [유저 이동 input]
-   */
-  validateUserMoving(userMovingInput) {
-    if (!GENERAL_CONSTANTS.USER_MOVING_REGEX.test(userMovingInput)) {
-      throw new Error(USER_MOVE_MESSAGES.INPUT_ERROR);
-    }
   }
 }
 
