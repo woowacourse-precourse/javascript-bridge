@@ -28,6 +28,17 @@ class Validation{
         }
 
     }
+
+    static validationForRetry(input){
+        if(input.length===0){
+            Console.print(ERROR.EMPTY)
+            Console.close()
+        }
+        if(!(input==='R' || input==='Q')){
+            Console.print(ERROR.RETRY)
+            Console.close()
+        }
+    }
 }
 
 module.exports=Validation
