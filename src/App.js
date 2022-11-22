@@ -32,6 +32,10 @@ class App {
       OutputView.printResult(this.#bridgeGame.getCurrentMap(-1), "실패", this.#bridgeGame.getNumberOfTry());
       return;
     }
+    if (gameCommand === "R") {
+      this.#bridgeGame.retry();
+      this.playing();
+    }
   }
 }
 
