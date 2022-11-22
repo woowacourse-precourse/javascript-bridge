@@ -20,6 +20,7 @@ class BridgeGameController {
 
   play() {
     this.#game = new BridgeGame();
+    OutputView.printGameStart();
     this.#game.start();
     readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
