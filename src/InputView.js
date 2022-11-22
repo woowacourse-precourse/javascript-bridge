@@ -28,28 +28,34 @@ const InputView = {
    */
   readMoving(bridgeList) {
     Console.readLine(USER_INPUT.ENTER_MOVEMENT, (upOrDown) => {
+      const isInputRight = this.bridgeGame.isUserInputRightOrWrong(bridgeList, upOrDown);
       const result = this.bridgeGame.move(bridgeList, upOrDown);
-      this.repeatMoving(bridgeList, result);
+      this.repeatMovingOrNot(bridgeList, result, isInputRight);
     })
   },
 
-  repeatMoving(bridgeList, result) {
-    const [upList, downList, tryNum] = result;
-    // const upAndDown = ['[ ' + upList.join(' | ') + ' ]', '[ ' + downList.join(' | ') + ' ]'];
-    // OutputView.printMap(upAndDown);
-    const upAndDownList = [upList, downList];
-    OutputView.printMap(upAndDownList);
+  repeatMovingOrNot(bridgeList, result, isInputRight) {
+    const [upAndDownList, tryNum] = result;
+    this.reapeatDrawing(upAndDownList);
+    if(isInputRight === true && tryNum < bridgeList.length) {
+      this.readMoving(bridgeList);
+    } 
+    else {
+      this.stopMoving(upAndDownList, isInputRight);
+    }
+  },
 
-    if([upList[upList.length-1], downList[downList.length-1]].includes('X')) {
+  stopMoving(upAndDownList, isInputRight) {
+    if(isInputRight) {
+      printResult(upAndDownList, this.retryNum, this.isSuccess);
+    }
+    if(!isInputRight) {
       this.readGameCommand(upAndDownList, bridgeList);
     }
-    else {
-      if(tryNum < bridgeList.length) {
-        this.readMoving(bridgeList);
-      } else {
-        printResult(upAndDownList, this.retryNum, this.isSuccess);
-      }
-    }
+  },
+
+  reapeatDrawing(upAndDownList) {
+    OutputView.printMap(upAndDownList);
   },
 
   /**

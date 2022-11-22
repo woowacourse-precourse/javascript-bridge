@@ -31,7 +31,13 @@ class BridgeGame {
       this.upList.push(' ');
     }
     this.num += 1;
-    return [this.upList, this.downList, this.num];
+    return [[this.upList, this.downList], this.num];
+  }
+  /*
+  * 사용자 입력값 - O, X 판단
+  */
+  isUserInputRightOrWrong(bridgeList, userUpOrDown) {
+    return (bridgeList[this.num] === userUpOrDown);
   }
 
   /**
