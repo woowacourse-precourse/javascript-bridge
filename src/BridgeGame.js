@@ -1,3 +1,5 @@
+const GAME_SETTING = require('../constants/Setting');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -20,23 +22,23 @@ class BridgeGame {
     }
   }
   passData(chooseBlock) {
-    if (chooseBlock === 'U') {
-      this.upper.push('O');
-      this.lower.push(' ');
+    if (chooseBlock === GAME_SETTING.up) {
+      this.upper.push(GAME_SETTING.correct);
+      this.lower.push(GAME_SETTING.blank);
     }
-    if (chooseBlock === 'D') {
-      this.upper.push(' ');
-      this.lower.push('O');
+    if (chooseBlock === GAME_SETTING.dowm) {
+      this.upper.push(GAME_SETTING.blank);
+      this.lower.push(GAME_SETTING.correct);
     }
   }
   failData(chooseBlock) {
-    if (chooseBlock === 'U') {
-      this.upper.push('X');
-      this.lower.push(' ');
+    if (chooseBlock === GAME_SETTING.up) {
+      this.upper.push(GAME_SETTING.wrong);
+      this.lower.push(GAME_SETTING.blank);
     }
-    if (chooseBlock === 'D') {
-      this.upper.push(' ');
-      this.lower.push('X');
+    if (chooseBlock === GAME_SETTING.dowm) {
+      this.upper.push(GAME_SETTING.blank);
+      this.lower.push(GAME_SETTING.wrong);
     }
   }
 

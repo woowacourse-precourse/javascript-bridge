@@ -3,6 +3,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const Validator = require('./Validator');
+const GAME_SETTING = require('../constants/Setting');
 
 const BridgeGameController = {
   getSize(value) {
@@ -40,8 +41,8 @@ const BridgeGameController = {
     OutputView.printError(message);
   },
   outputData(isFinal, isSuccess, tryCount) {
-    const upperBlocks = this.upper.join(' | ');
-    const lowerBlocks = this.lower.join(' | ');
+    const upperBlocks = this.upper.join(GAME_SETTING.verticalBar);
+    const lowerBlocks = this.lower.join(GAME_SETTING.verticalBar);
     const isSuccessAndTryCount = [isSuccess, tryCount];
     if (isFinal) {
       OutputView.printResult(upperBlocks, lowerBlocks, isSuccessAndTryCount);

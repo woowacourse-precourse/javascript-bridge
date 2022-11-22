@@ -1,5 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGameController = require('./BridgeGameController');
+const { INPUT_MESSAGE } = require('../constants/Message');
+const GAME_SETTING = require('../constants/Setting');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,7 +11,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (inputValue) => {
+    Console.readLine(INPUT_MESSAGE.bridgeSize, (inputValue) => {
       this.bridgeSizeTryCatch(inputValue);
     });
   },
@@ -32,12 +35,9 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(
-      '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-      (inputValue) => {
-        this.movingTryCatch(inputValue);
-      }
-    );
+    Console.readLine(INPUT_MESSAGE.moving, (inputValue) => {
+      this.movingTryCatch(inputValue);
+    });
   },
   movingTryCatch(inputValue) {
     try {
@@ -63,12 +63,9 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(
-      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      (inputValue) => {
-        this.gameCommandTryCatch(inputValue);
-      }
-    );
+    Console.readLine(INPUT_MESSAGE.retryOrQuit, (inputValue) => {
+      this.gameCommandTryCatch(inputValue);
+    });
   },
   gameCommandTryCatch(inputValue) {
     try {
@@ -81,13 +78,13 @@ const InputView = {
   },
 
   checkRetry(retryOrQuit) {
-    if (retryOrQuit === 'R') {
+    if (retryOrQuit === GAME_SETTING.retry) {
       BridgeGameController.getCommand();
       this.tryCount += 1;
       this.index = 0;
       this.readMoving();
     }
-    if (retryOrQuit === 'Q')
+    if (retryOrQuit === GAME_SETTING.quit)
       BridgeGameController.outputData(true, false, this.tryCount);
   },
 };
