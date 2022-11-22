@@ -25,6 +25,10 @@ class BridgeGame {
     return JSON.stringify(this.#userBridge) === JSON.stringify(bridgePiece);
   }
 
+  isEnd() {
+    return JSON.stringify(this.#userBridge) === JSON.stringify(this.#bridge);
+  }
+
   makeBridgeFormat() {
     const { front, middle, back } = BRIDGE;
     const { up, down } = this.#makeUpDownBridge();
@@ -60,10 +64,6 @@ class BridgeGame {
     bridge.up.push(BRIDGE.blank);
     bridge.down.push(space);
     return bridge;
-  }
-
-  isEnd() {
-    return JSON.stringify(this.#userBridge) === JSON.stringify(this.#bridge);
   }
 
   retry(input) {
