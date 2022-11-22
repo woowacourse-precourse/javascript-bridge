@@ -4,12 +4,13 @@ const InputView = require("./InputView");
 
 class Process {
   constructor() {
-    this.bridgeGame = new BridgeGame([], [[], []]);
+    this.bridgeGame = [];
     this.count = 1;
     this.resultMessage = "성공";
   }
 
   play() {
+    this.bridgeGame = new BridgeGame([], [[], []]);
     OutputView.startSentence();
     OutputView.lengthBridgeSentence();
     let size = InputView.readBridgeSize();
