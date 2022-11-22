@@ -6,10 +6,14 @@ const OutputView = require("../view/OutputView");
 const { validate } = require("../validation/RestartInputValidation");
 
 class MainController {
+  #bridgeController;
+  #userController;
+  #bridgeGame;
+
   constructor() {
-    this.bridgeController = new BridgeController(this);
-    this.userController = new UserController(this);
-    this.bridgeGame = new BridgeGame(this);
+    this.#bridgeController = new BridgeController(this);
+    this.#userController = new UserController(this);
+    this.#bridgeGame = new BridgeGame(this);
   }
 
   // 다리 길이 입력 연결 메서드
@@ -24,7 +28,7 @@ class MainController {
    */
   processBridgeSizeInput(bridgeLengthInput, mainController) {
     OutputView.printEmptyLine();
-    mainController.bridgeController.processBridgeSizeInput(bridgeLengthInput);
+    mainController.#bridgeController.processBridgeSizeInput(bridgeLengthInput);
   }
 
   /**
@@ -33,7 +37,7 @@ class MainController {
    * @param mainController [메인 컨트롤러]
    */
   processUserMovingInput(userMovingInput, mainController) {
-    mainController.userController.onUserMovingInput(userMovingInput);
+    mainController.#userController.onUserMovingInput(userMovingInput);
   }
 
   // 유저 이동 입력 연결 메서드
@@ -46,10 +50,10 @@ class MainController {
    * @param userMoving {string[]} [유저 이동 기록]
    */
   tryMove(userMoving) {
-    const isSuccess = this.bridgeController.getIsSuccessMoving(userMoving);
-    const isFinished = this.bridgeController.getIsFinished(userMoving);
+    const isSuccess = this.#bridgeController.getIsSuccessMoving(userMoving);
+    const isFinished = this.#bridgeController.getIsFinished(userMoving);
 
-    this.bridgeGame.move(isSuccess, isFinished, userMoving);
+    this.#bridgeGame.move(isSuccess, isFinished, userMoving);
   }
 
   /**
@@ -57,7 +61,7 @@ class MainController {
    * @param userMoving {string} [유저 이동 기록]
    */
   displayCaseResult(userMoving) {
-    const movingStatus = this.bridgeController.getMovingStatus(userMoving);
+    const movingStatus = this.#bridgeController.getMovingStatus(userMoving);
     OutputView.printMap(movingStatus);
   }
 
@@ -67,8 +71,8 @@ class MainController {
    * @param isSuccess {boolean} [최종 성공여부]
    */
   displayFinalResult(userMoving, isSuccess) {
-    const movingStatus = this.bridgeController.getMovingStatus(userMoving);
-    const userTryCount = this.userController.getTryCount();
+    const movingStatus = this.#bridgeController.getMovingStatus(userMoving);
+    const userTryCount = this.#userController.getTryCount();
     OutputView.printResult(movingStatus, isSuccess, userTryCount);
   }
 
@@ -81,7 +85,7 @@ class MainController {
   processUserRestartInput(userRestartInput, mainController, userMoving) {
     try {
       validate(userRestartInput);
-      mainController.bridgeGame.processRestart(userRestartInput, userMoving);
+      mainController.#bridgeGame.processRestart(userRestartInput, userMoving);
     } catch (errorLog) {
       mainController.printError(errorLog);
       mainController.readUserRestartInput(userMoving);
@@ -98,8 +102,8 @@ class MainController {
 
   // 게임 재시작 메서드
   restartGame() {
-    this.userController.increaseTryCount();
-    this.userController.resetUserMoving();
+    this.#userController.increaseTryCount();
+    this.#userController.resetUserMoving();
     this.readUserMovingInput();
   }
 
@@ -113,7 +117,7 @@ class MainController {
 
   // 게임 초기 실행 메서드
   init() {
-    this.userController.increaseTryCount();
+    this.#userController.increaseTryCount();
     OutputView.printOpening();
     this.readBridgeSizeInput();
   }

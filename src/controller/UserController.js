@@ -2,9 +2,12 @@ const UserModel = require("../model/UserModel");
 const { validate } = require("../validation/MovingInputValidation");
 
 class UserController {
+  #mainController;
+  #userModel;
+
   constructor(mainController) {
-    this.mainController = mainController;
-    this.userModel = new UserModel();
+    this.#mainController = mainController;
+    this.#userModel = new UserModel();
   }
 
   /**
@@ -12,17 +15,17 @@ class UserController {
    * @return {number} [유저 시도 횟수]
    */
   getTryCount() {
-    return this.userModel.getTryCount();
+    return this.#userModel.getTryCount();
   }
 
   // 유저의 시도 횟수 증가 연결 메서드
   increaseTryCount() {
-    this.userModel.increaseTryCount();
+    this.#userModel.increaseTryCount();
   }
 
   // 유저의 이동 기록을 초기화하는 연결 메서드
   resetUserMoving() {
-    this.userModel.resetUserMoving();
+    this.#userModel.resetUserMoving();
   }
 
   /**
@@ -32,11 +35,11 @@ class UserController {
   onUserMovingInput(userMovingInput) {
     try {
       validate(userMovingInput);
-      this.userModel.appendUserMoving(userMovingInput);
-      this.mainController.tryMove(this.userModel.getUserMoving());
+      this.#userModel.appendUserMoving(userMovingInput);
+      this.#mainController.tryMove(this.#userModel.getUserMoving());
     } catch (errorLog) {
-      this.mainController.printError(errorLog);
-      this.mainController.readUserMovingInput();
+      this.#mainController.printError(errorLog);
+      this.#mainController.readUserMovingInput();
     }
   }
 }

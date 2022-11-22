@@ -4,8 +4,10 @@ const { Console } = require("@woowacourse/mission-utils");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #mainController;
+
   constructor(mainController) {
-    this.mainController = mainController;
+    this.#mainController = mainController;
   }
 
   /**
@@ -13,7 +15,7 @@ class BridgeGame {
    * @param userMoving {string[]} [유저 이동 기록]
    */
   displayCaseResult(userMoving) {
-    this.mainController.displayCaseResult(userMoving);
+    this.#mainController.displayCaseResult(userMoving);
   }
 
   /**
@@ -34,9 +36,9 @@ class BridgeGame {
    */
   move(isSuccess, isFinished, userMoving) {
     this.displayCaseResult(userMoving);
-    if (!isSuccess) this.mainController.readUserRestartInput(userMoving);
+    if (!isSuccess) this.#mainController.readUserRestartInput(userMoving);
     if (isSuccess && isFinished) this.finishGame(userMoving, true);
-    if (isSuccess && !isFinished) this.mainController.readUserMovingInput();
+    if (isSuccess && !isFinished) this.#mainController.readUserMovingInput();
   }
 
   /**
@@ -45,13 +47,13 @@ class BridgeGame {
    * @param isSuccess {boolean} [최종 성공여부]
    */
   finishGame(userMoving, isSuccess) {
-    this.mainController.displayFinalResult(userMoving, isSuccess);
+    this.#mainController.displayFinalResult(userMoving, isSuccess);
     Console.close();
   }
 
   // 사용자가 게임을 다시 시도할 때 사용하는 메서드
   retry() {
-    this.mainController.restartGame();
+    this.#mainController.restartGame();
   }
 }
 

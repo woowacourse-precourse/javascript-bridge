@@ -4,9 +4,12 @@ const BridgeMaker = require("../BridgeMaker");
 const { validate } = require("../validation/BridgeSizeValidation");
 
 class BridgeController {
+  #mainController;
+  #bridgeModel;
+
   constructor(mainController) {
-    this.mainController = mainController;
-    this.bridgeModel = new BridgeModel();
+    this.#mainController = mainController;
+    this.#bridgeModel = new BridgeModel();
   }
 
   /**
@@ -27,7 +30,7 @@ class BridgeController {
    * @return {boolean} [성공 유무]
    */
   getIsSuccessMoving(userMoving) {
-    return this.bridgeModel.isSuccessMoving(userMoving);
+    return this.#bridgeModel.isSuccessMoving(userMoving);
   }
 
   /**
@@ -36,7 +39,7 @@ class BridgeController {
    * @return {boolean} [움직임 불가능 여부]
    */
   getIsFinished(userMoving) {
-    return this.bridgeModel.isFinished(userMoving);
+    return this.#bridgeModel.isFinished(userMoving);
   }
 
   /**
@@ -46,11 +49,11 @@ class BridgeController {
   processBridgeSizeInput(bridgeLengthInput) {
     try {
       validate(bridgeLengthInput);
-      this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
-      this.mainController.readUserMovingInput();
+      this.#bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
+      this.#mainController.readUserMovingInput();
     } catch (errorLog) {
-      this.mainController.printError(errorLog);
-      this.mainController.readBridgeSizeInput();
+      this.#mainController.printError(errorLog);
+      this.#mainController.readBridgeSizeInput();
     }
   }
 
@@ -60,7 +63,7 @@ class BridgeController {
    * @return {{up: string[], down: string[]}} [다리별 움직임 성공여부]
    */
   getMovingStatus(userMoving) {
-    return this.bridgeModel.getMovingStatus(userMoving);
+    return this.#bridgeModel.getMovingStatus(userMoving);
   }
 }
 
