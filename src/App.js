@@ -1,4 +1,4 @@
-const BridgeGameController = require('./BridgeGameController');
+const BridgeGameController = require('./Controller/BridgeGameController');
 
 class App {
   play() {

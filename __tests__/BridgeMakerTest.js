@@ -1,5 +1,5 @@
 const BridgeMaker = require('../src/BridgeMaker');
-const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('../src/utils/BridgeRandomNumberGenerator');
 
 describe('BridgeMaker 기능 테스트', () => {
   const testBridge = BridgeMaker.makeBridge(

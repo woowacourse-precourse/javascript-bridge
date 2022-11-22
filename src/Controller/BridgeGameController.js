@@ -1,8 +1,8 @@
-const Validate = require('./utils/validation');
-const InputView = require('./Viewer/InputView');
-const OutputView = require('./Viewer/OutputView');
-const BridgeGame = require('./BridgeGame');
-const { ERROR, STATUS, KEYS } = require('./utils/constants');
+const InputView = require('../Viewer/InputView');
+const OutputView = require('../Viewer/OutputView');
+const BridgeGame = require('../Model/BridgeGame');
+const { ERROR, STATUS, KEYS } = require('../utils/constants');
+const Validate = require('../utils/validation');
 
 class BridgeGameController {
   #inputView;
