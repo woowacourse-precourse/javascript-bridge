@@ -10,8 +10,18 @@ const BridgeMaker = {
     zeroOne = [];
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
+      this.changeNumber(number);
     }
     return zeroOne;
+  },
+
+  changeNumber(number) {
+    if (number === 1) {
+      zeroOne.push("U");
+    }
+    if (number === 0) {
+      zeroOne.push("D");
+    }
   },
 };
 
