@@ -81,7 +81,7 @@ const BridgeController = class extends GameController {
   passAllOrNot() {
     this.bridgeGame.increaseTryOrder();
     if (this.bridgeGame.isAllPass()) {
-      this.outputView.printResult(INPUT_VIEW.success, this.bridgeGame.returnBridgeData());
+      this.outputView.printResult(this.bridgeGame.returnBridgeData());
       return this.bridgeGame.end();
     }
     return this.inputMoving();
@@ -112,7 +112,7 @@ const BridgeController = class extends GameController {
       this.bridgeGame.retry();
       return this.inputMoving();
     }
-    this.outputView.printResult(INPUT_VIEW.failure, this.bridgeGame.returnBridgeData());
+    this.outputView.printResult(this.bridgeGame.returnBridgeData());
     this.bridgeGame.end();
   }
 };
