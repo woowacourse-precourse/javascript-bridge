@@ -32,7 +32,7 @@ class App {
         this.#game.increasePlayCount,
         this.#bridgeLength,
         bridgeGame
-      ); //this.#game.playAlgorithms(this.#bridgeLength); //여기서 물어보는 작업까지 끝내야함
+      );
 
       if (!PLAY_RESULT) {
         return false;

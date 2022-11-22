@@ -1,8 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/App");
 const Validator = require("../src/Library/Validator");
-const BridgeMaker = require("../src/BridgeMaker");
-const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
+// const BridgeMaker = require("../src/BridgeMaker");
+// const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const Constant = require("../src/constant");
 const TEST_ELEMENT = Constant.VALID_TEST_ELEMENT;
 
@@ -41,7 +39,6 @@ describe("Validator 테스트", () => {
   test("종료 R/Q validatation 테스트", () => {
     const RESULT = Constant.RQ_VALIDATION;
     for (let index = 0; index < TEST_ELEMENT.length; index++) {
-      console.log(TEST_ELEMENT[index]);
       expect(Validator.isQuit(temporaryCallback, TEST_ELEMENT[index])).toEqual(
         RESULT[index]
       );
