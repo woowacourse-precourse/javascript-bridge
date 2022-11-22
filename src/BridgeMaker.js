@@ -15,8 +15,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     for (let index = 0; index < size; index++) {
-      curr = generateRandomNumber();
-      bridge.push(BRIDGE.INPUT_RANGE[curr]);      
+      UorD = generateRandomNumber() === 0 ? BRIDGE.INPUT_RANGE[1] : BRIDGE.INPUT_RANGE[0];
+      bridge.push(UorD);      
     }
     return bridge;
   },

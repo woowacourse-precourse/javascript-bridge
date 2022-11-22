@@ -50,7 +50,6 @@ class GameManager {
 
     afterMove(bridge) {
         let currLocation = this.#isSuccessArray.length - 1;
-        console.log("afterMove", bridge, currLocation);
         OutputView.printMap(bridge, this.#isSuccessArray)
         if(!this.#isSuccessArray[currLocation]) return this.getRetryCommand(bridge);
         if(currLocation < bridge.length - 1) return this.getMoveDirection(bridge);
