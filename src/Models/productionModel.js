@@ -4,7 +4,7 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {
-  makeBridge(size) {
+  getBridge(size) {
     return BridgeMaker.makeBridge(+size, BridgeRandomNumberGenerator.generate);
   }
 

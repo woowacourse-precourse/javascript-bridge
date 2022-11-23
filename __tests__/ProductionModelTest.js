@@ -6,7 +6,7 @@ describe("생산 모델 테스트", () => {
   test("전달 받은 사이즈만큼 다리 만들기", () => {
     const size = 5;
     const brideSize = 5;
-    const errorTest = () => productionModel.makeBridge(size);
+    const errorTest = () => productionModel.getBridge(size);
     expect(errorTest().length).toBe(brideSize);
   });
 

@@ -26,7 +26,7 @@ class BridgeGame {
   }
 
   create(size) {
-    this.#bridge = this.#production.makeBridge(size);
+    this.#bridge = this.#production.getBridge(size);
   }
 
   move(moving) {
