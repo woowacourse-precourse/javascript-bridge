@@ -27,34 +27,16 @@ const checkBridgeLength = (string) => {
   }
 };
 
-const checkMoveFormat = (string) => {
-  const step = string.replace(/\s/g, "").toUpperCase();
-
+const checkMoveFormat = (step) => {
   if (step !== KEY.BRIDGE_UP && step !== KEY.BRIDGE_DOWN) {
-    throw new Error(ABOUT.BRIDGE_ELEMENT);
-  }
-
-  if (
-    string === KEY.BRIDGE_UP.toLowerCase() ||
-    string === KEY.BRIDGE_DOWN.toLowerCase()
-  ) {
     throw new Error(ABOUT.BRIDGE_ELEMENT);
   }
 
   return step;
 };
 
-const checkCommandFormat = (string) => {
-  const command = string.replace(/\s/g, "").toUpperCase();
-
+const checkCommandFormat = (command) => {
   if (command !== KEY.COMMAND_RESTART && command !== KEY.COMMAND_QUIT) {
-    throw new Error(ABOUT.COMMAND_ELEMENT);
-  }
-
-  if (
-    string === KEY.COMMAND_RESTART.toLowerCase() ||
-    string === KEY.COMMAND_QUIT.toLowerCase()
-  ) {
     throw new Error(ABOUT.COMMAND_ELEMENT);
   }
 

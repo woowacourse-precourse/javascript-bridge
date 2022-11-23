@@ -1,12 +1,5 @@
 const { SINGLE_MAP, WORD } = require("../Constants/Token");
 
-/**
- * 다리 건너기 게임을 관리하는 클래스 -> InputView, OutputView 사용 불가
- * Visualize 로직
- * 변경 가능 : 파일경로, 필드 추가, 메서드 인자, 메서드
- * 변경 불가 : 메서드 이름
- */
-
 class BridgeGame {
   #state = {
     bridge: null,

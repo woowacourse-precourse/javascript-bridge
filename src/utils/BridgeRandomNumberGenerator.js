@@ -1,8 +1,3 @@
-/**
- * 객체 - Random 값 추출은 이 객체의 generator()를 활용
- * 변경불가 : 이 코드는 변경할 수 없다.
- */
-
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const BridgeRandomNumberGenerator = {

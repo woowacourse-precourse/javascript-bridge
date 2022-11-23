@@ -1,8 +1,3 @@
-/**
- * 객체 - 다리의 길이를 입력 받아 다리 생성
- * 변경불가 : 파일경로, 프로퍼티, 메서드의 시그니처(인자, 이름), 반환 타입
- */
-
 const { CONFIG, KEY } = require("./Constants/Token");
 
 const BridgeMaker = {
