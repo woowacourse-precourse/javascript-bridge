@@ -1,5 +1,16 @@
+const GameController = require("./Controller/GameController");
+
 class App {
-  play() {}
+  constructor() {
+    this.controller = new GameController();
+  }
+
+  play() {
+    this.controller.startGame();
+  }
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
