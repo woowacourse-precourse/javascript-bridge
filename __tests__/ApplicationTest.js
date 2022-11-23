@@ -19,12 +19,18 @@ const mockRandoms = (numbers) => {
 };
 
 const getLogSpy = () => {
+  // spyOn은 MissionUtils.Console.print를 추적하는 목함수를 만들어 반환
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  // mock.fn의 call, instance, context, result 배열을 비움
   logSpy.mockClear();
+  // mock.fn 함수를 반환
   return logSpy;
 };
 
 const getOutput = (logSpy) => {
+  // mock.fn 함수 호출의 호출 인수를 포함하는 배열 -> MissionUtils.Console.print() 호출 시 인수를 담은 배열
+  // fn(1,2), fn(3,4) 호출 시 [[1,2], [3,4]] 반환
+  // 배열들을 하나의 문자열로 반환 > "1,23,4"
   return [...logSpy.mock.calls].join("");
 };
 
@@ -35,10 +41,13 @@ const runException = (inputs) => {
 
   app.play();
 
+  // getOutput(logSpy) = '다리 건너기 게임을 시작합니다. [ERROR] Validate.isNumber occur exception'
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
 const expectLogContains = (received, logs) => {
+  // received = '다리 건너기 게임을 시작합니다. [ERROR] Validate.isNumber occur exception'
+  // expect.stringContaining([ERROR]) = '[ERROR]'가 received에 포함되어 있는지 확인
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
   });
