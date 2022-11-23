@@ -2,7 +2,7 @@
 
 ## 다리 건너기 미션이란?
 
-<img src="./bridgeGame.gif">
+<img src="./bridge.gif">
 <br>
 
 - 위,아래 둘 중 하나의 칸만 건널 수 있는 다리를 끝까지 건너가는 게임.
