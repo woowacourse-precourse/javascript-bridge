@@ -1,5 +1,21 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const InputView = require('./InputView');
+const Constant = require('./Constant')
+
 class App {
-  play() {}
+
+  play() {
+   this.gameStart()
+  }
+
+  gameStart() {
+    MissionUtils.Console.print(Constant.GAME_START_MESSAGE);
+    this.userInputBridgeLength()
+  }
+
+  userInputBridgeLength() {
+    InputView.readBridgeSize()
+  }
 }
 
 module.exports = App;
