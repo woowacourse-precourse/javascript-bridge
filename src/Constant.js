@@ -1,0 +1,67 @@
+/**
+ * controller
+ */
+const CURRENT_POSITION_INITIAL_INDEX = 0;
+const SAFE_BRIDGE = 'O';
+const DANGER_BRIDGE = 'X';
+
+const MOVE_COUNT_INITIAL = 0;
+const TRY_COUNT_INITIAL = 1;
+const MOVE_COUNT_OFFSET = 1;
+const TRY_COUNT_OFFSET = 1;
+
+const GAME_COMMAND_RESTART = 'R';
+const GAME_COMMAND_QUIT = 'Q';
+
+/**
+ * model
+ */
+const BRIDGE_SIZE_RANGE_START = 3;
+const BRIDGE_SIZE_RANGE_END = 20;
+const DECIMAL_NUMBER = 10;
+
+const MOVE_COMMAND_UP = 'U';
+const MOVE_COMMAND_DOWN = 'D';
+
+const INDEX_OFFSET_MAP_AND_MOVING_COMMANDS = 1;
+
+/**
+ * InputView
+ */
+const INPUT_BRIDGE_LENGTH_LINE = '다리의 길이를 입력해주세요.\n';
+const INPUT_MOVE_COMMAND_LINE = `\n이동할 칸을 선택해주세요. (위: ${MOVE_COMMAND_UP}, 아래: ${MOVE_COMMAND_DOWN})\n`;
+const INPUT_RETRY_QUIT_LINE = `\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GAME_COMMAND_RESTART}, 종료: ${GAME_COMMAND_QUIT})\n`;
+
+/**
+ * OutputView
+ */
+const OUTPUT_START_LINE = '다리 건너기 게임을 시작합니다.\n';
+const OUTPUT_END_LINE = '최종 게임 결과';
+
+const OUTPUT_IS_WIN_LINE = (isWin) => `게임 성공 여부: ${isWin ? '성공' : '실패'}`;
+const OUTPUT_TRY_COUNT_LINE = (tryCount) => `총 시도한 횟수: ${tryCount}`;
+
+module.exports = {
+  CURRENT_POSITION_INITIAL_INDEX,
+  SAFE_BRIDGE,
+  DANGER_BRIDGE,
+  MOVE_COUNT_INITIAL,
+  TRY_COUNT_INITIAL,
+  MOVE_COUNT_OFFSET,
+  TRY_COUNT_OFFSET,
+  GAME_COMMAND_RESTART,
+  GAME_COMMAND_QUIT,
+  BRIDGE_SIZE_RANGE_START,
+  BRIDGE_SIZE_RANGE_END,
+  DECIMAL_NUMBER,
+  MOVE_COMMAND_UP,
+  MOVE_COMMAND_DOWN,
+  INDEX_OFFSET_MAP_AND_MOVING_COMMANDS,
+  INPUT_BRIDGE_LENGTH_LINE,
+  INPUT_MOVE_COMMAND_LINE,
+  INPUT_RETRY_QUIT_LINE,
+  OUTPUT_START_LINE,
+  OUTPUT_END_LINE,
+  OUTPUT_IS_WIN_LINE,
+  OUTPUT_TRY_COUNT_LINE,
+};
