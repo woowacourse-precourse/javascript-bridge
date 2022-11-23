@@ -47,9 +47,9 @@ class BridgeGame {
       this.moveMap.get("D")[nowIndex] === "X"
     )
       return "over";
-    else if (this.bridge.length === nowIndex + 1)
+    if (this.bridge.length === nowIndex + 1)
       return "win"; 
-    else return "next"; 
+    return "next";
   }
 
   /**
