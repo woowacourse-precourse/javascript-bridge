@@ -81,7 +81,45 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("예외 테스트", () => {
-    runException(["a"]);
+  test("기능 테스트2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "U", "D", "D", "R", "U", "D", "U", "U", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O | O |   ]",
+      "[   | O |   |   | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O | O |   ]", "[   | O |   |   | O ]");
   });
+
+  test("기능 테스트3", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["2", "3", "U", "D", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | X ]");
+  });
+
+  // test("예외 테스트", () => {
+  //   runException(["a"]);
+  // });
 });
