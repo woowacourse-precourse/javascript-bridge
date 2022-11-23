@@ -1,11 +1,11 @@
-const GameController = require("./GameController");
+const GameController = require('./GameController');
 // inputCheck
-const BridgeSize = require("../inputCheck/BridgeSize");
-const Moving = require("../inputCheck/Moving");
-const GameCommand = require("../inputCheck/GameCommand");
+const BridgeSize = require('../inputCheck/BridgeSize');
+const Moving = require('../inputCheck/Moving');
+const GameCommand = require('../inputCheck/GameCommand');
 // constants
-const { INPUT_VIEW } = require("../Constants");
-const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_VIEW } = require('../Constants');
+const { Console } = require('@woowacourse/mission-utils');
 
 const BridgeController = class extends GameController {
   constructor(inputView, outputView, bridgeGame) {
@@ -33,7 +33,7 @@ const BridgeController = class extends GameController {
       const bridgeSize = new BridgeSize(input);
       confirmedInput = bridgeSize.checkInput();
     } catch (error) {
-      this.outputView.printError(error);
+      this.outputView.printError(error.message);
     } finally {
       if (confirmedInput !== input) return this.inputBridgeSize();
     }
@@ -59,7 +59,7 @@ const BridgeController = class extends GameController {
     try {
       confirmedInput = this.checkMovingInput(input);
     } catch (error) {
-      this.outputView.printError(error);
+      this.outputView.printError(error.message);
     } finally {
       if (confirmedInput !== input) return this.inputMoving();
       return this.saveMoving(input);
@@ -101,7 +101,7 @@ const BridgeController = class extends GameController {
     try {
       confirmedInput = this.checkGameCommandInput(input);
     } catch (error) {
-      this.outputView.printError(error);
+      this.outputView.printError(error.message);
     } finally {
       if (confirmedInput !== input) return this.inputGameCommand();
       return this.retryOrQuit(input);
@@ -118,7 +118,7 @@ const BridgeController = class extends GameController {
   }
 
   static isRetry(input) {
-    const RETRY = "R";
+    const RETRY = 'R';
     return input === RETRY;
   }
 
