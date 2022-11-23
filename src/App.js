@@ -1,5 +1,8 @@
+const InputView = require('./UiLogic/InputView');
 class App {
-  play() {}
+  play() {
+    InputView.start();
+  }
 }
 
 module.exports = App;
