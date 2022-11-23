@@ -41,7 +41,7 @@ class BridgeGamePlay {
    */
   move() {
     const currentMove = InputView.getMoving();
-    this.#myMoves.push(currentMove);
+    this.#myMoves = [...this.#myMoves, currentMove];
     const result = this.bridgeGame.getMoveResult(this.#myMoves, this.#bridge);
     OutputView.printMap(result);
     if (this.bridgeGame.checkIfCanMove(this.#myMoves, this.#bridge)) {
@@ -66,10 +66,11 @@ class BridgeGamePlay {
    * 이동이 불가능할 때 다시 할지 확인
    */
   checkRetry(result, gameCommand) {
-    if (!this.bridgeGame.retry(gameCommand)) {
+    const retry = this.bridgeGame.retry(gameCommand);
+    if (!retry) {
       OutputView.printResult(result, RESULT.FAIL, this.bridgeGame.getTryCount());
     }
-    if (this.bridgeGame.retry(gameCommand)) {
+    if (retry) {
       this.playGame();
     }
   }
