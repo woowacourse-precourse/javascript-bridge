@@ -35,7 +35,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     try {
-      this.getUserInput(callback, QUERY.gameCommand, Validator.gameCommand);
+      this.getUserInput(callback, QUERY.GAME_COMMAND, Validator.gameCommand);
     } catch (err) {
       Console.print(err.message);
       this.readGameCommand(callback);
