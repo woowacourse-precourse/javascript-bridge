@@ -9,7 +9,7 @@ class BridgeGame {
   }
 
   setBridge(bridge) {
-    this.bridge = bridge;
+    this.#bridge = bridge;
   }
 
   move(direction) {
@@ -29,7 +29,7 @@ class BridgeGame {
   }
 
   isGameSuccess(lastTrial) {
-    return lastTrial.result === GAME_SIGNATURE.pass && this.trials.length === this.bridge.length;
+    return lastTrial.result === GAME_SIGNATURE.pass && this.trials.length === this.#bridge.length;
   }
 
   isGameFailed(lastTrial) {
@@ -41,7 +41,7 @@ class BridgeGame {
   }
 
   getTrialResult(trialDirection, stage) {
-    const answerDirection = this.bridge[stage];
+    const answerDirection = this.#bridge[stage];
     return answerDirection === trialDirection ? GAME_SIGNATURE.pass : GAME_SIGNATURE.fail;
   }
 
