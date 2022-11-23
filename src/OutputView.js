@@ -1,20 +1,50 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+const { ERROR, GAME } = require('./Constants');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  printEmptyLine() {
+    MissionUtils.Console.print('');
+  },
+
+  printStart() {
+    MissionUtils.Console.print(GAME.start);
+    OutputView.printEmptyLine();
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(map) {
+    map.forEach((way) => {
+      const stringMap = way.join(' | ');
+      MissionUtils.Console.print(`[ ${stringMap} ]`);
+    });
+    OutputView.printEmptyLine();
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isSuccess, playCount, map) {
+    MissionUtils.Console.print(GAME.end);
+    OutputView.printMap(map);
+    OutputView.printEmptyLine();
+    if (isSuccess) MissionUtils.Console.print(GAME.success);
+    if (!isSuccess) MissionUtils.Console.print(GAME.fail);
+    MissionUtils.Console.print(`${GAME.try}${playCount}`);
+    MissionUtils.Console.close();
+  },
+
+  printError(message) {
+    MissionUtils.Console.print(`${ERROR.prefix}${message}`);
+  },
 };
 
 module.exports = OutputView;
