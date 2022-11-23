@@ -3,19 +3,19 @@ const { ERROR } = require('./Constants');
 const Validation = {
   checkSizeInRange(size) {
     if (!(Number.isInteger(size) && size >= 3 && size <= 20)) {
-      throw ERROR.bridgeSizeException;
+      throw new Error(ERROR.bridgeSizeException);
     }
   },
 
   checkUserMove(input) {
     if (input !== 'U' && input !== 'D') {
-      throw ERROR.movingException;
+      throw new Error(ERROR.movingException);
     }
   },
 
   checkUserCommand(input) {
     if (input !== 'R' && input !== 'Q') {
-      throw ERROR.gameCommandException;
+      throw new Error(ERROR.gameCommandException);
     }
   },
 

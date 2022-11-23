@@ -27,7 +27,7 @@ class BridgeGameController {
   }
 
   controlException(error, callback) {
-    printError(error);
+    printError(error.message);
     return callback();
   }
 
