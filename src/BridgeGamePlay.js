@@ -47,19 +47,27 @@ class BridgeGamePlay {
     if (this.bridgeGame.checkIfCanMove(this.#myMoves, this.#bridge)) {
       this.move();
     }
-    this.checkIfWinOrMove(result);
+    this.checkIfWin(result).checkIfCanNotMove(result);
   }
 
   /**
-   * 이겼는지 또는 이동이 불가능한지 확인
+   * 이겼는지 확인
    */
-  checkIfWinOrMove(result) {
+  checkIfWin(result) {
     if (this.bridgeGame.validateWin(this.#myMoves, this.#bridge)) {
       OutputView.printResult(result, RESULT.WIN, this.bridgeGame.getTryCount());
     }
+    return this;
+  }
+
+  /**
+   * 이동이 불가능한지 확인
+   */
+  checkIfCanNotMove(result) {
     if (!this.bridgeGame.validateMove(this.#myMoves, this.#bridge)) {
       this.checkRetry(result, InputView.getGameCommand());
     }
+    return this;
   }
 
   /**
