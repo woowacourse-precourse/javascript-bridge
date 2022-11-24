@@ -32,9 +32,7 @@ const BridgeController = class extends GameController {
       const bridgeSize = new BridgeSize(input);
       confirmedInput = bridgeSize.checkInput();
     } catch (error) {
-      this.outputView.printError(error.message);
-    } finally {
-      if (confirmedInput !== input) return this.inputBridgeSize();
+      this.errorHandler(error, this.inputBridgeSize.bind(this));
     }
   }
 
@@ -58,11 +56,9 @@ const BridgeController = class extends GameController {
     try {
       confirmedInput = this.checkMovingInput(input);
     } catch (error) {
-      this.outputView.printError(error.message);
-    } finally {
-      if (confirmedInput !== input) return this.inputMoving();
-      return this.saveMoving(input);
+      this.errorHandler(error, this.inputMoving.bind(this));
     }
+    return this.saveMoving(input);
   }
 
   saveMoving(input) {
@@ -95,15 +91,13 @@ const BridgeController = class extends GameController {
     this.inputView.readGameCommand(INPUT_VIEW.game_command_message, callbackGameCommand);
   }
 
-  checkGameCommand(input, confirmedInput = null) {
+  checkGameCommand(input) {
     try {
-      confirmedInput = this.checkGameCommandInput(input);
+      this.checkGameCommandInput(input);
     } catch (error) {
-      this.outputView.printError(error.message);
-    } finally {
-      if (confirmedInput !== input) return this.inputGameCommand();
-      return this.retryOrQuit(input);
+      this.errorHandler(error, this.inputGameCommand.bind(this));
     }
+    return this.retryOrQuit(input);
   }
 
   retryOrQuit(input) {
@@ -117,6 +111,11 @@ const BridgeController = class extends GameController {
   static isRetry(input) {
     const RETRY = 'R';
     return input === RETRY;
+  }
+
+  errorHandler(error, callback) {
+    this.outputView.printError(error.message);
+    callback();
   }
 
   checkMovingInput(input) {
