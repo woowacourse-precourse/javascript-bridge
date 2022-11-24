@@ -34,8 +34,8 @@ const OutputView = {
   },
 
   resetBridge() {
-    let blank = "";
-    let last = "";
+    blank = "";
+    last = "";
   },
 
   printResult(score) {
