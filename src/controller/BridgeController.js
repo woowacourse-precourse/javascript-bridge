@@ -72,7 +72,7 @@ const BridgeController = class extends GameController {
       return this.passAllOrNot();
     }
     this.outputView.printMap(this.bridgeGame.move(input, INPUT_VIEW.fail));
-    this.inputGameCommand();
+    return this.inputGameCommand();
   }
 
   passAllOrNot() {
