@@ -1,5 +1,23 @@
 # Week 4: 오징어게임(다리 건너기)
 
+## 파일 구조
+
+📦src
+┣ 📂controllers
+┃ ┗ 📜BridgeGameController.js
+┣ 📂models
+┃ ┗ 📜BridgeGame.js
+┣ 📂utils
+┃ ┗ 📜constants.js
+┣ 📂views
+┃ ┣ 📜InputView.js
+┃ ┗ 📜OutputView.js
+┣ 📜App.js
+┣ 📜BridgeMaker.js
+┣ 📜BridgeRandomNumberGenerator.js
+┣ 📜Validators.js
+┗ 📜index.js
+
 ## 구현 기능 목록 🦑
 
 1. 게임 시작
@@ -89,3 +107,5 @@
   - `npm install --save-dev --save-exact prettier`로 prettier를 설치한다.
   - `echo {}> .prettierrc.json`로 prettier 규칙을 작성할 파일을 생성한다.
   - eslint와 충돌할 것을 대비하여 `npm install --save-dev eslint-config-prettier` 를 설치한 뒤 eslint 규칙 설정 파일의 extends에 `"prettier"`를 추가한다. ([출처](https://prettier.io/docs/en/integrating-with-linters.html))
+
+---
