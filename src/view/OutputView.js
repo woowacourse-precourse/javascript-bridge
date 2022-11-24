@@ -1,6 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const REQUIREMENT = require("../util/constant");
 let retry = 0;
+let blank;
+let last;
 
 const OutputView = {
   printMap(upBridge, downBridge) {
@@ -32,8 +34,8 @@ const OutputView = {
   },
 
   resetBridge() {
-    blank = "";
-    last = "";
+    let blank = "";
+    let last = "";
   },
 
   printResult(score) {

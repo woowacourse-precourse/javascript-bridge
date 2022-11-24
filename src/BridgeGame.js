@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 class BridgeGame {
   move(bridge, inputMove) {
-    if (bridge == inputMove) {
+    if (bridge === inputMove) {
       return true;
     }
   }
