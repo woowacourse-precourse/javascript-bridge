@@ -1,3 +1,5 @@
+/* eslint-disable jest/expect-expect */
+/* eslint-disable max-lines-per-function */
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
@@ -83,5 +85,32 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+});
+
+describe("추가 기능 테스트", () => {
+  test("기능 테스트2: 다리 건너기에 실패하면 처음부터 다시 시작합니다.", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "D", "D", "R", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 });
