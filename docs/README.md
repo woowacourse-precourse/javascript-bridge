@@ -1,5 +1,9 @@
 # 다리 건너기 게임
 
+## UI 디자인 패턴
+
+MVP pattern 사용(BridgeGame_Architecture.png 참조)
+
 ## 게임 방법
 
 1. 다리의 길이를 입력받아 생성한다.
