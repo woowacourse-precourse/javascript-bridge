@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const { BRIDGE_GAME } = require('../Constants');
+const { MODEL } = require('../Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -41,10 +41,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    * @returns { string[] } 입력값에 맞는 다리를 그린뒤 다리 위쪽과 아래쪽을 각각 return 한다.
    */
-  move(upOrDown, state) {
+  move(upOrDown, isSucess) {
     this.divideSpace();
-    if (state) return this.pass(state, upOrDown);
-    return this.fail(state, upOrDown);
+    return this.mapBridge(isSucess, upOrDown);
   }
 
   /**
@@ -73,34 +72,16 @@ class BridgeGame {
     });
   }
 
-  pass(state, upOrDown) {
-    if (upOrDown === BRIDGE_GAME.up) {
-      this.moveToUp(state);
-      return this.getUpAndDown();
-    }
-    this.moveToDown(state);
+  mapBridge(isSucess, upOrDown) {
+    const isUp = upOrDown === MODEL.up;
+    this.map(isSucess, isUp);
     return this.getUpAndDown();
   }
 
-  fail(state, upOrDown) {
-    if (upOrDown === BRIDGE_GAME.up) {
-      this.moveToUp(state);
-      return this.getUpAndDown();
-    }
-    this.moveToDown(state);
-    return this.getUpAndDown();
-  }
-
-  moveToUp(state) {
-    const passOrFail = state ? BRIDGE_GAME.pass : BRIDGE_GAME.fail;
-    this.#bridgeStatus.up += `${BRIDGE_GAME.space}${passOrFail}${BRIDGE_GAME.space}`;
-    this.#bridgeStatus.down += `${BRIDGE_GAME.space}${BRIDGE_GAME.space}${BRIDGE_GAME.space}`;
-  }
-
-  moveToDown(state) {
-    const passOrFail = state ? BRIDGE_GAME.pass : BRIDGE_GAME.fail;
-    this.#bridgeStatus.up += `${BRIDGE_GAME.space}${BRIDGE_GAME.space}${BRIDGE_GAME.space}`;
-    this.#bridgeStatus.down += `${BRIDGE_GAME.space}${passOrFail}${BRIDGE_GAME.space}`;
+  map(isSucess, isUp) {
+    const passOrFail = isSucess ? MODEL.pass : MODEL.fail;
+    this.#bridgeStatus.up += `${MODEL.space}${isUp ? passOrFail : MODEL.space}${MODEL.space}`;
+    this.#bridgeStatus.down += `${MODEL.space}${isUp ? MODEL.space : passOrFail}${MODEL.space}`;
   }
 
   getUpAndDown() {
@@ -141,8 +122,8 @@ class BridgeGame {
 
   divideSpace() {
     if (this.#bridgeStatus.up.length) {
-      this.#bridgeStatus.up += BRIDGE_GAME.divide;
-      this.#bridgeStatus.down += BRIDGE_GAME.divide;
+      this.#bridgeStatus.up += MODEL.divide;
+      this.#bridgeStatus.down += MODEL.divide;
     }
   }
 }

@@ -27,7 +27,7 @@ const OUTPUT_VIEW = Object.freeze({
   total_tryCount: (tryCount) => `총 시도한 횟수: ${tryCount}`,
 });
 
-const BRIDGE_GAME = Object.freeze({
+const MODEL = Object.freeze({
   up: 'U',
   pass: '1',
   fail: '0',
@@ -45,4 +45,4 @@ const BASE = Object.freeze({
   range: '3~20사이의 숫자만 입력이 가능합니다.',
 });
 
-module.exports = { BASE, BRIDGE_GAME, INPUT_VIEW, NEW_LINE, OUTPUT_VIEW };
+module.exports = { BASE, INPUT_VIEW, NEW_LINE, MODEL, OUTPUT_VIEW };
