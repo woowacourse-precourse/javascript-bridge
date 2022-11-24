@@ -5,12 +5,13 @@ const Validators = require('../Validators');
 const BridgeGame = require('../models/BridgeGame');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
+const { GAME_MESSAGE, COMMAND } = require('../utils/constants');
 
 const bridgeGame = new BridgeGame();
 
 class BridgeGameController {
   start() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(GAME_MESSAGE.START);
     InputView.readBridgeSize(this.handleInputSize);
   }
 
@@ -75,7 +76,7 @@ class BridgeGameController {
   };
 
   inputCommandHandler = (command) => {
-    if (command === 'Q') {
+    if (command === COMMAND.QUIT) {
       this.handleQuit();
     } else this.handleRetry();
   };

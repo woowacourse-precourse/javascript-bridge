@@ -1,3 +1,4 @@
+const { GAME_MESSAGE, SIGN, MOVE } = require('../utils/constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -8,7 +9,7 @@ class BridgeGame {
 
   #presentableBridge;
 
-  #isSuccess = '실패';
+  #isSuccess = GAME_MESSAGE.RESULT_FAIL;
 
   #round = 1;
 
@@ -29,7 +30,10 @@ class BridgeGame {
   };
 
   toggleResult = () => {
-    this.#isSuccess = this.#isSuccess === '성공' ? '실패' : '성공';
+    this.#isSuccess =
+      this.#isSuccess === GAME_MESSAGE.RESULT_SUCCESS
+        ? GAME_MESSAGE.RESULT_FAIL
+        : GAME_MESSAGE.RESULT_SUCCESS;
   };
 
   setRound = () => {
@@ -45,16 +49,18 @@ class BridgeGame {
   }
 
   isGameOver = (formattedBridges) => {
-    const isFail = formattedBridges.flat().find((block) => block === 'X');
+    const isFail = formattedBridges.flat().find((block) => block === SIGN.DEAD);
     const isFinished = formattedBridges[0].length === this.#randomBridge.length;
 
-    this.#isSuccess = isFail ? '실패' : '성공';
+    this.#isSuccess = isFail
+      ? GAME_MESSAGE.RESULT_FAIL
+      : GAME_MESSAGE.RESULT_SUCCESS;
 
     return isFail || isFinished;
   };
 
   isSuccess = () => {
-    if (this.#isSuccess === '성공') return true;
+    if (this.#isSuccess === GAME_MESSAGE.RESULT_SUCCESS) return true;
     return false;
   };
 
@@ -81,11 +87,11 @@ class BridgeGame {
     );
 
   handleBlock = (acc, block, idx) => {
-    if (this.#userBridge[idx] === 'U') {
-      acc[0].push(this.#randomBridge[idx] === block ? 'O' : 'X');
+    if (this.#userBridge[idx] === MOVE.UP) {
+      acc[0].push(this.#randomBridge[idx] === block ? SIGN.ALIVE : SIGN.DEAD);
       acc[1].push(' ');
     } else {
-      acc[1].push(this.#randomBridge[idx] === block ? 'O' : 'X');
+      acc[1].push(this.#randomBridge[idx] === block ? SIGN.ALIVE : SIGN.DEAD);
       acc[0].push(' ');
     }
     return acc;
