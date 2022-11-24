@@ -110,8 +110,8 @@ class BridgeGame {
     this.#bridgeData.upOrDown = input;
   }
 
-  precompose(size) {
-    this.#prebuilt = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+  precompose() {
+    this.#prebuilt = BridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
   }
 
   getData() {

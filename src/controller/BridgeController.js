@@ -20,7 +20,7 @@ const BridgeController = class extends GameController {
     const callbackInputBridgeSize = (size) => {
       this.checkBridgeSize(size);
       this.saveSize(size);
-      this.prebuildBridge(size);
+      this.prebuildBridge();
       this.inputMoving();
     };
 
@@ -40,8 +40,8 @@ const BridgeController = class extends GameController {
     this.bridgeGame.saveSize(input);
   }
 
-  prebuildBridge(input) {
-    this.bridgeGame.precompose(input);
+  prebuildBridge() {
+    this.bridgeGame.precompose();
   }
 
   inputMoving() {
