@@ -4,15 +4,23 @@ const OutputView = require('./view/OutputView');
 const BridgeController = require('./controller/BridgeController');
 
 class App {
+  #inputView;
+
+  #outputView;
+
+  #bridgeGame;
+
+  #bridgeCntroller;
+
   constructor() {
-    this.inputView = InputView;
-    this.outputView = OutputView;
-    this.bridgeGame = new BridgeGame();
-    this.bridgeCntroller = new BridgeController(this.inputView, this.outputView, this.bridgeGame);
+    this.#inputView = InputView;
+    this.#outputView = OutputView;
+    this.#bridgeGame = new BridgeGame();
+    this.#bridgeCntroller = new BridgeController(this.#inputView, this.#outputView, this.#bridgeGame);
   }
 
   play() {
-    this.bridgeCntroller.runProcess();
+    this.#bridgeCntroller.runProcess();
   }
 }
 const app = new App();
