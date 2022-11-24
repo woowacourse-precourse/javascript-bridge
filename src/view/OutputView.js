@@ -26,6 +26,7 @@ const OutputView = {
     Console.print(OUTPUT_VIEW.down_bridge(this.decode(down)));
     Console.print(NEW_LINE + OUTPUT_VIEW.state_message(this.inferState(up, down)));
     Console.print(OUTPUT_VIEW.total_tryCount(tryCount));
+    Console.close();
   },
 
   printError(error) {
