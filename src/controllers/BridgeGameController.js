@@ -14,14 +14,7 @@ class BridgeGameController {
     InputView.readBridgeSize(this.handleInputSize);
   }
 
-  inputSizeHandler = (length) => {
-    const bridge = BridgeMaker.makeBridge(
-      length,
-      BridgeRandomNumberGenerator.generate
-    );
-    bridgeGame.setRandomBridge(bridge);
-  };
-
+  /** 메인 로직 메소드 */
   handleInputSize = (length) => {
     try {
       Validators.isValidLength(length);
@@ -31,6 +24,35 @@ class BridgeGameController {
       Console.print(e);
       InputView.readBridgeSize(this.handleInputSize);
     }
+  };
+
+  handleInputMove = (block) => {
+    try {
+      Validators.isValidMove(block);
+      this.inputMoveHandler(block);
+    } catch (e) {
+      Console.print(e);
+      InputView.readMoving(this.handleInputMove);
+    }
+  };
+
+  handleInputCommand = (command) => {
+    try {
+      Validators.isValidCommand(command);
+      this.inputCommandHandler(command);
+    } catch (e) {
+      Console.print(e);
+      InputView.readGameCommand(this.handleInputCommand);
+    }
+  };
+
+  /** 세부 메소드 */
+  inputSizeHandler = (length) => {
+    const bridge = BridgeMaker.makeBridge(
+      length,
+      BridgeRandomNumberGenerator.generate
+    );
+    bridgeGame.setRandomBridge(bridge);
   };
 
   inputMoveHandler = (block) => {
@@ -52,16 +74,6 @@ class BridgeGameController {
     } else InputView.readMoving(this.handleInputMove);
   };
 
-  handleInputMove = (block) => {
-    try {
-      Validators.isValidMove(block);
-      this.inputMoveHandler(block);
-    } catch (e) {
-      Console.print(e);
-      InputView.readMoving(this.handleInputMove);
-    }
-  };
-
   inputCommandHandler = (command) => {
     if (command === 'Q') {
       this.handleQuit();
@@ -78,16 +90,6 @@ class BridgeGameController {
     bridgeGame.setRound();
     bridgeGame.retry();
     InputView.readMoving(this.handleInputMove);
-  };
-
-  handleInputCommand = (command) => {
-    try {
-      Validators.isValidCommand(command);
-      this.inputCommandHandler(command);
-    } catch (e) {
-      Console.print(e);
-      InputView.readGameCommand(this.handleInputCommand);
-    }
   };
 }
 
