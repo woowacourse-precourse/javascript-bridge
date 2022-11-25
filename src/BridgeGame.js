@@ -47,12 +47,12 @@ class BridgeGame {
     return this.#history;
   }
 
-  checkPath(chooseStep) {
+  isCorrectPath(chooseStep) {
     return this.#pattern[this.#distance] === chooseStep;
   }
 
   #getPathMarker(chooseStep) {
-    return this.checkPath(chooseStep) ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
+    return this.isCorrectPath(chooseStep) ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
   }
 
   getTryCount() {

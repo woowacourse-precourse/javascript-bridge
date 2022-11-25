@@ -58,7 +58,7 @@ describe('다리 건너기 테스트', () => {
       const bridgeGame = new BridgeGame();
       Array.from({ length: distance }, () => bridgeGame.incrementDistance());
       bridgeGame.setPattern(['U', 'D', 'D']);
-      expect(bridgeGame.checkPath(chooseStep)).toEqual(result);
+      expect(bridgeGame.isCorrectPath(chooseStep)).toEqual(result);
     },
   );
   test('다리 건너기 기록 체크', () => {

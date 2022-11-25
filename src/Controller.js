@@ -64,7 +64,7 @@ class Controller {
 
   #moveMap(chooseStep) {
     this.#showMap(chooseStep);
-    if (!this.#bridgeGame.checkPath(chooseStep)) {
+    if (!this.#bridgeGame.isCorrectPath(chooseStep)) {
       return this.#askRetry();
     }
     this.#bridgeGame.incrementDistance();
