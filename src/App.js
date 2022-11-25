@@ -8,16 +8,16 @@ class App {
 
   #model;
 
-  #bridgeCntroller;
+  #bridgeController;
 
   constructor() {
     this.#view = new View();
     this.#model = new Model();
-    this.#bridgeCntroller = new BridgeController(this.#view, this.#model);
+    this.#bridgeController = new BridgeController(this.#view, this.#model);
   }
 
   play() {
-    this.#bridgeCntroller.runProcess();
+    this.#bridgeController.runProcess();
   }
 }
 const app = new App();
