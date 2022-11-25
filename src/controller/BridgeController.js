@@ -7,12 +7,18 @@ const GameCommand = require('../inputCheck/GameCommand');
 const { INPUT_VIEW } = require('../Constants');
 
 const BridgeController = class extends GameController {
-  constructor(inputView, outputView, bridgeGame) {
-    super(inputView, outputView, bridgeGame);
+  #view;
+
+  #model;
+
+  constructor(view, bridgeGame) {
+    super(view, bridgeGame);
+    this.#view = view;
+    this.#model = bridgeGame;
   }
 
   runProcess() {
-    this.outputView.printStartMessage();
+    this.#view.printStart();
     this.inputBridgeSize();
   }
 
@@ -24,24 +30,24 @@ const BridgeController = class extends GameController {
       this.inputMoving();
     };
 
-    this.inputView.readBridgeSize(INPUT_VIEW.size_message, callbackInputBridgeSize);
+    this.#view.readBridgeSize(INPUT_VIEW.size_message, callbackInputBridgeSize);
   }
 
-  checkBridgeSize(input, confirmedInput = null) {
+  checkBridgeSize(input) {
     try {
       const bridgeSize = new BridgeSize(input);
-      confirmedInput = bridgeSize.checkInput();
+      bridgeSize.checkInput();
     } catch (error) {
       this.errorHandler(error, this.inputBridgeSize.bind(this));
     }
   }
 
   saveSize(input) {
-    this.bridgeGame.saveSize(input);
+    this.#model.saveSize(input);
   }
 
   prebuildBridge() {
-    this.bridgeGame.precompose();
+    this.#model.precompose();
   }
 
   inputMoving() {
@@ -49,12 +55,12 @@ const BridgeController = class extends GameController {
       this.checkMoving(moving);
     };
 
-    this.inputView.readMoving(INPUT_VIEW.moving_message, callbackInputMoving);
+    this.#view.readMoving(INPUT_VIEW.moving_message, callbackInputMoving);
   }
 
-  checkMoving(input, confirmedInput = null) {
+  checkMoving(input) {
     try {
-      confirmedInput = this.checkMovingInput(input);
+      this.checkMovingInput(input);
     } catch (error) {
       this.errorHandler(error, this.inputMoving.bind(this));
     }
@@ -62,23 +68,23 @@ const BridgeController = class extends GameController {
   }
 
   saveMoving(input) {
-    this.bridgeGame.saveUpOrDown(input);
+    this.#model.saveUpOrDown(input);
     return this.printMap(input);
   }
 
   printMap(input) {
-    if (this.bridgeGame.isSamePreBuiltBridgeAsInput(input)) {
-      this.outputView.printMap(this.bridgeGame.move(input, INPUT_VIEW.pass));
+    if (this.#model.isSamePreBuiltBridgeAsInput(input)) {
+      this.#view.printMap(this.#model.move(input, INPUT_VIEW.pass));
       return this.passAllOrNot();
     }
-    this.outputView.printMap(this.bridgeGame.move(input, INPUT_VIEW.fail));
+    this.#view.printMap(this.#model.move(input, INPUT_VIEW.fail));
     return this.inputGameCommand();
   }
 
   passAllOrNot() {
-    this.bridgeGame.increaseTryOrder();
-    if (this.bridgeGame.isAllPass()) {
-      this.outputView.printResult(this.bridgeGame.getData());
+    this.#model.increaseTryOrder();
+    if (this.#model.isAllPass()) {
+      this.#view.printResult(this.#model.getData());
     }
     return this.inputMoving();
   }
@@ -88,7 +94,7 @@ const BridgeController = class extends GameController {
       this.checkGameCommand(retryOrQuit);
     };
 
-    this.inputView.readGameCommand(INPUT_VIEW.game_command_message, callbackGameCommand);
+    this.#view.readGameCommand(INPUT_VIEW.game_command_message, callbackGameCommand);
   }
 
   checkGameCommand(input) {
@@ -102,10 +108,10 @@ const BridgeController = class extends GameController {
 
   retryOrQuit(input) {
     if (BridgeController.isRetry(input)) {
-      this.bridgeGame.retry();
+      this.#model.retry();
       return this.inputMoving();
     }
-    this.outputView.printResult(this.bridgeGame.getData());
+    this.#view.printResult(this.#model.getData());
   }
 
   static isRetry(input) {
@@ -114,7 +120,7 @@ const BridgeController = class extends GameController {
   }
 
   errorHandler(error, callback) {
-    this.outputView.printError(error.message);
+    this.#view.printError(error.message);
     callback();
   }
 

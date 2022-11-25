@@ -1,7 +1,6 @@
 const GameController = class {
-  constructor(inputView, outputView, bridgeGame) {
-    this.inputView = inputView;
-    this.outputView = outputView;
+  constructor(view, bridgeGame) {
+    this.view = view;
     this.bridgeGame = bridgeGame;
   }
 
