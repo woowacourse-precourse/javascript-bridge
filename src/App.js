@@ -1,5 +1,12 @@
+const BridgeGame = require("./controller/BridgeGame");
+const ModeEasy = require("./controller/Mode/ModeEasy");
+
 class App {
-  play() {}
+  play() {
+    const bridgeGame = new BridgeGame(new ModeEasy());
+    bridgeGame.next();
+  }
 }
+
 
 module.exports = App;
