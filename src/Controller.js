@@ -24,14 +24,14 @@ class Controller {
 
   #handleMakePattern(size) {
     try {
-      this.#validatorBridgeSize(size);
+      this.#validateBridgeSize(size);
     } catch (error) {
       OutputView.printError(error);
       this.#askBridgeSize();
     }
   }
 
-  #validatorBridgeSize(size) {
+  #validateBridgeSize(size) {
     if (Validator.validatorBridgeLength(size)) {
       OutputView.printBlankLine();
       this.#createPattern(size);
