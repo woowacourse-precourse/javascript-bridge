@@ -10,7 +10,9 @@ class ModeEasy extends ModeStrategy {
 		return Object.keys(POSITION_TWO).length;
 	}
 	createPosition(positionSign) {
-		return Position.createPosition(POSITION_TWO, positionSign);
+		if (!POSITION_TWO.hasOwnProperty(positionSign))
+			throw new Error("[ERROR] 지정된 커맨드를 입력해주세요.");
+		return new Position(POSITION_TWO[positionSign]);
 	}
 
 	createBridge(size) {

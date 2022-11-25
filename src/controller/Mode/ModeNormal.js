@@ -1,5 +1,3 @@
-const BridgeRandomNumberGenerator = require("../../BridgeRandomNumberGenerator");
-const BridgeMaker = require("../../BridgeMaker");
 const ModeStrategy = require("./ModeStrategy");
 const Bridge = require("../../model/Bridge");
 const Position = require("../../model/Position");
@@ -23,7 +21,9 @@ class ModeNormal extends ModeStrategy {
 	}
 
 	createPosition(positionSign) {
-		return Position.createPosition(POSITION_THREE, positionSign);
+		if (!POSITION_THREE.hasOwnProperty(positionSign))
+			throw new Error("[ERROR] 지정된 커맨드를 입력해주세요.");
+		return new Position(POSITION_THREE[positionSign]);
 	}
 
 	createBridge(size) {
