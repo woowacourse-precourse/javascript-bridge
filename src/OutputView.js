@@ -1,3 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const wConsole = MissionUtils.Console;
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -7,14 +10,25 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(moveMap) {
+    let up = moveMap.get("U"),
+      down = moveMap.get("D");
+    wConsole.print(`[ ${up.split("").join(" | ")} ]`);
+    wConsole.print(`[ ${down.split("").join(" | ")} ]`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame, clear) {
+    wConsole.print("\n최종 게임 결과");
+    OutputView.printMap(bridgeGame.getMoveMap());
+    wConsole.print(`\n게임 성공 여부: ${clear ? "성공" : "실패"}`);
+    wConsole.print(`총 시도한 횟수: ${bridgeGame.getAttemptCount()}`);
+    wConsole.close();
+  },
 };
 
 module.exports = OutputView;
