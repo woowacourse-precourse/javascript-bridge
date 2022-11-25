@@ -10,20 +10,20 @@ class BridgeGame {
   #distance;
   #tryCount;
 
-  constructor () {
+  constructor() {
     this.#initHistory();
     this.#tryCount = 1;
   }
 
-  setPattern (pattern) {
+  setPattern(pattern) {
     this.#pattern = pattern;
   }
 
-  static makePattern (size) {
+  static makePattern(size) {
     return BridgeMaker.makeBridge(Number(size), generate);
   }
 
-  #initHistory () {
+  #initHistory() {
     this.#distance = 0;
     this.#history = new Map([
       [GAME_CONSTANTS.upStair, []],
@@ -31,33 +31,31 @@ class BridgeGame {
     ]);
   }
 
-  isEndGame () {
+  isEndGame() {
     return this.#pattern.length === this.#distance;
   }
 
-  incrementDistance () {
+  incrementDistance() {
     this.#distance += 1;
   }
 
-  #incrementTryCount () {
+  #incrementTryCount() {
     this.#tryCount += 1;
   }
 
-  getHistory () {
+  getHistory() {
     return this.#history;
   }
 
-  checkPath (chooseStep) {
+  checkPath(chooseStep) {
     return this.#pattern[this.#distance] === chooseStep;
   }
 
-  #getPathMarker (chooseStep) {
-    return this.checkPath(chooseStep)
-      ? GAME_CONSTANTS.goPath
-      : GAME_CONSTANTS.notPath;
+  #getPathMarker(chooseStep) {
+    return this.checkPath(chooseStep) ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
   }
 
-  getTryCount () {
+  getTryCount() {
     return this.#tryCount;
   }
 
@@ -66,13 +64,12 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move (chooseStep) {
-    [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair]
-      .forEach((stair) => {
-        this.#history.get(stair)
-          .push(chooseStep === stair
-            ? this.#getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
-      });
+  move(chooseStep) {
+    [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair].forEach((stair) => {
+      this.#history
+        .get(stair)
+        .push(chooseStep === stair ? this.#getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+    });
     return this;
   }
 
@@ -81,7 +78,7 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry () {
+  retry() {
     this.#initHistory();
     this.#incrementTryCount();
   }

@@ -9,20 +9,20 @@ const Validator = require('./Validator');
 class Controller {
   #bridgeGame;
 
-  constructor () {
+  constructor() {
     this.#bridgeGame = new BridgeGame();
   }
 
-  start () {
+  start() {
     OutputView.printStart();
     this.#askBridgeSize();
   }
 
-  #askBridgeSize () {
+  #askBridgeSize() {
     InputView.readBridgeSize(this.#handleMakePattern.bind(this));
   }
 
-  #handleMakePattern (size) {
+  #handleMakePattern(size) {
     try {
       this.#validatorBridgeSize(size);
     } catch (error) {
@@ -31,23 +31,23 @@ class Controller {
     }
   }
 
-  #validatorBridgeSize (size) {
+  #validatorBridgeSize(size) {
     if (Validator.validatorBridgeLength(size)) {
       OutputView.printBlankLine();
       this.#createPattern(size);
     }
   }
 
-  #createPattern (size) {
+  #createPattern(size) {
     this.#bridgeGame.setPattern(BridgeGame.makePattern(size));
     this.#askNextStep();
   }
 
-  #askNextStep () {
+  #askNextStep() {
     InputView.readMoving(this.#handleMovingStep.bind(this));
   }
 
-  #handleMovingStep (chooseStep) {
+  #handleMovingStep(chooseStep) {
     try {
       this.#validatorNextStep(chooseStep);
     } catch (error) {
@@ -56,13 +56,13 @@ class Controller {
     }
   }
 
-  #validatorNextStep (chooseStep) {
+  #validatorNextStep(chooseStep) {
     if (Validator.checkStep(chooseStep)) {
       this.#moveMap(chooseStep);
     }
   }
 
-  #moveMap (chooseStep) {
+  #moveMap(chooseStep) {
     this.#showMap(chooseStep);
     if (!this.#bridgeGame.checkPath(chooseStep)) {
       return this.#askRetry();
@@ -74,15 +74,15 @@ class Controller {
     this.#askNextStep();
   }
 
-  #showMap (chooseStep) {
+  #showMap(chooseStep) {
     OutputView.printMap(this.#bridgeGame.move(chooseStep).getHistory());
   }
 
-  #askRetry () {
+  #askRetry() {
     InputView.readGameCommand(this.#handleRetryGame.bind(this));
   }
 
-  #handleRetryGame (chooseRetry) {
+  #handleRetryGame(chooseRetry) {
     try {
       this.#validatorRetry(chooseRetry);
     } catch (error) {
@@ -91,17 +91,17 @@ class Controller {
     }
   }
 
-  #validatorRetry (chooseRetry) {
+  #validatorRetry(chooseRetry) {
     if (Validator.checkRetry(chooseRetry)) {
       this.#runRetry(chooseRetry);
     }
   }
 
-  static #isQuitGame (chooseRetry) {
+  static #isQuitGame(chooseRetry) {
     return chooseRetry === GAME_CONSTANTS.quitGame;
   }
 
-  #runRetry (chooseRetry) {
+  #runRetry(chooseRetry) {
     if (Controller.#isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
@@ -109,7 +109,7 @@ class Controller {
     this.#askNextStep();
   }
 
-  #showResult (isSuccess) {
+  #showResult(isSuccess) {
     OutputView.printResult(
       isSuccess,
       this.#bridgeGame.getHistory(),

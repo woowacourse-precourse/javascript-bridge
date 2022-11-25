@@ -4,19 +4,20 @@ const BridgeMaker = require('../src/BridgeMaker');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers
-    .reduce((acc, input) => acc.mockImplementationOnce((__, callback) => {
+  answers.reduce(
+    (acc, input) => acc.mockImplementationOnce((__, callback) => {
       callback(input);
-    }), MissionUtils.Console.readLine);
+    }),
+    MissionUtils.Console.readLine,
+  );
 };
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers
-    .reduce(
-      (acc, number) => acc.mockReturnValueOnce(number),
-      MissionUtils.Random.pickNumberInRange,
-    );
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange,
+  );
 };
 
 const getLogSpy = () => {
@@ -53,8 +54,10 @@ const expectBridgeOrder = (received, upside, downside) => {
 describe('다리 건너기 테스트', () => {
   test('다리 생성 테스트', () => {
     const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers
-      .reduce((acc, number) => acc.mockReturnValueOnce(number), jest.fn());
+    const mockGenerator = randomNumbers.reduce(
+      (acc, number) => acc.mockReturnValueOnce(number),
+      jest.fn(),
+    );
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(['U', 'D', 'D']);
   });

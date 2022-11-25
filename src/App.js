@@ -3,7 +3,7 @@ const Controller = require('./Controller');
 class App {
   #controller = new Controller();
 
-  play () {
+  play() {
     this.#controller.start();
   }
 }
