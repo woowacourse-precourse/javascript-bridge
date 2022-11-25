@@ -75,9 +75,7 @@ class Controller {
   }
 
   #showMap (chooseStep) {
-    OutputView.printMap(this.#bridgeGame
-      .move(chooseStep)
-      .getHistory());
+    OutputView.printMap(this.#bridgeGame.move(chooseStep).getHistory());
   }
 
   #askRetry () {
@@ -99,12 +97,12 @@ class Controller {
     }
   }
 
-  static isQuitGame (chooseRetry) {
+  static #isQuitGame (chooseRetry) {
     return chooseRetry === GAME_CONSTANTS.quitGame;
   }
 
   #runRetry (chooseRetry) {
-    if (Controller.isQuitGame(chooseRetry)) {
+    if (Controller.#isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
     this.#bridgeGame.retry();
