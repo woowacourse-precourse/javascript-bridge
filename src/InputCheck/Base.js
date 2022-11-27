@@ -1,4 +1,5 @@
 const { BASE } = require('../Constants');
+const ValidationError = require('../error/ValidationError');
 
 class Base {
   #inputValue;
@@ -8,18 +9,18 @@ class Base {
 
   checkUOrD() {
     if (/[^UD]/g.test(this.#inputValue)) {
-      throw new Error(`${BASE.error}${BASE.u_or_d}`);
+      throw new ValidationError(`${BASE.u_or_d}`);
     }
   }
   checkROrQ() {
     if (/[^RQ]/g.test(this.#inputValue)) {
-      throw new Error(`${BASE.error}${BASE.r_or_q}`);
+      throw new ValidationError(`${BASE.r_or_q}`);
     }
   }
 
   checkLength() {
     if (this.isNotLengthOne()) {
-      throw new Error(`${BASE.error}${BASE.one_length}`);
+      throw new ValidationError(`${BASE.one_length}`);
     }
     return this.#inputValue;
   }
@@ -30,7 +31,7 @@ class Base {
 
   checkNumberLength() {
     if (!this.isLengthOneOrTwo()) {
-      throw new Error(`${BASE.error}${BASE.two_length}`);
+      throw new ValidationError(`${BASE.two_length}`);
     }
     return this.#inputValue;
   }
@@ -41,13 +42,13 @@ class Base {
 
   checkOnlyNumber() {
     if (/\D/.test(this.#inputValue)) {
-      throw new Error(`${BASE.error}${BASE.only_number}`);
+      throw new ValidationError(`${BASE.only_number}`);
     }
   }
 
   checkCorrectNumberRange() {
     if (this.isFitRange()) {
-      throw new Error(`${BASE.error}${BASE.range}`);
+      throw new ValidationError(`${BASE.range}`);
     }
   }
 

@@ -5,6 +5,9 @@ const Moving = require('../inputCheck/Moving');
 const GameCommand = require('../inputCheck/GameCommand');
 // constants
 const { INPUT_VIEW } = require('../Constants');
+// error
+const ReadError = require('../error/ReadError');
+const ValidationError = require('../error/ValidationError');
 
 const BridgeController = class extends GameController {
   #view;
@@ -62,7 +65,7 @@ const BridgeController = class extends GameController {
     try {
       this.checkMovingInput(input);
     } catch (error) {
-      this.errorHandler(error, this.inputMoving.bind(this));
+      return this.errorHandler(error, this.inputMoving.bind(this));
     }
     return this.saveMoving(input);
   }
@@ -84,7 +87,7 @@ const BridgeController = class extends GameController {
   passAllOrNot() {
     this.#model.increaseTryOrder();
     if (this.#model.isAllPass()) {
-      this.#view.printResult(this.#model.getData());
+      return this.#view.printResult(this.#model.getData());
     }
     return this.inputMoving();
   }
@@ -101,7 +104,7 @@ const BridgeController = class extends GameController {
     try {
       this.checkGameCommandInput(input);
     } catch (error) {
-      this.errorHandler(error, this.inputGameCommand.bind(this));
+      return this.errorHandler(error, this.inputGameCommand.bind(this));
     }
     return this.retryOrQuit(input);
   }
@@ -120,8 +123,11 @@ const BridgeController = class extends GameController {
   }
 
   errorHandler(error, callback) {
-    this.#view.printError(error.message);
-    callback();
+    if (error instanceof ValidationError) {
+      this.#view.printError(new ReadError('Validation Error', error));
+      return callback();
+    }
+    throw error;
   }
 
   checkMovingInput(input) {
