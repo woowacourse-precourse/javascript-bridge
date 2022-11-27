@@ -58,13 +58,13 @@ class Controller {
 
   #validatorNextStep(chooseStep) {
     if (Validator.checkStep(chooseStep)) {
-      return this.#moveMap(chooseStep);
+      return this.#updateMovement(chooseStep);
     }
     return this.#askNextStep();
   }
 
-  #moveMap(chooseStep) {
-    this.#showMap(chooseStep);
+  #updateMovement(chooseStep) {
+    this.#updateHistory(chooseStep).#showMap();
     if (!this.#bridgeMap.isCorrectPath(chooseStep)) {
       return this.#askRetry();
     }
@@ -75,14 +75,16 @@ class Controller {
     this.#askNextStep();
   }
 
-  #showMap(chooseStep) {
-    OutputView.printMap(
-      this.#bridgeGame.move(
-        this.#bridgeMap.getPathMarker(chooseStep),
-        chooseStep,
-      )
-        .getHistory(),
+  #updateHistory(chooseStep) {
+    this.#bridgeGame.move(
+      this.#bridgeMap.getPathMarker(chooseStep),
+      chooseStep,
     );
+    return this;
+  }
+
+  #showMap() {
+    OutputView.printMap(this.#bridgeGame.getHistory());
   }
 
   #askRetry() {
