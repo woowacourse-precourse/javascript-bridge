@@ -15,7 +15,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(handleMovingStep) {
-    Console.readLine(MESSAGE.inputChooseNextStep, handleMovingStep);
+    Console.readLine(MESSAGE.inputChooseNextBridgeStep, handleMovingStep);
   },
 
   /**

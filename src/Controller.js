@@ -45,10 +45,10 @@ class Controller {
 
   #createPattern(size) {
     this.#bridgeMap.setPattern(Controller.#makePattern(size));
-    this.#askNextStep();
+    this.#askNextBridgeStep();
   }
 
-  #askNextStep() {
+  #askNextBridgeStep() {
     InputView.readMoving(this.#handleMovingStep.bind(this));
   }
 
@@ -60,7 +60,7 @@ class Controller {
     if (Validator.checkStep(chooseStep)) {
       return this.#updateMovement(chooseStep);
     }
-    return this.#askNextStep();
+    return this.#askNextBridgeStep();
   }
 
   #updateMovement(chooseStep) {
@@ -72,7 +72,7 @@ class Controller {
     if (this.#bridgeMap.isEndGame()) {
       return this.#showResult(GAME_CONSTANTS.resultSuccess);
     }
-    this.#askNextStep();
+    this.#askNextBridgeStep();
   }
 
   #updateHistory(chooseStep) {
@@ -112,7 +112,7 @@ class Controller {
     }
     this.#bridgeMap.retryMap();
     this.#bridgeGame.retry();
-    this.#askNextStep();
+    this.#askNextBridgeStep();
   }
 
   #showResult(isSuccess) {
