@@ -5,10 +5,10 @@ class BridgeMap {
   #distance;
 
   constructor() {
-    this.initDistance();
+    this.#initDistance();
   }
 
-  initDistance() {
+  #initDistance() {
     this.#distance = 0;
   }
 
@@ -35,7 +35,7 @@ class BridgeMap {
   }
 
   retryMap() {
-    this.initDistance();
+    this.#initDistance();
   }
 }
 
