@@ -29,8 +29,8 @@ const OutputView = {
     Console.close();
   },
 
-  printError(error) {
-    Console.print(error);
+  printError({ name, message, cause }) {
+    Console.print(`${name} : ${message}\n[CAUSE] : ${cause}`);
   },
 
   printStartMessage() {
@@ -46,12 +46,12 @@ const OutputView = {
   },
 
   inferState(up, down) {
-    const PASS = '1';
+    const FAIL = '0';
     const SUCESS = '성공';
-    const FAIL = '실패';
-    const isLastPassFromUp = up[up.length - 2] === PASS;
-    const isLastPassFromDown = down[down.length - 2] === PASS;
-    return isLastPassFromUp || isLastPassFromDown ? SUCESS : FAIL;
+    const FAILURE = '실패';
+    const hasFailFromUp = up.includes(FAIL);
+    const hasFailFromDown = down.includes(FAIL);
+    return hasFailFromUp || hasFailFromDown ? FAILURE : SUCESS;
   },
 };
 
