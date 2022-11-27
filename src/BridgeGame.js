@@ -1,13 +1,9 @@
 const { GAME_CONSTANTS } = require('./utils/constants');
-const BridgeMaker = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #pattern;
   #history;
-  #distance;
   #tryCount;
 
   constructor() {
@@ -15,28 +11,11 @@ class BridgeGame {
     this.#tryCount = 1;
   }
 
-  setPattern(pattern) {
-    this.#pattern = pattern;
-  }
-
-  static makePattern(size) {
-    return BridgeMaker.makeBridge(Number(size), generate);
-  }
-
   #initHistory() {
-    this.#distance = 0;
     this.#history = new Map([
       [GAME_CONSTANTS.upStair, []],
       [GAME_CONSTANTS.downStair, []],
     ]);
-  }
-
-  isEndGame() {
-    return this.#pattern.length === this.#distance;
-  }
-
-  incrementDistance() {
-    this.#distance += 1;
   }
 
   #incrementTryCount() {
@@ -45,10 +24,6 @@ class BridgeGame {
 
   getHistory() {
     return this.#history;
-  }
-
-  isCorrectPath(chooseStep) {
-    return this.#pattern[this.#distance] === chooseStep;
   }
 
   #getPathMarker(chooseStep) {
@@ -64,11 +39,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(chooseStep) {
+  move(pathMarker, chooseStep) {
     [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair].forEach((stair) => {
       this.#history
         .get(stair)
-        .push(chooseStep === stair ? this.#getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+        .push(chooseStep === stair ? pathMarker : GAME_CONSTANTS.empty);
     });
     return this;
   }

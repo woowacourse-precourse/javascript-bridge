@@ -1,15 +1,20 @@
 const { GAME_CONSTANTS } = require('./utils/constants');
 
+const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
+const BridgeMaker = require('./BridgeMaker');
 
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
+const BridgeMap = require('./BridgeMap');
 
 class Controller {
   #bridgeGame;
+  #bridgeMap;
 
   constructor() {
+    this.#bridgeMap = new BridgeMap();
     this.#bridgeGame = new BridgeGame();
   }
 
@@ -38,8 +43,12 @@ class Controller {
     }
   }
 
+  static #makePattern(size) {
+    return BridgeMaker.makeBridge(Number(size), generate);
+  }
+
   #createPattern(size) {
-    this.#bridgeGame.setPattern(BridgeGame.makePattern(size));
+    this.#bridgeMap.setPattern(Controller.#makePattern(size));
     this.#askNextStep();
   }
 
@@ -64,18 +73,24 @@ class Controller {
 
   #moveMap(chooseStep) {
     this.#showMap(chooseStep);
-    if (!this.#bridgeGame.isCorrectPath(chooseStep)) {
+    if (!this.#bridgeMap.isCorrectPath(chooseStep)) {
       return this.#askRetry();
     }
-    this.#bridgeGame.incrementDistance();
-    if (this.#bridgeGame.isEndGame()) {
+    this.#bridgeMap.incrementDistance();
+    if (this.#bridgeMap.isEndGame()) {
       return this.#showResult(GAME_CONSTANTS.resultSuccess);
     }
     this.#askNextStep();
   }
 
   #showMap(chooseStep) {
-    OutputView.printMap(this.#bridgeGame.move(chooseStep).getHistory());
+    OutputView.printMap(
+      this.#bridgeGame.move(
+        this.#bridgeMap.getPathMarker(chooseStep),
+        chooseStep,
+      )
+        .getHistory(),
+    );
   }
 
   #askRetry() {
@@ -105,6 +120,7 @@ class Controller {
     if (Controller.#isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
+    this.#bridgeMap.initDistance();
     this.#bridgeGame.retry();
     this.#askNextStep();
   }
