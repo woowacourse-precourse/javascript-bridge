@@ -1,5 +1,5 @@
 const { GAME_CONSTANTS } = require('./utils/constants');
-
+const MESSAGE = require('./utils/Message');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
@@ -117,7 +117,7 @@ class Controller {
 
   #showResult(isSuccess) {
     OutputView.printResult(
-      isSuccess,
+      (isSuccess ? MESSAGE.successMessage : MESSAGE.failMessage),
       this.#bridgeGame.getHistory(),
       this.#bridgeGame.getTryCount(),
     );
