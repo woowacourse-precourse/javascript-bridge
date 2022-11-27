@@ -33,6 +33,10 @@ class BridgeMap {
     return this.isCorrectPath(chooseStep)
       ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
   }
+
+  retryMap() {
+    this.initDistance();
+  }
 }
 
 module.exports = BridgeMap;

@@ -120,7 +120,7 @@ class Controller {
     if (Controller.#isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
-    this.#bridgeMap.initDistance();
+    this.#bridgeMap.retryMap();
     this.#bridgeGame.retry();
     this.#askNextStep();
   }
