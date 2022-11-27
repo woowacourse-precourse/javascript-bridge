@@ -1,10 +1,11 @@
 const { BRIDGE_CONSTANTS, GAME_CONSTANTS } = require('./utils/constants');
 const ERROR_MESSAGE = require('./utils/ErrorMessage');
+const handleError = require('./utils/handleError');
 
 class Validator {
   static #validate(condition, errorMsg) {
     if (condition) {
-      throw new Error(errorMsg);
+      return handleError(errorMsg);
     }
     return true;
   }

@@ -28,19 +28,15 @@ class Controller {
   }
 
   #handleMakePattern(size) {
-    try {
-      this.#validateBridgeSize(size);
-    } catch (error) {
-      OutputView.printError(error);
-      this.#askBridgeSize();
-    }
+    this.#validateBridgeSize(size);
   }
 
   #validateBridgeSize(size) {
     if (Validator.validatorBridgeLength(size)) {
       OutputView.printBlankLine();
-      this.#createPattern(size);
+      return this.#createPattern(size);
     }
+    return this.#askBridgeSize();
   }
 
   static #makePattern(size) {
@@ -57,18 +53,14 @@ class Controller {
   }
 
   #handleMovingStep(chooseStep) {
-    try {
-      this.#validatorNextStep(chooseStep);
-    } catch (error) {
-      OutputView.printError(error);
-      this.#askNextStep();
-    }
+    this.#validatorNextStep(chooseStep);
   }
 
   #validatorNextStep(chooseStep) {
     if (Validator.checkStep(chooseStep)) {
-      this.#moveMap(chooseStep);
+      return this.#moveMap(chooseStep);
     }
+    return this.#askNextStep();
   }
 
   #moveMap(chooseStep) {
@@ -98,18 +90,14 @@ class Controller {
   }
 
   #handleRetryGame(chooseRetry) {
-    try {
-      this.#validatorRetry(chooseRetry);
-    } catch (error) {
-      OutputView.printError(error);
-      this.#askRetry();
-    }
+    this.#validatorRetry(chooseRetry);
   }
 
   #validatorRetry(chooseRetry) {
     if (Validator.checkRetry(chooseRetry)) {
-      this.#runRetry(chooseRetry);
+      return this.#runRetry(chooseRetry);
     }
+    return this.#askRetry();
   }
 
   static #isQuitGame(chooseRetry) {
