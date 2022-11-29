@@ -18,9 +18,9 @@ class BridgeGame {
 
   move(moveKey, userMoveArray) {
     if (moveKey === COMMAND_VALUE.UP) {
-      userMoveArray.push(1);
+      userMoveArray.push("U");
     } else if (moveKey === COMMAND_VALUE.DOWN) {
-      userMoveArray.push(0);
+      userMoveArray.push("D");
     }
     this.userMoveArray = userMoveArray;
     return userMoveArray;
@@ -38,6 +38,10 @@ class BridgeGame {
       return "wrong";
     }
   }
+
+  /**
+   * 현재 MAP 빈칸 나옴
+   */
   getMap(userMoveArray) {
     this.userMoveArray = userMoveArray;
     return this.userMoveArray;

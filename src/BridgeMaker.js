@@ -3,7 +3,9 @@ const BridgeMaker = {
     let bridge = [];
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-      bridge.push(number);
+
+      if (number === 0) bridge.push("D");
+      if (number === 1) bridge.push("U");
     }
 
     return bridge;

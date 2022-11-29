@@ -27,6 +27,7 @@ const InputView = {
       const moveKey = Validate.checkMovingKey(userInput);
       const userArray = bridgeGame.move(moveKey, userMoveArray);
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
+      // compareMove까지는 작동함. getMap에서 부터 빈칸으로 나옴 + 게임은돌아감
       const getMap = bridgeGame.getMap(userArray);
       const result = OutputView.printMap(getMap, bridge);
       if (keepGaming === GAME_RESOURCE.RIGHT) {
