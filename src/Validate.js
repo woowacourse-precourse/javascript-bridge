@@ -38,9 +38,8 @@ const Validate = {
 
   checkRetryOrCloseKey(value) {
     try {
-      const check = value.toUpperCase();
-      if (check === COMMAND_VALUE.RETRY || check === COMMAND_VALUE.QUIT) {
-        return check;
+      if (value === COMMAND_VALUE.RETRY || value === COMMAND_VALUE.QUIT) {
+        return value;
       }
       throw err;
     } catch (err) {
