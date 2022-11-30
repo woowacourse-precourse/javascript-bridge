@@ -39,20 +39,14 @@ class BridgeGame {
     }
   }
 
-  /**
-   * 현재 MAP 빈칸 나옴
-   */
   getMap(userMoveArray) {
     this.userMoveArray = userMoveArray;
     return this.userMoveArray;
   }
 
   retry(retryOrCloseKey) {
-    if (retryOrCloseKey === COMMAND_VALUE.RETRY) {
-      return 1;
-    } else if (retryOrCloseKey === COMMAND_VALUE.QUIT) {
-      return 0;
-    }
+    if (retryOrCloseKey === COMMAND_VALUE.RETRY) return 1;
+    if (retryOrCloseKey === COMMAND_VALUE.QUIT) return 0;
   }
 }
 
