@@ -12,8 +12,8 @@ const OutputView = {
     resultArr[GAME_RESOURCE.DOWNSIDE] = "";
     for (let i = 0; i < getMap.length; i++) {
       if (i == 0) {
-        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.LEFT_BRACKET;
-        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.LEFT_BRACKET;
+        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.START_BRACKET;
+        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.START_BRACKET;
       } else {
         resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.VERTICAL;
         resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.VERTICAL;
@@ -36,8 +36,8 @@ const OutputView = {
         }
       }
       if (i == getMap.length - 1) {
-        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
-        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
+        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.END_BRACKET;
+        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.END_BRACKET;
       }
     }
     Console.print(resultArr[GAME_RESOURCE.UPSIDE]);
@@ -51,12 +51,16 @@ const OutputView = {
     Console.print(result[GAME_RESOURCE.UPSIDE]);
     Console.print(result[GAME_RESOURCE.DOWNSIDE]);
     Console.print("");
-    if (command === 0) {
-      Console.print(MESSAGE.PRINT_GAME_RESULT + MESSAGE.FAIL);
-      Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + count);
-      Console.close();
-      return;
-    }
+    if (command === 0) this.printFail(count);
+    if (command !== 0) this.printSuccess(count);
+  },
+
+  printFail(count) {
+    Console.print(MESSAGE.PRINT_GAME_RESULT + MESSAGE.FAIL);
+    Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + count);
+    Console.close();
+  },
+  printSuccess(count) {
     Console.print(MESSAGE.PRINT_GAME_RESULT + MESSAGE.SUCCESS);
     Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + count);
     Console.close();
