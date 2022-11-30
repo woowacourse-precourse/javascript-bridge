@@ -1,4 +1,4 @@
-const { COMMAND_VALUE } = require("./constants/Constant");
+const { COMMAND_VALUE, GAME_RESOURCE } = require("./constants/Constant");
 
 class BridgeGame {
   constructor(userMoveArray, gameTryCount) {
@@ -31,11 +31,11 @@ class BridgeGame {
     for (let i = this.userMoveArray.length - 1; i < bridge.length; i++) {
       if (bridge[i] === this.userMoveArray[i]) {
         if (bridge.length === this.userMoveArray.length) {
-          return "allRight";
+          return GAME_RESOURCE.ALLRIGHT;
         }
-        return "right";
+        return GAME_RESOURCE.RIGHT;
       }
-      return "wrong";
+      return GAME_RESOURCE.WRONG;
     }
   }
 
