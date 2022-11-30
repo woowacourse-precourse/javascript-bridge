@@ -1,20 +1,53 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { COMMAND_VALUE, GAME_RESOURCE } = require("./constants/Constant");
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  constructor(userMoveArray, gameTryCount) {
+    this.userMoveArray = userMoveArray;
+    this.gameTryCount = gameTryCount;
+  }
+
+  getCount(gameTryCount) {
+    this.gameTryCount = gameTryCount;
+    return this.gameTryCount;
+  }
+
+  plusCount() {
+    this.gameTryCount += 1;
+    return this.gameTryCount;
+  }
+
+  move(moveKey, userMoveArray) {
+    if (moveKey === COMMAND_VALUE.UP) {
+      userMoveArray.push("U");
+    } else if (moveKey === COMMAND_VALUE.DOWN) {
+      userMoveArray.push("D");
+    }
+    this.userMoveArray = userMoveArray;
+    return userMoveArray;
+  }
+
+  compareMove(bridge, userMoveArray) {
+    this.userMoveArray = userMoveArray;
+    for (let i = this.userMoveArray.length - 1; i < bridge.length; i++) {
+      if (bridge[i] === this.userMoveArray[i]) {
+        if (bridge.length === this.userMoveArray.length) {
+          return GAME_RESOURCE.ALLRIGHT;
+        }
+        return GAME_RESOURCE.RIGHT;
+      }
+      return GAME_RESOURCE.WRONG;
+    }
+  }
+
+  getMap(userMoveArray) {
+    this.userMoveArray = userMoveArray;
+    return this.userMoveArray;
+  }
+
+  retry(retryOrCloseKey) {
+    if (retryOrCloseKey === COMMAND_VALUE.RETRY) return 1;
+    if (retryOrCloseKey === COMMAND_VALUE.QUIT) return 0;
+  }
 }
 
 module.exports = BridgeGame;
