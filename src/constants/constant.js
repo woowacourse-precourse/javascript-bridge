@@ -25,8 +25,8 @@ const COMMAND_VALUE = {
 };
 
 const GAME_RESOURCE = {
-  LEFT_BRACKET: "[ ",
-  RIGHT_BRACKET: " ]",
+  START_BRACKET: "[ ",
+  END_BRACKET: " ]",
   VERTICAL: " | ",
   CAN_GO: "O",
   CANT_GO: "X",
