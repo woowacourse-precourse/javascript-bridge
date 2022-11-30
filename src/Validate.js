@@ -27,9 +27,8 @@ const Validate = {
 
   checkMovingKey(value) {
     try {
-      const check = value.toUpperCase();
-      if (check === COMMAND_VALUE.UP || check === COMMAND_VALUE.DOWN) {
-        return check;
+      if (value === COMMAND_VALUE.UP || value === COMMAND_VALUE.DOWN) {
+        return value;
       }
       throw err;
     } catch (err) {
