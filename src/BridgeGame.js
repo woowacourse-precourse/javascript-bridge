@@ -1,40 +1,39 @@
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { print } = require('./Utils');
-
+const { GAME_COMMAND } = require('./constants/Constants');
+/**
+ * 다리 건너기 게임을 관리하는 클래스
+ */
 class BridgeGame {
-  #size;
   #bridge;
-  #tryCount;
   #userInputArray;
+  #tryCount;
   #gameStatus;
 
   initGame(size) {
-    this.#size = size;
-    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
-    this.#userInputArray = [];
+    this.#bridge = BridgeMaker.makeBridge(size, generate);
     this.#tryCount = 1;
     this.#gameStatus = false;
-    this.topText = '';
-    this.bottomText = '';
+    this.resetGame();
   }
 
   showResult() {
     return `[${this.topText}]\n[${this.bottomText}]\n`;
   }
-  
+
   buildResult(correct) {
     const len = this.#userInputArray.length;
     const value = this.#userInputArray[len - 1];
     const ox = correct ? ' O ' : ' X ';
 
-    if (value == 'U') {
+    if (value == GAME_COMMAND.UP) {
       this.topText = this.buildCorrectText(len, this.topText, ox);
       this.bottomText = this.buildEmptyText(len, this.bottomText);
-    } else {
-      this.topText = this.buildEmptyText(len, this.topText);
-      this.bottomText = this.buildCorrectText(len, this.bottomText, ox);
+      return;
     }
+
+    this.topText = this.buildEmptyText(len, this.topText);
+    this.bottomText = this.buildCorrectText(len, this.bottomText, ox);
   }
 
   buildCorrectText(len, text, ox) {
@@ -50,8 +49,8 @@ class BridgeGame {
   }
 
   isCorrect(input) {
-    const currentIndex = this.#userInputArray.length;
-    return this.#bridge[currentIndex] == input;
+    const currentIdx = this.#userInputArray.length;
+    return this.#bridge[currentIdx] == input;
   }
 
   move(input, correct) {
@@ -60,25 +59,30 @@ class BridgeGame {
   }
 
   retry(input) {
-    if (input == 'R') {
+    if (input == GAME_COMMAND.RETRY) {
+      this.resetGame();
       this.#tryCount += 1;
-      this.#userInputArray = [];
-      this.topText = '';
-      this.bottomText = '';
       return true;
     }
 
     return false;
   }
 
+  resetGame() {
+    this.#userInputArray = [];
+    this.topText = '';
+    this.bottomText = '';
+  }
+
   isFinish() {
-    return (this.#gameStatus = this.#userInputArray.length == this.#size);
+    this.#gameStatus = this.#userInputArray.length == this.#bridge.length;
+    return this.#gameStatus;
   }
 
   finishGame() {
-    print(
-      `게임 성공 여부: ${this.#gameStatus ? '성공' : '실패'}\n 총 시도한 횟수: ${this.#tryCount}`
-    );
+    return `게임 성공 여부: ${this.#gameStatus ? '성공' : '실패'}\n총 시도한 횟수: ${
+      this.#tryCount
+    }`;
   }
 }
 

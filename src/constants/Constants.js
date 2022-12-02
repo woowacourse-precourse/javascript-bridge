@@ -3,6 +3,14 @@ const GAME_RANGE = Object.freeze({
   END_INCLUSIVE: 20
 });
 
+const GAME_COMMAND = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q'
+});
+
 module.exports = {
-  GAME_RANGE
+  GAME_RANGE,
+  GAME_COMMAND
 };
