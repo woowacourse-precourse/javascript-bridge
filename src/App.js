@@ -1,18 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeGame = require('./BridgeGame');
+const InputView = require('./view/InputView');
 
 const { GAME_MESSAGE } = require('./utils/constants');
 
 class App {
-  #bridgeGame;
-
-  constructor() {
-    this.#bridgeGame = new BridgeGame();
-  }
-
   play() {
     Console.print(GAME_MESSAGE.startCommand);
-    this.#bridgeGame.start();
+    InputView.readBridgeSize();
+
+    return this;
   }
 }
 
