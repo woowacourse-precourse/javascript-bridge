@@ -1,4 +1,4 @@
-const BridgeService = require('../service/BridgeService');
+const BridgeService = require('../service/BridgeGame');
 const { ERROR_MESSAGE } = require('../utils/constants');
 
 let instance = null;

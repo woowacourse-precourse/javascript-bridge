@@ -1,4 +1,4 @@
-const BridgeService = require('../../src/service/BridgeService');
+const BridgeService = require('../../src/service/BridgeGame');
 
 const MissionUtils = require('@woowacourse/mission-utils');
 

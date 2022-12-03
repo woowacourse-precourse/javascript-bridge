@@ -6,7 +6,7 @@ const BridgeFinalResult = require('./domain/BridgeFinalResult');
 
 const BridgeRepository = require('../repository/BridgeRepository');
 
-class BridgeService {
+class BridgeGame {
   #bridgeRepository;
 
   constructor() {
@@ -56,4 +56,4 @@ class BridgeService {
   }
 }
 
-module.exports = BridgeService;
+module.exports = BridgeGame;

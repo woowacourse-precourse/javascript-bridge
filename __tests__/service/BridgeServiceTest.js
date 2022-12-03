@@ -1,4 +1,4 @@
-const BridgeService = require('../../src/service/BridgeService');
+const BridgeService = require('../../src/service/BridgeGame');
 
 const MissionUtils = require('@woowacourse/mission-utils');
 
@@ -27,7 +27,7 @@ const makeInput = ({ input, moveResult, gameResult }) => {
     input,
     moveResult,
     gameResult,
-    service: startService('3')
+    service: startService('3'),
   };
 };
 
@@ -38,53 +38,53 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
         input: ['U', 'D'],
         moveResult: [
           ['O', ' '],
-          [' ', 'X']
+          [' ', 'X'],
         ],
         gameResult: {
           result: GAME_RESULT_STATE.fail,
-          tryCount: 1
-        }
-      })
+          tryCount: 1,
+        },
+      }),
     ],
     [
       makeInput({
         input: ['U', 'U', 'D'],
         moveResult: [
           ['O', 'O', ' '],
-          [' ', ' ', 'X']
+          [' ', ' ', 'X'],
         ],
         gameResult: {
           result: GAME_RESULT_STATE.fail,
-          tryCount: 1
-        }
-      })
+          tryCount: 1,
+        },
+      }),
     ],
     [
       makeInput({
         input: ['U', 'U'],
         moveResult: [
           ['O', 'O'],
-          [' ', ' ']
+          [' ', ' '],
         ],
         gameResult: {
           result: GAME_RESULT_STATE.try,
-          tryCount: 1
-        }
-      })
+          tryCount: 1,
+        },
+      }),
     ],
     [
       makeInput({
         input: ['U', 'U', 'U'],
         moveResult: [
           ['O', 'O', 'O'],
-          [' ', ' ', ' ']
+          [' ', ' ', ' '],
         ],
         gameResult: {
           result: GAME_RESULT_STATE.success,
-          tryCount: 1
-        }
-      })
-    ]
+          tryCount: 1,
+        },
+      }),
+    ],
   ])(
     '다리 길이 입력 시 시작데이터가 잘 만들어지는 지 확인',
     ({ input, gameResult, moveResult, service }) => {
