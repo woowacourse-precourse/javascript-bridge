@@ -46,10 +46,10 @@ class BridgeInteractPlayer {
     this.playerGoResultOutput(this.#bridgeGame.move(this.#player, direction));
   }
 
-  playerGoResultOutput([resultBridgeArr, status]) {
+  playerGoResultOutput({ bridgeResult, status }) {
     OutputView.printResult(
       this.#bridgeGameShape
-        .getCurrentBridgeGameShape(resultBridgeArr, status)
+        .getCurrentBridgeGameShape(bridgeResult, status)
         .getCurrentShape()
     );
     this.playerGoBridgeNext(status);
@@ -76,19 +76,12 @@ class BridgeInteractPlayer {
   }
 
   playerDicisionRetry(command) {
-    if (command === BRIDGE.GAME.RETRY) {
-      this.bridgeGameRetry();
-    }
-    if (command === BRIDGE.GAME.END) {
-      this.playerEndThisGame(
-        this.#bridgeGameShape.getCurrentShape(),
-        GAME.RESULT.FAIL
-      );
-    }
+    if (command === BRIDGE.GAME.RETRY) this.bridgeGameRetry();
+    if (command === BRIDGE.GAME.END) this.playerEndThisGame(GAME.RESULT.FAIL);
   }
 
   bridgeGameRetry() {
-    this.#player.bridgeGameRetry();
+    this.#player.gameRetry();
     this.#bridgeGame.retry();
     this.playerInputBridgeDirection();
   }

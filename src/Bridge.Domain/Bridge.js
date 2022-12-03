@@ -5,14 +5,14 @@ class Bridge {
   }
 
   getBridgePosition(pos) {
-    return this.#bridgeArr[pos];
+    return this.#bridgeArr[pos - 1];
   }
 
   getBridgeSliceArrFirstToPosition(pos) {
-    return this.#bridgeArr.slice(0, pos + 1);
+    return this.#bridgeArr.slice(0, pos);
   }
 
-  getBridgeArrayLength() {
+  getBridgeLength() {
     return this.#bridgeArr.length;
   }
 

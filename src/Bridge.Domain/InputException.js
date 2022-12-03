@@ -4,10 +4,10 @@ const exception = (ment) => new Error(`[ERROR] ${ment}`);
 
 const InputException = {
   BridgeSizeValidate(size) {
-    const intSize = parseInt(size);
+    const intSize = Number(size);
     if (size < BRIDGE.SIZE.MIN || size > BRIDGE.SIZE.MAX)
       throw exception("올바른 다리 사이즈가 아닙니다.");
-    if (isNaN(intSize)) throw exception("숫자만 입력가능합니다.");
+    if (Number.isNaN(intSize)) throw exception("숫자만 입력가능합니다.");
   },
 
   playerDirectionValidate(direction) {

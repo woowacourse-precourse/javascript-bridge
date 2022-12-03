@@ -25,15 +25,26 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(player, playerDirection) {
-    const index = player.getCurrentPositionAndMovePlayer();
+    const bridgeLength = this.#bridge.getBridgeLength();
+    const index = player.getCurrentPositionAndMovePlayer(bridgeLength);
     const answerDirection = this.#bridge.getBridgePosition(index);
-    if (playerDirection !== answerDirection) this.#status = GAME.STATUS.FAIL;
-    if (
-      playerDirection === answerDirection &&
-      index + 1 === this.#bridge.getBridgeArrayLength()
-    )
-      this.#status = GAME.STATUS.END;
-    return [this.#bridge.getBridgeSliceArrFirstToPosition(index), this.#status];
+    const moveResult = playerDirection === answerDirection;
+    const bridgeResult = this.setGameMoveStatus({
+      moveResult,
+      index,
+      bridgeLength,
+    }).getBridgeCurrentBridgeShape(index);
+    return { bridgeResult, status: this.#status };
+  }
+
+  setGameMoveStatus({ moveResult, index, bridgeLength }) {
+    if (!moveResult) this.#status = GAME.STATUS.FAIL;
+    if (moveResult && index === bridgeLength) this.#status = GAME.STATUS.END;
+    return this;
+  }
+
+  getBridgeCurrentBridgeShape(index) {
+    return this.#bridge.getBridgeSliceArrFirstToPosition(index);
   }
 
   /**

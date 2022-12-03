@@ -17,10 +17,10 @@ class BridgeGameShape {
       arr = this.upBridgeShape(bridgeArr);
     if (status === GAME.STATUS.FAIL)
       arr = this.upBridgeShapeWhenFail(bridgeArr);
-    const UpShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
+    const upShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
       BRIDGE_PRINT.END
     }`;
-    return UpShape;
+    return upShape;
   }
 
   upBridgeShape(bridgeArr) {

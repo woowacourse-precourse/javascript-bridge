@@ -3,9 +3,7 @@ const GAME = {
   END: "최종 게임 결과",
   SUCCESS_END: "게임 성공 여부: 성공",
   FAILURE_END: "게임 성공 여부: 실패",
-  ALL_RETRY_COUNT(count) {
-    return `총 시도한 횟수: ${count}`;
-  },
+  RETRY_COUNT: "총 시도한 횟수: ",
 };
 
 const INPUT = {

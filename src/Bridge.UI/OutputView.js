@@ -34,13 +34,15 @@ const OutputView = {
     return;
   },
 
-  printGameEnd(resultMap, isGameWin, reTryCount) {
+  printGameEnd(resultMap, isGameWin) {
+    const gameResultMessage = isGameWin ? GAME.SUCCESS_END : GAME.FAILURE_END;
+
     Console.print(GAME.END);
     Console.print(resultMap);
-    if (isGameWin) Console.print(GAME.SUCCESS_END);
-    if (!isGameWin) Console.print(GAME.FAILURE_END);
-    Console.print(GAME.ALL_RETRY_COUNT(reTryCount));
+    Console.print(gameResultMessage);
+    Console.print(`${GAME.RETRY_COUNT}${reTryCount}`);
     Console.close();
+
     return;
   },
 };

@@ -7,14 +7,14 @@ class Player {
     this.#gameTryCount = 1;
   }
 
-  getCurrentPositionAndMovePlayer() {
-    return this.#bridgePostion++;
+  getCurrentPositionAndMovePlayer(bridgeLength) {
+    if (bridgeLength > this.#bridgePostion) this.#bridgePostion += 1;
+    return this.#bridgePostion;
   }
 
-  bridgeGameRetry() {
+  gameRetry() {
     this.#bridgePostion = 0;
-    this.#gameTryCount++;
-    return this;
+    this.#gameTryCount += 1;
   }
 
   getBridgeGameTryCount() {
