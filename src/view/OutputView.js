@@ -11,7 +11,7 @@ const OutputView = {
   moveMapTemplate(outputMap) {
     return [
       OutputView.makeMiniTemplate(outputMap[0]),
-      OutputView.makeMiniTemplate(outputMap[1])
+      OutputView.makeMiniTemplate(outputMap[1]),
     ];
   },
 
@@ -19,7 +19,7 @@ const OutputView = {
     return [
       '',
       `게임 성공 여부: ${outputExit.result}`,
-      `총 시도한 횟수: ${outputExit.tryCount}`
+      `총 시도한 횟수: ${outputExit.tryCount}`,
     ];
   },
 
@@ -33,12 +33,12 @@ const OutputView = {
   printResult() {
     Console.print(GAME_MESSAGE.final);
     OutputView.printMap();
-    OutputView.finalResultTemplate(
-      controller.outputExit()
-    ).forEach((sentence) => Console.print(sentence));
+    OutputView.finalResultTemplate(controller.outputExit()).forEach(
+      (sentence) => Console.print(sentence)
+    );
 
     Console.close();
-  }
+  },
 };
 
 module.exports = OutputView;

@@ -11,7 +11,7 @@ class BridgeFinalResult {
     return {
       randomBridge: this.#repo.read(MODEL_KEY.randomBridge),
       userBridge: this.#repo.read(MODEL_KEY.userBridge),
-      tryCount: this.#repo.read(MODEL_KEY.tryCount)
+      tryCount: this.#repo.read(MODEL_KEY.tryCount),
     };
   }
 

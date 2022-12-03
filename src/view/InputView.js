@@ -23,7 +23,7 @@ const InputView = {
 
   readGameCommand(input) {
     InputView.validate(new BridgeRestartExitException(input));
-  }
+  },
 };
 
 module.exports = InputView;

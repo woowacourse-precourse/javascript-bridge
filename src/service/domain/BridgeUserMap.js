@@ -1,7 +1,7 @@
 const {
   MODEL_KEY,
   BRIDGE_DIRECTION,
-  BRIDGE_CHECK
+  BRIDGE_CHECK,
 } = require('../../utils/constants');
 
 class BridgeUserMap {
@@ -14,7 +14,7 @@ class BridgeUserMap {
   #getRepoData() {
     return {
       randomBridge: this.#repo.read(MODEL_KEY.randomBridge),
-      userBridge: this.#repo.read(MODEL_KEY.userBridge)
+      userBridge: this.#repo.read(MODEL_KEY.userBridge),
     };
   }
 
@@ -40,7 +40,7 @@ class BridgeUserMap {
   getOutput() {
     return [
       this.#makeOneBridgeFor(BRIDGE_DIRECTION.up),
-      this.#makeOneBridgeFor(BRIDGE_DIRECTION.down)
+      this.#makeOneBridgeFor(BRIDGE_DIRECTION.down),
     ];
   }
 }

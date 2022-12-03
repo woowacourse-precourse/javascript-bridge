@@ -16,7 +16,7 @@ class BridgeService {
   start(inputLength) {
     const bridgeStart = new BridgeStart({
       input: inputLength,
-      repo: this.#bridgeRepository
+      repo: this.#bridgeRepository,
     });
 
     bridgeStart.store();
@@ -25,7 +25,7 @@ class BridgeService {
   recordMove(command) {
     const bridgeDirection = new BridgeDirection({
       input: command,
-      repo: this.#bridgeRepository
+      repo: this.#bridgeRepository,
     });
 
     bridgeDirection.store();
@@ -33,7 +33,7 @@ class BridgeService {
 
   restart() {
     const bridgeRestart = new BridgeRestart({
-      repo: this.#bridgeRepository
+      repo: this.#bridgeRepository,
     });
 
     bridgeRestart.store();
@@ -41,7 +41,7 @@ class BridgeService {
 
   getMoveResult() {
     const bridgeUserMap = new BridgeUserMap({
-      repo: this.#bridgeRepository
+      repo: this.#bridgeRepository,
     });
 
     return bridgeUserMap.getOutput();
@@ -49,7 +49,7 @@ class BridgeService {
 
   getGameResult() {
     const bridgeFinalResult = new BridgeFinalResult({
-      repo: this.#bridgeRepository
+      repo: this.#bridgeRepository,
     });
 
     return bridgeFinalResult.getOutput();

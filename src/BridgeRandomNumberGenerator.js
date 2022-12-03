@@ -8,7 +8,7 @@ const BridgeRandomNumberGenerator = {
       BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE,
       BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE
     );
-  }
+  },
 };
 
 module.exports = BridgeRandomNumberGenerator;
