@@ -33,9 +33,9 @@ const OutputView = {
   printResult() {
     Console.print(GAME_MESSAGE.final);
     OutputView.printMap();
-    OutputView.finalResultTemplate(controller.outputExit()).forEach(
-      (sentence) => Console.print(sentence)
-    );
+    OutputView.finalResultTemplate(
+      controller.outputExit()
+    ).forEach((sentence) => Console.print(sentence));
 
     Console.close();
   },
