@@ -6,9 +6,10 @@ const OutputView = {
   },
 
   printResult(bg) {
+    const { isEndGame, tryCount } = bg.getGameResult();
     print('최종 게임 결과');
-    print(bg.showResult());
-    print(bg.finishGame());
+    this.printMap(bg);
+    print(`게임 성공 여부: ${isEndGame}\n총 시도한 횟수: ${tryCount}`);
   }
 };
 

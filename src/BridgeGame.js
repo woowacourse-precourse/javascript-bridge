@@ -79,10 +79,11 @@ class BridgeGame {
     return this.#gameStatus;
   }
 
-  finishGame() {
-    return `게임 성공 여부: ${this.#gameStatus ? '성공' : '실패'}\n총 시도한 횟수: ${
-      this.#tryCount
-    }`;
+  getGameResult() {
+    const isEndGame = this.#gameStatus ? '성공' : '실패';
+    const tryCount = this.#tryCount;
+
+    return { isEndGame, tryCount };
   }
 }
 

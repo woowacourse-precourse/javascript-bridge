@@ -13,7 +13,7 @@ const BridgeMaker = {
       array.push(number == 1 ? 'U' : 'D');
     }
 
-    return [...array];
+    return array;
   }
 };
 
