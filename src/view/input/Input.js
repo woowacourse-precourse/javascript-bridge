@@ -1,8 +1,8 @@
 const controller = require('../../controller/BridgeController');
 
-const BridgeLengthException = require('../validate/BridgeLengthException');
-const BridgeUpDownException = require('../validate/BridgeUpDownException');
-const BridgeRestartExitException = require('../validate/BridgeRestartExitException');
+const BridgeLengthException = require('./validate/BridgeLengthException');
+const BridgeUpDownException = require('./validate/BridgeUpDownException');
+const BridgeRestartExitException = require('./validate/BridgeRestartExitException');
 
 class Input {
   #validate(exceptInstance) {
