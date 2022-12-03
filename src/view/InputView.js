@@ -1,8 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const BridgeLengthException = require('./validate/BridgeLengthException');
-const BridgeUpDownException = require('./validate/BridgeUpDownException');
-const BridgeRestartExitException = require('./validate/BridgeRestartExitException');
+const Input = require('./input/Input');
 
 const OutputView = require('./OutputView');
 const controller = require('../controller/BridgeController');
@@ -16,30 +14,12 @@ const {
 } = require('../utils/constants');
 
 const InputView = {
-  validate(exceptInstance) {
-    exceptInstance.isValidate();
-  },
-
-  inputBridgeSize(input) {
-    InputView.validate(new BridgeLengthException(input));
-
-    controller.inputBridgeLength(input);
-  },
-
-  inputMoveCommand(input) {
-    InputView.validate(new BridgeUpDownException(input));
-
-    controller.inputBridgeUpDown(input);
-  },
-
-  inputGameCommand(input) {
-    InputView.validate(new BridgeRestartExitException(input));
-  },
+  input: new Input(),
 
   readBridgeSize() {
     Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
       errorCheckFor(
-        () => InputView.inputBridgeSize(bridgeLength),
+        () => this.input.inputBridgeSize(bridgeLength),
         () => this.readBridgeSize()
       );
 
@@ -59,7 +39,7 @@ const InputView = {
   readGameCommand() {
     Console.readLine(GAME_QUESTION.gameCommand, (command) => {
       errorCheckFor(
-        () => InputView.inputGameCommand(command),
+        () => this.input.inputGameCommand(command),
         () => this.readGameCommand()
       );
 
@@ -68,7 +48,7 @@ const InputView = {
   },
 
   successMoveEvent(command) {
-    InputView.inputMoveCommand(command);
+    this.input.inputMoveCommand(command);
     OutputView.printMap();
     this.checkGameResult(controller.outputExit().result);
   },
