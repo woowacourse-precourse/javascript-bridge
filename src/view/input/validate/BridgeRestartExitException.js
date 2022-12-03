@@ -1,5 +1,5 @@
 const Exceptionable = require('./Exceptionable');
-const { ERROR_MESSAGE, REGEX } = require('../../utils/constants');
+const { ERROR_MESSAGE, REGEX } = require('../../../utils/constants');
 
 class BrdgeRestartExitException extends Exceptionable {
   #command;
