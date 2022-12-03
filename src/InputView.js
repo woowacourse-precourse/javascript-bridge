@@ -1,21 +1,49 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { readLine, close } = require('./Utils');
+const BridgeGame = require('./BridgeGame');
+const { validateBridgeLength, validateMovingValue, validateEndValue } = require('./Validation');
+const OutputView = require('./OutputView');
+const { RIDGE_LENGTH_MESSAGE, MOVE_MESSAGE, RETRY_MESSAGE } = require('./constants/Message');
+const bg = new BridgeGame();
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize() {
+    readLine(RIDGE_LENGTH_MESSAGE, this.onInputBridge.bind(this));
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  onInputBridge(input) {
+    const size = Number(input);
+    validateBridgeLength(input);
+    bg.initGame(size);
+    readLine(MOVE_MESSAGE, this.readMoving.bind(this));
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readMoving(input) {
+    validateMovingValue(input);
+    const correct = bg.isCorrect(input);
+
+    bg.move(input, correct);
+    OutputView.printMap(bg);
+
+    if (!correct) {
+      return readLine(RETRY_MESSAGE, this.readGameCommand.bind(this));
+    }
+
+    if (bg.isFinish()) {
+      OutputView.printResult(bg);
+      close();
+    } else {
+      readLine(MOVE_MESSAGE, this.readMoving.bind(this));
+    }
+  },
+
+  readGameCommand(input) {
+    validateEndValue(input);
+
+    if (bg.retry(input)) return readLine(MOVE_MESSAGE, this.readMoving.bind(this));
+
+    OutputView.printResult(bg);
+    close();
+  }
 };
 
 module.exports = InputView;

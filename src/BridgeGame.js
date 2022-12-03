@@ -1,20 +1,90 @@
+const BridgeMaker = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { GAME_COMMAND } = require('./constants/Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge;
+  #userInputArray;
+  #tryCount;
+  #gameStatus;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  initGame(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, generate);
+    this.#tryCount = 1;
+    this.#gameStatus = false;
+    this.resetGame();
+  }
+
+  showResult() {
+    return `[${this.topText}]\n[${this.bottomText}]\n`;
+  }
+
+  buildResult(correct) {
+    const len = this.#userInputArray.length;
+    const value = this.#userInputArray[len - 1];
+    const ox = correct ? ' O ' : ' X ';
+
+    if (value == GAME_COMMAND.UP) {
+      this.topText = this.buildCorrectText(len, this.topText, ox);
+      this.bottomText = this.buildEmptyText(len, this.bottomText);
+      return;
+    }
+
+    this.topText = this.buildEmptyText(len, this.topText);
+    this.bottomText = this.buildCorrectText(len, this.bottomText, ox);
+  }
+
+  buildCorrectText(len, text, ox) {
+    return len == 1 ? this.addText(text, `${ox}`) : this.addText(text, `|${ox}`);
+  }
+
+  buildEmptyText(len, text) {
+    return len == 1 ? this.addText(text, '   ') : this.addText(text, '|   ');
+  }
+
+  addText(totalText, text) {
+    return (totalText += text);
+  }
+
+  isCorrect(input) {
+    const currentIdx = this.#userInputArray.length;
+    return this.#bridge[currentIdx] == input;
+  }
+
+  move(input, correct) {
+    this.#userInputArray.push(input);
+    this.buildResult(correct);
+  }
+
+  retry(input) {
+    if (input == GAME_COMMAND.RETRY) {
+      this.resetGame();
+      this.#tryCount += 1;
+      return true;
+    }
+
+    return false;
+  }
+
+  resetGame() {
+    this.#userInputArray = [];
+    this.topText = '';
+    this.bottomText = '';
+  }
+
+  isFinish() {
+    this.#gameStatus = this.#userInputArray.length == this.#bridge.length;
+    return this.#gameStatus;
+  }
+
+  getGameResult() {
+    const isEndGame = this.#gameStatus ? '성공' : '실패';
+    const tryCount = this.#tryCount;
+
+    return { isEndGame, tryCount };
+  }
 }
 
 module.exports = BridgeGame;
