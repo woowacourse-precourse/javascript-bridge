@@ -21,11 +21,11 @@ class BridgeController {
   }
 
   inputBridgeUpDown(command) {
-    this.#service.recordMove(command);
+    this.#service.move(command);
   }
 
   inputRestart() {
-    this.#service.restart();
+    this.#service.retry();
   }
 
   outputmoveMap() {

@@ -22,7 +22,7 @@ class BridgeGame {
     bridgeStart.store();
   }
 
-  recordMove(command) {
+  move(command) {
     const bridgeDirection = new BridgeDirection({
       input: command,
       repo: this.#bridgeRepository,
@@ -31,7 +31,7 @@ class BridgeGame {
     bridgeDirection.store();
   }
 
-  restart() {
+  retry() {
     const bridgeRestart = new BridgeRestart({
       repo: this.#bridgeRepository,
     });

@@ -89,7 +89,7 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
     '다리 길이 입력 시 시작데이터가 잘 만들어지는 지 확인',
     ({ input, gameResult, moveResult, service }) => {
       input.forEach((updown) => {
-        service.recordMove(updown);
+        service.move(updown);
       });
 
       expect(service.getMoveResult()).toEqual(moveResult);

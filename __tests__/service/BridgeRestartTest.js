@@ -18,10 +18,10 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
     const bridgeService = new BridgeService();
 
     bridgeService.start('3');
-    bridgeService.recordMove('U');
-    bridgeService.recordMove('D');
+    bridgeService.move('U');
+    bridgeService.move('D');
 
-    bridgeService.restart();
+    bridgeService.retry();
 
     const moveResult = bridgeService.getMoveResult();
 
