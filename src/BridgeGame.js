@@ -2,10 +2,12 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
+const { errorCheckFor } = require('./utils/inputErrorCheck');
+
 const {
   GAME_QUESTION,
   GAME_RESULT_STATE,
-  GAMEOVER_COMMAND
+  GAMEOVER_COMMAND,
 } = require('./utils/constants');
 
 const controller = require('./controller/BridgeController');
@@ -13,16 +15,18 @@ const controller = require('./controller/BridgeController');
 class BridgeGame {
   start() {
     Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
-      this.#errorCheckFor(
+      errorCheckFor(
         () => InputView.readBridgeSize(bridgeLength),
         () => this.start()
-      ).move();
+      );
+
+      this.move();
     });
   }
 
   move() {
     Console.readLine(GAME_QUESTION.move, (command) => {
-      this.#errorCheckFor(
+      errorCheckFor(
         () => this.#successMoveEvent(command),
         () => this.move()
       );
@@ -31,10 +35,12 @@ class BridgeGame {
 
   retry() {
     Console.readLine(GAME_QUESTION.gameCommand, (command) => {
-      this.#errorCheckFor(
+      errorCheckFor(
         () => InputView.readGameCommand(command),
         () => this.retry()
-      ).#checkGameCommand(command);
+      );
+
+      this.#checkGameCommand(command);
     });
   }
 
@@ -61,17 +67,6 @@ class BridgeGame {
     if (command === GAMEOVER_COMMAND.exit) {
       OutputView.printResult();
     }
-  }
-
-  #errorCheckFor(inputFn, beforePlayFn) {
-    try {
-      inputFn();
-    } catch (error) {
-      Console.print(error.message);
-      beforePlayFn();
-    }
-
-    return this;
   }
 }
 
