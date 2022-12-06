@@ -1,85 +1,13 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const BridgeGame = require("./BridgeGame");
-const { eventEmitter } = require("./EventEmitter");
-const { Console } = require("@woowacourse/mission-utils");
+const BridgeGameController = require("./controller/BridgeGame.controller");
+const BridgeGame = require("./models/BridgeGame");
 
 class App {
-  constructor() {
-    this.game = new BridgeGame();
-    this.eventEmitter = eventEmitter;
-    this.eventInitialize();
-  }
+  #bridgeGame = new BridgeGame();
 
-  eventInitialize() {
-    this.eventEmitter.on("readBridgeSize", (bridgeLength) => {
-      this.setBridge(bridgeLength);
-      this.getMovingDirection();
-    });
-    this.eventEmitter.on("readMoving", (direction) =>
-      this.checkRightDirection(direction)
-    );
-    this.eventEmitter.on("retryOrExit", (answer) => this.retryOrExit(answer));
-  }
+  #controller = new BridgeGameController(this.#bridgeGame);
 
   play() {
-    OutputView.printStart();
-    this.createBridge();
-  }
-
-  createBridge() {
-    InputView.readBridgeSize();
-  }
-
-  setBridge(bridgeLength) {
-    this.game.setBridge(bridgeLength);
-  }
-
-  getMovingDirection() {
-    InputView.readMoving();
-  }
-
-  checkRightDirection(direction) {
-    const result = this.game.move(direction.toUpperCase());
-    this.printResult(result);
-  }
-
-  printResult({ history, winThisTurn, gameEnd }) {
-    OutputView.printMap(history);
-
-    if (gameEnd) return this.finishGame(history);
-    if (winThisTurn) return InputView.readMoving();
-    this.askRetry();
-  }
-
-  finishGame(history) {
-    OutputView.printMap(history, true);
-    OutputView.printResult({
-      result: this.game.result,
-      totalTry: this.game.totalTry,
-    });
-    this.exit();
-  }
-
-  askRetry() {
-    this.game.removeLastHistory();
-    InputView.readGameCommand();
-  }
-
-  exit() {
-    Console.close();
-  }
-
-  retryOrExit(answer) {
-    if (answer === "R") {
-      return this.retry();
-    }
-    this.finishGame(this.game.history);
-  }
-
-  retry() {
-    this.game.retry();
-    this.getMovingDirection();
+    this.#controller.start();
   }
 }
 

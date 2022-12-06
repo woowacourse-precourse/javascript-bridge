@@ -1,7 +1,15 @@
+/*
+ * 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
+ * BridgeMaker에 프로퍼티를 추가할 수 없다.
+ * BridgeMaker의 파일 경로는 변경할 수 없다.
+ * BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
+ */
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
 const BridgeMaker = {
+  DIRECTION: ["D", "U"],
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -10,12 +18,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     while (bridge.length < size) {
-      bridge.push(+generateRandomNumber());
+      const number = generateRandomNumber();
+      bridge.push(BridgeMaker.DIRECTION[number]);
     }
-    return BridgeMaker.changeToLetter(bridge);
-  },
-  changeToLetter(numberBridge) {
-    return numberBridge.map((number) => (number === 1 ? "U" : "D"));
+    return bridge;
   },
 };
 
