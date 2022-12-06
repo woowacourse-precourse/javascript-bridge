@@ -1,8 +1,8 @@
 /*
- *제공된 BridgeMaker 객체를 활용해 구현해야 한다.
- *BridgeMaker에 프로퍼티를 추가할 수 없다.
- *BridgeMaker의 파일 경로는 변경할 수 없다.
- *BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
+ * 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
+ * BridgeMaker에 프로퍼티를 추가할 수 없다.
+ * BridgeMaker의 파일 경로는 변경할 수 없다.
+ * BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
  */
 
 /**

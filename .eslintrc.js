@@ -13,5 +13,6 @@ module.exports = {
     "no-use-before-define": "off",
     "comma-dangle": "off",
     "consistent-return": "off",
+    "import/no-unresolved": "off",
   },
 };
