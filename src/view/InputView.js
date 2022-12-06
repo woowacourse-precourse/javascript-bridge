@@ -16,15 +16,15 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(game) {
+  readBridgeSize(controller) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       try {
         ExceptionHandler.checkBridgeSize(size);
-        game.init(size);
-        InputView.readMoving(game);
+        controller.setupGame(size);
+        controller.readMoving();
       } catch (error) {
         OutputView.printError(error);
-        InputView.readBridgeSize(game);
+        controller.readBridgeSize();
       }
     });
   },
@@ -32,21 +32,16 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(game) {
+  readMoving(controller) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (direction) => {
         try {
           ExceptionHandler.checkDirection(direction);
-          const isLastMove = game.move(direction);
-          const result = game.getResult();
-          OutputView.printMap(result);
-          if (isLastMove) return OutputView.printResult(result);
-          if (result.win) return InputView.readMoving(game);
-          InputView.readGameCommand(game);
+          controller.move(direction);
         } catch (error) {
           OutputView.printError(error);
-          InputView.readMoving(game);
+          controller.readMoving();
         }
       }
     );
@@ -55,17 +50,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(game) {
+  readGameCommand(controller) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (command) => {
         try {
           ExceptionHandler.checkGameCommand(command);
-          if (command === "R") return game.retry();
-          if (command === "Q") return OutputView.printResult(game.getResult());
+          controller.tryOfExit(command);
         } catch (error) {
           OutputView.printError(error);
-          InputView.readGameCommand(game);
+          controller.readGameCommand();
         }
       }
     );
