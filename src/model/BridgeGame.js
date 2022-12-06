@@ -23,13 +23,9 @@ class BridgeGame {
   }
 
   checkSameChar(bridgeWay, userSelect, countIndex) {
-    if (bridgeWay[countIndex] === userSelect[countIndex]) {
-      this.#isSameChar.push('O');
-    }
-    if (bridgeWay[countIndex] !== userSelect[countIndex]) {
-      this.#isSameChar.push('X');
-      this.#isGameOver = true;
-    }
+    bridgeWay[countIndex] === userSelect[countIndex]
+      ? this.#isSameChar.push('O')
+      : (this.#isSameChar.push('X'), (this.#isGameOver = true));
   }
 
   checkUpOrDown(userSelect, countIndex, selectResult) {
