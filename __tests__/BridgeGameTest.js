@@ -14,12 +14,10 @@ describe('다리 건너기 테스트', () => {
 });
 
 describe('재시작 테스트', () => {
-  test('사용자 입력이 R이면 true 출력', () => {
-    const userCommand = 'R';
-    expect(bridgeGame.retry(userCommand)).toBe(true);
-  });
-  test('사용자 입력이 Q이면 false 출력', () => {
-    const userCommand = 'Q';
-    expect(bridgeGame.retry(userCommand)).toBe(false);
+  test.each([
+    ['R', true],
+    ['Q', false],
+  ])('사용자 입력이 %s이면 %s 출력', (command, expected) => {
+    expect(bridgeGame.retry(command)).toBe(expected);
   });
 });
