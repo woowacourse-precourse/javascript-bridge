@@ -12,13 +12,13 @@ class Validator {
 
   checkUserMoving(input) {
     if (input !== 'U' && input !== 'D') {
-      throw new Error(ErrorMessages.U_OR_D);
+      throw new Error(ErrorMessages.INVALID_MOVE);
     }
   }
 
   checkRestartOrQuit(input) {
     if (input !== 'R' && input !== 'Q') {
-      throw new Error('[ERROR] 대문자 R 또는 Q를 입력해주세요.');
+      throw new Error(ErrorMessages.INVALID_COMMAND);
     }
   }
 }
