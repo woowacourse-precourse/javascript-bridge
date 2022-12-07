@@ -2,17 +2,17 @@ const BridgeGame = require('../src/BridgeGame');
 const bridgeGame = new BridgeGame();
 
 describe('다리 건너기 테스트', () => {
-  test('사용자 입력과 다리가 맞지 않으면 X 출력', () => {
-    const userMoving = 'U';
-    const bridge = ['D', 'U', 'D'];
-    expect(bridgeGame.move(userMoving, bridge)).toBe('X');
-  });
-  test('사용자 입력과 다리가 맞지 않으면 O 출력', () => {
-    const userMoving = 'D';
-    const bridge = ['D', 'U', 'D'];
-    expect(bridgeGame.move(userMoving, bridge)).toBe('O');
-  });
+  test.each([
+    ['U', ['D', 'U', 'D'], 'X'],
+    ['D', ['D', 'U', 'D'], 'O'],
+  ])(
+    '사용자가 %s로 움직이면 다리 %s 를 건넌 결과는 %s이다.',
+    (userMoving, bridge, expected) => {
+      expect(bridgeGame.move(userMoving, bridge)).toBe(expected);
+    },
+  );
 });
+
 describe('재시작 테스트', () => {
   test('사용자 입력이 R이면 true 출력', () => {
     const userCommand = 'R';
