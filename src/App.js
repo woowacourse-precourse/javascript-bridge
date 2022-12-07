@@ -69,41 +69,26 @@ class App {
   makeMove(userMoving) {
     if (userMoving === 'U') {
       this.#result.lower.push(' ');
-      this.moveToUpper(userMoving);
+      this.movingResult(userMoving);
     }
     if (userMoving === 'D') {
       this.#result.upper.push(' ');
-      this.moveToLower(userMoving);
+      this.movingResult(userMoving);
     }
   }
 
-  moveToUpper(userMoving) {
+  movingResult(userMoving) {
     const gameResult = this.#bridgeGame.move(userMoving, this.#bridge);
+    const result = userMoving === 'U' ? this.#result.upper : this.#result.lower;
 
     if (gameResult === 'O') {
-      this.#result.upper.push('O');
+      result.push('O');
       this.printMovingResult();
       this.#bridge.shift();
       this.moveToNext(gameResult);
     }
     if (gameResult === 'X') {
-      this.#result.upper.push('X');
-      this.printMovingResult();
-      this.printFinalResult(gameResult);
-    }
-  }
-
-  moveToLower(userMoving) {
-    const gameResult = this.#bridgeGame.move(userMoving, this.#bridge);
-
-    if (gameResult === 'O') {
-      this.#result.lower.push('O');
-      this.printMovingResult();
-      this.#bridge.shift();
-      this.moveToNext(gameResult);
-    }
-    if (gameResult === 'X') {
-      this.#result.lower.push('X');
+      result.push('X');
       this.printMovingResult();
       this.printFinalResult(gameResult);
     }
