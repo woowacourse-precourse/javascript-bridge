@@ -15,7 +15,7 @@ const BridgeMaker = {
       RandomNumbers.push(randomNumber);
     }
 
-    return RandomNumbers.map((number) => (number === 0 ? 'D' : 'U'));
+    return RandomNumbers.map(number => (number === 0 ? 'D' : 'U'));
   },
 };
 

@@ -13,7 +13,7 @@ const OutputView = {
    */
   printMap(upperResult, lowerResult) {
     MissionUtils.Console.print(
-      `[ ${upperResult.join(' | ')} ]\n[ ${lowerResult.join(' | ')} ]`
+      `[ ${upperResult.join(' | ')} ]\n[ ${lowerResult.join(' | ')} ]`,
     );
   },
 
@@ -27,7 +27,7 @@ const OutputView = {
     MissionUtils.Console.print('\n최종 게임 결과\n');
     this.printMap(upperResult, lowerResult);
     MissionUtils.Console.print(
-      `\n게임 성공 여부: ${successOrFail}\n 총 시도한 횟수: ${totalCount}`
+      `\n게임 성공 여부: ${successOrFail}\n 총 시도한 횟수: ${totalCount}`,
     );
   },
 

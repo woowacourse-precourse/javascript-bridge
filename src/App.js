@@ -35,7 +35,7 @@ class App {
   }
 
   getBridgeSize() {
-    InputView.readBridgeSize((bridgeSize) => {
+    InputView.readBridgeSize(bridgeSize => {
       try {
         validator.checkBridgeSize(bridgeSize);
         this.makeBridge(bridgeSize);
@@ -49,13 +49,13 @@ class App {
   makeBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(
       size,
-      BridgeRandomNumberGenerator.generate
+      BridgeRandomNumberGenerator.generate,
     );
     this.getUserMoving();
   }
 
   getUserMoving() {
-    InputView.readMoving((userMoving) => {
+    InputView.readMoving(userMoving => {
       try {
         validator.checkUserMoving(userMoving);
       } catch (error) {
@@ -112,13 +112,13 @@ class App {
       this.#result.upper,
       this.#result.lower,
       gameResult,
-      this.#totalCount
+      this.#totalCount,
     );
     this.getUserCommand();
   }
 
   getUserCommand() {
-    InputView.readGameCommand((command) => {
+    InputView.readGameCommand(command => {
       try {
         validator.checkRestartOrQuit(command);
       } catch (error) {
