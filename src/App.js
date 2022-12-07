@@ -6,8 +6,6 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Validator = require('./Validator');
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const validator = new Validator();
-
 class App {
   #bridge;
   #bridgeGame;
@@ -37,7 +35,7 @@ class App {
   getBridgeSize() {
     InputView.readBridgeSize(bridgeSize => {
       try {
-        validator.checkBridgeSize(bridgeSize);
+        Validator.checkBridgeSize(bridgeSize);
         this.makeBridge(bridgeSize);
       } catch (error) {
         OutputView.printErrorMessages(error);
@@ -57,7 +55,7 @@ class App {
   getUserMoving() {
     InputView.readMoving(userMoving => {
       try {
-        validator.checkUserMoving(userMoving);
+        Validator.checkUserMoving(userMoving);
       } catch (error) {
         OutputView.printErrorMessages(error);
         this.getUserMoving();
@@ -120,7 +118,7 @@ class App {
   getUserCommand() {
     InputView.readGameCommand(command => {
       try {
-        validator.checkRestartOrQuit(command);
+        Validator.checkRestartOrQuit(command);
       } catch (error) {
         OutputView.printErrorMessages(error);
         this.getUserCommand();
