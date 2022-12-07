@@ -3,11 +3,6 @@ const MissionUtils = require('@woowacourse/mission-utils');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  upperResult: '',
-  lowerResult: '',
-  upperLog: '',
-  lowerLog: '',
-
   printStartMessage() {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
   },
@@ -16,33 +11,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(crossingResult, userCommand, tryCount, totalCount) {
-    if (totalCount > 1 && tryCount === 1) {
-      this.log = '';
-    }
-    if (tryCount > 1) {
-      this.upperResult += ' | ';
-      this.lowerResult += ' | ';
-    }
-
-    if (userCommand === 'U' && crossingResult === 'O') {
-      this.upperResult += 'O';
-      this.lowerResult += ' ';
-    }
-    if (userCommand === 'U' && crossingResult === 'X') {
-      this.upperResult += 'X';
-      this.lowerResult += ' ';
-    }
-    if (userCommand === 'D' && crossingResult === 'O') {
-      this.upperResult += ' ';
-      this.lowerResult += 'O';
-    }
-    if (userCommand === 'D' && crossingResult === 'X') {
-      this.upperResult += ' ';
-      this.lowerResult += 'X';
-    }
-    this.log = `\n[ ${this.upperResult} ]\n[ ${this.lowerResult} ]`;
-    MissionUtils.Console.print(this.log);
+  printMap(upperResult, lowerResult) {
+    MissionUtils.Console.print(
+      `[ ${upperResult.join(' | ')} ]\n[ ${lowerResult.join(' | ')} ]`
+    );
   },
 
   /**
@@ -50,10 +22,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(gameResult, totalCount) {
-    MissionUtils.Console.print(`\n최종 게임 결과\n${this.log}`);
+  printResult(upperResult, lowerResult, gameResult, totalCount) {
+    const successOrFail = gameResult === 'O' ? '성공' : '실패';
+    MissionUtils.Console.print('\n최종 게임 결과\n');
+    this.printMap(upperResult, lowerResult);
     MissionUtils.Console.print(
-      `\n게임 성공 여부: ${gameResult}\n 총 시도한 횟수: ${totalCount}`
+      `\n게임 성공 여부: ${successOrFail}\n 총 시도한 횟수: ${totalCount}`
     );
   },
 
