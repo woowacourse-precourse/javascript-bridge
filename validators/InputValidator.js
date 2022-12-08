@@ -17,10 +17,18 @@ class InputValidator {
     throw new Error(INPUT_ERROR.IS_NOT_IN_RANGE);
   }
 
+  static isNaturalNumber (number) {
+    if(Number.isInteger(Number(number))){
+      return true;
+    } 
+    throw new Error(INPUT_ERROR.IS_NOT_NATURAL_NUMBER);
+  }
+
   static isRightBridgeLength (string) {
     this.isBlank(string);
     this.isNumber(string);
     this.isRightRange(string);
+    this.isNaturalNumber(string);
   }
 
   static isUpDown (string) {
