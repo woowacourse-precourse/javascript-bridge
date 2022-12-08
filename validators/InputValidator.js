@@ -7,7 +7,7 @@ class InputValidator {
   }
 
   static isNumber (string) {
-    if (isNaN(string)) throw new Error(INPUT_ERROR.IS_NOT_NUMBER);
+    if (Number.isNaN(Number(string))) throw new Error(INPUT_ERROR.IS_NOT_NUMBER);
   }
 
   static isRightRange (number) {
