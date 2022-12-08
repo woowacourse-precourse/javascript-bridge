@@ -20,6 +20,11 @@ const BRIDGE = {
     SUCCESS: '성공\n',
     FAIL: '실패\n',
   };
+
+  const INPUT_MESSAGE ={
+    RETRY : 'R',
+    QUIT : 'Q',
+  };
   
-  module.exports = { BRIDGE, GAME_MESSAGE };
+  module.exports = { BRIDGE, GAME_MESSAGE, INPUT_MESSAGE };
   

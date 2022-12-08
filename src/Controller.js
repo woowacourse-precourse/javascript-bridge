@@ -1,6 +1,6 @@
 const inputView = require('./InputView');
 const outputView = require('./OutputView');
-const { BRIDGE } = require('../constants/game.constants');
+const { BRIDGE, INPUT_MESSAGE } = require('../constants/game.constants');
 const InputValidator = require('../validators/InputValidator');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
@@ -110,7 +110,7 @@ class Controller {
   }
 
   inputRetryOrQuit (string) {
-    if (string === 'R') {
+    if (string === INPUT_MESSAGE.RETRY) {
       this.#bridgeGame.setList();
       this.moveBrige();
       this.#bridgeGame.retry();
@@ -119,7 +119,7 @@ class Controller {
   }
 
   inputQuit (string) {
-    if (string === 'Q') outputView.printResult(
+    if (string === INPUT_MESSAGE.QUIT) outputView.printResult(
       false,
       this.getUpDownTotalPrintList(),
       this.#bridgeGame.getTryCount(),
