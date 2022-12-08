@@ -90,14 +90,14 @@ class Controller {
       : BRIDGE.UNABLE;
   }
 
-  updateMapArray (sameResult, string) {
-    if (string === BRIDGE.UP && sameResult) {
-      this.#bridgeGame.getUpList().push(sameResult);
+  updateMapArray (marker, string) {
+    if (string === BRIDGE.UP && marker) {
+      this.#bridgeGame.getUpList().push(marker);
       this.#bridgeGame.getDownList().push(' ');
     }
-    if (string === BRIDGE.DOWN && sameResult) {
+    if (string === BRIDGE.DOWN && marker) {
       this.#bridgeGame.getUpList().push(' ');
-      this.#bridgeGame.getDownList().push(sameResult);
+      this.#bridgeGame.getDownList().push(marker);
     }
   }
 
