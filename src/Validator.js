@@ -1,4 +1,4 @@
-const ErrorMessages = require('./ErrorMessage');
+const ErrorMessages = require('./ErrorMessages');
 
 class Validator {
   static checkBridgeSize(input) {
