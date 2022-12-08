@@ -58,7 +58,7 @@ class Controller {
 
   drawBridgeMap (string) {
     this.#bridgeGame.move(string);
-    this.setMapArray(this.sameBridge(this.#bridgeGame.getMoveIndex()), string);
+    this.updateMapArray(this.sameBridge(this.#bridgeGame.getMoveIndex()), string);
     outputView.printMap(
       this.getUpDownTotalPrintList(),
     );
@@ -90,7 +90,7 @@ class Controller {
       : BRIDGE.UNABLE;
   }
 
-  setMapArray (sameResult, string) {
+  updateMapArray (sameResult, string) {
     if (string === BRIDGE.UP && sameResult) {
       this.#bridgeGame.getUpList().push(sameResult);
       this.#bridgeGame.getDownList().push(' ');
