@@ -25,6 +25,11 @@ const BRIDGE = {
     RETRY : 'R',
     QUIT : 'Q',
   };
+
+  const RANGE = {
+    MIN : 3,
+    MAX : 20,
+  };
   
-  module.exports = { BRIDGE, GAME_MESSAGE, INPUT_MESSAGE };
+  module.exports = { BRIDGE, GAME_MESSAGE, INPUT_MESSAGE, RANGE };
   
