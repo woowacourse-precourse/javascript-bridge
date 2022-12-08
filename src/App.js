@@ -1,10 +1,8 @@
 const Controller = require('./Controller');
 
 class App {
-  constructor () {
-    this.controller = new Controller();
-  }
   play() {
+    this.controller = new Controller();
     this.controller.maker();
   }
 }
