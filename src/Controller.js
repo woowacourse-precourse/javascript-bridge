@@ -91,14 +91,10 @@ class Controller {
   }
 
   updateMapArray (marker, string) {
-    if (string === BRIDGE.UP && marker) {
-      this.#bridgeGame.getUpList().push(marker);
-      this.#bridgeGame.getDownList().push(' ');
-    }
-    if (string === BRIDGE.DOWN && marker) {
-      this.#bridgeGame.getUpList().push(' ');
-      this.#bridgeGame.getDownList().push(marker);
-    }
+    this.#bridgeGame.getUpList()
+        .push(string === BRIDGE.UP?marker:' ');
+    this.#bridgeGame.getDownList()
+        .push(string === BRIDGE.DOWN?marker:' ');
   }
 
   getPrintList (list) {
