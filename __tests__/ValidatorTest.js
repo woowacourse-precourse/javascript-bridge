@@ -28,4 +28,13 @@ describe('다리 길이 유효성 검사', () => {
       }).toThrow(ErrorMessages.INVALID_MOVE);
     },
   );
+
+  test.each([['1'], ['1e'], ['r']])(
+    '사용자가 대문자 R 또는 Q를 입력하지 않고 %s를 입력하면 예외처리',
+    size => {
+      expect(() => {
+        Validator.checkRestartOrQuit(size);
+      }).toThrow(ErrorMessages.INVALID_COMMAND);
+    },
+  );
 });
