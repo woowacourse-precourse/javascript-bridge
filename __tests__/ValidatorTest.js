@@ -19,4 +19,13 @@ describe('다리 길이 유효성 검사', () => {
       }).toThrow(ErrorMessages.INVALID_SIZE);
     },
   );
+
+  test.each([['1'], ['1e'], ['u']])(
+    '사용자가 대문자 U 또는 D를 입력하지 않고 %s를 입력하면 예외처리',
+    size => {
+      expect(() => {
+        Validator.checkUserMoving(size);
+      }).toThrow(ErrorMessages.INVALID_MOVE);
+    },
+  );
 });
