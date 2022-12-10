@@ -67,3 +67,17 @@
 - #### _printErrorMessages(error)_
 
   - [x] 값이 유효하지 않다면 에러 메시지를 출력한다.
+
+- ### Validator - 사용자의 입력값이 유효한지 확인한다.
+
+  - #### _checkBridgeSize(input)_
+
+  - [x] 다리 길이 입력값이 유효한지 확인하고, 아니라면 에러 메시지를 출력한다.
+
+  - #### \_checkUserMoving(input)
+
+  - [x] 유저 이동 입력값이 유효한지 확인하고, 아니라면 에러 메시지를 출력한다.
+
+  - #### _checkRestartOrQuit(input)_
+
+  - -[x] 재실행 입력값이 유효한지 확인하고, 아니라면 에러 메시지를 출력한다.
