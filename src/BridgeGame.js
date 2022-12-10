@@ -58,6 +58,14 @@ class BridgeGame {
     return this.#tryCount;
   }
 
+  setUpList (string) { 
+    this.#upList.push(string);
+  }
+
+  setDownList (string) {
+    this.#downList.push(string);
+  }
+
   getUpList () {
     return this.#upList;
   }
