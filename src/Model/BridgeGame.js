@@ -1,7 +1,7 @@
-const BridgeMaker = require("../BridgeMaker");
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
-const { GAME_OVER, GAME_CLEAR } = require("../Constant/Constants");
-const ObjectMapping = require("../Mapping/ObjectMapping");
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { GAME_OVER, GAME_CLEAR } = require('../Constant/Constants');
+const ObjectMapping = require('../Mapping/ObjectMapping');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스, 필드 추가가 가능하다.
@@ -58,30 +58,30 @@ class BridgeGame {
 
   retry(command) {
     this.setRetryCount = this.getRetryCount + 1;
-    if (command === "Q") return false;
-    if (command === "R") {
+    if (command === 'Q') return false;
+    if (command === 'R') {
       this.initSelectBridge();
       return true;
     }
   }
 
   makeMap() {
-    const topSquares = this.makeSquares("U");
-    const bottomSquares = this.makeSquares("D");
-    return topSquares + "\n" + bottomSquares;
+    const topSquares = this.makeSquares('U');
+    const bottomSquares = this.makeSquares('D');
+    return topSquares + '\n' + bottomSquares;
   }
 
   makeSquares(type) {
     const selectBridge = this.getSelectBridge;
     const lastIndex = selectBridge.length - 1;
     const squares = selectBridge.reduce((pre, cur, index) => {
-      let string = this.drawOneSquare(cur, type, "O");
-      if (!this.isSame(index, lastIndex)) string += "|";
+      let string = this.drawOneSquare(cur, type, 'O');
+      if (!this.isSame(index, lastIndex)) string += '|';
       if (this.isSame(lastIndex, index) && this.isDie())
-        string = this.drawOneSquare(cur, type, "X");
+        string = this.drawOneSquare(cur, type, 'X');
       return pre + string;
-    }, "[");
-    return squares + "]";
+    }, '[');
+    return squares + ']';
   }
 
   drawOneSquare(cur, type, result) {

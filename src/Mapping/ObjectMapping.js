@@ -1,11 +1,11 @@
 const ObjectMapping = {
   BridgeLineMap: {
-    0: "D",
-    1: "U",
+    0: 'D',
+    1: 'U',
   },
   GameClear: {
-    true: "성공",
-    false: "실패",
+    true: '성공',
+    false: '실패',
   },
 };
 

@@ -1,6 +1,6 @@
-const { GAME_CLEAR, GAME_OVER } = require("../Constant/Constants");
-const BridgeGame = require("../Model/BridgeGame");
-const OutputView = require("../View/OutputView");
+const { GAME_CLEAR, GAME_OVER } = require('../Constant/Constants');
+const BridgeGame = require('../Model/BridgeGame');
+const OutputView = require('../View/OutputView');
 
 const Controller = {
   makeBridgeGame(bridgeSize) {
