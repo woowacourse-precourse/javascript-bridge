@@ -18,7 +18,7 @@ class App {
   }
 
   restart() {
-    if (this.#bridgeGame.bridgeLength() > 0) {
+    if (this.#bridgeGame.allBridgeCrossed()) {
       this.#totalCount += 1;
       this.getUserMove();
     } else {
@@ -70,8 +70,7 @@ class App {
   }
 
   moveToNext(map, gameResult) {
-    if (this.#bridgeGame.bridgeLength() > 0) {
-      console.log(this.#bridgeGame.bridgeLength());
+    if (this.#bridgeGame.allBridgeCrossed()) {
       this.getUserMove();
     } else {
       this.printFinalResult(map, gameResult);

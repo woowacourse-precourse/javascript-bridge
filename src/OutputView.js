@@ -26,7 +26,6 @@ const OutputView = {
    */
   printResult(map, successOrFail, totalCount) {
     MissionUtils.Console.print(`\n${ServiceMessages.FINAL_RESULT}\n`);
-
     this.printMap(map);
     MissionUtils.Console.print(
       `${ServiceMessages.IS_SUCCESS}: ${successOrFail} \n ${ServiceMessages.TOTAL_COUNT}: ${totalCount}\n`,
