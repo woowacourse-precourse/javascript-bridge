@@ -13,9 +13,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(upperResult, lowerResult) {
+  printMap(map) {
     MissionUtils.Console.print(
-      `[ ${upperResult.join(' | ')} ]\n[ ${lowerResult.join(' | ')} ]`,
+      `[ ${map[0].join(' | ')} ]\n[ ${map[1].join(' | ')} ]\n`,
     );
   },
 
@@ -24,12 +24,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(upperResult, lowerResult, gameResult, totalCount) {
-    const successOrFail = gameResult === 'O' ? '성공' : '실패';
-    MissionUtils.Console.print('\n최종 게임 결과\n');
-    this.printMap(upperResult, lowerResult);
+  printResult(map, successOrFail, totalCount) {
+    MissionUtils.Console.print(`\n${ServiceMessages.FINAL_RESULT}\n`);
+
+    this.printMap(map);
     MissionUtils.Console.print(
-      `\n게임 성공 여부: ${successOrFail}\n 총 시도한 횟수: ${totalCount}`,
+      `${ServiceMessages.IS_SUCCESS}: ${successOrFail} \n ${ServiceMessages.TOTAL_COUNT}: ${totalCount}\n`,
     );
   },
 

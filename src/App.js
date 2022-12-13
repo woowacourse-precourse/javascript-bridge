@@ -1,20 +1,16 @@
 const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Validator = require('./Validator');
 const MissionUtils = require('@woowacourse/mission-utils');
+const ServiceMessages = require('./ServiceMessages');
 
 class App {
-  #bridge;
   #bridgeGame;
-  #result = { upper: [], lower: [] };
   #totalCount = 1;
 
   constructor() {
     OutputView.printStartMessage();
-    this.#bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -22,10 +18,9 @@ class App {
   }
 
   restart() {
-    this.#result = { upper: [], lower: [] };
-    if (this.#bridge.length > 0) {
+    if (this.#bridgeGame.bridgeLength() > 0) {
       this.#totalCount += 1;
-      this.getUserMoving();
+      this.getUserMove();
     } else {
       this.#totalCount = 1;
       this.getBridgeSize();
@@ -44,74 +39,50 @@ class App {
     });
   }
 
-  makeBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate,
-    );
-    this.getUserMoving();
+  makeBridge(bridgeSize) {
+    this.#bridgeGame = new BridgeGame(bridgeSize);
+    this.getUserMove();
   }
 
-  getUserMoving() {
-    InputView.readMoving(userMoving => {
+  getUserMove() {
+    InputView.readMoving(userMove => {
       try {
-        Validator.checkUserMoving(userMoving);
+        Validator.checkUserMoving(userMove);
+        this.makeMove(userMove);
       } catch (error) {
         OutputView.printErrorMessages(error);
-        this.getUserMoving();
+        this.getUserMove();
       }
-      this.makeMove(userMoving);
     });
   }
 
-  makeMove(userMoving) {
-    if (userMoving === 'U') {
-      this.#result.lower.push(' ');
-      this.movingResult(userMoving);
-    }
-    if (userMoving === 'D') {
-      this.#result.upper.push(' ');
-      this.movingResult(userMoving);
-    }
-  }
+  makeMove(userMove) {
+    const gameResult = this.#bridgeGame.move(userMove);
+    const map = this.#bridgeGame.makeMap(userMove);
 
-  movingResult(userMoving) {
-    const gameResult = this.#bridgeGame.move(userMoving, this.#bridge);
-    const result = userMoving === 'U' ? this.#result.upper : this.#result.lower;
-
+    OutputView.printMap(map);
     if (gameResult === 'O') {
-      result.push('O');
-      this.printMovingResult();
-      this.#bridge.shift();
-      this.moveToNext(gameResult);
+      this.moveToNext(map, gameResult);
     }
     if (gameResult === 'X') {
-      result.push('X');
-      this.printMovingResult();
-      this.printFinalResult(gameResult);
+      this.printFinalResult(map, gameResult);
     }
   }
 
-  printMovingResult() {
-    OutputView.printMap(this.#result.upper, this.#result.lower);
-  }
-
-  moveToNext(gameResult) {
-    if (this.#bridge.length > 0) {
-      this.getUserMoving();
+  moveToNext(map, gameResult) {
+    if (this.#bridgeGame.bridgeLength() > 0) {
+      console.log(this.#bridgeGame.bridgeLength());
+      this.getUserMove();
     } else {
-      this.printFinalResult(gameResult);
+      this.printFinalResult(map, gameResult);
       this.getBridgeSize();
     }
   }
-  printFinalResult(gameResult) {
-    gameResult === 'X' ? '실패' : '성공';
-    OutputView.printResult(
-      this.#result.upper,
-      this.#result.lower,
-      gameResult,
-      this.#totalCount,
-    );
+  printFinalResult(map, gameResult) {
+    const successOrFail =
+      gameResult === 'O' ? ServiceMessages.SUCCESS : ServiceMessages.FAIL;
+
+    OutputView.printResult(map, successOrFail, this.#totalCount);
     this.getUserCommand();
   }
 
@@ -119,11 +90,11 @@ class App {
     InputView.readGameCommand(command => {
       try {
         Validator.checkRestartOrQuit(command);
+        this.restartOrQuit(command);
       } catch (error) {
         OutputView.printErrorMessages(error);
         this.getUserCommand();
       }
-      this.restartOrQuit(command);
     });
   }
 
