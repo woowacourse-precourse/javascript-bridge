@@ -2,7 +2,7 @@ const {
   validateBridgeSize,
   validateMovingCommand,
   validateGameCommand,
-} = require('../src/Controller/ErrorHandling');
+} = require('../src/ErrorHandler');
 
 const table = {
   bridgeSizeWithNaturalNumberError: [
