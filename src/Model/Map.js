@@ -3,6 +3,7 @@ const { CORRECT, WRONG, UNSELECT } = require('../constants/Message').map;
 
 class Map {
   #upperRow;
+
   #lowerRow;
 
   constructor() {

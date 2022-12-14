@@ -1,5 +1,6 @@
 class Bridge {
   #targetBridge;
+
   #currentIndex;
 
   constructor(targetBridge) {

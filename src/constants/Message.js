@@ -1,6 +1,6 @@
 const { UP, DOWN, RETRY, QUIT } = require('./Command');
 
-const Message = {
+const Message = Object.freeze({
   GAME_START: '다리 건너기 게임을 시작합니다.\n',
   BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
   MOVING_COMMAND: `\n이동할 칸을 선택해주세요. (위: ${UP}, 아래: ${DOWN})\n`,
@@ -19,6 +19,6 @@ const Message = {
     WRONG: 'X',
     UNSELECT: ' ',
   },
-};
+});
 
 module.exports = Message;

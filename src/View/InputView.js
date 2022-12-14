@@ -4,7 +4,7 @@ const {
   validateBridgeSize,
   validateMovingCommand,
   validateGameCommand,
-} = require('../Controller/ErrorHandling');
+} = require('../ErrorHandler');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
