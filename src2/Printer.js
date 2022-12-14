@@ -1,8 +1,8 @@
-const MissionUtiles = require("@woowacourse/mission-utils");
+const OutputView = require("./console/OutputView");
 
 class Printer {
-  text(msg) {
-    MissionUtiles.Console.print(msg);
+  text(message) {
+    OutputView.printText(message);
   }
 }
 
