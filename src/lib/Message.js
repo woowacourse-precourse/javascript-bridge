@@ -1,4 +1,4 @@
-const Message = Object.freeze({
+const MESSAGE = Object.freeze({
   GAME_START: "다리 건너기 게임을 시작합니다.",
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
   BRIDGE_DIRECTION: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
@@ -19,4 +19,4 @@ const Message = Object.freeze({
   SEPARATOR: "|",
 });
 
-module.exports = Message;
+module.exports = MESSAGE;

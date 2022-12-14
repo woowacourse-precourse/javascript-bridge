@@ -1,4 +1,4 @@
-const Constant = require("../lib/Constant");
+const CONSTANT = require("../lib/Constant");
 const Bridge = require("./Bridge");
 const ViewPrinter = require("../view/ViewPrinter");
 const InputPrinter = require("../view/InputPrinter");
@@ -8,17 +8,17 @@ const InputPrinter = require("../view/InputPrinter");
  */
 class BridgeGame {
   #bridge;
-  #inputPrinter
+  #inputPrinter;
   #viewPrinter;
   #state = {
-    tried: Constant.GAME_RESULT.DEFAULT,
-    isWin: Constant.GAME_RESULT.LOSS,
+    tried: CONSTANT.GAME_RESULT.DEFAULT,
+    isWin: CONSTANT.GAME_RESULT.LOSS,
   };
 
   constructor() {
     this.#bridge = new Bridge(this);
     this.#viewPrinter = new ViewPrinter(this);
-    this.#inputPrinter = new InputPrinter(this)
+    this.#inputPrinter = new InputPrinter(this);
   }
 
   setState(result) {
@@ -58,9 +58,9 @@ class BridgeGame {
   move(direction) {
     const index = this.#bridge.getCurrentBridge().length;
 
-    if (direction === Constant.DIRECTION.UP)
+    if (direction === CONSTANT.DIRECTION.UP)
       this.#bridge.moveUpside(direction, index);
-    if (direction === Constant.DIRECTION.DOWN)
+    if (direction === CONSTANT.DIRECTION.DOWN)
       this.#bridge.moveDownside(direction, index);
   }
 
@@ -76,7 +76,7 @@ class BridgeGame {
   }
 
   setWinOrLoss() {
-    if (!this.#bridge.haveXValue()) this.setState(Constant.GAME_RESULT.WIN);
+    if (!this.#bridge.haveXValue()) this.setState(CONSTANT.GAME_RESULT.WIN);
   }
 
   endGame() {

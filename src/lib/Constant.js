@@ -1,4 +1,4 @@
-const Constant = Object.freeze({
+const CONSTANT = Object.freeze({
   BRIDGE: {
     LENGTH: {
       MIN: 3,
@@ -25,4 +25,4 @@ const Constant = Object.freeze({
   },
 });
 
-module.exports = Constant;
+module.exports = CONSTANT;

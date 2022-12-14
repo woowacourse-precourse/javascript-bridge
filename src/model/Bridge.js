@@ -1,4 +1,4 @@
-const Constant = require("../lib/Constant");
+const CONSTANT = require("../lib/Constant");
 
 class Bridge {
   #bridgeGame;
@@ -27,41 +27,42 @@ class Bridge {
   }
 
   setAllBridgeEmpty() {
-    (this.#upsideBridge = []), (this.#downsideBridge = []);
+    this.#upsideBridge = [];
+    this.#downsideBridge = [];
   }
 
   moveUpside(direction, index) {
-    if (direction === this.#originalBridge[index]) {
-      this.#upsideBridge.push(Constant.DIRECTION.POSSIBLE);
+    if (direction === this.moveOkPosition(index)) {
+      this.#upsideBridge.push(CONSTANT.DIRECTION.POSSIBLE);
     }
-    if (direction !== this.#originalBridge[index]) {
-      this.#upsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
+    if (direction !== this.moveOkPosition(index)) {
+      this.#upsideBridge.push(CONSTANT.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
   }
 
   moveDownside(direction, index) {
-    if (direction === this.#originalBridge[index]) {
-      this.#downsideBridge.push(Constant.DIRECTION.POSSIBLE);
+    if (direction === this.moveOkPosition(index)) {
+      this.#downsideBridge.push(CONSTANT.DIRECTION.POSSIBLE);
     }
-    if (direction !== this.#originalBridge[index]) {
-      this.#downsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
+    if (direction !== this.moveOkPosition(index)) {
+      this.#downsideBridge.push(CONSTANT.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
   }
 
   moveOthersideEmpty(direction) {
-    if (direction === Constant.DIRECTION.UP) {
-      this.#downsideBridge.push(Constant.DIRECTION.EMPTY);
+    if (direction === CONSTANT.DIRECTION.UP) {
+      this.#downsideBridge.push(CONSTANT.DIRECTION.EMPTY);
     }
-    if (direction === Constant.DIRECTION.DOWN) {
-      this.#upsideBridge.push(Constant.DIRECTION.EMPTY);
+    if (direction === CONSTANT.DIRECTION.DOWN) {
+      this.#upsideBridge.push(CONSTANT.DIRECTION.EMPTY);
     }
   }
 
   haveXValue() {
-    const upX = this.#upsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
-    const downX = this.#downsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
+    const upX = this.#upsideBridge.includes(CONSTANT.DIRECTION.IMPOSSIBLE);
+    const downX = this.#downsideBridge.includes(CONSTANT.DIRECTION.IMPOSSIBLE);
     return upX || downX;
   }
 
@@ -69,6 +70,10 @@ class Bridge {
     const lengthOrigin = this.#originalBridge.length;
     const lengthAnother = this.#upsideBridge.length;
     return lengthOrigin === lengthAnother;
+  }
+
+  moveOkPosition(index) {
+    return this.#originalBridge[index];
   }
 }
 
