@@ -112,5 +112,5 @@ class App {
     Console.close();
   }
 }
-
+new App().play();
 module.exports = App;

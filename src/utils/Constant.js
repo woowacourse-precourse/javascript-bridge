@@ -47,6 +47,11 @@ const BRIDGE_MAP = Object.freeze({
   1: "U",
 });
 
+const MAGIC_NUMBER = Object.freeze({
+  retryCount: 1,
+  startCount: 1,
+});
+
 module.exports = {
   MESSAGE,
   ERROR_MESSAGE,
@@ -56,4 +61,5 @@ module.exports = {
   NUMBER_RANGE,
   NEW_LINE,
   MAP,
+  MAGIC_NUMBER,
 };

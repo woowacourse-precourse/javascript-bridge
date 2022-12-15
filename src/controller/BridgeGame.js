@@ -1,6 +1,8 @@
 const BridgeMaker = require("../BridgeMaker");
 const { generate } = require("../utils/BridgeRandomNumberGenerator");
-const { LETTER, NEW_LINE, MAP } = require("../utils/Constant");
+const { MAGIC_NUMBER } = require("../utils/Constant");
+const Convertor = require("../utils/Convertor");
+const Judge = require("../utils/Judge");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,7 +10,7 @@ const { LETTER, NEW_LINE, MAP } = require("../utils/Constant");
 class BridgeGame {
   #bridge;
   #moves = [];
-  #trialTime = 1;
+  #trialTime = MAGIC_NUMBER.startCount;
 
   setBridge(number) {
     this.#bridge = BridgeMaker.makeBridge(number, generate);
@@ -30,45 +32,19 @@ class BridgeGame {
    */
   retry = () => {
     this.#moves = [];
-    this.#trialTime += 1;
+    this.#trialTime += MAGIC_NUMBER.retryCount;
   };
 
   getResult() {
-    const resultArray = this.#makeResultArray();
-    const map = this.#drawMap(resultArray);
-    const isCorrect = this.#isCorrect();
-    const isGameOver = this.#isGameOver();
+    const resultArray = Convertor.convertToResultArray(
+      this.#bridge,
+      this.#moves
+    );
+    const map = Convertor.convertArrayToMap(resultArray);
+    const isCorrect = Judge.isCorrect(this.#bridge, this.#moves);
+    const isGameOver = Judge.isGameOver(this.#bridge, this.#moves);
 
     return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
-  }
-
-  #makeResultArray() {
-    return this.#moves.map((move, ind) => [
-      move,
-      this.#bridge[ind] === move ? MAP.correct : MAP.wrong,
-    ]);
-  }
-
-  #drawMap(resultArray) {
-    return [LETTER.up, LETTER.down]
-      .map(
-        (upOrDown) =>
-          `[ ${resultArray
-            .map(([userUorD, isCorrect]) =>
-              userUorD === upOrDown ? isCorrect : MAP.blank
-            )
-            .join(MAP.divider)} ]`
-      )
-      .join(NEW_LINE);
-  }
-
-  #isCorrect() {
-    const lastIndex = this.#moves.length - 1;
-    return this.#moves[lastIndex] === this.#bridge[lastIndex];
-  }
-
-  #isGameOver() {
-    return this.#bridge.length === this.#moves.length;
   }
 }
 
