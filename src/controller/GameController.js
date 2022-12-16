@@ -44,11 +44,16 @@ class GameController {
   }
 
   #move(direction) {
-    if (InputChecker.checkDirection(direction, this.#move.bind(this)) === GAME_STATE.ERROR) {
+    if (
+      InputChecker.checkDirection(direction, this.#move.bind(this)) ===
+      GAME_STATE.ERROR
+    ) {
       return;
     }
 
-    this.#instance.formatter.generate(this.#instance.bridgeGame.move(direction));
+    this.#instance.formatter.generate(
+      this.#instance.bridgeGame.move(direction)
+    );
     OutputView.printMap(this.#instance.formatter.getFormattedBridge());
     this.#startGame();
 
@@ -66,12 +71,16 @@ class GameController {
   }
 
   #restartOrQuit(select) {
-    if (InputChecker.checkSelect(select, this.#restartOrQuit.bind(this)) === GAME_STATE.ERROR) {
+    if (
+      InputChecker.checkSelect(select, this.#restartOrQuit.bind(this)) ===
+      GAME_STATE.ERROR
+    ) {
       return;
     }
 
     if (select === BRIDGE_GAME.RESTART) {
       this.#instance.bridgeGame.retry(this.#startGame.bind(this));
+
       return;
     }
 

@@ -10,6 +10,7 @@ const InputChecker = {
     } catch (error) {
       Console.print(error);
       InputView.readMoving(move);
+
       return GAME_STATE.ERROR;
     }
 
@@ -29,6 +30,7 @@ const InputChecker = {
     } catch (error) {
       Console.print(error);
       InputView.readGameCommand(restartOrQuit);
+
       return GAME_STATE.ERROR;
     }
 
