@@ -1,6 +1,6 @@
-const BridgeMaker = require("../BridgeMaker");
-const Generator = require("../BridgeRandomNumberGenerator");
-const InputView = require("../console/InputView");
+const BridgeMaker = require('../BridgeMaker');
+const Generator = require('../BridgeRandomNumberGenerator');
+const InputView = require('../console/InputView');
 
 class InputPrinter {
   #bridgeGame;
@@ -10,7 +10,7 @@ class InputPrinter {
   }
 
   insertBridgeSize() {
-    const bridgeSetter = (size) => {
+    const bridgeSetter = size => {
       const bridge = BridgeMaker.makeBridge(size, Generator.generate);
       this.#bridgeGame.getBridge().setOriginalBridge(bridge);
     };
@@ -18,10 +18,12 @@ class InputPrinter {
     const errorCallback = this.insertBridgeSize.bind(this);
 
     InputView.readBridgeSize(bridgeSetter, nextCallback, errorCallback);
+
   }
 
   selectBridgeDirection() {
-    const moveCallback = (direction) => {
+
+    const moveCallback = direction => {
       this.#bridgeGame.move(direction);
       this.#bridgeGame.getView().printBridge();
     };

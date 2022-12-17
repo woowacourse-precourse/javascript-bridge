@@ -1,4 +1,4 @@
-const BridgeGame = require("./model/BridgeGame");
+const BridgeGame = require('./model/BridgeGame');
 
 class App {
   play() {
@@ -7,3 +7,6 @@ class App {
   }
 }
 module.exports = App;
+
+const app = new App();
+app.play();

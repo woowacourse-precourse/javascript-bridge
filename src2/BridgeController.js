@@ -20,7 +20,16 @@ class BridgeController {
   }
 
   readBridege() {
-    this.#reader.bridgSize();
+    const makeBridge = this.#bridge.buildBridge.bind(this.#bridge);
+    const errorCallback = this.readBridege.bind(this);
+    const callback = this.selectDirection.bind(this);
+    this.#reader.bridgeSize(makeBridge, errorCallback, callback);
+  }
+
+  selectDirection() {
+    const callback = this.#bridge.move.bind(this.#bridge);
+    const errorCallback = this.selectDirection.bind(this);
+    this.#reader.direction(callback, errorCallback);
   }
 }
 
